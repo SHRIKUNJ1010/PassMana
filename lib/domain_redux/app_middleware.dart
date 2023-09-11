@@ -2,9 +2,11 @@
 * Created by Shrikunj Patel on 8/28/2023.
 */
 
-import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/domain_redux/app_actions.dart';
+import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/main.dart';
+import 'package:passmana/router/router.dart';
+import 'package:passmana/utility/page_routes_utility/page_routes.dart';
 import 'package:redux/redux.dart';
 
 List<Middleware<AppState>> createStoreMiddleware() {
@@ -16,10 +18,10 @@ List<Middleware<AppState>> createStoreMiddleware() {
 void Function(Store<AppState> store, CheckAndManageNewUser action, NextDispatcher next) _checkAndManageNewUser() {
   return (store, action, next) {
     next(action);
-    if (objectBox.hasUser()) {
-      //todo: navigate to enter pin screen / biometric check screen
+    if (objectBox.userBox.hasUser()) {
+      router.go(AppRoutes.authentication);
     } else {
-      //todo: navigate to get started screen to generate master password and mobile pin
+      router.go(AppRoutes.getStarted);
     }
   };
 }

@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:2379576262382179893",
-      "lastPropertyId": "3:3417414018983795265",
+      "lastPropertyId": "4:1167460715826724220",
       "name": "User",
       "properties": [
         {
@@ -23,13 +23,89 @@
           "id": "3:3417414018983795265",
           "name": "masterPassword",
           "type": 9
+        },
+        {
+          "id": "4:1167460715826724220",
+          "name": "isBiometricEnabled",
+          "type": 1
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:7022352903906742617",
+      "lastPropertyId": "3:3294534142306290642",
+      "name": "Group",
+      "properties": [
+        {
+          "id": "1:4065844036565779166",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:1664889290613067532",
+          "name": "groupName",
+          "type": 9
+        },
+        {
+          "id": "3:3294534142306290642",
+          "name": "description",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:6243334753350276209",
+      "lastPropertyId": "7:6132687139176641847",
+      "name": "Password",
+      "properties": [
+        {
+          "id": "1:5428819418602381393",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:3932673885070513494",
+          "name": "title",
+          "type": 9
+        },
+        {
+          "id": "3:4755622282995748104",
+          "name": "subTitle",
+          "type": 9
+        },
+        {
+          "id": "4:4686609453007835310",
+          "name": "userName",
+          "type": 9
+        },
+        {
+          "id": "5:7205940068219850615",
+          "name": "password",
+          "type": 9
+        },
+        {
+          "id": "6:2104709478361974975",
+          "name": "note",
+          "type": 9
+        },
+        {
+          "id": "7:6132687139176641847",
+          "name": "groupId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "1:2431947868288706786",
+          "relationTarget": "Group"
         }
       ],
       "relations": []
     }
   ],
-  "lastEntityId": "1:2379576262382179893",
-  "lastIndexId": "0:0",
+  "lastEntityId": "3:6243334753350276209",
+  "lastIndexId": "1:2431947868288706786",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,

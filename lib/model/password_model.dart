@@ -1,9 +1,9 @@
 /*
-* Created by Shrikunj Patel on 9/4/2023.
+* Created by Shrikunj Patel on 9/5/2023.
 */
 
 import 'package:objectbox/objectbox.dart';
-import 'package:passmana/object_box/group_box.dart';
+import 'package:passmana/model/group_model.dart';
 
 @Entity()
 class Password {
@@ -14,7 +14,7 @@ class Password {
   String userName;
   String password;
   String note;
-  final group = ToOne<Group>;
+  final group = ToOne<Group>();
 
   Password({
     this.id = 0,

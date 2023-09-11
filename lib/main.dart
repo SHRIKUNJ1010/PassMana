@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:passmana/data_object_box/object_box.dart';
 import 'package:passmana/domain_redux/app_middleware.dart';
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/domain_redux/app_reducer.dart';
 import 'package:passmana/domain_redux/user/user_middleware.dart';
-import 'package:passmana/object_box/objectbox.dart';
 import 'package:passmana/router/router.dart';
 import 'package:passmana/utility/color.dart';
 import 'package:redux/redux.dart' as redux;
@@ -36,9 +36,9 @@ class MyApp extends StatelessWidget {
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: primaryMaterialColor,
+          primarySwatch: AppColors.primaryMaterialColor,
           useMaterial3: true,
-          colorSchemeSeed: primaryMaterialColor,
+          colorSchemeSeed: AppColors.primaryMaterialColor,
         ),
         routeInformationProvider: router.routeInformationProvider,
         routeInformationParser: router.routeInformationParser,

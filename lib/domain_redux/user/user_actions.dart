@@ -2,8 +2,7 @@
 * Created by Shrikunj Patel on 8/28/2023.
 */
 
-import 'package:passmana/object_box/user_box.dart';
-
+import 'package:passmana/model/user_model.dart';
 
 class CreateUser {
   final String masterPassword;
@@ -38,3 +37,5 @@ class UserChanged {
     required this.user,
   });
 }
+
+class SwitchBiometricOption {}
