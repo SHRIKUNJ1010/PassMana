@@ -36,7 +36,7 @@ class GroupBox {
     return _groupBox.get(groupId);
   }
 
-  deletePassword(int groupId) {
+  deleteGroup(int groupId) {
     _groupBox.remove(groupId);
   }
 }

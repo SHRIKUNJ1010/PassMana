@@ -27,11 +27,12 @@ class PasswordBox {
         password: password,
         note: note,
       ),
+      mode: PutMode.insert,
     );
   }
 
   updatePassword({required Password password}) {
-    _passwordBox.put(password);
+    _passwordBox.put(password,mode: PutMode.update);
   }
 
   List<Password> getAllPasswords() {

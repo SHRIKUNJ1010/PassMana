@@ -3,6 +3,8 @@ import 'package:passmana/data_object_box/object_box.dart';
 import 'package:passmana/domain_redux/app_middleware.dart';
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/domain_redux/app_reducer.dart';
+import 'package:passmana/domain_redux/group/group_middleware.dart';
+import 'package:passmana/domain_redux/password/password_middleware.dart';
 import 'package:passmana/domain_redux/user/user_middleware.dart';
 import 'package:passmana/router/router.dart';
 import 'package:passmana/utility/color.dart';
@@ -26,7 +28,12 @@ class MyApp extends StatelessWidget {
   final store = redux.Store<AppState>(
     appReducer,
     initialState: AppState(),
-    middleware: createStoreMiddleware()..addAll(createUserMiddleware()),
+    middleware: createStoreMiddleware()
+      ..addAll(
+        createUserMiddleware()
+          ..addAll(createPasswordMiddleware())
+          ..addAll(createGroupMiddleware()),
+      ),
   );
 
   @override
