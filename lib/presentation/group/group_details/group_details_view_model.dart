@@ -15,6 +15,7 @@ class GroupDetailsViewModel {
 
   static GroupDetailsViewModel fromStore(Store<AppState> store) {
     return GroupDetailsViewModel(
+      //todo: change to selector with id
       group: store.state.groupList?.first ?? Group(),
     );
   }

@@ -3,12 +3,33 @@
 */
 
 import 'package:passmana/domain_redux/app_state.dart';
+import 'package:passmana/domain_redux/filter_search/filter_search_actions.dart';
+import 'package:passmana/model/group_model.dart';
 import 'package:redux/redux.dart';
 
 class FilterSearchViewModel {
-  FilterSearchViewModel();
+  final String searchKeyword;
+  final List<Map<Group, bool>> selectedGroupsForFilterList;
+  final Function(int) changeSelectionOfGroup;
+  final Function(String) changeKeyword;
+
+  FilterSearchViewModel({
+    required this.searchKeyword,
+    required this.selectedGroupsForFilterList,
+    required this.changeSelectionOfGroup,
+    required this.changeKeyword,
+  });
 
   static FilterSearchViewModel fromStore(Store<AppState> store) {
-    return FilterSearchViewModel();
+    return FilterSearchViewModel(
+      searchKeyword: store.state.searchKeyword,
+      selectedGroupsForFilterList: store.state.selectedGroupsForFilterList ?? [],
+      changeSelectionOfGroup: (int groupId) {
+        store.dispatch(ChangeSelectionOfGroup(groupId: groupId));
+      },
+      changeKeyword: (String searchKeyword) {
+        store.dispatch(ChangeKeyword(searchKeyword: searchKeyword));
+      },
+    );
   }
 }

@@ -12,9 +12,13 @@ import 'package:redux/redux.dart';
 List<Middleware<AppState>> createStoreMiddleware() {
   return [
     TypedMiddleware<AppState, CheckAndManageNewUser>(_checkAndManageNewUser()),
+    TypedMiddleware<AppState, ChangeLocale>(_changeLocale()),
   ];
 }
 
+//when splash screen is opened check if user is available or not and if user is available then
+//navigate to authentication screen and if user is not available then navigate to
+//get started screen which will then start registration process for user
 void Function(Store<AppState> store, CheckAndManageNewUser action, NextDispatcher next) _checkAndManageNewUser() {
   return (store, action, next) {
     next(action);
@@ -23,5 +27,12 @@ void Function(Store<AppState> store, CheckAndManageNewUser action, NextDispatche
     } else {
       router.go(AppRoutes.getStarted);
     }
+  };
+}
+
+void Function(Store<AppState> store, ChangeLocale action, NextDispatcher next) _changeLocale() {
+  return (store, action, next) {
+    next(action);
+    store.dispatch(LocaleChanged(locale: action.locale));
   };
 }

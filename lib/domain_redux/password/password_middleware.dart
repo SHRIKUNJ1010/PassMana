@@ -20,6 +20,7 @@ List<Middleware<AppState>> createPasswordMiddleware() {
 void Function(Store<AppState> store, CreatePassword action, NextDispatcher next) _createPassword() {
   return (store, action, next) {
     next(action);
+    //add password in object box database
     objectBox.passwordBox.addPassword(
       title: action.title,
       subTitle: action.subTitle,
@@ -27,7 +28,9 @@ void Function(Store<AppState> store, CreatePassword action, NextDispatcher next)
       password: action.password,
       note: action.note,
     );
+    //get all latest passwords
     List<Password> passwords = objectBox.passwordBox.getAllPasswords();
+    //change the list of passwords in state
     store.dispatch(PasswordListChanged(passwordList: passwords));
   };
 }
@@ -35,8 +38,11 @@ void Function(Store<AppState> store, CreatePassword action, NextDispatcher next)
 void Function(Store<AppState> store, UpdatePassword action, NextDispatcher next) _updatePassword() {
   return (store, action, next) {
     next(action);
+    //update password in object box database
     objectBox.passwordBox.updatePassword(password: action.password);
+    //get all latest passwords
     List<Password> passwords = objectBox.passwordBox.getAllPasswords();
+    //change the list of passwords in state
     store.dispatch(PasswordListChanged(passwordList: passwords));
   };
 }
@@ -44,8 +50,11 @@ void Function(Store<AppState> store, UpdatePassword action, NextDispatcher next)
 void Function(Store<AppState> store, DeletePassword action, NextDispatcher next) _deletePassword() {
   return (store, action, next) {
     next(action);
+    //delete password from object box database
     objectBox.passwordBox.deletePassword(action.passwordId);
+    //get all latest passwords
     List<Password> passwords = objectBox.passwordBox.getAllPasswords();
+    //change the list of passwords in state
     store.dispatch(PasswordListChanged(passwordList: passwords));
   };
 }
@@ -53,7 +62,9 @@ void Function(Store<AppState> store, DeletePassword action, NextDispatcher next)
 void Function(Store<AppState> store, GetAllPasswords action, NextDispatcher next) _getAllPasswords() {
   return (store, action, next) {
     next(action);
+    //get all latest passwords
     List<Password> passwords = objectBox.passwordBox.getAllPasswords();
+    //change the list of passwords in state
     store.dispatch(PasswordListChanged(passwordList: passwords));
   };
 }

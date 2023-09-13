@@ -20,11 +20,14 @@ List<Middleware<AppState>> createGroupMiddleware() {
 void Function(Store<AppState> store, CreateGroup action, NextDispatcher next) _createGroup() {
   return (store, action, next) {
     next(action);
+    //add group in object box database
     objectBox.groupBox.addGroup(
       groupName: action.groupName,
       description: action.description,
     );
+    //get all latest groups
     List<Group> groups = objectBox.groupBox.getAllGroups();
+    //change the list of groups in state
     store.dispatch(GroupListChanged(groupList: groups));
   };
 }
@@ -32,8 +35,11 @@ void Function(Store<AppState> store, CreateGroup action, NextDispatcher next) _c
 void Function(Store<AppState> store, UpdateGroup action, NextDispatcher next) _updateGroup() {
   return (store, action, next) {
     next(action);
+    //update group in object box database
     objectBox.groupBox.updateGroup(group: action.group);
+    //get all latest groups
     List<Group> groups = objectBox.groupBox.getAllGroups();
+    //change the list of groups in state
     store.dispatch(GroupListChanged(groupList: groups));
   };
 }
@@ -41,8 +47,11 @@ void Function(Store<AppState> store, UpdateGroup action, NextDispatcher next) _u
 void Function(Store<AppState> store, DeleteGroup action, NextDispatcher next) _deleteGroup() {
   return (store, action, next) {
     next(action);
+    //delete group from object box database
     objectBox.groupBox.deleteGroup(action.groupId);
+    //get all latest groups
     List<Group> groups = objectBox.groupBox.getAllGroups();
+    //change the list of groups in state
     store.dispatch(GroupListChanged(groupList: groups));
   };
 }
@@ -50,7 +59,9 @@ void Function(Store<AppState> store, DeleteGroup action, NextDispatcher next) _d
 void Function(Store<AppState> store, GetAllGroups action, NextDispatcher next) _getAllGroups() {
   return (store, action, next) {
     next(action);
+    //get all latest groups
     List<Group> groups = objectBox.groupBox.getAllGroups();
+    //change the list of groups in state
     store.dispatch(GroupListChanged(groupList: groups));
   };
 }

@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:passmana/data_object_box/object_box.dart';
 import 'package:passmana/domain_redux/app_middleware.dart';
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/domain_redux/app_reducer.dart';
+import 'package:passmana/domain_redux/filter_search/filter_search_middleware.dart';
 import 'package:passmana/domain_redux/group/group_middleware.dart';
 import 'package:passmana/domain_redux/password/password_middleware.dart';
 import 'package:passmana/domain_redux/user/user_middleware.dart';
+import 'package:passmana/localization/app_localization.dart';
 import 'package:passmana/router/router.dart';
 import 'package:passmana/utility/color.dart';
+import 'package:passmana/utility/constants.dart';
 import 'package:redux/redux.dart' as redux;
 import 'package:flutter_redux/flutter_redux.dart' as flutter_redux;
 
@@ -32,7 +36,8 @@ class MyApp extends StatelessWidget {
       ..addAll(
         createUserMiddleware()
           ..addAll(createPasswordMiddleware())
-          ..addAll(createGroupMiddleware()),
+          ..addAll(createGroupMiddleware())
+          ..addAll(createFilterSearchMiddleware()),
       ),
   );
 
@@ -47,6 +52,26 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
           colorSchemeSeed: AppColors.primaryMaterialColor,
         ),
+        locale: store.state.locale,
+        supportedLocales: const [
+          Locale(AppConstants.english),
+          Locale(AppConstants.hindi),
+          Locale(AppConstants.gujarati),
+        ],
+        localizationsDelegates: [
+          AppLocalizationDelegate(),
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        localeResolutionCallback: (locale, supportedLocales) {
+          for (var supportedLocale in supportedLocales) {
+            if (supportedLocale.languageCode == locale?.languageCode && supportedLocale.countryCode == locale?.countryCode) {
+              return supportedLocale;
+            }
+          }
+          return supportedLocales.first;
+        },
         routeInformationProvider: router.routeInformationProvider,
         routeInformationParser: router.routeInformationParser,
         routerDelegate: router.routerDelegate,
