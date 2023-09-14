@@ -3,6 +3,7 @@
 */
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 
 class Utility {
   //printing log when app is in debug mode
@@ -10,6 +11,11 @@ class Utility {
     if (kDebugMode) {
       debugPrint('$log');
     }
+  }
+
+  //function to copy string data to clip board
+  static Future<void> copyToClipboard(String data) async{
+    await Clipboard.setData(ClipboardData(text: data));
   }
 
 }
