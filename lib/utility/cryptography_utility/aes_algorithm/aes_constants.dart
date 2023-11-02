@@ -27,4 +27,24 @@ class AESConstants {
         return AESData(keyLength: 128, numberOfRounds: 10);
     }
   }
+
+  //array of round constants used in key expansion function
+  static const List<List<int>> roundConstants = [
+    [01, 00, 00, 00],
+    [02, 00, 00, 00],
+    [04, 00, 00, 00],
+    [08, 00, 00, 00],
+    [16, 00, 00, 00],
+    [32, 00, 00, 00],
+    [64, 00, 00, 00],
+    [128, 00, 00, 00],
+    [27, 00, 00, 00],
+    [54, 00, 00, 00],
+  ];
+
+  //inverse s box used in sub bytes function of decryption
+  static const List<int> inverseSBox = [];
+
+  // s box used in sub bytes function of encryption
+  static const List<int> sBox = [];
 }
