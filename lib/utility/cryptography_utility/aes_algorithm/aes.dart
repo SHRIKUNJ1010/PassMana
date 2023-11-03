@@ -80,7 +80,9 @@ class AES {
   //this round keys would be of 16 bytes (same as state of one block)
   static List<List<int>> _keyExpansion({
     List<int> byteListOfKey = const [],
+    //this byte list length would be 16 for 128,24 for 192 and 32 for 256
   }) {
+    //temp round keys round + 1 length of array with 16 length of arrays
     List<List<int>> tempKeys = [];
 
     return tempKeys;
@@ -158,7 +160,38 @@ class AES {
   static List<int> _shiftRows({
     List<int> state = const [],
   }) {
-    return [];
+    /*
+    after shifting matrix would look like
+
+    [00,04,08,12]         [00,04,08,12]  // first row would remain same
+    [01,05,09,13]    =>   [05,09,13,01]  // second row would be shifted one time
+    [02,06,10,14]    =>   [10,14,02,06]  // third row would be shifted two time
+    [03,07,11,15]         [15,03,07,11]  // fourth row would be shifted three time
+     */
+
+    List<int> tempState = [];
+    //first column after row shifting
+    tempState.add(state[0]);
+    tempState.add(state[5]);
+    tempState.add(state[10]);
+    tempState.add(state[15]);
+    //second column after row shifting
+    tempState.add(state[4]);
+    tempState.add(state[9]);
+    tempState.add(state[14]);
+    tempState.add(state[3]);
+    //third column after row shifting
+    tempState.add(state[8]);
+    tempState.add(state[13]);
+    tempState.add(state[2]);
+    tempState.add(state[7]);
+    //forth column after row shifting
+    tempState.add(state[12]);
+    tempState.add(state[1]);
+    tempState.add(state[6]);
+    tempState.add(state[11]);
+    //return shifted matrix array
+    return tempState;
   }
 
   static List<int> _cipher({
