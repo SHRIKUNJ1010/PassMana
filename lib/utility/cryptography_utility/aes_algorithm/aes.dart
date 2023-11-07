@@ -154,19 +154,53 @@ class AES {
   static List<int> _mixColumns({
     List<int> state = const [],
   }) {
-    return [];
+    //TODO: check this function again
+    /*
+    [01,02,03,04]
+    [05,06,07,08]
+    [09,10,11,12]
+    [13,14,15,16]
+    for mix column operation below matrix multiplication is done
+    [2,3,1,1]   [a,b,c,d]    [(2a + 1m + 3e + 1i), (1j + 1n + 2b + 3f), (1k + 1o + 2c + 3g), (1l + 1p + 2d + 3h)]
+    [1,2,3,1] * [e,f,g,h] => [(1a + 1m + 2e + 3i), (3j + 1n + 1b + 2f), (3k + 1o + 1c + 2g), (3l + 1p + 1d + 2h)]
+    [1,1,2,3]   [i,j,k,l]    [(1a + 3m + 1e + 2i), (2j + 3n + 1b + 1f), (2k + 3o + 1c + 1g), (2l + 3p + 1d + 1h)]
+    [3,1,1,2]   [m,n,o,p]    [(3a + 2m + 1e + 1i), (1j + 2n + 3b + 1f), (1k + 2o + 3c + 1g), (1l + 2p + 3d + 1h)]
+     */
+    List<int> tempState = [];
+    //first column
+    tempState.add((2 * state[0]) + (1 * state[12]) + (3 * state[4]) + (1 * state[8]));
+    tempState.add((1 * state[0]) + (1 * state[12]) + (2 * state[4]) + (3 * state[8]));
+    tempState.add((1 * state[0]) + (3 * state[12]) + (1 * state[4]) + (2 * state[8]));
+    tempState.add((3 * state[0]) + (2 * state[12]) + (1 * state[4]) + (1 * state[8]));
+    //second column
+    tempState.add((1 * state[9]) + (1 * state[13]) + (2 * state[1]) + (3 * state[5]));
+    tempState.add((3 * state[9]) + (1 * state[13]) + (1 * state[1]) + (2 * state[5]));
+    tempState.add((2 * state[9]) + (3 * state[13]) + (1 * state[1]) + (1 * state[5]));
+    tempState.add((1 * state[9]) + (2 * state[13]) + (3 * state[1]) + (1 * state[5]));
+    //third column
+    tempState.add((1 * state[10]) + (1 * state[14]) + (2 * state[2]) + (3 * state[6]));
+    tempState.add((3 * state[10]) + (1 * state[14]) + (1 * state[2]) + (2 * state[6]));
+    tempState.add((2 * state[10]) + (3 * state[14]) + (1 * state[2]) + (1 * state[6]));
+    tempState.add((1 * state[10]) + (2 * state[14]) + (3 * state[2]) + (1 * state[6]));
+    //fourth column
+    tempState.add((1 * state[11]) + (1 * state[15]) + (2 * state[3]) + (3 * state[7]));
+    tempState.add((3 * state[11]) + (1 * state[15]) + (1 * state[3]) + (2 * state[7]));
+    tempState.add((2 * state[11]) + (3 * state[15]) + (1 * state[3]) + (1 * state[7]));
+    tempState.add((1 * state[11]) + (2 * state[15]) + (3 * state[3]) + (1 * state[7]));
+
+    return tempState;
   }
 
   static List<int> _shiftRows({
     List<int> state = const [],
   }) {
+    //TODO: check this function
     /*
     after shifting matrix would look like
-
     [00,04,08,12]         [00,04,08,12]  // first row would remain same
-    [01,05,09,13]    =>   [05,09,13,01]  // second row would be shifted one time
-    [02,06,10,14]    =>   [10,14,02,06]  // third row would be shifted two time
-    [03,07,11,15]         [15,03,07,11]  // fourth row would be shifted three time
+    [01,05,09,13]    =>   [05,09,13,01]  // second row would be shifted one time (left shift)
+    [02,06,10,14]    =>   [10,14,02,06]  // third row would be shifted two time (left shift)
+    [03,07,11,15]         [15,03,07,11]  // fourth row would be shifted three time (left shift)
      */
 
     List<int> tempState = [];
@@ -231,19 +265,86 @@ class AES {
   static List<int> _inverseSubBytes({
     List<int> state = const [],
   }) {
-    return [];
+    List<int> temp = [];
+    for (int i = 0; i < state.length; i++) {
+      temp.add(AESConstants.inverseSBox[state[i]]);
+    }
+    return temp;
   }
 
   static List<int> _inverseMixColumns({
     List<int> state = const [],
   }) {
-    return [];
+    //TODO: check this function again
+    /*
+    [01,02,03,04] [2,3,1,1]
+    [05,06,07,08] [1,2,3,1]
+    [09,10,11,12] [1,1,2,3]
+    [13,14,15,16] [3,1,1,2]
+    for mix column operation below matrix multiplication is done
+    [14,11,13,09]   [a,b,c,d]    [(2a + 1m + 3e + 1i), (1j + 1n + 2b + 3f), (1k + 1o + 2c + 3g), (1l + 1p + 2d + 3h)]
+    [09,14,11,13] * [e,f,g,h] => [(1a + 1m + 2e + 3i), (3j + 1n + 1b + 2f), (3k + 1o + 1c + 2g), (3l + 1p + 1d + 2h)]
+    [13,09,14,11]   [i,j,k,l]    [(1a + 3m + 1e + 2i), (2j + 3n + 1b + 1f), (2k + 3o + 1c + 1g), (2l + 3p + 1d + 1h)]
+    [11,13,09,14]   [m,n,o,p]    [(3a + 2m + 1e + 1i), (1j + 2n + 3b + 1f), (1k + 2o + 3c + 1g), (1l + 2p + 3d + 1h)]
+     */
+    List<int> tempState = [];
+    //first column
+    tempState.add((2 * state[0]) + (1 * state[12]) + (3 * state[4]) + (1 * state[8]));
+    tempState.add((1 * state[0]) + (1 * state[12]) + (2 * state[4]) + (3 * state[8]));
+    tempState.add((1 * state[0]) + (3 * state[12]) + (1 * state[4]) + (2 * state[8]));
+    tempState.add((3 * state[0]) + (2 * state[12]) + (1 * state[4]) + (1 * state[8]));
+    //second column
+    tempState.add((1 * state[9]) + (1 * state[13]) + (2 * state[1]) + (3 * state[5]));
+    tempState.add((3 * state[9]) + (1 * state[13]) + (1 * state[1]) + (2 * state[5]));
+    tempState.add((2 * state[9]) + (3 * state[13]) + (1 * state[1]) + (1 * state[5]));
+    tempState.add((1 * state[9]) + (2 * state[13]) + (3 * state[1]) + (1 * state[5]));
+    //third column
+    tempState.add((1 * state[10]) + (1 * state[14]) + (2 * state[2]) + (3 * state[6]));
+    tempState.add((3 * state[10]) + (1 * state[14]) + (1 * state[2]) + (2 * state[6]));
+    tempState.add((2 * state[10]) + (3 * state[14]) + (1 * state[2]) + (1 * state[6]));
+    tempState.add((1 * state[10]) + (2 * state[14]) + (3 * state[2]) + (1 * state[6]));
+    //fourth column
+    tempState.add((1 * state[11]) + (1 * state[15]) + (2 * state[3]) + (3 * state[7]));
+    tempState.add((3 * state[11]) + (1 * state[15]) + (1 * state[3]) + (2 * state[7]));
+    tempState.add((2 * state[11]) + (3 * state[15]) + (1 * state[3]) + (1 * state[7]));
+    tempState.add((1 * state[11]) + (2 * state[15]) + (3 * state[3]) + (1 * state[7]));
+
+    return tempState;
   }
 
   static List<int> _inverseShiftRows({
     List<int> state = const [],
   }) {
-    return [];
+    /*
+    after inverse shifting matrix would look like
+    [00,04,08,12]         [00,04,08,12]  // first row would remain same
+    [01,05,09,13]    =>   [13,01,05,09]  // second row would be shifted one time inversely (right shift)
+    [02,06,10,14]    =>   [10,14,02,06]  // third row would be shifted two time inversely (right shift)
+    [03,07,11,15]         [07,11,15,03]  // fourth row would be shifted three time inversely (right shift)
+     */
+    List<int> tempState = [];
+    //first column after row shifting
+    tempState.add(state[0]);
+    tempState.add(state[13]);
+    tempState.add(state[10]);
+    tempState.add(state[7]);
+    //second column after row shifting
+    tempState.add(state[4]);
+    tempState.add(state[1]);
+    tempState.add(state[14]);
+    tempState.add(state[11]);
+    //third column after row shifting
+    tempState.add(state[8]);
+    tempState.add(state[5]);
+    tempState.add(state[2]);
+    tempState.add(state[15]);
+    //forth column after row shifting
+    tempState.add(state[12]);
+    tempState.add(state[9]);
+    tempState.add(state[6]);
+    tempState.add(state[3]);
+    //return shifted matrix array
+    return tempState;
   }
 
   static List<int> _inverseCipher({
