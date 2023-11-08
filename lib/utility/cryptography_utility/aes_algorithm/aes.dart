@@ -193,7 +193,6 @@ class AES {
   static List<int> _shiftRows({
     List<int> state = const [],
   }) {
-    //TODO: check this function
     /*
     after shifting matrix would look like
     [00,04,08,12]         [00,04,08,12]  // first row would remain same
