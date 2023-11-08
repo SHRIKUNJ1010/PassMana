@@ -7,10 +7,12 @@ enum AESType { aes256, aes192, aes128 }
 class AESData {
   final int keyLength;
   final int numberOfRounds;
+  final int nk;
 
   AESData({
     required this.keyLength,
     required this.numberOfRounds,
+    required this.nk,
   });
 }
 
@@ -20,11 +22,11 @@ class AESConstants {
   static AESData getAESData({AESType type = AESType.aes256}) {
     switch (type) {
       case AESType.aes256:
-        return AESData(keyLength: 256, numberOfRounds: 14);
+        return AESData(keyLength: 256, numberOfRounds: 14, nk: 8);
       case AESType.aes192:
-        return AESData(keyLength: 192, numberOfRounds: 12);
+        return AESData(keyLength: 192, numberOfRounds: 12, nk: 6);
       case AESType.aes128:
-        return AESData(keyLength: 128, numberOfRounds: 10);
+        return AESData(keyLength: 128, numberOfRounds: 10, nk: 4);
     }
   }
 

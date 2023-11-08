@@ -66,12 +66,6 @@ class AES {
     return tempArray;
   }
 
-  //converting byte list in string
-  static String _getStringFromByteList(List<int> value) {
-    String temp = utf8.decode(value);
-    return temp.trim();
-  }
-
   //generates list of round key for every round fo encryption and decryption
   //as per the length of given key which would be 128,192 or 256
   // 128 -> 11 keys (number of rounds + 1)
@@ -80,10 +74,33 @@ class AES {
   //this round keys would be of 16 bytes (same as state of one block)
   static List<List<int>> _keyExpansion({
     List<int> byteListOfKey = const [],
+    required int nk,
+    required int numberOfRounds,
     //this byte list length would be 16 for 128,24 for 192 and 32 for 256
   }) {
     //temp round keys round + 1 length of array with 16 length of arrays
     List<List<int>> tempKeys = [];
+    //temp words list
+    List<List<int>> tempWords = [];
+    //first nk words are taken as it is from byte list of key
+    for (int i = 0; i < nk; i++) {
+      tempWords.add([
+        byteListOfKey[(4 * i)],
+        byteListOfKey[(4 * i) + 1],
+        byteListOfKey[(4 * i) + 2],
+        byteListOfKey[(4 * i) + 3],
+      ]);
+    }
+
+    for (int i = nk; i < (numberOfRounds + 1) * nk; i++) {
+      List<int> temp = tempWords[i - 1];
+      if (i % nk == 0) {
+        temp = _xorWord(array1: _subWord(array: _rotWord(array: temp)), array2: AESConstants.roundConstants[i ~/ nk]);
+      } else if ((nk > 6) && (i % nk == 4)) {
+        temp = _subWord(array: temp);
+      }
+      tempWords.add(_xorWord(array1: tempWords[i - nk], array2: temp));
+    }
 
     return tempKeys;
   }
@@ -94,7 +111,12 @@ class AES {
     List<int> roundKey = const [],
     List<int> state = const [],
   }) {
-    return [];
+    List<int> tempState = [];
+
+    for (int i = 0; i < 16; i++) {
+      tempState.add(state[i] ^ roundKey[i]);
+    }
+    return tempState;
   }
 
   //================================================== key Expansion Helper Functions ========================================//
@@ -135,6 +157,18 @@ class AES {
     List<int> array = const [],
   }) {
     List<int> temp = _subBytes(state: array);
+    return temp;
+  }
+
+  // perform xor operation on word
+  static List<int> _xorWord({
+    List<int> array1 = const [],
+    List<int> array2 = const [],
+  }) {
+    List<int> temp = [];
+    for (int i = 0; i < array1.length; i++) {
+      temp.add(array1[i] ^ array2[i]);
+    }
     return temp;
   }
 
@@ -393,8 +427,10 @@ class AES {
     List<List<int>> plainTextByteBlocks = _getByteBlocksFromString(plainText);
     //byte list of key
     List<int> byteListOfKey = _getByteListFromString(key);
+    //aes data for different type of aes algorithms
+    AESData data = AESConstants.getAESData(type: type);
     //generate round keys using key expansion function which uses given key
-    List<List<int>> roundKeysBlocks = _keyExpansion(byteListOfKey: byteListOfKey);
+    List<List<int>> roundKeysBlocks = _keyExpansion(byteListOfKey: byteListOfKey, nk: data.nk, numberOfRounds: data.numberOfRounds);
 
     for (List<int> i in plainTextByteBlocks) {
       //call cipher function for particular 16 bytes block and add cipher text which is
@@ -421,8 +457,10 @@ class AES {
     List<List<int>> cipherTextByteBlocks = _getByteBlocksFromString(plainText);
     //byte list of key
     List<int> byteListOfKey = _getByteListFromString(key);
+    //aes data for different type of aes algorithms
+    AESData data = AESConstants.getAESData(type: type);
     //generate round keys using key expansion function which uses given key
-    List<List<int>> roundKeysBlocks = _keyExpansion(byteListOfKey: byteListOfKey);
+    List<List<int>> roundKeysBlocks = _keyExpansion(byteListOfKey: byteListOfKey, nk: data.nk, numberOfRounds: data.numberOfRounds);
 
     for (List<int> i in cipherTextByteBlocks) {
       //call inverse cipher function for particular 16 bytes block and add plain text which is
