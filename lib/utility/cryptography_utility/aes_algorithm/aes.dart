@@ -168,26 +168,25 @@ class AES {
      */
     List<int> tempState = [];
     //first column
-    tempState.add((2 * state[0]) + (1 * state[12]) + (3 * state[4]) + (1 * state[8]));
-    tempState.add((1 * state[0]) + (1 * state[12]) + (2 * state[4]) + (3 * state[8]));
-    tempState.add((1 * state[0]) + (3 * state[12]) + (1 * state[4]) + (2 * state[8]));
-    tempState.add((3 * state[0]) + (2 * state[12]) + (1 * state[4]) + (1 * state[8]));
+    tempState.add(((2 * state[0]) % 256) ^ ((1 * state[12]) % 256) ^ ((3 * state[4]) % 256) ^ ((1 * state[8]) % 256));
+    tempState.add(((1 * state[0]) % 256) ^ ((1 * state[12]) % 256) ^ ((2 * state[4]) % 256) ^ ((3 * state[8]) % 256));
+    tempState.add(((1 * state[0]) % 256) ^ ((3 * state[12]) % 256) ^ ((1 * state[4]) % 256) ^ ((2 * state[8]) % 256));
+    tempState.add(((3 * state[0]) % 256) ^ ((2 * state[12]) % 256) ^ ((1 * state[4]) % 256) ^ ((1 * state[8]) % 256));
     //second column
-    tempState.add((1 * state[9]) + (1 * state[13]) + (2 * state[1]) + (3 * state[5]));
-    tempState.add((3 * state[9]) + (1 * state[13]) + (1 * state[1]) + (2 * state[5]));
-    tempState.add((2 * state[9]) + (3 * state[13]) + (1 * state[1]) + (1 * state[5]));
-    tempState.add((1 * state[9]) + (2 * state[13]) + (3 * state[1]) + (1 * state[5]));
+    tempState.add(((1 * state[9]) % 256) ^ ((1 * state[13]) % 256) ^ ((2 * state[1]) % 256) ^ ((3 * state[5]) % 256));
+    tempState.add(((3 * state[9]) % 256) ^ ((1 * state[13]) % 256) ^ ((1 * state[1]) % 256) ^ ((2 * state[5]) % 256));
+    tempState.add(((2 * state[9]) % 256) ^ ((3 * state[13]) % 256) ^ ((1 * state[1]) % 256) ^ ((1 * state[5]) % 256));
+    tempState.add(((1 * state[9]) % 256) ^ ((2 * state[13]) % 256) ^ ((3 * state[1]) % 256) ^ ((1 * state[5]) % 256));
     //third column
-    tempState.add((1 * state[10]) + (1 * state[14]) + (2 * state[2]) + (3 * state[6]));
-    tempState.add((3 * state[10]) + (1 * state[14]) + (1 * state[2]) + (2 * state[6]));
-    tempState.add((2 * state[10]) + (3 * state[14]) + (1 * state[2]) + (1 * state[6]));
-    tempState.add((1 * state[10]) + (2 * state[14]) + (3 * state[2]) + (1 * state[6]));
+    tempState.add(((1 * state[10]) % 256) ^ ((1 * state[14]) % 256) ^ ((2 * state[2]) % 256) ^ ((3 * state[6]) % 256));
+    tempState.add(((3 * state[10]) % 256) ^ ((1 * state[14]) % 256) ^ ((1 * state[2]) % 256) ^ ((2 * state[6]) % 256));
+    tempState.add(((2 * state[10]) % 256) ^ ((3 * state[14]) % 256) ^ ((1 * state[2]) % 256) ^ ((1 * state[6]) % 256));
+    tempState.add(((1 * state[10]) % 256) ^ ((2 * state[14]) % 256) ^ ((3 * state[2]) % 256) ^ ((1 * state[6]) % 256));
     //fourth column
-    tempState.add((1 * state[11]) + (1 * state[15]) + (2 * state[3]) + (3 * state[7]));
-    tempState.add((3 * state[11]) + (1 * state[15]) + (1 * state[3]) + (2 * state[7]));
-    tempState.add((2 * state[11]) + (3 * state[15]) + (1 * state[3]) + (1 * state[7]));
-    tempState.add((1 * state[11]) + (2 * state[15]) + (3 * state[3]) + (1 * state[7]));
-
+    tempState.add(((1 * state[11]) % 256) ^ ((1 * state[15]) % 256) ^ ((2 * state[3]) % 256) ^ ((3 * state[7]) % 256));
+    tempState.add(((3 * state[11]) % 256) ^ ((1 * state[15]) % 256) ^ ((1 * state[3]) % 256) ^ ((2 * state[7]) % 256));
+    tempState.add(((2 * state[11]) % 256) ^ ((3 * state[15]) % 256) ^ ((1 * state[3]) % 256) ^ ((1 * state[7]) % 256));
+    tempState.add(((1 * state[11]) % 256) ^ ((2 * state[15]) % 256) ^ ((3 * state[3]) % 256) ^ ((1 * state[7]) % 256));
     return tempState;
   }
 
@@ -282,33 +281,32 @@ class AES {
     [09,10,11,12] [1,1,2,3]
     [13,14,15,16] [3,1,1,2]
     for mix column operation below matrix multiplication is done
-    [14,11,13,09]   [a,b,c,d]    [(2a + 1m + 3e + 1i), (1j + 1n + 2b + 3f), (1k + 1o + 2c + 3g), (1l + 1p + 2d + 3h)]
-    [09,14,11,13] * [e,f,g,h] => [(1a + 1m + 2e + 3i), (3j + 1n + 1b + 2f), (3k + 1o + 1c + 2g), (3l + 1p + 1d + 2h)]
-    [13,09,14,11]   [i,j,k,l]    [(1a + 3m + 1e + 2i), (2j + 3n + 1b + 1f), (2k + 3o + 1c + 1g), (2l + 3p + 1d + 1h)]
-    [11,13,09,14]   [m,n,o,p]    [(3a + 2m + 1e + 1i), (1j + 2n + 3b + 1f), (1k + 2o + 3c + 1g), (1l + 2p + 3d + 1h)]
+    [14,11,13,09]   [a,b,c,d]    [(14a + 11e + 13i + 09m), (14b + 11f + 13j + 09n), (14c + 11g + 13k + 09o), (14d + 11h + 13l + 09p)]
+    [09,14,11,13] * [e,f,g,h] => [(09a + 14e + 11i + 13m), (09b + 14f + 11j + 13n), (09c + 14g + 11k + 13o), (09d + 14h + 11l + 13p)]
+    [13,09,14,11]   [i,j,k,l]    [(13a + 09e + 14i + 11m), (13b + 09f + 14j + 11n), (13c + 09g + 14k + 11o), (13d + 09h + 14l + 11p)]
+    [11,13,09,14]   [m,n,o,p]    [(11a + 13e + 09i + 14m), (11b + 13f + 09j + 14n), (11c + 13g + 09k + 14o), (11d + 13h + 09l + 14p)]
      */
     List<int> tempState = [];
     //first column
-    tempState.add((2 * state[0]) + (1 * state[12]) + (3 * state[4]) + (1 * state[8]));
-    tempState.add((1 * state[0]) + (1 * state[12]) + (2 * state[4]) + (3 * state[8]));
-    tempState.add((1 * state[0]) + (3 * state[12]) + (1 * state[4]) + (2 * state[8]));
-    tempState.add((3 * state[0]) + (2 * state[12]) + (1 * state[4]) + (1 * state[8]));
+    tempState.add(((14 * state[0]) % 256) ^ ((11 * state[4]) % 256) ^ ((13 * state[8]) % 256) ^ ((09 * state[12]) % 256));
+    tempState.add(((09 * state[0]) % 256) ^ ((14 * state[4]) % 256) ^ ((11 * state[8]) % 256) ^ ((13 * state[12]) % 256));
+    tempState.add(((13 * state[0]) % 256) ^ ((09 * state[4]) % 256) ^ ((14 * state[8]) % 256) ^ ((11 * state[12]) % 256));
+    tempState.add(((11 * state[0]) % 256) ^ ((13 * state[4]) % 256) ^ ((09 * state[8]) % 256) ^ ((14 * state[12]) % 256));
     //second column
-    tempState.add((1 * state[9]) + (1 * state[13]) + (2 * state[1]) + (3 * state[5]));
-    tempState.add((3 * state[9]) + (1 * state[13]) + (1 * state[1]) + (2 * state[5]));
-    tempState.add((2 * state[9]) + (3 * state[13]) + (1 * state[1]) + (1 * state[5]));
-    tempState.add((1 * state[9]) + (2 * state[13]) + (3 * state[1]) + (1 * state[5]));
+    tempState.add(((14 * state[1]) % 256) ^ ((11 * state[5]) % 256) ^ ((13 * state[9]) % 256) ^ ((09 * state[13]) % 256));
+    tempState.add(((09 * state[1]) % 256) ^ ((14 * state[5]) % 256) ^ ((11 * state[9]) % 256) ^ ((13 * state[13]) % 256));
+    tempState.add(((13 * state[1]) % 256) ^ ((09 * state[5]) % 256) ^ ((14 * state[9]) % 256) ^ ((11 * state[13]) % 256));
+    tempState.add(((11 * state[1]) % 256) ^ ((13 * state[5]) % 256) ^ ((09 * state[9]) % 256) ^ ((14 * state[13]) % 256));
     //third column
-    tempState.add((1 * state[10]) + (1 * state[14]) + (2 * state[2]) + (3 * state[6]));
-    tempState.add((3 * state[10]) + (1 * state[14]) + (1 * state[2]) + (2 * state[6]));
-    tempState.add((2 * state[10]) + (3 * state[14]) + (1 * state[2]) + (1 * state[6]));
-    tempState.add((1 * state[10]) + (2 * state[14]) + (3 * state[2]) + (1 * state[6]));
+    tempState.add(((14 * state[2]) % 256) ^ ((11 * state[6]) % 256) ^ ((13 * state[10]) % 256) ^ ((09 * state[14]) % 256));
+    tempState.add(((09 * state[2]) % 256) ^ ((14 * state[6]) % 256) ^ ((11 * state[10]) % 256) ^ ((13 * state[14]) % 256));
+    tempState.add(((13 * state[2]) % 256) ^ ((09 * state[6]) % 256) ^ ((14 * state[10]) % 256) ^ ((11 * state[14]) % 256));
+    tempState.add(((11 * state[2]) % 256) ^ ((13 * state[6]) % 256) ^ ((09 * state[10]) % 256) ^ ((14 * state[14]) % 256));
     //fourth column
-    tempState.add((1 * state[11]) + (1 * state[15]) + (2 * state[3]) + (3 * state[7]));
-    tempState.add((3 * state[11]) + (1 * state[15]) + (1 * state[3]) + (2 * state[7]));
-    tempState.add((2 * state[11]) + (3 * state[15]) + (1 * state[3]) + (1 * state[7]));
-    tempState.add((1 * state[11]) + (2 * state[15]) + (3 * state[3]) + (1 * state[7]));
-
+    tempState.add(((14 * state[3]) % 256) ^ ((11 * state[7]) % 256) ^ ((13 * state[11]) % 256) ^ ((09 * state[15]) % 256));
+    tempState.add(((09 * state[3]) % 256) ^ ((14 * state[7]) % 256) ^ ((11 * state[11]) % 256) ^ ((13 * state[15]) % 256));
+    tempState.add(((13 * state[3]) % 256) ^ ((09 * state[7]) % 256) ^ ((14 * state[11]) % 256) ^ ((11 * state[15]) % 256));
+    tempState.add(((11 * state[3]) % 256) ^ ((13 * state[7]) % 256) ^ ((09 * state[11]) % 256) ^ ((14 * state[15]) % 256));
     return tempState;
   }
 
