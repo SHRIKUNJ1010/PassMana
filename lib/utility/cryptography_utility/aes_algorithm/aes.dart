@@ -102,6 +102,15 @@ class AES {
       tempWords.add(_xorWord(array1: tempWords[i - nk], array2: temp));
     }
 
+    for (int i = 0; i < numberOfRounds + 1; i++) {
+      tempKeys.add([
+        ...tempWords[4 * i],
+        ...tempWords[(4 * i) + 1],
+        ...tempWords[(4 * i) + 2],
+        ...tempWords[(4 * i) + 3],
+      ]);
+    }
+
     return tempKeys;
   }
 
