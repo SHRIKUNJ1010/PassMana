@@ -92,10 +92,10 @@ class AES {
       ]);
     }
 
-    for (int i = nk; i < (numberOfRounds + 1) * nk; i++) {
+    for (int i = nk; i < (numberOfRounds + 1) * 4; i++) {
       List<int> temp = tempWords[i - 1];
       if (i % nk == 0) {
-        temp = _xorWord(array1: _subWord(array: _rotWord(array: temp)), array2: AESConstants.roundConstants[i ~/ nk]);
+        temp = _xorWord(array1: _subWord(array: _rotWord(array: temp)), array2: AESConstants.roundConstants[(i ~/ nk) - 1]);
       } else if ((nk > 6) && (i % nk == 4)) {
         temp = _subWord(array: temp);
       }
@@ -110,7 +110,6 @@ class AES {
         ...tempWords[(4 * i) + 3],
       ]);
     }
-
     return tempKeys;
   }
 
