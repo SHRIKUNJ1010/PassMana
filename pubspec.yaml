@@ -39,3 +39,18 @@ flutter:
 
   assets:
     - assets/
+    - languages/
+
+  fonts:
+    - family: Muli
+      fonts:
+        - asset: fonts/muli/Muli.ttf
+        - asset: fonts/muli/Muli-Bold.ttf
+        - asset: fonts/muli/Muli-BoldItalic.ttf
+        - asset: fonts/muli/Muli-ExtraLight.ttf
+        - asset: fonts/muli/Muli-ExtraLightItalic.ttf
+        - asset: fonts/muli/Muli-Italic.ttf
+        - asset: fonts/muli/Muli-Light.ttf
+        - asset: fonts/muli/Muli-LightItalic.ttf
+        - asset: fonts/muli/Muli-Semi-BoldItalic.ttf
+        - asset: fonts/muli/Muli-SemiBold.ttf

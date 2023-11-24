@@ -4,36 +4,64 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
+  //==============================primary color======================//
   static const MaterialColor primaryMaterialColor = MaterialColor(
     primaryColorValue,
     <int, Color>{
-      50: Color(0xFFE4E9EE),
-      100: Color(0xFFBBC7D5),
-      200: Color(0xFF8DA2B9),
-      300: Color(0xFF5F7D9C),
-      400: Color(0xFF3D6187),
-      500: primaryColor,
-      600: Color(0xFF183E6A),
-      700: Color(0xFF14365F),
-      800: Color(0xFF102E55),
-      900: Color(0xFF081F42),
+      50: Color(0xFFE4E9ED),
+      100: Color(0xFFBCC8D3),
+      200: Color(0xFF90A4B6),
+      300: Color(0xFF637F98),
+      400: Color(0xFF416382),
+      500: Color(primaryColorValue),
+      600: Color(0xFF1C4164),
+      700: Color(0xFF183859),
+      800: Color(0xFF13304F),
+      900: Color(0xFF0B213D),
     },
   );
 
-  static const MaterialColor accent = MaterialColor(
-    accentValue,
+  static const MaterialColor accentPrimary = MaterialColor(
+    accentPrimaryValue,
     <int, Color>{
-      100: Color(0xFF79A5FF),
-      200: accentColor,
-      400: Color(0xFF1361FF),
-      700: Color(0xFF0053F8),
+      100: Color(0xFF76ACFF),
+      200: Color(accentPrimaryValue),
+      400: Color(0xFF106DFF),
+      700: Color(0xFF0060F6),
     },
   );
-  static const int accentValue = 0xFF4683FF;
-  static const Color accentColor = Color(0xFF4683FF);
+  static const int accentPrimaryValue = 0xFF438CFF;
+  static const Color accentPrimaryColor = Color(0xFF438CFF);
 
-  static const int primaryColorValue = 0xFF1B4572;
-  static const Color primaryColor = Color(0xFF1B4572);
+  static const int primaryColorValue = 0xFF20486C;
+  static const Color primaryColor = Color(0xFF20486C);
+
+//==============================secondary color======================//
+  static const MaterialColor secondaryMaterialColor = MaterialColor(secondaryColorValue, <int, Color>{
+    50: Color(0xFFF5E5E9),
+    100: Color(0xFFE6BDC9),
+    200: Color(0xFFD692A5),
+    300: Color(0xFFC56681),
+    400: Color(0xFFB84566),
+    500: Color(secondaryColorValue),
+    600: Color(0xFFA52044),
+    700: Color(0xFF9B1B3B),
+    800: Color(0xFF921633),
+    900: Color(0xFF820D23),
+  });
+
+  static const MaterialColor accentSecondary = MaterialColor(accentSecondaryValue, <int, Color>{
+    100: Color(0xFFFFB3BF),
+    200: Color(accentSecondaryValue),
+    400: Color(0xFFFF4D69),
+    700: Color(0xFFFF3453),
+  });
+
+  static const int accentSecondaryValue = 0xFFFF8094;
+  static const Color accentSecondaryColor = Color(0xFFFF8094);
+
+  static const int secondaryColorValue = 0xFFAC244B;
+  static const Color secondaryColor = Color(0xFFAC244B);
 
 //======================================================================//
   ///normal color codes

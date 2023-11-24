@@ -19,6 +19,9 @@ class SettingsItemListViewModel {
 
   static SettingsItemListViewModel fromStore(Store<AppState> store) {
     return SettingsItemListViewModel(
+      //todo: do not use title here title is part of view not
+      // part of view model which should only contain methods or calculated
+      // data not directly available data like below list titles
       listItemTitles: [
         getTranslated("change_master_password"),
         getTranslated("change_mobile_pin"),

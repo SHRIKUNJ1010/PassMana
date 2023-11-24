@@ -80,7 +80,7 @@ final GoRouter router = GoRouter(
       },
     ),
     ShellRoute(
-      parentNavigatorKey: shellNavigatorKey,
+      navigatorKey: shellNavigatorKey,
       builder: (context, state, child) {
         return NavigationBarScreen(child: child);
       },
