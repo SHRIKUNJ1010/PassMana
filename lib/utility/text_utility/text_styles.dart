@@ -17,7 +17,7 @@ class TextStyles {
 
   static TextStyle? titleRedText = const TextStyle(
     color: AppColors.accentSecondaryColor,
-    fontSize: 42,
+    fontSize: 36,
     fontWeight: FontWeight.w400,
     fontFamily: FontsList.muli,
     decoration: TextDecoration.none,
@@ -25,7 +25,7 @@ class TextStyles {
 
   static TextStyle? titleWhiteText = const TextStyle(
     color: AppColors.mWhite,
-    fontSize: 42,
+    fontSize: 30,
     fontWeight: FontWeight.w400,
     fontFamily: FontsList.muli,
     decoration: TextDecoration.none,

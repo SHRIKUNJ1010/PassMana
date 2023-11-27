@@ -38,16 +38,19 @@ class GetStartedScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 30),
-                            child: Text(
-                              getTranslated('stay_safe').toUpperCase(),
-                              softWrap: true,
-                              style: TextStyles.titleRedText,
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 30),
+                              child: Text(
+                                getTranslated('empowering_privacy_offline').toUpperCase(),
+                                softWrap: true,
+                                style: TextStyles.titleRedText,
+                              ),
                             ),
                           ),
                         ],
                       ),
+                      const SizedBox(height: 8),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         mainAxisSize: MainAxisSize.max,
@@ -56,7 +59,7 @@ class GetStartedScreen extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 30),
                               child: Text(
-                                getTranslated('store_your_password_offline'),
+                                getTranslated('where_your_passwords_find_sanctuary'),
                                 softWrap: true,
                                 style: TextStyles.titleWhiteText,
                               ),
@@ -64,6 +67,7 @@ class GetStartedScreen extends StatelessWidget {
                           ),
                         ],
                       ),
+                      const SizedBox(height: 30),
                     ],
                   ),
                 ),
