@@ -23,6 +23,7 @@ class UserBox {
 
   void changeCreateMasterPassword(String masterPassword) {
     User? user = getUser();
+    if (user != null && masterPassword == "") return;
     _userBox.put(
       user != null
           ? user.setMasterPassword(masterPassword)
@@ -35,6 +36,7 @@ class UserBox {
 
   void changeCreatePin(String pin) {
     User? user = getUser();
+    if (user != null && pin == "") return;
     _userBox.put(
       user != null ? user.setPin(pin) : User(pin: pin),
       mode: user != null ? PutMode.update : PutMode.insert,

@@ -7,7 +7,7 @@ import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/text_utility/text_styles.dart';
 
 class CommonWidgets {
-  static Widget getCommonSplashButton({
+  static Widget getCommonButtonWithSplash({
     required BuildContext context,
     required double height,
     required Function onTap,

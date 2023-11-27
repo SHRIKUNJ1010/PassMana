@@ -2,5 +2,7 @@
   "change_master_password": "मास्टर पासवर्ड बदलें",
   "change_mobile_pin": "मोबाइल पिन बदलें",
   "generate_password": "पासवर्ड उत्पन्न करें",
-  "get_started": "आरंभ करें"
+  "get_started": "आरंभ करें",
+  "stay_safe": "सुरक्षित रहें",
+  "store_your_password_offline": "अपना पासवर्ड ऑफ़लाइन संग्रहीत करें"
 }

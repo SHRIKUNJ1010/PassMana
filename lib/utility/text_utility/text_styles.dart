@@ -14,5 +14,21 @@ class TextStyles {
     fontWeight: FontWeight.normal,
     decoration: TextDecoration.none,
   );
+
+  static TextStyle? titleRedText = const TextStyle(
+    color: AppColors.accentSecondaryColor,
+    fontSize: 42,
+    fontWeight: FontWeight.w400,
+    fontFamily: FontsList.muli,
+    decoration: TextDecoration.none,
+  );
+
+  static TextStyle? titleWhiteText = const TextStyle(
+    color: AppColors.mWhite,
+    fontSize: 42,
+    fontWeight: FontWeight.w400,
+    fontFamily: FontsList.muli,
+    decoration: TextDecoration.none,
+  );
 }
 //ac244b

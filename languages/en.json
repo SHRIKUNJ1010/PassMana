@@ -2,5 +2,7 @@
   "change_master_password": "Change Master Password",
   "change_mobile_pin": "Change Mobile Pin",
   "generate_password": "Generate Password",
-  "get_started": "Get Started"
+  "get_started": "Get Started",
+  "stay_safe": "Stay Safe",
+  "store_your_password_offline": "Store Your Password Offline"
 }
