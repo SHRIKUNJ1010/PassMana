@@ -3,7 +3,11 @@
 */
 
 class AppConstants {
+  //language constants
   static const String english = 'en';
   static const String hindi = 'hi';
   static const String gujarati = 'gu';
+
+  //hero animation tags
+  static const String appLogo = "appLogo";
 }

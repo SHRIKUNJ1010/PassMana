@@ -10,6 +10,7 @@ import 'package:passmana/presentation/get_started/get_started_view_model.dart';
 import 'package:passmana/utility/assets_utility/assets_paths.dart';
 import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/common_widgets_utility/common_widgets.dart';
+import 'package:passmana/utility/constants.dart';
 import 'package:passmana/utility/text_utility/text_styles.dart';
 
 class GetStartedScreen extends StatelessWidget {
@@ -32,7 +33,10 @@ class GetStartedScreen extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
                         alignment: Alignment.center,
-                        child: Image.asset(AppAssets.appLogoWithText),
+                        child: Hero(
+                          tag: AppConstants.appLogo,
+                          child: Image.asset(AppAssets.appLogoWithText),
+                        ),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,

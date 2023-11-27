@@ -7,6 +7,7 @@ import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/presentation/splash/splash_view_model.dart';
 import 'package:passmana/utility/assets_utility/assets_paths.dart';
 import 'package:passmana/utility/color.dart';
+import 'package:passmana/utility/constants.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -28,7 +29,10 @@ class SplashScreen extends StatelessWidget {
     return Container(
       color: AppColors.primaryColor,
       alignment: Alignment.center,
-      child: Image.asset(AppAssets.appLogoWithText),
+      child: Hero(
+        tag: AppConstants.appLogo,
+        child: Image.asset(AppAssets.appLogoWithText),
+      ),
     );
   }
 }
