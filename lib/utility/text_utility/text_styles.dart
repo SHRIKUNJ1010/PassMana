@@ -7,28 +7,28 @@ import 'package:flutter/material.dart';
 import 'package:passmana/utility/text_utility/fonts_list.dart';
 
 class TextStyles {
-  static TextStyle? buttonWhiteText = const TextStyle(
-    color: AppColors.mWhite,
-    fontSize: 16,
-    fontFamily: FontsList.muli,
-    fontWeight: FontWeight.normal,
-    decoration: TextDecoration.none,
-  );
+  static TextStyle? getButtonWhiteText(double fontSize) => TextStyle(
+        color: AppColors.mWhite,
+        fontSize: fontSize,
+        fontFamily: FontsList.muli,
+        fontWeight: FontWeight.normal,
+        decoration: TextDecoration.none,
+      );
 
-  static TextStyle? titleRedText = const TextStyle(
-    color: AppColors.accentSecondaryColor,
-    fontSize: 36,
-    fontWeight: FontWeight.w400,
-    fontFamily: FontsList.muli,
-    decoration: TextDecoration.none,
-  );
+  static TextStyle? getTitleRedText(double fontSize) => TextStyle(
+        color: AppColors.accentSecondaryColor,
+        fontSize: fontSize,
+        fontWeight: FontWeight.w400,
+        fontFamily: FontsList.muli,
+        decoration: TextDecoration.none,
+      );
 
-  static TextStyle? titleWhiteText = const TextStyle(
-    color: AppColors.mWhite,
-    fontSize: 30,
-    fontWeight: FontWeight.w400,
-    fontFamily: FontsList.muli,
-    decoration: TextDecoration.none,
-  );
+  static TextStyle? getTitleWhiteText(double fontSize) => TextStyle(
+        color: AppColors.mWhite,
+        fontSize: fontSize,
+        fontWeight: FontWeight.w400,
+        fontFamily: FontsList.muli,
+        decoration: TextDecoration.none,
+      );
 }
 //ac244b

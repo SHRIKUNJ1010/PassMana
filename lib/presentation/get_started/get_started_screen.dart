@@ -48,7 +48,7 @@ class GetStartedScreen extends StatelessWidget {
                               child: Text(
                                 getTranslated('empowering_privacy_offline').toUpperCase(),
                                 softWrap: true,
-                                style: TextStyles.titleRedText,
+                                style: TextStyles.getTitleRedText(36),
                               ),
                             ),
                           ),
@@ -65,7 +65,7 @@ class GetStartedScreen extends StatelessWidget {
                               child: Text(
                                 getTranslated('where_your_passwords_find_sanctuary'),
                                 softWrap: true,
-                                style: TextStyles.titleWhiteText,
+                                style: TextStyles.getTitleWhiteText(30),
                               ),
                             ),
                           ),

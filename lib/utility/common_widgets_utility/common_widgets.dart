@@ -32,7 +32,7 @@ class CommonWidgets {
             alignment: Alignment.center,
             child: Text(
               title,
-              style: TextStyles.buttonWhiteText,
+              style: TextStyles.getButtonWhiteText(16),
             ),
           ),
         ),
