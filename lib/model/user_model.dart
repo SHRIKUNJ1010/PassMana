@@ -17,11 +17,19 @@ class User {
     this.isBiometricEnabled = false,
   });
 
-  setPin(String pin) {
-    this.pin = pin;
+  User setPin(String pin) {
+    return User(
+      id: id,
+      pin: pin,
+      isBiometricEnabled: isBiometricEnabled,
+    );
   }
 
   changeBiometricOption(bool isBiometricEnabled) {
-    this.isBiometricEnabled = isBiometricEnabled;
+    return User(
+      id: id,
+      pin: pin,
+      isBiometricEnabled: isBiometricEnabled,
+    );
   }
 }

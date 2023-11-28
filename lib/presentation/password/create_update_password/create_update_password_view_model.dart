@@ -62,12 +62,13 @@ class CreateUpdatePasswordViewModel {
           UpdatePassword(
             //todo: change to selector as above
             password: store.state.passwordList?.first.updatePassword(
-              title: title,
-              subTitle: subTitle,
-              userName: userName,
-              password: password,
-              note: note,
-            ),
+                  title: title,
+                  subTitle: subTitle,
+                  userName: userName,
+                  password: password,
+                  note: note,
+                ) ??
+                Password(),
           ),
         );
       },

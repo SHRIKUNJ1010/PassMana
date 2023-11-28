@@ -21,11 +21,13 @@ class Group {
     this.description = '',
   });
 
-  updateGroupInfo({
+  Group updateGroupInfo({
     String? groupName,
     String? description,
   }) {
-    this.groupName = groupName ?? this.groupName;
-    this.description = description ?? this.description;
+    return Group(
+      groupName: groupName ?? this.groupName,
+      description: description ?? this.description,
+    );
   }
 }

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/localization/app_localization.dart';
+import 'package:passmana/presentation/common/custom_pin_field.dart';
 import 'package:passmana/presentation/sign_up_flow/create_mobile_pin/create_mobile_pin_view_model.dart';
 import 'package:passmana/utility/assets_utility/assets_paths.dart';
 import 'package:passmana/utility/color.dart';
@@ -46,6 +47,18 @@ class CreateMobilePinScreen extends StatelessWidget {
                     getTranslated('enter_your_pin'),
                     style: TextStyles.getTitleWhiteText(24),
                   ),
+                  Expanded(
+                    child: CustomPinField(
+                      backButtonChild: const Icon(
+                        Icons.backspace,
+                        color: AppColors.mWhite,
+                        size: 25,
+                      ),
+                      onBackTap: vm.onBackTap,
+                      onForwardTap: vm.onSubmitTap,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
                 ],
               ),
             ),

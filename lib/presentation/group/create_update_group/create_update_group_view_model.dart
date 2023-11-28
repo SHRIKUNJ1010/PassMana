@@ -47,9 +47,10 @@ class CreateUpdateGroupViewModel {
           UpdateGroup(
             //todo: change to selector as above
             group: store.state.groupList?.first.updateGroupInfo(
-              groupName: groupName,
-              description: description,
-            ),
+                  groupName: groupName,
+                  description: description,
+                ) ??
+                Group(),
           ),
         );
       },

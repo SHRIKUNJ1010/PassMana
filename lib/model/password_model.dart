@@ -25,17 +25,19 @@ class Password {
     this.note = '',
   });
 
-  updatePassword({
+  Password updatePassword({
     String? title,
     String? subTitle,
     String? userName,
     String? password,
     String? note,
   }) {
-    this.title = title ?? this.title;
-    this.subTitle = subTitle ?? this.subTitle;
-    this.userName = userName ?? this.userName;
-    this.password = password ?? this.password;
-    this.note = note ?? this.note;
+    return Password(
+      title: title ?? this.title,
+      subTitle: subTitle ?? this.subTitle,
+      userName: userName ?? this.userName,
+      password: password ?? this.password,
+      note: note ?? this.note,
+    );
   }
 }

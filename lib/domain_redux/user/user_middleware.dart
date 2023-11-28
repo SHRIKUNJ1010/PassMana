@@ -43,7 +43,7 @@ void Function(Store<AppState> store, UpdatePin action, NextDispatcher next) _upd
     //change latest value for user in state
     store.dispatch(
       UserChanged(
-        user: store.state.user?.setPin(action.pin),
+        user: store.state.user?.setPin(action.pin) ?? User(),
       ),
     );
   };

@@ -17,7 +17,7 @@ class GetStartedViewModel {
     return GetStartedViewModel(
       onGetStartedPressed: () {
         store.dispatch(CreateUser(pin: ''));
-        router.go(AppRoutes.createMobilePin);
+        router.push(AppRoutes.createMobilePin);
       },
     );
   }
