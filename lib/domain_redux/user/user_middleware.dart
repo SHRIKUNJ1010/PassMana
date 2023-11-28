@@ -12,7 +12,6 @@ List<Middleware<AppState>> createUserMiddleware() {
   return [
     TypedMiddleware<AppState, CreateUser>(_createUser()),
     TypedMiddleware<AppState, UpdatePin>(_updatePin()),
-    TypedMiddleware<AppState, UpdateMasterPassword>(_updateMasterPassword()),
     TypedMiddleware<AppState, SwitchBiometricOption>(_switchBiometricOption()),
   ];
 }
@@ -20,16 +19,14 @@ List<Middleware<AppState>> createUserMiddleware() {
 void Function(Store<AppState> store, CreateUser action, NextDispatcher next) _createUser() {
   return (store, action, next) {
     next(action);
-    //for create user call either of change create master password or change create pin
-    //both method will create user if does not exist in object box database
-    objectBox.userBox.changeCreateMasterPassword(action.masterPassword);
+    //for create user call either of change create pin
+    //method will create user if does not exist in object box database
     //for remaining parameter change its value
     objectBox.userBox.changeCreatePin(action.pin);
     //change latest value for user in state
     store.dispatch(
       UserChanged(
         user: User(
-          masterPassword: action.masterPassword,
           pin: action.pin,
         ),
       ),
@@ -47,21 +44,6 @@ void Function(Store<AppState> store, UpdatePin action, NextDispatcher next) _upd
     store.dispatch(
       UserChanged(
         user: store.state.user?.setPin(action.pin),
-      ),
-    );
-  };
-}
-
-void Function(Store<AppState> store, UpdateMasterPassword action, NextDispatcher next) _updateMasterPassword() {
-  return (store, action, next) {
-    next(action);
-    //change master password in object box database and if user does not exist then
-    // it will create new user and update master password value
-    objectBox.userBox.changeCreateMasterPassword(action.masterPassword);
-    //change latest value for user in state
-    store.dispatch(
-      UserChanged(
-        user: store.state.user?.setMasterPassword(action.masterPassword),
       ),
     );
   };

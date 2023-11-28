@@ -5,20 +5,10 @@
 import 'package:passmana/model/user_model.dart';
 
 class CreateUser {
-  final String masterPassword;
   final String pin;
 
   CreateUser({
-    required this.masterPassword,
     required this.pin,
-  });
-}
-
-class UpdateMasterPassword {
-  final String masterPassword;
-
-  UpdateMasterPassword({
-    required this.masterPassword,
   });
 }
 

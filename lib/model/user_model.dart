@@ -10,21 +10,15 @@ class User {
   int id;
   bool isBiometricEnabled;
   String pin;
-  String masterPassword;
 
   User({
     this.id = 0,
-    this.masterPassword = '',
     this.pin = '',
     this.isBiometricEnabled = false,
   });
 
   setPin(String pin) {
     this.pin = pin;
-  }
-
-  setMasterPassword(String masterPassword) {
-    this.masterPassword = masterPassword;
   }
 
   changeBiometricOption(bool isBiometricEnabled) {

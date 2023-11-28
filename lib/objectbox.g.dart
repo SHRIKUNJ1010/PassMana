@@ -38,11 +38,6 @@ final _entities = <ModelEntity>[
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(3, 3417414018983795265),
-            name: 'masterPassword',
-            type: 9,
-            flags: 0),
-        ModelProperty(
             id: const IdUid(4, 1167460715826724220),
             name: 'isBiometricEnabled',
             type: 1,
@@ -158,7 +153,7 @@ ModelDefinition getObjectBoxModel() {
       lastSequenceId: const IdUid(0, 0),
       retiredEntityUids: const [],
       retiredIndexUids: const [],
-      retiredPropertyUids: const [],
+      retiredPropertyUids: const [3417414018983795265],
       retiredRelationUids: const [],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
@@ -175,11 +170,9 @@ ModelDefinition getObjectBoxModel() {
         },
         objectToFB: (User object, fb.Builder fbb) {
           final pinOffset = fbb.writeString(object.pin);
-          final masterPasswordOffset = fbb.writeString(object.masterPassword);
           fbb.startTable(5);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, pinOffset);
-          fbb.addOffset(2, masterPasswordOffset);
           fbb.addBool(3, object.isBiometricEnabled);
           fbb.finish(fbb.endTable());
           return object.id;
@@ -189,16 +182,12 @@ ModelDefinition getObjectBoxModel() {
           final rootOffset = buffer.derefObject(0);
           final idParam =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
-          final masterPasswordParam =
-              const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 8, '');
           final pinParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 6, '');
           final isBiometricEnabledParam =
               const fb.BoolReader().vTableGet(buffer, rootOffset, 10, false);
           final object = User(
               id: idParam,
-              masterPassword: masterPasswordParam,
               pin: pinParam,
               isBiometricEnabled: isBiometricEnabledParam);
 
@@ -312,13 +301,9 @@ class User_ {
   /// see [User.pin]
   static final pin = QueryStringProperty<User>(_entities[0].properties[1]);
 
-  /// see [User.masterPassword]
-  static final masterPassword =
-      QueryStringProperty<User>(_entities[0].properties[2]);
-
   /// see [User.isBiometricEnabled]
   static final isBiometricEnabled =
-      QueryBooleanProperty<User>(_entities[0].properties[3]);
+      QueryBooleanProperty<User>(_entities[0].properties[2]);
 }
 
 /// [Group] entity fields to define ObjectBox queries.

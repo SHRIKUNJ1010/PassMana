@@ -16,8 +16,8 @@ class GetStartedViewModel {
   static GetStartedViewModel fromStore(Store<AppState> store) {
     return GetStartedViewModel(
       onGetStartedPressed: () {
-        store.dispatch(CreateUser(masterPassword: '', pin: ''));
-        router.go(AppRoutes.createMasterPassword);
+        store.dispatch(CreateUser(pin: ''));
+        router.go(AppRoutes.createMobilePin);
       },
     );
   }

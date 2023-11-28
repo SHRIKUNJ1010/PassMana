@@ -14,24 +14,11 @@ class UserBox {
 
   bool hasUser() {
     var users = _userBox.getAll();
-    return users.isNotEmpty && users.first.pin != '' && users.first.masterPassword != '';
+    return users.isNotEmpty && users.first.pin != '';
   }
 
   User? getUser() {
     return _userBox.getAll().isEmpty ? null : _userBox.getAll().first;
-  }
-
-  void changeCreateMasterPassword(String masterPassword) {
-    User? user = getUser();
-    if (user != null && masterPassword == "") return;
-    _userBox.put(
-      user != null
-          ? user.setMasterPassword(masterPassword)
-          : User(
-              masterPassword: masterPassword,
-            ),
-      mode: user != null ? PutMode.update : PutMode.insert,
-    );
   }
 
   void changeCreatePin(String pin) {

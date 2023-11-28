@@ -13,11 +13,9 @@ import 'package:passmana/presentation/navigation_bar_screen.dart';
 import 'package:passmana/presentation/password/create_update_password/create_udpate_password_screen.dart';
 import 'package:passmana/presentation/password/password_details/password_details_screen.dart';
 import 'package:passmana/presentation/password/password_list/password_list_screen.dart';
-import 'package:passmana/presentation/settings/change_master_password/change_master_password_screen.dart';
 import 'package:passmana/presentation/settings/change_mobile_pin/change_mobile_pin_screen.dart';
 import 'package:passmana/presentation/settings/generate_password/generate_password_screen.dart';
 import 'package:passmana/presentation/settings/settings_item_list/settings_item_list_screen.dart';
-import 'package:passmana/presentation/sign_up_flow/create_master_password/create_master_password_screen.dart';
 import 'package:passmana/presentation/sign_up_flow/create_mobile_pin/create_mobile_pin_screen.dart';
 import 'package:passmana/presentation/splash/splash_screen.dart';
 import 'package:passmana/utility/page_routes_utility/page_routes.dart';
@@ -55,16 +53,6 @@ final GoRouter router = GoRouter(
       pageBuilder: (context, state) {
         return FadeTransitionPage(
           child: const AuthenticationScreen(),
-          key: state.pageKey,
-        );
-      },
-    ),
-    GoRoute(
-      parentNavigatorKey: rootNavigatorKey,
-      path: AppRoutes.createMasterPassword,
-      pageBuilder: (context, state) {
-        return FadeTransitionPage(
-          child: const CreateMasterPasswordScreen(),
           key: state.pageKey,
         );
       },
@@ -153,16 +141,6 @@ final GoRouter router = GoRouter(
       pageBuilder: (context, state) {
         return FadeTransitionPage(
           child: const PasswordDetailsScreen(),
-          key: state.pageKey,
-        );
-      },
-    ),
-    GoRoute(
-      parentNavigatorKey: rootNavigatorKey,
-      path: AppRoutes.changeMasterPassword,
-      pageBuilder: (context, state) {
-        return FadeTransitionPage(
-          child: const ChangeMasterPasswordScreen(),
           key: state.pageKey,
         );
       },

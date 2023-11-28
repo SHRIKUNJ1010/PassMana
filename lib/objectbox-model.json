@@ -20,11 +20,6 @@
           "type": 9
         },
         {
-          "id": "3:3417414018983795265",
-          "name": "masterPassword",
-          "type": 9
-        },
-        {
           "id": "4:1167460715826724220",
           "name": "isBiometricEnabled",
           "type": 1
@@ -112,7 +107,9 @@
   "modelVersionParserMinimum": 5,
   "retiredEntityUids": [],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [],
+  "retiredPropertyUids": [
+    3417414018983795265
+  ],
   "retiredRelationUids": [],
   "version": 1
 }
