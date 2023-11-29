@@ -5,15 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:passmana/utility/common_widgets_utility/common_widgets.dart';
 
 class CustomPinField extends StatefulWidget {
-  final Widget backButtonChild;
-  final Function(TextEditingController) onBackTap;
-  final Function(TextEditingController) onForwardTap;
+  final Widget bottomLeftButtonChild;
+  final Function(TextEditingController) onBottomLeftButtonTap;
+  final Widget bottomRightButtonChild;
+  final Function(TextEditingController) onBottomRightButtonTap;
+  final Function(TextEditingController) onPinCompleted;
 
   const CustomPinField({
     super.key,
-    required this.backButtonChild,
-    required this.onBackTap,
-    required this.onForwardTap,
+    required this.bottomLeftButtonChild,
+    required this.bottomRightButtonChild,
+    required this.onBottomLeftButtonTap,
+    required this.onBottomRightButtonTap,
+    required this.onPinCompleted,
   });
 
   @override
@@ -28,7 +32,7 @@ class _CustomPinFieldState extends State<CustomPinField> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _pinController.addListener(() {
         if (_pinController.text.length == 6) {
-          widget.onForwardTap.call(_pinController);
+          widget.onPinCompleted.call(_pinController);
         }
         setState(() {});
       });
@@ -50,9 +54,13 @@ class _CustomPinFieldState extends State<CustomPinField> {
           const Spacer(),
           CommonWidgets.getCommonNumericKeyboard(
             controller: _pinController,
-            backButtonChild: widget.backButtonChild,
-            onBackTap: () {
-              widget.onBackTap.call(_pinController);
+            bottomLeftButtonChild: widget.bottomLeftButtonChild,
+            bottomRightButtonChild: widget.bottomRightButtonChild,
+            onBottomLeftButtonTap: () {
+              widget.onBottomLeftButtonTap.call(_pinController);
+            },
+            onBottomRightButtonTap: () {
+              widget.onBottomRightButtonTap.call(_pinController);
             },
           ),
         ],

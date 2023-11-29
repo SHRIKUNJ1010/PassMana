@@ -68,8 +68,10 @@ class CommonWidgets {
 
   static Widget getCommonNumericKeyboard({
     required TextEditingController controller,
-    required Widget backButtonChild,
-    required Function onBackTap,
+    required Widget bottomLeftButtonChild,
+    required Widget bottomRightButtonChild,
+    required Function onBottomLeftButtonTap,
+    required Function onBottomRightButtonTap,
   }) {
     return ConstrainedBox(
       constraints: const BoxConstraints(
@@ -181,8 +183,8 @@ class CommonWidgets {
             child: Row(
               children: [
                 getCommonNumericKeyboardTile(
-                  onTap: () {},
-                  child: const SizedBox(),
+                  onTap: onBottomLeftButtonTap,
+                  child: bottomLeftButtonChild,
                 ),
                 getCommonNumericKeyboardTile(
                   onTap: () {
@@ -194,8 +196,8 @@ class CommonWidgets {
                   ),
                 ),
                 getCommonNumericKeyboardTile(
-                  onTap: onBackTap,
-                  child: backButtonChild,
+                  onTap: onBottomRightButtonTap,
+                  child: bottomRightButtonChild,
                 ),
               ],
             ),

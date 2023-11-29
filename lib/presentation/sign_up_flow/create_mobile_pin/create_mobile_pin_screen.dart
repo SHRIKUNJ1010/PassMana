@@ -49,13 +49,15 @@ class CreateMobilePinScreen extends StatelessWidget {
                   ),
                   Expanded(
                     child: CustomPinField(
-                      backButtonChild: const Icon(
+                      bottomRightButtonChild: const Icon(
                         Icons.backspace,
                         color: AppColors.mWhite,
                         size: 25,
                       ),
-                      onBackTap: vm.onBackTap,
-                      onForwardTap: vm.onSubmitTap,
+                      onBottomRightButtonTap: vm.onBackTap,
+                      onPinCompleted: vm.onSubmitTap,
+                      bottomLeftButtonChild: const SizedBox(),
+                      onBottomLeftButtonTap: (controller) {},
                     ),
                   ),
                   const SizedBox(height: 20),
