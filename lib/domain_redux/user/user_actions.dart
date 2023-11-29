@@ -29,3 +29,25 @@ class UserChanged {
 }
 
 class SwitchBiometricOption {}
+
+class VerifyUserPin {
+  final String pin;
+  final Function onVerified;
+  final Function onNotVerified;
+
+  VerifyUserPin({
+    required this.pin,
+    required this.onVerified,
+    required this.onNotVerified,
+  });
+}
+
+class VerifyUserBiometric {
+  final Function onVerified;
+  final Function onNotVerified;
+
+  VerifyUserBiometric({
+    required this.onVerified,
+    required this.onNotVerified,
+  });
+}

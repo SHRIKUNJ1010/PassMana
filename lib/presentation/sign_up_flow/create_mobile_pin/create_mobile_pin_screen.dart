@@ -44,7 +44,7 @@ class CreateMobilePinScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    getTranslated('enter_your_pin'),
+                    vm.isConfirm ? getTranslated('confirm_your_pin') : getTranslated('create_your_pin'),
                     style: TextStyles.getTitleWhiteText(24),
                   ),
                   Expanded(

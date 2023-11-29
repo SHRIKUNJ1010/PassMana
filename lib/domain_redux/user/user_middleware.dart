@@ -6,12 +6,15 @@ import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/domain_redux/user/user_actions.dart';
 import 'package:passmana/main.dart';
 import 'package:passmana/model/user_model.dart';
+import 'package:passmana/utility/method_channel_utility/biometric_verification_channel.dart';
 import 'package:redux/redux.dart';
 
 List<Middleware<AppState>> createUserMiddleware() {
   return [
     TypedMiddleware<AppState, CreateUser>(_createUser()),
     TypedMiddleware<AppState, UpdatePin>(_updatePin()),
+    TypedMiddleware<AppState, VerifyUserPin>(_verifyUserPin()),
+    TypedMiddleware<AppState, VerifyUserBiometric>(_verifyUserBiometric()),
     TypedMiddleware<AppState, SwitchBiometricOption>(_switchBiometricOption()),
   ];
 }
@@ -45,6 +48,32 @@ void Function(Store<AppState> store, UpdatePin action, NextDispatcher next) _upd
       UserChanged(
         user: store.state.user?.setPin(action.pin) ?? User(),
       ),
+    );
+  };
+}
+
+void Function(Store<AppState> store, VerifyUserPin action, NextDispatcher next) _verifyUserPin() {
+  return (store, action, next) {
+    next(action);
+    if (objectBox.userBox.getUser()?.pin == action.pin) {
+      action.onVerified.call();
+    } else {
+      action.onNotVerified.call();
+    }
+  };
+}
+
+void Function(Store<AppState> store, VerifyUserBiometric action, NextDispatcher next) _verifyUserBiometric() {
+  return (store, action, next) {
+    next(action);
+    BiometricsChannel.verifyBiometric().then(
+      (value) {
+        if (value) {
+          action.onVerified.call();
+        } else {
+          action.onNotVerified.call();
+        }
+      },
     );
   };
 }
