@@ -48,6 +48,8 @@ class AuthenticationScreen extends StatelessWidget {
                   ),
                   Expanded(
                     child: CustomPinField(
+                      disableBottomLeft: !vm.isBiometricEnabled,
+                      disableBottomRight: false,
                       bottomRightButtonChild: const Icon(
                         Icons.backspace,
                         color: AppColors.mWhite,
@@ -65,9 +67,7 @@ class AuthenticationScreen extends StatelessWidget {
                             )
                           : const SizedBox(),
                       onBottomLeftButtonTap: (controller) {
-                        if (vm.isBiometricEnabled) {
-                          vm.verifyBiometric.call();
-                        }
+                        vm.verifyBiometric.call();
                       },
                     ),
                   ),

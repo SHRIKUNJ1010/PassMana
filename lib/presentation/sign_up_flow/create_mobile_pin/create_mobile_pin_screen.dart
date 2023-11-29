@@ -49,6 +49,8 @@ class CreateMobilePinScreen extends StatelessWidget {
                   ),
                   Expanded(
                     child: CustomPinField(
+                      disableBottomLeft: true,
+                      disableBottomRight: false,
                       bottomRightButtonChild: const Icon(
                         Icons.backspace,
                         color: AppColors.mWhite,

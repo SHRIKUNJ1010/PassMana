@@ -47,18 +47,21 @@ class CommonWidgets {
   }) {
     return Expanded(
       flex: 1,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(16),
-        child: Material(
-          color: Colors.transparent,
-          child: InkWell(
-            onTap: () {
-              onTap.call();
-            },
-            splashColor: AppColors.accentPrimaryColor,
-            child: Container(
-              alignment: Alignment.center,
-              child: child,
+      child: Padding(
+        padding: const EdgeInsets.all(2),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(16),
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: () {
+                onTap.call();
+              },
+              splashColor: AppColors.accentPrimaryColor,
+              child: Container(
+                alignment: Alignment.center,
+                child: child,
+              ),
             ),
           ),
         ),
@@ -68,6 +71,8 @@ class CommonWidgets {
 
   static Widget getCommonNumericKeyboard({
     required TextEditingController controller,
+    required bool disableBottomLeft,
+    required bool disableBottomRight,
     required Widget bottomLeftButtonChild,
     required Widget bottomRightButtonChild,
     required Function onBottomLeftButtonTap,
@@ -182,10 +187,12 @@ class CommonWidgets {
           Expanded(
             child: Row(
               children: [
-                getCommonNumericKeyboardTile(
-                  onTap: onBottomLeftButtonTap,
-                  child: bottomLeftButtonChild,
-                ),
+                disableBottomLeft
+                    ? const Spacer(flex: 1)
+                    : getCommonNumericKeyboardTile(
+                        onTap: onBottomLeftButtonTap,
+                        child: bottomLeftButtonChild,
+                      ),
                 getCommonNumericKeyboardTile(
                   onTap: () {
                     controller.text += '0';
@@ -195,10 +202,12 @@ class CommonWidgets {
                     style: TextStyles.getButtonWhiteText(32),
                   ),
                 ),
-                getCommonNumericKeyboardTile(
-                  onTap: onBottomRightButtonTap,
-                  child: bottomRightButtonChild,
-                ),
+                disableBottomRight
+                    ? const Spacer(flex: 1)
+                    : getCommonNumericKeyboardTile(
+                        onTap: onBottomRightButtonTap,
+                        child: bottomRightButtonChild,
+                      ),
               ],
             ),
           ),

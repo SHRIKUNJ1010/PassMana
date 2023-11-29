@@ -10,9 +10,13 @@ class CustomPinField extends StatefulWidget {
   final Widget bottomRightButtonChild;
   final Function(TextEditingController) onBottomRightButtonTap;
   final Function(TextEditingController) onPinCompleted;
+  final bool disableBottomLeft;
+  final bool disableBottomRight;
 
   const CustomPinField({
     super.key,
+    required this.disableBottomLeft,
+    required this.disableBottomRight,
     required this.bottomLeftButtonChild,
     required this.bottomRightButtonChild,
     required this.onBottomLeftButtonTap,
@@ -54,6 +58,8 @@ class _CustomPinFieldState extends State<CustomPinField> {
           const Spacer(),
           CommonWidgets.getCommonNumericKeyboard(
             controller: _pinController,
+            disableBottomLeft: widget.disableBottomLeft,
+            disableBottomRight: widget.disableBottomRight,
             bottomLeftButtonChild: widget.bottomLeftButtonChild,
             bottomRightButtonChild: widget.bottomRightButtonChild,
             onBottomLeftButtonTap: () {
