@@ -221,8 +221,8 @@ class CommonWidgets {
       child: Container(
         alignment: Alignment.center,
         child: Container(
-          width: 20,
-          height: 20,
+          width: 17,
+          height: 17,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             color: AppColors.mWhite,
@@ -237,14 +237,14 @@ class CommonWidgets {
       child: Container(
         alignment: Alignment.center,
         child: Container(
-          width: 20,
-          height: 20,
+          width: 17,
+          height: 17,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             color: Colors.transparent,
             border: Border.all(
               color: AppColors.mWhite,
-              width: 2,
+              width: 1.7,
             ),
           ),
         ),
@@ -261,7 +261,7 @@ class CommonWidgets {
     return ConstrainedBox(
       constraints: const BoxConstraints(
         maxHeight: 30,
-        maxWidth: 330,
+        maxWidth: 270,
       ),
       child: Row(
         children: [
