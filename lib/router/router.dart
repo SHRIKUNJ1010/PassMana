@@ -70,7 +70,9 @@ final GoRouter router = GoRouter(
     ShellRoute(
       navigatorKey: shellNavigatorKey,
       builder: (context, state, child) {
-        return NavigationBarScreen(child: child);
+        return NavigationBarScreen(
+          child: child,
+        );
       },
       routes: <RouteBase>[
         GoRoute(

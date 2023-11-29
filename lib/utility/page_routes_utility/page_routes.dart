@@ -10,12 +10,13 @@ class AppRoutes {
   static const navigationBar = '/nav_bar';
   static const passwordList = '/password_list';
   static const groupList = '/group_list';
+  static const createList = '/create_list';
+  static const generatePassword = '/generate_password';
   static const settings = '/settings';
-  static const passwordDetails ='/password_details';
+  static const passwordDetails = '/password_details';
   static const createUpdatePassword = '/create_update_password';
   static const filterSearch = '/filter_search';
-  static const groupDetails ='/group_details';
+  static const groupDetails = '/group_details';
   static const createUpdateGroup = '/create_update_group';
   static const changeMobilePin = '/change_mobile_pin';
-  static const generatePassword = '/generate_password';
 }

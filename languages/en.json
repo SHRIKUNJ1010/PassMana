@@ -1,6 +1,11 @@
 {
   "change_mobile_pin": "Change Mobile Pin",
   "generate_password": "Generate Password",
+  "generate": "Generate",
+  "password": "Password",
+  "group": "Group",
+  "settings": "Settings",
+  "create": "Create",
   "get_started": "Get Started",
   "empowering_privacy_offline": "Empowering Privacy Offline",
   "where_your_passwords_find_sanctuary": "Where Your Passwords Find Sanctuary.",

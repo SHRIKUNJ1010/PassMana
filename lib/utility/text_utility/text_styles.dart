@@ -23,6 +23,14 @@ class TextStyles {
         decoration: TextDecoration.none,
       );
 
+  static TextStyle? getTitleDarkRedText(double fontSize) => TextStyle(
+    color: AppColors.secondaryColor,
+    fontSize: fontSize,
+    fontWeight: FontWeight.w600,
+    fontFamily: FontsList.muli,
+    decoration: TextDecoration.none,
+  );
+
   static TextStyle? getTitleWhiteText(double fontSize) => TextStyle(
         color: AppColors.mWhite,
         fontSize: fontSize,

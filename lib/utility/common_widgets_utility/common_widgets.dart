@@ -275,4 +275,133 @@ class CommonWidgets {
       ),
     );
   }
+
+  static Widget getBottomBarNotSelectedTile({
+    required Widget iconWidget,
+    required Widget textWidget,
+    required Function onTap,
+  }) {
+    return Expanded(
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(5),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            splashColor: AppColors.accentPrimaryColor,
+            onTap: () {
+              onTap.call();
+            },
+            child: SizedBox(
+              height: 50,
+              child: Column(
+                children: [
+                  const SizedBox(height: 5),
+                  SizedBox(
+                    height: 24,
+                    child: OverflowBox(
+                      maxHeight: 24,
+                      minHeight: 24,
+                      alignment: Alignment.center,
+                      child: iconWidget,
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  textWidget,
+                  const SizedBox(height: 2),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  static Widget getBottomBarSelectedTile({
+    required Widget iconWidget,
+    required Widget textWidget,
+  }) {
+    return Expanded(
+      child: SizedBox(
+        height: 50,
+        child: Column(
+          children: [
+            const SizedBox(height: 5),
+            SizedBox(
+              height: 24,
+              child: OverflowBox(
+                maxHeight: 24,
+                minHeight: 24,
+                alignment: Alignment.center,
+                child: iconWidget,
+              ),
+            ),
+            const SizedBox(height: 5),
+            textWidget,
+            const SizedBox(height: 2),
+          ],
+        ),
+      ),
+    );
+  }
+
+  static Widget getBottomBarCenterSelectedTile({
+    required Widget iconWidget,
+    required Widget textWidget,
+  }) {
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            height: 60,
+            width: 60,
+            decoration: BoxDecoration(
+              color: AppColors.secondaryColor,
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: iconWidget,
+          ),
+          const SizedBox(height: 5),
+          textWidget,
+          const SizedBox(height: 2),
+        ],
+      ),
+    );
+  }
+
+  static Widget getBottomBarCenterNotSelectedTile({
+    required Widget iconWidget,
+    required Widget textWidget,
+    required Function onTap,
+  }) {
+    return Expanded(
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          splashColor: AppColors.accentPrimaryColor,
+          onTap: () {
+            onTap.call();
+          },
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                height: 60,
+                width: 60,
+                decoration: BoxDecoration(
+                  color: AppColors.secondaryColor,
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: iconWidget,
+              ),
+              const SizedBox(height: 5),
+              textWidget,
+              const SizedBox(height: 2),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
