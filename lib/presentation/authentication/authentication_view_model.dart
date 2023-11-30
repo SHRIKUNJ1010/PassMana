@@ -24,6 +24,7 @@ class AuthenticationViewModel {
 
   static AuthenticationViewModel fromStore(Store<AppState> store) {
     return AuthenticationViewModel(
+      //todo: use selector do not directly access the state
       isBiometricEnabled: store.state.user?.isBiometricEnabled ?? false,
       verifyBiometric: () {
         store.dispatch(

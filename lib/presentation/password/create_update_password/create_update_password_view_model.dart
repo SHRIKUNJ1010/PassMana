@@ -32,7 +32,7 @@ class CreateUpdatePasswordViewModel {
 
   static CreateUpdatePasswordViewModel fromStore(Store<AppState> store) {
     return CreateUpdatePasswordViewModel(
-      //todo: change password by passing id or index and using selector
+      //todo: use selector do not directly access the state and get details by id or index in selector
       password: store.state.passwordList?.first,
       createPassword: ({
         required String title,
@@ -60,7 +60,7 @@ class CreateUpdatePasswordViewModel {
       }) {
         store.dispatch(
           UpdatePassword(
-            //todo: change to selector as above
+            //todo: use selector do not directly access the state and get details by id or index in selector
             password: store.state.passwordList?.first.updatePassword(
                   title: title,
                   subTitle: subTitle,

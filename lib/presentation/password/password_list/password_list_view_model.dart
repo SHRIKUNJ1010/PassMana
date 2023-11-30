@@ -15,6 +15,7 @@ class PasswordListViewModel {
 
   static PasswordListViewModel fromStore(Store<AppState> store) {
     return PasswordListViewModel(
+      //todo: use selector do not directly access the state
       passwordList: store.state.passwordList ?? [],
     );
   }

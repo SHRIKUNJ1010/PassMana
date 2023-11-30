@@ -3,7 +3,8 @@
 */
 
 import 'package:flutter/material.dart';
-import 'package:passmana/presentation/settings/generate_password/generate_password_view_model.dart';
+import 'package:passmana/presentation/generate_password/generate_password_view_model.dart';
+
 
 class GeneratePasswordStatefulContainer extends StatefulWidget {
   final GeneratePasswordViewModel vm;

@@ -15,7 +15,7 @@ class GroupDetailsViewModel {
 
   static GroupDetailsViewModel fromStore(Store<AppState> store) {
     return GroupDetailsViewModel(
-      //todo: change to selector with id
+      //todo: use selector do not directly access the state
       group: store.state.groupList?.first ?? Group(),
     );
   }

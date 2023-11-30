@@ -26,7 +26,7 @@ class CreateUpdateGroupViewModel {
 
   static CreateUpdateGroupViewModel fromStore(Store<AppState> store) {
     return CreateUpdateGroupViewModel(
-      //todo: change group by passing id or index and using selector
+      //todo: use selector do not directly access the state also with index or id
       group: store.state.groupList?.first,
       createGroup: ({
         required String groupName,
@@ -45,7 +45,7 @@ class CreateUpdateGroupViewModel {
       }) {
         store.dispatch(
           UpdateGroup(
-            //todo: change to selector as above
+            //todo: use selector do not directly access the state
             group: store.state.groupList?.first.updateGroupInfo(
                   groupName: groupName,
                   description: description,

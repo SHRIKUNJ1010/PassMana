@@ -15,7 +15,7 @@ class PasswordDetailsViewModel {
 
   static PasswordDetailsViewModel fromStore(Store<AppState> store) {
     return PasswordDetailsViewModel(
-      //todo: change using selector
+      //todo: use selector do not directly access the state also get index or id and get details
       password: store.state.passwordList?.first ?? Password(),
     );
   }

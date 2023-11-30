@@ -5,6 +5,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:passmana/presentation/authentication/authentication_screen.dart';
+import 'package:passmana/presentation/create/create_list/create_list_screen.dart';
+import 'package:passmana/presentation/generate_password/generate_password_screen.dart';
 import 'package:passmana/presentation/get_started/get_started_screen.dart';
 import 'package:passmana/presentation/group/create_update_group/create_update_group_screen.dart';
 import 'package:passmana/presentation/group/group_details/group_details_screen.dart';
@@ -14,7 +16,6 @@ import 'package:passmana/presentation/password/create_update_password/create_udp
 import 'package:passmana/presentation/password/password_details/password_details_screen.dart';
 import 'package:passmana/presentation/password/password_list/password_list_screen.dart';
 import 'package:passmana/presentation/settings/change_mobile_pin/change_mobile_pin_screen.dart';
-import 'package:passmana/presentation/settings/generate_password/generate_password_screen.dart';
 import 'package:passmana/presentation/settings/settings_item_list/settings_item_list_screen.dart';
 import 'package:passmana/presentation/sign_up_flow/create_mobile_pin/create_mobile_pin_screen.dart';
 import 'package:passmana/presentation/splash/splash_screen.dart';
@@ -97,6 +98,26 @@ final GoRouter router = GoRouter(
         ),
         GoRoute(
           parentNavigatorKey: shellNavigatorKey,
+          path: AppRoutes.createList,
+          pageBuilder: (context, state) {
+            return FadeTransitionPage(
+              child: const CreateListScreen(),
+              key: state.pageKey,
+            );
+          },
+        ),
+        GoRoute(
+          parentNavigatorKey: shellNavigatorKey,
+          path: AppRoutes.generatePassword,
+          pageBuilder: (context, state) {
+            return FadeTransitionPage(
+              child: const GeneratePasswordScreen(),
+              key: state.pageKey,
+            );
+          },
+        ),
+        GoRoute(
+          parentNavigatorKey: shellNavigatorKey,
           path: AppRoutes.settings,
           pageBuilder: (context, state) {
             return FadeTransitionPage(
@@ -105,6 +126,7 @@ final GoRouter router = GoRouter(
             );
           },
         ),
+
       ],
     ),
     GoRoute(
@@ -153,16 +175,6 @@ final GoRouter router = GoRouter(
       pageBuilder: (context, state) {
         return FadeTransitionPage(
           child: const ChangeMobilePinScreen(),
-          key: state.pageKey,
-        );
-      },
-    ),
-    GoRoute(
-      parentNavigatorKey: rootNavigatorKey,
-      path: AppRoutes.generatePassword,
-      pageBuilder: (context, state) {
-        return FadeTransitionPage(
-          child: const GeneratePasswordScreen(),
           key: state.pageKey,
         );
       },

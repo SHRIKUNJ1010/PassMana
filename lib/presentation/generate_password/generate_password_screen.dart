@@ -5,8 +5,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:passmana/domain_redux/app_state.dart';
-import 'package:passmana/presentation/settings/generate_password/generate_password_stateful_container.dart';
-import 'package:passmana/presentation/settings/generate_password/generate_password_view_model.dart';
+import 'package:passmana/presentation/generate_password/generate_password_stateful_container.dart';
+import 'package:passmana/presentation/generate_password/generate_password_view_model.dart';
 
 class GeneratePasswordScreen extends StatelessWidget {
   const GeneratePasswordScreen({super.key});

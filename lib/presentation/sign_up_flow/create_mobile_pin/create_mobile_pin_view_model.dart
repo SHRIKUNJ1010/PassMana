@@ -25,6 +25,7 @@ class CreateMobilePinViewModel {
     Store<AppState> store,
   ) {
     return CreateMobilePinViewModel(
+      //todo: use selector for accessing state do not directly access the state
       isConfirm: store.state.user?.pin != null && store.state.user?.pin != "",
       onSubmitTap: (TextEditingController pinController) {
         if (store.state.user?.pin == null || store.state.user?.pin == "") {

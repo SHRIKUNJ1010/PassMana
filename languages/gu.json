@@ -1,6 +1,11 @@
 {
   "change_mobile_pin": "મોબાઇલ પિન બદલો",
   "generate_password": "પાસવર્ડ જનરેટ કરો",
+  "generate": "પેદા",
+  "password": "પાસવર્ડ",
+  "group": "જૂથ",
+  "settings": "સેટિંગ્સ",
+  "create": "બનાવો",
   "get_started": "પ્રારંભ કરો",
   "empowering_privacy_offline": "ઑફલાઇન પ્રાઇવેસી ને સશક્ત કરો",
   "where_your_passwords_find_sanctuary": "જ્યાં તમારા પાસવર્ડ્સ સુરક્ષિત સ્થાન મેળવે છે.",

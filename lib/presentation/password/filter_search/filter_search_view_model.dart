@@ -22,7 +22,9 @@ class FilterSearchViewModel {
 
   static FilterSearchViewModel fromStore(Store<AppState> store) {
     return FilterSearchViewModel(
+      //todo: use selector do not directly access the state
       searchKeyword: store.state.searchKeyword,
+      //todo: use selector do not directly access the state
       selectedGroupsForFilterList: store.state.selectedGroupsForFilterList ?? [],
       changeSelectionOfGroup: (int groupId) {
         store.dispatch(ChangeSelectionOfGroup(groupId: groupId));

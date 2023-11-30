@@ -72,30 +72,30 @@ class _NavigationBarScreenState extends State<NavigationBarScreen> {
       style: TextStyles.getTitleWhiteText(10),
     ),
   ];
-  List<Widget> selectedIconWidgets = const <Widget>[
+  List<Widget> selectedIconWidgets = <Widget>[
     Icon(
       Icons.lock,
-      color: AppColors.secondaryColor,
+      color: AppColors.secondaryMaterialColor[400],
       size: 24,
     ),
     Icon(
       Icons.people,
-      color: AppColors.secondaryColor,
+      color: AppColors.secondaryMaterialColor[400],
       size: 30,
     ),
-    Icon(
+    const Icon(
       Icons.add,
-      color: AppColors.secondaryColor,
+      color: AppColors.mWhite,
       size: 30,
     ),
     Icon(
       Icons.alt_route,
-      color: AppColors.secondaryColor,
+      color: AppColors.secondaryMaterialColor[400],
       size: 22,
     ),
     Icon(
       Icons.settings,
-      color: AppColors.secondaryColor,
+      color: AppColors.secondaryMaterialColor[400],
       size: 25,
     )
   ];

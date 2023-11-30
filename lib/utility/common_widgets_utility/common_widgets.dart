@@ -357,7 +357,7 @@ class CommonWidgets {
             height: 60,
             width: 60,
             decoration: BoxDecoration(
-              color: AppColors.secondaryColor,
+              color: AppColors.secondaryMaterialColor[400],
               borderRadius: BorderRadius.circular(30),
             ),
             child: iconWidget,
@@ -376,29 +376,32 @@ class CommonWidgets {
     required Function onTap,
   }) {
     return Expanded(
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          splashColor: AppColors.accentPrimaryColor,
-          onTap: () {
-            onTap.call();
-          },
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                height: 60,
-                width: 60,
-                decoration: BoxDecoration(
-                  color: AppColors.secondaryColor,
-                  borderRadius: BorderRadius.circular(30),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(5),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            splashColor: AppColors.accentPrimaryColor,
+            onTap: () {
+              onTap.call();
+            },
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  height: 60,
+                  width: 60,
+                  decoration: BoxDecoration(
+                    color: AppColors.secondaryMaterialColor[400],
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: iconWidget,
                 ),
-                child: iconWidget,
-              ),
-              const SizedBox(height: 5),
-              textWidget,
-              const SizedBox(height: 2),
-            ],
+                const SizedBox(height: 5),
+                textWidget,
+                const SizedBox(height: 2),
+              ],
+            ),
           ),
         ),
       ),

@@ -12,7 +12,7 @@ class GroupListViewModel {
   GroupListViewModel({required this.groupList});
 
   static GroupListViewModel fromStore(Store<AppState> store) {
-    //todo: change
+    //todo: use selector for getting group list
     return GroupListViewModel(groupList: []);
   }
 }

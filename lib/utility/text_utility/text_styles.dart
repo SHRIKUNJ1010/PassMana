@@ -24,7 +24,7 @@ class TextStyles {
       );
 
   static TextStyle? getTitleDarkRedText(double fontSize) => TextStyle(
-    color: AppColors.secondaryColor,
+    color: AppColors.secondaryMaterialColor[400],
     fontSize: fontSize,
     fontWeight: FontWeight.w600,
     fontFamily: FontsList.muli,
