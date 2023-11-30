@@ -20,22 +20,6 @@ class Utility {
     await Clipboard.setData(ClipboardData(text: data));
   }
 
-  /*static int getCurrentIndex() {
-    if (router.routerDelegate.currentConfiguration.fullPath.contains(AppRoutes.passwordList)) {
-      return 0;
-    } else if (router.routerDelegate.currentConfiguration.fullPath.contains(AppRoutes.groupList)) {
-      return 1;
-    } else if (router.routerDelegate.currentConfiguration.fullPath.contains(AppRoutes.createList)) {
-      return 2;
-    } else if (router.routerDelegate.currentConfiguration.fullPath.contains(AppRoutes.generatePassword)) {
-      return 3;
-    } else if (router.routerDelegate.currentConfiguration.fullPath.contains(AppRoutes.settings)) {
-      return 4;
-    } else {
-      return 0;
-    }
-  }*/
-
   static void bottomBarOnTap(int index) {
     switch (index) {
       case 0:
