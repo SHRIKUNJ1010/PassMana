@@ -15,7 +15,9 @@ class CreateListScreen extends StatelessWidget {
     return StoreConnector<AppState, CreateListViewModel>(
       converter: CreateListViewModel.fromStore,
       builder: (BuildContext context, CreateListViewModel vm) {
-        return Container();
+        return Container(
+          color: Colors.red,
+        );
       },
     );
   }

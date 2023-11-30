@@ -80,7 +80,7 @@ final GoRouter router = GoRouter(
           parentNavigatorKey: shellNavigatorKey,
           path: AppRoutes.passwordList,
           pageBuilder: (context, state) {
-            return FadeTransitionPage(
+            return SlideLeftTransitionPage(
               child: const PasswordListScreen(),
               key: state.pageKey,
             );
@@ -90,7 +90,7 @@ final GoRouter router = GoRouter(
           parentNavigatorKey: shellNavigatorKey,
           path: AppRoutes.groupList,
           pageBuilder: (context, state) {
-            return FadeTransitionPage(
+            return SlideLeftTransitionPage(
               child: const GroupListScreen(),
               key: state.pageKey,
             );
@@ -100,7 +100,7 @@ final GoRouter router = GoRouter(
           parentNavigatorKey: shellNavigatorKey,
           path: AppRoutes.createList,
           pageBuilder: (context, state) {
-            return FadeTransitionPage(
+            return SlideLeftTransitionPage(
               child: const CreateListScreen(),
               key: state.pageKey,
             );
@@ -110,7 +110,7 @@ final GoRouter router = GoRouter(
           parentNavigatorKey: shellNavigatorKey,
           path: AppRoutes.generatePassword,
           pageBuilder: (context, state) {
-            return FadeTransitionPage(
+            return SlideLeftTransitionPage(
               child: const GeneratePasswordScreen(),
               key: state.pageKey,
             );
@@ -120,13 +120,12 @@ final GoRouter router = GoRouter(
           parentNavigatorKey: shellNavigatorKey,
           path: AppRoutes.settings,
           pageBuilder: (context, state) {
-            return FadeTransitionPage(
+            return SlideLeftTransitionPage(
               child: const SettingsItemListScreen(),
               key: state.pageKey,
             );
           },
         ),
-
       ],
     ),
     GoRoute(

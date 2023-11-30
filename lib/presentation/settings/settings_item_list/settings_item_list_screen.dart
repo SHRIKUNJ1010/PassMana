@@ -15,7 +15,9 @@ class SettingsItemListScreen extends StatelessWidget {
     return StoreConnector<AppState, SettingsItemListViewModel>(
       converter: SettingsItemListViewModel.fromStore,
       builder: (BuildContext context, SettingsItemListViewModel vm) {
-        return Container();
+        return Container(
+          color: Colors.cyanAccent,
+        );
       },
     );
   }

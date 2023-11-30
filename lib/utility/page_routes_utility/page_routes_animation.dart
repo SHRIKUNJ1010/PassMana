@@ -56,6 +56,23 @@ class SlideRightTransitionPage extends CustomTransitionPage<void> {
         );
 }
 
+class SlideLeftTransitionPage extends CustomTransitionPage<void> {
+  SlideLeftTransitionPage({
+    required LocalKey key,
+    required Widget child,
+  }) : super(
+          key: key,
+          child: child,
+          transitionsBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+            Widget child,
+          ) =>
+              SlideTransition(position: Tween<Offset>(begin: const Offset(1, 0), end: Offset.zero).animate(animation), child: child),
+        );
+}
+
 class SizeTransitionPage extends CustomTransitionPage<void> {
   SizeTransitionPage({
     required LocalKey key,

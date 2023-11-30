@@ -15,7 +15,9 @@ class PasswordListScreen extends StatelessWidget {
     return StoreConnector<AppState, PasswordListViewModel>(
       converter: PasswordListViewModel.fromStore,
       builder: (BuildContext context, PasswordListViewModel vm) {
-        return Container();
+        return Container(
+          color: Colors.blue,
+        );
       },
     );
   }

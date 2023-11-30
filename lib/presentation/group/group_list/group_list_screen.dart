@@ -16,7 +16,9 @@ class GroupListScreen extends StatelessWidget {
       converter: GroupListViewModel.fromStore,
       builder: (BuildContext context, GroupListViewModel vm) {
         //todo: change
-        return Container();
+        return Container(
+          color: Colors.yellow,
+        );
       },
     );
   }
