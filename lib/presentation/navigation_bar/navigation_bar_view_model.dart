@@ -1,21 +1,25 @@
 /*
-* Created by Shrikunj Patel on 9/13/2023.
+* Created by Shrikunj Patel on 11/30/2023.
 */
 
+import 'package:flutter/material.dart';
+import 'package:passmana/domain_redux/app_state.dart';
+import 'package:passmana/localization/app_localization.dart';
+import 'package:passmana/router/router.dart';
+import 'package:passmana/utility/color.dart';
+import 'package:passmana/utility/page_routes_utility/page_routes.dart';
+import 'package:passmana/utility/text_utility/text_styles.dart';
+import 'package:redux/redux.dart';
 
-
-class AppConstants {
-  //language constants
-  static const String english = 'en';
-  static const String hindi = 'hi';
-  static const String gujarati = 'gu';
-
-  //hero animation tags
-  static const String appLogo = "appLogo";
-
-
-  /*//navigation bar screen constants
-  static List<Widget> bottomNavigationNotSelectedIconWidgets = const <Widget>[
+class NavigationBarViewModel {
+  final List<String> routeList = [
+    AppRoutes.passwordList,
+    AppRoutes.groupList,
+    AppRoutes.createList,
+    AppRoutes.generatePassword,
+    AppRoutes.settings,
+  ];
+  final List<Widget> notSelectedIconWidgets = const <Widget>[
     Icon(
       Icons.lock_outline_rounded,
       color: AppColors.mWhite,
@@ -42,7 +46,7 @@ class AppConstants {
       size: 25,
     ),
   ];
-  static List<Widget> bottomNavigationNotSelectedTextWidgets = <Widget>[
+  final List<Widget> notSelectedTextWidgets = <Widget>[
     Text(
       getTranslated('password'),
       style: TextStyles.getTitleWhiteText(10),
@@ -64,7 +68,7 @@ class AppConstants {
       style: TextStyles.getTitleWhiteText(10),
     ),
   ];
-  static List<Widget> bottomNavigationSelectedIconWidgets = <Widget>[
+  final List<Widget> selectedIconWidgets = <Widget>[
     Icon(
       Icons.lock,
       color: AppColors.secondaryMaterialColor[400],
@@ -91,7 +95,7 @@ class AppConstants {
       size: 25,
     )
   ];
-  static List<Widget> bottomNavigationSelectedTextWidgets = <Widget>[
+  final List<Widget> selectedTextWidgets = <Widget>[
     Text(
       getTranslated('password'),
       style: TextStyles.getTitleDarkRedText(10),
@@ -113,11 +117,29 @@ class AppConstants {
       style: TextStyles.getTitleDarkRedText(10),
     ),
   ];
-  static List<String> bottomNavigationRouteList = [
-    AppRoutes.passwordList,
-    AppRoutes.groupList,
-    AppRoutes.createList,
-    AppRoutes.generatePassword,
-    AppRoutes.settings,
-  ];*/
+  final int Function() getCurrentIndex;
+
+  NavigationBarViewModel({
+    required this.getCurrentIndex,
+  });
+
+  static NavigationBarViewModel fromStore(Store<AppState> store) {
+    return NavigationBarViewModel(
+      getCurrentIndex: () {
+        if (router.routerDelegate.currentConfiguration.fullPath.contains(AppRoutes.passwordList)) {
+          return 0;
+        } else if (router.routerDelegate.currentConfiguration.fullPath.contains(AppRoutes.groupList)) {
+          return 1;
+        } else if (router.routerDelegate.currentConfiguration.fullPath.contains(AppRoutes.createList)) {
+          return 2;
+        } else if (router.routerDelegate.currentConfiguration.fullPath.contains(AppRoutes.generatePassword)) {
+          return 3;
+        } else if (router.routerDelegate.currentConfiguration.fullPath.contains(AppRoutes.settings)) {
+          return 4;
+        } else {
+          return 0;
+        }
+      },
+    );
+  }
 }

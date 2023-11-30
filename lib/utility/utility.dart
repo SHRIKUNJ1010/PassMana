@@ -20,7 +20,7 @@ class Utility {
     await Clipboard.setData(ClipboardData(text: data));
   }
 
-  static int getCurrentIndex() {
+  /*static int getCurrentIndex() {
     if (router.routerDelegate.currentConfiguration.fullPath.contains(AppRoutes.passwordList)) {
       return 0;
     } else if (router.routerDelegate.currentConfiguration.fullPath.contains(AppRoutes.groupList)) {
@@ -34,7 +34,7 @@ class Utility {
     } else {
       return 0;
     }
-  }
+  }*/
 
   static void bottomBarOnTap(int index) {
     switch (index) {
