@@ -5,7 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:passmana/domain_redux/app_state.dart';
-import 'package:passmana/presentation/create/create_list/create_list_view_model.dart';
+import 'package:passmana/presentation/create_list/create_list_view_model.dart';
 
 class CreateListScreen extends StatelessWidget {
   const CreateListScreen({super.key});

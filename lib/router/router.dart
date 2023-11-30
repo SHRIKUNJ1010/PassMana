@@ -5,7 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:passmana/presentation/authentication/authentication_screen.dart';
-import 'package:passmana/presentation/create/create_list/create_list_screen.dart';
+import 'package:passmana/presentation/create_list/create_list_screen.dart';
 import 'package:passmana/presentation/generate_password/generate_password_screen.dart';
 import 'package:passmana/presentation/get_started/get_started_screen.dart';
 import 'package:passmana/presentation/group/create_update_group/create_update_group_screen.dart';
