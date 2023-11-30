@@ -132,8 +132,9 @@ final GoRouter router = GoRouter(
       parentNavigatorKey: rootNavigatorKey,
       path: AppRoutes.createUpdateGroup,
       pageBuilder: (context, state) {
+        int tempId = state.extra as int;
         return FadeTransitionPage(
-          child: const CreateUpdateGroupScreen(),
+          child: CreateUpdateGroupScreen(id: tempId),
           key: state.pageKey,
         );
       },
@@ -142,8 +143,9 @@ final GoRouter router = GoRouter(
       parentNavigatorKey: rootNavigatorKey,
       path: AppRoutes.groupDetails,
       pageBuilder: (context, state) {
+        int tempId = state.extra as int;
         return FadeTransitionPage(
-          child: const GroupDetailsScreen(),
+          child: GroupDetailsScreen(id: tempId),
           key: state.pageKey,
         );
       },
@@ -152,8 +154,9 @@ final GoRouter router = GoRouter(
       parentNavigatorKey: rootNavigatorKey,
       path: AppRoutes.createUpdatePassword,
       pageBuilder: (context, state) {
+        int tempId = state.extra as int;
         return FadeTransitionPage(
-          child: const CreateUpdatePasswordScreen(),
+          child: CreateUpdatePasswordScreen(id: tempId),
           key: state.pageKey,
         );
       },
@@ -162,8 +165,9 @@ final GoRouter router = GoRouter(
       parentNavigatorKey: rootNavigatorKey,
       path: AppRoutes.passwordDetails,
       pageBuilder: (context, state) {
+        int tempId = state.extra as int;
         return FadeTransitionPage(
-          child: const PasswordDetailsScreen(),
+          child: PasswordDetailsScreen(id: tempId),
           key: state.pageKey,
         );
       },

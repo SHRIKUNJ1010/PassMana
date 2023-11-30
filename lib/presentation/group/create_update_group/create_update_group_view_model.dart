@@ -4,6 +4,7 @@
 
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/domain_redux/group/group_actions.dart';
+import 'package:passmana/domain_redux/group/group_selector.dart';
 import 'package:passmana/model/group_model.dart';
 import 'package:redux/redux.dart';
 
@@ -24,10 +25,9 @@ class CreateUpdateGroupViewModel {
     required this.updateGroup,
   });
 
-  static CreateUpdateGroupViewModel fromStore(Store<AppState> store) {
+  static CreateUpdateGroupViewModel fromStore(Store<AppState> store, int id) {
     return CreateUpdateGroupViewModel(
-      //todo: use selector do not directly access the state also with index or id
-      group: store.state.groupList?.first,
+      group: getGroupById(store.state, id),
       createGroup: ({
         required String groupName,
         required String description,
@@ -45,8 +45,7 @@ class CreateUpdateGroupViewModel {
       }) {
         store.dispatch(
           UpdateGroup(
-            //todo: use selector do not directly access the state
-            group: store.state.groupList?.first.updateGroupInfo(
+            group: getGroupById(store.state, id)?.updateGroupInfo(
                   groupName: groupName,
                   description: description,
                 ) ??

@@ -6,14 +6,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/presentation/group/create_update_group/create_update_group_view_model.dart';
+import 'package:redux/redux.dart';
 
 class CreateUpdateGroupScreen extends StatelessWidget {
-  const CreateUpdateGroupScreen({super.key});
+  final int id;
+
+  const CreateUpdateGroupScreen({
+    super.key,
+    required this.id,
+  });
 
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, CreateUpdateGroupViewModel>(
-      converter: CreateUpdateGroupViewModel.fromStore,
+      converter: (Store<AppState> store) {
+        return CreateUpdateGroupViewModel.fromStore(store, id);
+      },
       builder: (BuildContext context, CreateUpdateGroupViewModel vm) {
         return Container();
       },

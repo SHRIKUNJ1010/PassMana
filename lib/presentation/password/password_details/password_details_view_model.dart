@@ -3,6 +3,7 @@
 */
 
 import 'package:passmana/domain_redux/app_state.dart';
+import 'package:passmana/domain_redux/password/password_selector.dart';
 import 'package:passmana/model/password_model.dart';
 import 'package:redux/redux.dart';
 
@@ -13,10 +14,9 @@ class PasswordDetailsViewModel {
     required this.password,
   });
 
-  static PasswordDetailsViewModel fromStore(Store<AppState> store) {
+  static PasswordDetailsViewModel fromStore(Store<AppState> store,int id) {
     return PasswordDetailsViewModel(
-      //todo: use selector do not directly access the state also get index or id and get details
-      password: store.state.passwordList?.first ?? Password(),
+      password: getPasswordByIndex(store.state, id),
     );
   }
 }

@@ -5,9 +5,13 @@
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/model/password_model.dart';
 
-Password getTodoByIndex(AppState state, int index) => state.passwordList![index];
+Password getPasswordByIndex(AppState state, int index) => state.passwordList![index];
 
-Password? getTodoById(AppState state, int passwordId) => state.passwordList?.singleWhere((element) => element.id == passwordId);
+Password? getPasswordById(AppState state, int passwordId) => state.passwordList?.singleWhere((element) => element.id == passwordId);
+
+List<Password> getPasswordList(AppState state) {
+  return state.passwordList ?? [];
+}
 
 List<Password> getFilteredPasswordList(AppState state) {
   List<Password> tempList = [];

@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/domain_redux/user/user_actions.dart';
+import 'package:passmana/domain_redux/user/user_selector.dart';
 import 'package:passmana/router/router.dart';
 import 'package:passmana/utility/page_routes_utility/page_routes.dart';
 import 'package:redux/redux.dart';
@@ -24,8 +25,7 @@ class AuthenticationViewModel {
 
   static AuthenticationViewModel fromStore(Store<AppState> store) {
     return AuthenticationViewModel(
-      //todo: use selector do not directly access the state
-      isBiometricEnabled: store.state.user?.isBiometricEnabled ?? false,
+      isBiometricEnabled: getIsBiometricEnabled(store.state),
       verifyBiometric: () {
         store.dispatch(
           VerifyUserBiometric(

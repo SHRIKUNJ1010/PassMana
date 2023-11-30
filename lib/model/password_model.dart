@@ -33,6 +33,7 @@ class Password {
     String? note,
   }) {
     return Password(
+      id: id,
       title: title ?? this.title,
       subTitle: subTitle ?? this.subTitle,
       userName: userName ?? this.userName,

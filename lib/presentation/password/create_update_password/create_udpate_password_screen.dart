@@ -6,14 +6,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/presentation/password/create_update_password/create_update_password_view_model.dart';
+import 'package:redux/redux.dart';
 
 class CreateUpdatePasswordScreen extends StatelessWidget {
-  const CreateUpdatePasswordScreen({super.key});
+  final int id;
+
+  const CreateUpdatePasswordScreen({
+    super.key,
+    required this.id,
+  });
 
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, CreateUpdatePasswordViewModel>(
-      converter: CreateUpdatePasswordViewModel.fromStore,
+      converter: (Store<AppState> store) {
+        return CreateUpdatePasswordViewModel.fromStore(store, id);
+      },
       builder: (BuildContext context, CreateUpdatePasswordViewModel vm) {
         return Container();
       },

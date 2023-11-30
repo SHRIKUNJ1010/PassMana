@@ -4,6 +4,7 @@
 
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/domain_redux/password/password_actions.dart';
+import 'package:passmana/domain_redux/password/password_selector.dart';
 import 'package:passmana/model/password_model.dart';
 import 'package:redux/redux.dart';
 
@@ -30,10 +31,9 @@ class CreateUpdatePasswordViewModel {
     required this.updatePassword,
   });
 
-  static CreateUpdatePasswordViewModel fromStore(Store<AppState> store) {
+  static CreateUpdatePasswordViewModel fromStore(Store<AppState> store, int id) {
     return CreateUpdatePasswordViewModel(
-      //todo: use selector do not directly access the state and get details by id or index in selector
-      password: store.state.passwordList?.first,
+      password: getPasswordById(store.state, id),
       createPassword: ({
         required String title,
         required String subTitle,
@@ -60,8 +60,7 @@ class CreateUpdatePasswordViewModel {
       }) {
         store.dispatch(
           UpdatePassword(
-            //todo: use selector do not directly access the state and get details by id or index in selector
-            password: store.state.passwordList?.first.updatePassword(
+            password: getPasswordById(store.state, id)?.updatePassword(
                   title: title,
                   subTitle: subTitle,
                   userName: userName,

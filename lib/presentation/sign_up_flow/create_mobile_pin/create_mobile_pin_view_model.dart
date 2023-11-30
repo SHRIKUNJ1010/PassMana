@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/domain_redux/user/user_actions.dart';
+import 'package:passmana/domain_redux/user/user_selector.dart';
 import 'package:passmana/model/user_model.dart';
 import 'package:passmana/router/router.dart';
 import 'package:passmana/utility/page_routes_utility/page_routes.dart';
@@ -25,21 +26,25 @@ class CreateMobilePinViewModel {
     Store<AppState> store,
   ) {
     return CreateMobilePinViewModel(
-      //todo: use selector for accessing state do not directly access the state
-      isConfirm: store.state.user?.pin != null && store.state.user?.pin != "",
+      isConfirm: getIsConfirmPin(store.state),
       onSubmitTap: (TextEditingController pinController) {
-        if (store.state.user?.pin == null || store.state.user?.pin == "") {
+        // if is not confirm pin which invert of is confirm pin
+        // for is confirm pin state of user is changed for pin but
+        // database of user is not changed
+        if (!getIsConfirmPin(store.state)) {
           store.dispatch(
+            //this action is part of reducer which changes state
             UserChanged(
               user: User(
-                id: store.state.user?.id ?? 0,
+                id: getUserId(store.state),
                 pin: pinController.text,
               ),
             ),
           );
           pinController.clear();
         } else {
-          if (store.state.user?.pin == pinController.text) {
+          //for first user pin input add pin in app state but do not change object box database
+          if (getUserPin(store.state) == pinController.text) {
             store.dispatch(UpdatePin(pin: pinController.text));
             pinController.clear();
             router.go(AppRoutes.passwordList);

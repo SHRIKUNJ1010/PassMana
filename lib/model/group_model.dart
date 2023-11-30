@@ -26,6 +26,7 @@ class Group {
     String? description,
   }) {
     return Group(
+      id: id,
       groupName: groupName ?? this.groupName,
       description: description ?? this.description,
     );

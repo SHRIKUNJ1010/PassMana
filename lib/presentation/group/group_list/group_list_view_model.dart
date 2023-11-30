@@ -3,6 +3,7 @@
 */
 
 import 'package:passmana/domain_redux/app_state.dart';
+import 'package:passmana/domain_redux/group/group_selector.dart';
 import 'package:passmana/model/group_model.dart';
 import 'package:redux/redux.dart';
 
@@ -12,7 +13,8 @@ class GroupListViewModel {
   GroupListViewModel({required this.groupList});
 
   static GroupListViewModel fromStore(Store<AppState> store) {
-    //todo: use selector for getting group list
-    return GroupListViewModel(groupList: []);
+    return GroupListViewModel(
+      groupList: getGroupList(store.state),
+    );
   }
 }

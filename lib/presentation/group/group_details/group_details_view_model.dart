@@ -3,6 +3,7 @@
 */
 
 import 'package:passmana/domain_redux/app_state.dart';
+import 'package:passmana/domain_redux/group/group_selector.dart';
 import 'package:passmana/model/group_model.dart';
 import 'package:redux/redux.dart';
 
@@ -13,10 +14,9 @@ class GroupDetailsViewModel {
     required this.group,
   });
 
-  static GroupDetailsViewModel fromStore(Store<AppState> store) {
+  static GroupDetailsViewModel fromStore(Store<AppState> store, int id) {
     return GroupDetailsViewModel(
-      //todo: use selector do not directly access the state
-      group: store.state.groupList?.first ?? Group(),
+      group: getGroupById(store.state, id) ?? Group(),
     );
   }
 }
