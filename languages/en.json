@@ -1,6 +1,10 @@
 {
   "change_mobile_pin": "Change Mobile Pin",
   "generate_password": "Generate Password",
+  "store_your_data": "Store Your Data",
+  "card": "Card",
+  "note": "Note",
+  "secret_note": "Secret Note",
   "generate": "Generate",
   "password": "Password",
   "group": "Group",

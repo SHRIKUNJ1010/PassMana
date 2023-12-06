@@ -1,6 +1,10 @@
 {
   "change_mobile_pin": "मोबाइल पिन बदलें",
   "generate_password": "पासवर्ड उत्पन्न करें",
+  "store_your_data": "Store Your Data",
+  "card": "Card",
+  "note": "Note",
+  "secret_note": "Secret Note",
   "generate": "उत्पन्न",
   "password": "पासवर्ड",
   "group": "समूह",

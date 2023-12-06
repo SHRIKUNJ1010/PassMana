@@ -24,15 +24,27 @@ class TextStyles {
       );
 
   static TextStyle? getTitleDarkRedText(double fontSize) => TextStyle(
-    color: AppColors.secondaryMaterialColor[400],
-    fontSize: fontSize,
-    fontWeight: FontWeight.w600,
-    fontFamily: FontsList.muli,
-    decoration: TextDecoration.none,
-  );
+        color: AppColors.secondaryMaterialColor[400],
+        fontSize: fontSize,
+        fontWeight: FontWeight.w600,
+        fontFamily: FontsList.muli,
+        decoration: TextDecoration.none,
+      );
 
   static TextStyle? getTitleWhiteText(double fontSize) => TextStyle(
         color: AppColors.mWhite,
+        fontSize: fontSize,
+        fontWeight: FontWeight.w400,
+        fontFamily: FontsList.muli,
+        decoration: TextDecoration.none,
+      );
+
+  static TextStyle? getTitleTransparentWhiteText({
+    required double fontSize,
+    required double opacity,
+  }) =>
+      TextStyle(
+        color: AppColors.mWhite.withOpacity(opacity),
         fontSize: fontSize,
         fontWeight: FontWeight.w400,
         fontFamily: FontsList.muli,
