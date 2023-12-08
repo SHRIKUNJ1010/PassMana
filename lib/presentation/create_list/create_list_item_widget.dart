@@ -31,11 +31,11 @@ class CreateListItemTile extends StatelessWidget {
             onTap: () {
               onTap.call();
             },
-            splashColor: AppColors.accentSecondaryColor.withOpacity(0.5),
+            splashColor: AppColors.accentSecondaryColor,
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
-                color: AppColors.mWhite,
+                color: AppColors.mWhite.withOpacity(0.7),
               ),
               child: Center(
                 child: Column(
