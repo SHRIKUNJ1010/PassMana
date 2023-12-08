@@ -8,23 +8,31 @@ import 'package:passmana/utility/page_routes_utility/page_routes.dart';
 import 'package:redux/redux.dart';
 
 class CreateListViewModel {
-  final Function(int) onListItemTap;
+  final Function onPasswordItemTap;
+  final Function onGroupItemTap;
+  final Function onCardItemTap;
+  final Function onSecretNoteItemTap;
 
   CreateListViewModel({
-    required this.onListItemTap,
+    required this.onPasswordItemTap,
+    required this.onGroupItemTap,
+    required this.onCardItemTap,
+    required this.onSecretNoteItemTap,
   });
 
   static CreateListViewModel fromStore(Store<AppState> store) {
     return CreateListViewModel(
-      onListItemTap: (int index) {
-        switch(index) {
-          case 0:
-            router.push(AppRoutes.createUpdatePassword);
-            break;
-          case 1:
-            router.push(AppRoutes.createUpdateGroup);
-            break;
-        }
+      onPasswordItemTap: () {
+        router.push(AppRoutes.createUpdatePassword);
+      },
+      onGroupItemTap: () {
+        router.push(AppRoutes.createUpdateGroup);
+      },
+      onCardItemTap: () {
+        router.push(AppRoutes.createUpdatePassword);
+      },
+      onSecretNoteItemTap: () {
+        router.push(AppRoutes.createUpdatePassword);
       },
     );
   }

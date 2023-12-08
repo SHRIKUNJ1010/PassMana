@@ -19,4 +19,8 @@ class AppRoutes {
   static const groupDetails = '/group_details';
   static const createUpdateGroup = '/create_update_group';
   static const changeMobilePin = '/change_mobile_pin';
+
+  //==========================Pending Screens=========================//
+  static const createUpdateCard = '/create_update_card';
+  static const createUpdateSecretNote = '/create_update_secret_note';
 }
