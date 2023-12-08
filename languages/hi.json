@@ -1,7 +1,8 @@
 {
+  "passmana": "PassMana",
   "change_mobile_pin": "मोबाइल पिन बदलें",
   "generate_password": "पासवर्ड उत्पन्न करें",
-  "store_your_data": "Store Your Data",
+  "store_your_data_securely": "Store Your Data Securely",
   "card": "Card",
   "note": "Note",
   "secret_note": "Secret Note",

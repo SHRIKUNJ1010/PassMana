@@ -39,12 +39,12 @@ class TextStyles {
         decoration: TextDecoration.none,
       );
 
-  static TextStyle? getTitleTransparentWhiteText({
+  static TextStyle? getTitleTransparentBlackText({
     required double fontSize,
     required double opacity,
   }) =>
       TextStyle(
-        color: AppColors.mWhite.withOpacity(opacity),
+        color: AppColors.mBlack.withOpacity(opacity),
         fontSize: fontSize,
         fontWeight: FontWeight.w400,
         fontFamily: FontsList.muli,

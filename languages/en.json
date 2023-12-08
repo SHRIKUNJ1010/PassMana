@@ -1,7 +1,8 @@
 {
+  "passmana": "PassMana",
   "change_mobile_pin": "Change Mobile Pin",
   "generate_password": "Generate Password",
-  "store_your_data": "Store Your Data",
+  "store_your_data_securely": "Store Your Data Securely",
   "card": "Card",
   "note": "Note",
   "secret_note": "Secret Note",

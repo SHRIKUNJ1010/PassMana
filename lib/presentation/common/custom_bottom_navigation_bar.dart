@@ -39,9 +39,11 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
           alignment: Alignment.bottomCenter,
           child: Container(
             height: 60,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: AppColors.primaryColor,
-              borderRadius: BorderRadius.circular(30),
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(30),
+              ),
             ),
           ),
         ),

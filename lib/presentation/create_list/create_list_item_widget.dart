@@ -21,31 +21,21 @@ class CreateListItemTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(5),
+      padding: const EdgeInsets.all(10),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10.0),
         child: Material(
           elevation: 5,
-          color: AppColors.mBlack,
+          color: AppColors.mWhite,
           child: InkWell(
             onTap: () {
               onTap.call();
             },
-            splashColor: AppColors.mBlack.withOpacity(0.5),
+            splashColor: AppColors.accentSecondaryColor.withOpacity(0.5),
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  stops: const [0.05, 0.45, 0.55, 0.95],
-                  colors: [
-                    AppColors.primaryColor.withOpacity(0.7),
-                    AppColors.accentPrimaryColor.withOpacity(0.7),
-                    AppColors.accentSecondaryColor.withOpacity(0.7),
-                    AppColors.secondaryColor.withOpacity(0.7),
-                  ],
-                ),
+                color: AppColors.mWhite,
               ),
               child: Center(
                 child: Column(
@@ -55,7 +45,7 @@ class CreateListItemTile extends StatelessWidget {
                     const SizedBox(height: 5),
                     Text(
                       title,
-                      style: TextStyles.getTitleTransparentWhiteText(
+                      style: TextStyles.getTitleTransparentBlackText(
                         fontSize: 25,
                         opacity: 0.6,
                       ),

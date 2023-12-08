@@ -6,9 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/localization/app_localization.dart';
+import 'package:passmana/presentation/common/custom_app_bar.dart';
 import 'package:passmana/presentation/create_list/create_list_item_widget.dart';
 import 'package:passmana/presentation/create_list/create_list_view_model.dart';
+import 'package:passmana/utility/assets_utility/assets_paths.dart';
 import 'package:passmana/utility/color.dart';
+import 'package:passmana/utility/constants.dart';
 import 'package:passmana/utility/text_utility/text_styles.dart';
 
 class CreateListScreen extends StatelessWidget {
@@ -20,84 +23,119 @@ class CreateListScreen extends StatelessWidget {
       converter: CreateListViewModel.fromStore,
       builder: (BuildContext context, CreateListViewModel vm) {
         final double height = MediaQuery.of(context).size.height;
-        return Scaffold(
-          body: SafeArea(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Text(
-                    getTranslated("store_your_data"),
-                    softWrap: true,
-                    style: TextStyles.getTitleDarkRedText(40),
-                  ),
-                ),
-                Container(
-                  height: 0.6 * height,
-                  margin: const EdgeInsets.symmetric(horizontal: 5),
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: CreateListItemTile(
-                                onTap: () {},
-                                title: getTranslated("password"),
-                                icon: Icon(
-                                  Icons.lock,
-                                  color: AppColors.mWhite.withOpacity(0.6),
-                                  size: 50,
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: CreateListItemTile(
-                                onTap: () {},
-                                title: getTranslated("group"),
-                                icon: Icon(
-                                  Icons.people,
-                                  color: AppColors.mWhite.withOpacity(0.6),
-                                  size: 50,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: CreateListItemTile(
-                                onTap: () {},
-                                title: getTranslated("card"),
-                                icon: Icon(
-                                  Icons.credit_card,
-                                  color: AppColors.mWhite.withOpacity(0.6),
-                                  size: 50,
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: CreateListItemTile(
-                                onTap: () {},
-                                title: getTranslated("secret_note"),
-                                icon: Icon(
-                                  Icons.note_alt,
-                                  color: AppColors.mWhite.withOpacity(0.6),
-                                  size: 50,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+        return Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              stops: const [0.10, 0.90],
+              colors: [
+                AppColors.accentPrimaryColor.withOpacity(0.7),
+                AppColors.accentSecondaryColor.withOpacity(0.7),
               ],
+            ),
+          ),
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            appBar: CustomAppBar(
+              centerWidgetsList: [
+                const SizedBox(width: 20),
+                SizedBox(
+                  width: 40,
+                  child: Hero(
+                    tag: AppConstants.appLogo,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Image.asset(AppAssets.appLogoWithoutText),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Text(
+                  getTranslated("passmana"),
+                  style: TextStyles.getTitleWhiteText(28),
+                ),
+                const Spacer(),
+              ],
+            ),
+            body: SafeArea(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                    child: Text(
+                      getTranslated("store_your_data_securely"),
+                      softWrap: true,
+                      style: TextStyles.getTitleWhiteText(40),
+                    ),
+                  ),
+                  Container(
+                    height: 0.5 * height,
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: CreateListItemTile(
+                                  onTap: () {},
+                                  title: getTranslated("password"),
+                                  icon: Icon(
+                                    Icons.lock,
+                                    color: AppColors.mBlack.withOpacity(0.6),
+                                    size: 50,
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: CreateListItemTile(
+                                  onTap: () {},
+                                  title: getTranslated("group"),
+                                  icon: Icon(
+                                    Icons.people,
+                                    color: AppColors.mBlack.withOpacity(0.6),
+                                    size: 50,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: CreateListItemTile(
+                                  onTap: () {},
+                                  title: getTranslated("card"),
+                                  icon: Icon(
+                                    Icons.credit_card,
+                                    color: AppColors.mBlack.withOpacity(0.6),
+                                    size: 50,
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: CreateListItemTile(
+                                  onTap: () {},
+                                  title: getTranslated("secret_note"),
+                                  icon: Icon(
+                                    Icons.note_alt,
+                                    color: AppColors.mBlack.withOpacity(0.6),
+                                    size: 50,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         );
