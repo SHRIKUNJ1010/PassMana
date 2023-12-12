@@ -2,8 +2,10 @@
 * Created by Shrikunj Patel on 8/25/2023.
 */
 
+import 'package:passmana/data_object_box/card_box.dart';
 import 'package:passmana/data_object_box/group_box.dart';
 import 'package:passmana/data_object_box/password_box.dart';
+import 'package:passmana/data_object_box/secret_note_box.dart';
 import 'package:passmana/data_object_box/user_box.dart';
 import 'package:passmana/objectbox.g.dart';
 import 'package:path_provider/path_provider.dart';
@@ -17,11 +19,15 @@ class ObjectBox {
   late final UserBox userBox;
   late final PasswordBox passwordBox;
   late final GroupBox groupBox;
+  late final CardBox cardBox;
+  late final SecretNoteBox secretNoteBox;
 
   ObjectBox._create(this._store) {
     userBox = UserBox(_store);
     passwordBox = PasswordBox(_store);
     groupBox = GroupBox(_store);
+    cardBox = CardBox(_store);
+    secretNoteBox = SecretNoteBox(_store);
   }
 
   //create an instance of ObjectBox to use throughout the app

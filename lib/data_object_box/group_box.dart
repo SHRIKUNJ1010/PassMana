@@ -21,11 +21,17 @@ class GroupBox {
         groupName: groupName,
         description: description,
       ),
+      mode: PutMode.insert,
     );
   }
 
-  updateGroup({required Group group}) {
-    _groupBox.put(group);
+  updateGroup({
+    required Group group,
+  }) {
+    _groupBox.put(
+      group,
+      mode: PutMode.update,
+    );
   }
 
   List<Group> getAllGroups() {

@@ -23,4 +23,6 @@ class AppRoutes {
   //==========================Pending Screens=========================//
   static const createUpdateCard = '/create_update_card';
   static const createUpdateSecretNote = '/create_update_secret_note';
+  static const cardList = '/card_list';
+  static const secretNoteList = '/secret_note_list';
 }

@@ -31,8 +31,13 @@ class PasswordBox {
     );
   }
 
-  updatePassword({required Password password}) {
-    _passwordBox.put(password,mode: PutMode.update);
+  updatePassword({
+    required Password password,
+  }) {
+    _passwordBox.put(
+      password,
+      mode: PutMode.update,
+    );
   }
 
   List<Password> getAllPasswords() {
