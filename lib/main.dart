@@ -5,9 +5,11 @@ import 'package:passmana/data_object_box/object_box.dart';
 import 'package:passmana/domain_redux/app_middleware.dart';
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/domain_redux/app_reducer.dart';
+import 'package:passmana/domain_redux/card/card_middleware.dart';
 import 'package:passmana/domain_redux/filter_search/filter_search_middleware.dart';
 import 'package:passmana/domain_redux/group/group_middleware.dart';
 import 'package:passmana/domain_redux/password/password_middleware.dart';
+import 'package:passmana/domain_redux/secret_note/secret_note_middleware.dart';
 import 'package:passmana/domain_redux/user/user_middleware.dart';
 import 'package:passmana/localization/app_localization.dart';
 import 'package:passmana/router/router.dart';
@@ -42,6 +44,8 @@ class MyApp extends StatelessWidget {
         createUserMiddleware()
           ..addAll(createPasswordMiddleware())
           ..addAll(createGroupMiddleware())
+          ..addAll(createCardMiddleware())
+          ..addAll(createSecretNoteMiddleware())
           ..addAll(createFilterSearchMiddleware()),
       ),
   );
