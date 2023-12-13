@@ -29,7 +29,6 @@ class _GeneratePasswordStatefulContainerState extends State<GeneratePasswordStat
 
   @override
   Widget build(BuildContext context) {
-    //todo: change
     return Container(
       color: Colors.green,
     );

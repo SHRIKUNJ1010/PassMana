@@ -13,7 +13,6 @@ List<Password> getPasswordList(AppState state) {
   return state.passwordList ?? [];
 }
 
-//todo: check when filter is totally implemented
 List<Password> getFilteredPasswordList(AppState state) {
   List<Password> tempList = [];
   if (state.passwordList != null) {

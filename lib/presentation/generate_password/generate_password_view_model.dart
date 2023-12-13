@@ -34,10 +34,8 @@ class GeneratePasswordViewModel {
         required bool isReadable,
         required int passwordLength,
       }) {
-        //todo: call generate password function
       },
       copyToClipboard: (value) {
-        //todo: call copy to clipboard function
       },
     );
   }
