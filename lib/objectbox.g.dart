@@ -14,8 +14,10 @@ import 'package:objectbox/internal.dart'; // generated code can access "internal
 import 'package:objectbox/objectbox.dart';
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
+import 'model/card_model.dart';
 import 'model/group_model.dart';
 import 'model/password_model.dart';
+import 'model/secret_note_model.dart';
 import 'model/user_model.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
@@ -117,6 +119,64 @@ final _entities = <ModelEntity>[
             relationTarget: 'Group')
       ],
       relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(4, 7319612359426061167),
+      name: 'Card',
+      lastPropertyId: const IdUid(6, 934914539446613746),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 3923624425905033178),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 1976595611956823025),
+            name: 'bankAndCardName',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 5172812700472783797),
+            name: 'cardNumber',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(4, 9098147579021319787),
+            name: 'cardHolderName',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(5, 7283837161105017108),
+            name: 'cvv',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(6, 934914539446613746),
+            name: 'cardPin',
+            type: 9,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(5, 4333211291667404215),
+      name: 'SecretNote',
+      lastPropertyId: const IdUid(2, 888198510703763420),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 3886065542503847877),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 888198510703763420),
+            name: 'note',
+            type: 9,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[])
 ];
 
@@ -147,7 +207,7 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(3, 6243334753350276209),
+      lastEntityId: const IdUid(5, 4333211291667404215),
       lastIndexId: const IdUid(1, 2431947868288706786),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
@@ -287,6 +347,84 @@ ModelDefinition getObjectBoxModel() {
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 16, 0);
           object.group.attach(store);
           return object;
+        }),
+    Card: EntityDefinition<Card>(
+        model: _entities[3],
+        toOneRelations: (Card object) => [],
+        toManyRelations: (Card object) => {},
+        getId: (Card object) => object.id,
+        setId: (Card object, int id) {
+          object.id = id;
+        },
+        objectToFB: (Card object, fb.Builder fbb) {
+          final bankAndCardNameOffset = fbb.writeString(object.bankAndCardName);
+          final cardNumberOffset = fbb.writeString(object.cardNumber);
+          final cardHolderNameOffset = fbb.writeString(object.cardHolderName);
+          final cvvOffset = fbb.writeString(object.cvv);
+          final cardPinOffset = fbb.writeString(object.cardPin);
+          fbb.startTable(7);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, bankAndCardNameOffset);
+          fbb.addOffset(2, cardNumberOffset);
+          fbb.addOffset(3, cardHolderNameOffset);
+          fbb.addOffset(4, cvvOffset);
+          fbb.addOffset(5, cardPinOffset);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final idParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+          final bankAndCardNameParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 6, '');
+          final cardNumberParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 8, '');
+          final cardHolderNameParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 10, '');
+          final cardPinParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 14, '');
+          final cvvParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 12, '');
+          final object = Card(
+              id: idParam,
+              bankAndCardName: bankAndCardNameParam,
+              cardNumber: cardNumberParam,
+              cardHolderName: cardHolderNameParam,
+              cardPin: cardPinParam,
+              cvv: cvvParam);
+
+          return object;
+        }),
+    SecretNote: EntityDefinition<SecretNote>(
+        model: _entities[4],
+        toOneRelations: (SecretNote object) => [],
+        toManyRelations: (SecretNote object) => {},
+        getId: (SecretNote object) => object.id,
+        setId: (SecretNote object, int id) {
+          object.id = id;
+        },
+        objectToFB: (SecretNote object, fb.Builder fbb) {
+          final noteOffset = fbb.writeString(object.note);
+          fbb.startTable(3);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, noteOffset);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final idParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+          final noteParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 6, '');
+          final object = SecretNote(id: idParam, note: noteParam);
+
+          return object;
         })
   };
 
@@ -347,4 +485,39 @@ class Password_ {
   /// see [Password.group]
   static final group =
       QueryRelationToOne<Password, Group>(_entities[2].properties[6]);
+}
+
+/// [Card] entity fields to define ObjectBox queries.
+class Card_ {
+  /// see [Card.id]
+  static final id = QueryIntegerProperty<Card>(_entities[3].properties[0]);
+
+  /// see [Card.bankAndCardName]
+  static final bankAndCardName =
+      QueryStringProperty<Card>(_entities[3].properties[1]);
+
+  /// see [Card.cardNumber]
+  static final cardNumber =
+      QueryStringProperty<Card>(_entities[3].properties[2]);
+
+  /// see [Card.cardHolderName]
+  static final cardHolderName =
+      QueryStringProperty<Card>(_entities[3].properties[3]);
+
+  /// see [Card.cvv]
+  static final cvv = QueryStringProperty<Card>(_entities[3].properties[4]);
+
+  /// see [Card.cardPin]
+  static final cardPin = QueryStringProperty<Card>(_entities[3].properties[5]);
+}
+
+/// [SecretNote] entity fields to define ObjectBox queries.
+class SecretNote_ {
+  /// see [SecretNote.id]
+  static final id =
+      QueryIntegerProperty<SecretNote>(_entities[4].properties[0]);
+
+  /// see [SecretNote.note]
+  static final note =
+      QueryStringProperty<SecretNote>(_entities[4].properties[1]);
 }
