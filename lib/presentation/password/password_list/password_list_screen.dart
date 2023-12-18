@@ -131,6 +131,7 @@ class PasswordListScreen extends StatelessWidget {
                           scrollDirection: Axis.horizontal,
                           children: [
                             for (int i = 0; i < 4; i++) ...[
+                              //todo: common list tile with splash effect
                               Container(
                                 decoration: BoxDecoration(
                                   color: AppColors.mWhite,
@@ -213,6 +214,7 @@ class PasswordListScreen extends StatelessWidget {
                       physics: const NeverScrollableScrollPhysics(),
                       children: [
                         for (int i = 0; i < 10; i++) ...[
+                          //todo: common list tile with splash effect
                           Container(
                             height: 75,
                             margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),

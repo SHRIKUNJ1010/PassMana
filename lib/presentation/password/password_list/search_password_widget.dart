@@ -55,6 +55,7 @@ class _SearchPasswordWidgetState extends State<SearchPasswordWidget> {
               ),
             ),
           ),
+          //todo: add on tap with splash effect
           Container(
             width: 55,
             height: 55,
