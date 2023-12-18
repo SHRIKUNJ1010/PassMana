@@ -182,7 +182,7 @@ class PasswordListScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            getTranslated("recent_activity"),
+                            getTranslated("recently_added"),
                             softWrap: true,
                             style: TextStyles.getBoldWhiteText(26),
                           ),
