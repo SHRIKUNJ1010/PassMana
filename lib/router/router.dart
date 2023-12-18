@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:passmana/presentation/authentication/authentication_screen.dart';
+import 'package:passmana/presentation/card/card_list/card_list_screen.dart';
 import 'package:passmana/presentation/create_list/create_list_screen.dart';
 import 'package:passmana/presentation/generate_password/generate_password_screen.dart';
 import 'package:passmana/presentation/get_started/get_started_screen.dart';
@@ -15,6 +16,7 @@ import 'package:passmana/presentation/navigation_bar/navigation_bar_screen.dart'
 import 'package:passmana/presentation/password/create_update_password/create_update_password_screen.dart';
 import 'package:passmana/presentation/password/password_details/password_details_screen.dart';
 import 'package:passmana/presentation/password/password_list/password_list_screen.dart';
+import 'package:passmana/presentation/secret_note/secret_note_list/secret_note_list_screen.dart';
 import 'package:passmana/presentation/settings/change_mobile_pin/change_mobile_pin_screen.dart';
 import 'package:passmana/presentation/settings/settings_item_list/settings_item_list_screen.dart';
 import 'package:passmana/presentation/sign_up_flow/create_mobile_pin/create_mobile_pin_screen.dart';
@@ -88,6 +90,26 @@ final GoRouter router = GoRouter(
         ),
         GoRoute(
           parentNavigatorKey: shellNavigatorKey,
+          path: AppRoutes.cardList,
+          pageBuilder: (context, state) {
+            return SlideLeftTransitionPage(
+              child: const CardListScreen(),
+              key: state.pageKey,
+            );
+          },
+        ),
+        GoRoute(
+          parentNavigatorKey: shellNavigatorKey,
+          path: AppRoutes.secretNoteList,
+          pageBuilder: (context, state) {
+            return SlideLeftTransitionPage(
+              child: const SecretNoteListScreen(),
+              key: state.pageKey,
+            );
+          },
+        ),
+        /*GoRoute(
+          parentNavigatorKey: shellNavigatorKey,
           path: AppRoutes.groupList,
           pageBuilder: (context, state) {
             return SlideLeftTransitionPage(
@@ -95,7 +117,7 @@ final GoRouter router = GoRouter(
               key: state.pageKey,
             );
           },
-        ),
+        ),*/
         GoRoute(
           parentNavigatorKey: shellNavigatorKey,
           path: AppRoutes.createList,
@@ -106,7 +128,7 @@ final GoRouter router = GoRouter(
             );
           },
         ),
-        GoRoute(
+        /*GoRoute(
           parentNavigatorKey: shellNavigatorKey,
           path: AppRoutes.generatePassword,
           pageBuilder: (context, state) {
@@ -115,7 +137,7 @@ final GoRouter router = GoRouter(
               key: state.pageKey,
             );
           },
-        ),
+        ),*/
         GoRoute(
           parentNavigatorKey: shellNavigatorKey,
           path: AppRoutes.settings,

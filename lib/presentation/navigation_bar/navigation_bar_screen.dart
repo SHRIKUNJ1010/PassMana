@@ -41,6 +41,7 @@ class _NavigationBarScreenState extends State<NavigationBarScreen> {
                   selectedIconWidgets: vm.selectedIconWidgets,
                   selectedTextWidgets: vm.selectedTextWidgets,
                   selectedIndex: vm.getCurrentIndex.call(),
+                  onItemTap: vm.onItemTap,
                 ),
               ),
             ],

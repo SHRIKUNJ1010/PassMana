@@ -3,6 +3,8 @@
 */
 
 import 'package:flutter/material.dart';
+import 'package:fluttericon/font_awesome5_icons.dart';
+import 'package:fluttericon/font_awesome_icons.dart';
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/localization/app_localization.dart';
 import 'package:passmana/router/router.dart';
@@ -14,9 +16,9 @@ import 'package:redux/redux.dart';
 class NavigationBarViewModel {
   final List<String> routeList = [
     AppRoutes.passwordList,
-    AppRoutes.groupList,
+    AppRoutes.cardList,
     AppRoutes.createList,
-    AppRoutes.generatePassword,
+    AppRoutes.secretNoteList,
     AppRoutes.settings,
   ];
   final List<Widget> notSelectedIconWidgets = const <Widget>[
@@ -26,9 +28,9 @@ class NavigationBarViewModel {
       size: 24,
     ),
     Icon(
-      Icons.people_outline,
+      FontAwesome.credit_card,
       color: AppColors.mWhite,
-      size: 30,
+      size: 23,
     ),
     Icon(
       Icons.add,
@@ -36,9 +38,9 @@ class NavigationBarViewModel {
       size: 30,
     ),
     Icon(
-      Icons.alt_route,
+      Icons.note_alt_outlined,
       color: AppColors.mWhite,
-      size: 22,
+      size: 28,
     ),
     Icon(
       Icons.settings_outlined,
@@ -52,7 +54,7 @@ class NavigationBarViewModel {
       style: TextStyles.getTitleWhiteText(10),
     ),
     Text(
-      getTranslated('group'),
+      getTranslated('card'),
       style: TextStyles.getTitleWhiteText(10),
     ),
     Text(
@@ -60,7 +62,7 @@ class NavigationBarViewModel {
       style: TextStyles.getTitleWhiteText(10),
     ),
     Text(
-      getTranslated('generate'),
+      getTranslated('secret_note'),
       style: TextStyles.getTitleWhiteText(10),
     ),
     Text(
@@ -75,9 +77,9 @@ class NavigationBarViewModel {
       size: 24,
     ),
     Icon(
-      Icons.people,
+      FontAwesome5.credit_card,
       color: AppColors.secondaryMaterialColor[400],
-      size: 30,
+      size: 22,
     ),
     const Icon(
       Icons.add,
@@ -85,9 +87,9 @@ class NavigationBarViewModel {
       size: 30,
     ),
     Icon(
-      Icons.alt_route,
+      Icons.note_alt_rounded,
       color: AppColors.secondaryMaterialColor[400],
-      size: 22,
+      size: 28,
     ),
     Icon(
       Icons.settings,
@@ -101,7 +103,7 @@ class NavigationBarViewModel {
       style: TextStyles.getTitleDarkRedText(10),
     ),
     Text(
-      getTranslated('group'),
+      getTranslated('card'),
       style: TextStyles.getTitleDarkRedText(10),
     ),
     Text(
@@ -109,7 +111,7 @@ class NavigationBarViewModel {
       style: TextStyles.getTitleDarkRedText(10),
     ),
     Text(
-      getTranslated('generate'),
+      getTranslated('secret_note'),
       style: TextStyles.getTitleDarkRedText(10),
     ),
     Text(
@@ -118,21 +120,44 @@ class NavigationBarViewModel {
     ),
   ];
   final int Function() getCurrentIndex;
+  final Function(int) onItemTap;
 
   NavigationBarViewModel({
     required this.getCurrentIndex,
+    required this.onItemTap,
   });
 
   static NavigationBarViewModel fromStore(Store<AppState> store) {
     return NavigationBarViewModel(
+      onItemTap: (index) {
+        switch (index) {
+          case 0:
+            router.go(AppRoutes.passwordList);
+            break;
+          case 1:
+            router.go(AppRoutes.cardList);
+            break;
+          case 2:
+            router.go(AppRoutes.createList);
+            break;
+          case 3:
+            router.go(AppRoutes.secretNoteList);
+            break;
+          case 4:
+            router.go(AppRoutes.settings);
+            break;
+          default:
+            router.go(AppRoutes.passwordList);
+        }
+      },
       getCurrentIndex: () {
         if (router.routerDelegate.currentConfiguration.fullPath.contains(AppRoutes.passwordList)) {
           return 0;
-        } else if (router.routerDelegate.currentConfiguration.fullPath.contains(AppRoutes.groupList)) {
+        } else if (router.routerDelegate.currentConfiguration.fullPath.contains(AppRoutes.cardList)) {
           return 1;
         } else if (router.routerDelegate.currentConfiguration.fullPath.contains(AppRoutes.createList)) {
           return 2;
-        } else if (router.routerDelegate.currentConfiguration.fullPath.contains(AppRoutes.generatePassword)) {
+        } else if (router.routerDelegate.currentConfiguration.fullPath.contains(AppRoutes.secretNoteList)) {
           return 3;
         } else if (router.routerDelegate.currentConfiguration.fullPath.contains(AppRoutes.settings)) {
           return 4;

@@ -63,11 +63,19 @@ class CreateListScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                    padding: const EdgeInsets.fromLTRB(20, 40, 20, 0),
                     child: Text(
-                      getTranslated("store_your_data_securely"),
+                      getTranslated("what_do_you_want_to"),
                       softWrap: true,
-                      style: TextStyles.getTitleWhiteText(40),
+                      style: TextStyles.getTitleWhiteText(18),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+                    child: Text(
+                      getTranslated("store_today?"),
+                      softWrap: true,
+                      style: TextStyles.getTitleWhiteText(42),
                     ),
                   ),
                   Container(

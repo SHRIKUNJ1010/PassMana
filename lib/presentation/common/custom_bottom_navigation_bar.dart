@@ -5,7 +5,6 @@
 import 'package:flutter/material.dart';
 import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/common_widgets_utility/common_widgets.dart';
-import 'package:passmana/utility/utility.dart';
 
 class CustomBottomNavigationBar extends StatefulWidget {
   final List<Widget> notSelectedIconWidgets;
@@ -14,6 +13,7 @@ class CustomBottomNavigationBar extends StatefulWidget {
   final List<Widget> selectedTextWidgets;
   final List<String> routeList;
   final int selectedIndex;
+  final Function(int) onItemTap;
 
   const CustomBottomNavigationBar({
     super.key,
@@ -23,6 +23,7 @@ class CustomBottomNavigationBar extends StatefulWidget {
     required this.selectedIconWidgets,
     required this.selectedTextWidgets,
     required this.selectedIndex,
+    required this.onItemTap,
   });
 
   @override
@@ -70,13 +71,14 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                             iconWidget: widget.notSelectedIconWidgets[i],
                             textWidget: widget.notSelectedTextWidgets[i],
                             onTap: () {
-                              Utility.bottomBarOnTap(i);
-                            })
+                              widget.onItemTap.call(i);
+                            },
+                          )
                         : CommonWidgets.getBottomBarNotSelectedTile(
                             iconWidget: widget.notSelectedIconWidgets[i],
                             textWidget: widget.notSelectedTextWidgets[i],
                             onTap: () {
-                              Utility.bottomBarOnTap(i);
+                              widget.onItemTap.call(i);
                             },
                           ),
               ],
