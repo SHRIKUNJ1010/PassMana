@@ -88,7 +88,9 @@ class CreateListScreen extends StatelessWidget {
                             children: [
                               Expanded(
                                 child: CreateListItemTile(
-                                  onTap: () {},
+                                  onTap: () {
+                                    vm.onPasswordItemTap.call();
+                                  },
                                   title: getTranslated("password"),
                                   icon: Icon(
                                     Icons.lock,
@@ -99,7 +101,9 @@ class CreateListScreen extends StatelessWidget {
                               ),
                               Expanded(
                                 child: CreateListItemTile(
-                                  onTap: () {},
+                                  onTap: () {
+                                    vm.onGroupItemTap.call();
+                                  },
                                   title: getTranslated("group"),
                                   icon: Icon(
                                     Icons.people,
@@ -116,7 +120,9 @@ class CreateListScreen extends StatelessWidget {
                             children: [
                               Expanded(
                                 child: CreateListItemTile(
-                                  onTap: () {},
+                                  onTap: () {
+                                    vm.onCardItemTap.call();
+                                  },
                                   title: getTranslated("card"),
                                   icon: Icon(
                                     Icons.credit_card,
@@ -127,7 +133,9 @@ class CreateListScreen extends StatelessWidget {
                               ),
                               Expanded(
                                 child: CreateListItemTile(
-                                  onTap: () {},
+                                  onTap: () {
+                                    vm.onSecretNoteItemTap.call();
+                                  },
                                   title: getTranslated("secret_note"),
                                   icon: Icon(
                                     Icons.note_alt,

@@ -39,6 +39,38 @@ class TextStyles {
         decoration: TextDecoration.none,
       );
 
+  static TextStyle? getTitleBlueText(double fontSize) => TextStyle(
+        color: AppColors.primaryColor,
+        fontSize: fontSize,
+        fontWeight: FontWeight.w400,
+        fontFamily: FontsList.muli,
+        decoration: TextDecoration.none,
+      );
+
+  static TextStyle? getBoldBlueText(double fontSize) => TextStyle(
+        color: AppColors.primaryColor,
+        fontSize: fontSize,
+        fontWeight: FontWeight.bold,
+        fontFamily: FontsList.muli,
+        decoration: TextDecoration.none,
+      );
+
+  static TextStyle? getBoldWhiteText(double fontSize) => TextStyle(
+        color: AppColors.mWhite,
+        fontSize: fontSize,
+        fontWeight: FontWeight.bold,
+        fontFamily: FontsList.muli,
+        decoration: TextDecoration.none,
+      );
+
+  static TextStyle? getBoldRedText(double fontSize) => TextStyle(
+        color: AppColors.secondaryColor,
+        fontSize: fontSize,
+        fontWeight: FontWeight.bold,
+        fontFamily: FontsList.muli,
+        decoration: TextDecoration.none,
+      );
+
   static TextStyle? getTitleTransparentBlackText({
     required double fontSize,
     required double opacity,

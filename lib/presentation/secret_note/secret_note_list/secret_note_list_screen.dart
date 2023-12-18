@@ -35,6 +35,7 @@ class SecretNoteListScreen extends StatelessWidget {
           ),
           child: Scaffold(
             backgroundColor: Colors.transparent,
+            resizeToAvoidBottomInset: false,
             appBar: CustomAppBar(
               centerWidgetsList: [
                 const SizedBox(width: 20),

@@ -27,6 +27,7 @@ class _NavigationBarScreenState extends State<NavigationBarScreen> {
       converter: NavigationBarViewModel.fromStore,
       builder: (BuildContext context, NavigationBarViewModel vm) {
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           body: Stack(
             children: [
               widget.child,
