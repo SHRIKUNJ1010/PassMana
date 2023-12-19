@@ -13,6 +13,7 @@ import 'package:passmana/utility/assets_utility/assets_paths.dart';
 import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/constants.dart';
 import 'package:passmana/utility/text_utility/text_styles.dart';
+import 'package:passmana/utility/utility.dart';
 
 class CreateListScreen extends StatelessWidget {
   const CreateListScreen({super.key});
@@ -24,17 +25,7 @@ class CreateListScreen extends StatelessWidget {
       builder: (BuildContext context, CreateListViewModel vm) {
         final double height = MediaQuery.of(context).size.height;
         return Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              stops: const [0.10, 0.90],
-              colors: [
-                AppColors.accentPrimaryColor.withOpacity(0.7),
-                AppColors.accentSecondaryColor.withOpacity(0.7),
-              ],
-            ),
-          ),
+          decoration: Utility.getCommonBackgroundDecoration(),
           child: Scaffold(
             backgroundColor: Colors.transparent,
             appBar: CustomAppBar(
@@ -78,84 +69,88 @@ class CreateListScreen extends StatelessWidget {
                       style: TextStyles.getTitleWhiteText(42),
                     ),
                   ),
-                  Container(
-                    height: 0.5 * height,
-                    margin: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: CreateListItemTile(
-                                  onTap: () {
-                                    vm.onPasswordItemTap.call();
-                                  },
-                                  title: getTranslated("password"),
-                                  icon: Icon(
-                                    Icons.lock,
-                                    color: AppColors.mBlack.withOpacity(0.6),
-                                    size: 50,
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                child: CreateListItemTile(
-                                  onTap: () {
-                                    vm.onGroupItemTap.call();
-                                  },
-                                  title: getTranslated("group"),
-                                  icon: Icon(
-                                    Icons.people,
-                                    color: AppColors.mBlack.withOpacity(0.6),
-                                    size: 50,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: CreateListItemTile(
-                                  onTap: () {
-                                    vm.onCardItemTap.call();
-                                  },
-                                  title: getTranslated("card"),
-                                  icon: Icon(
-                                    Icons.credit_card,
-                                    color: AppColors.mBlack.withOpacity(0.6),
-                                    size: 50,
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                child: CreateListItemTile(
-                                  onTap: () {
-                                    vm.onSecretNoteItemTap.call();
-                                  },
-                                  title: getTranslated("secret_note"),
-                                  icon: Icon(
-                                    Icons.note_alt,
-                                    color: AppColors.mBlack.withOpacity(0.6),
-                                    size: 50,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  getGridList(height, vm),
                 ],
               ),
             ),
           ),
         );
       },
+    );
+  }
+
+  Container getGridList(double height, CreateListViewModel vm) {
+    return Container(
+      height: 0.5 * height,
+      margin: const EdgeInsets.symmetric(horizontal: 10),
+      child: Column(
+        children: [
+          Expanded(
+            child: Row(
+              children: [
+                Expanded(
+                  child: CreateListItemTile(
+                    onTap: () {
+                      vm.onPasswordItemTap.call();
+                    },
+                    title: getTranslated("password"),
+                    icon: Icon(
+                      Icons.lock,
+                      color: AppColors.mBlack.withOpacity(0.6),
+                      size: 50,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: CreateListItemTile(
+                    onTap: () {
+                      vm.onGroupItemTap.call();
+                    },
+                    title: getTranslated("group"),
+                    icon: Icon(
+                      Icons.people,
+                      color: AppColors.mBlack.withOpacity(0.6),
+                      size: 50,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Row(
+              children: [
+                Expanded(
+                  child: CreateListItemTile(
+                    onTap: () {
+                      vm.onCardItemTap.call();
+                    },
+                    title: getTranslated("card"),
+                    icon: Icon(
+                      Icons.credit_card,
+                      color: AppColors.mBlack.withOpacity(0.6),
+                      size: 50,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: CreateListItemTile(
+                    onTap: () {
+                      vm.onSecretNoteItemTap.call();
+                    },
+                    title: getTranslated("secret_note"),
+                    icon: Icon(
+                      Icons.note_alt,
+                      color: AppColors.mBlack.withOpacity(0.6),
+                      size: 50,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

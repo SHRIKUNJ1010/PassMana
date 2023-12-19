@@ -9,9 +9,9 @@ import 'package:passmana/localization/app_localization.dart';
 import 'package:passmana/presentation/common/custom_app_bar.dart';
 import 'package:passmana/presentation/settings/settings_item_list/settings_item_list_view_model.dart';
 import 'package:passmana/utility/assets_utility/assets_paths.dart';
-import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/constants.dart';
 import 'package:passmana/utility/text_utility/text_styles.dart';
+import 'package:passmana/utility/utility.dart';
 
 class SettingsItemListScreen extends StatelessWidget {
   const SettingsItemListScreen({super.key});
@@ -22,17 +22,7 @@ class SettingsItemListScreen extends StatelessWidget {
       converter: SettingsItemListViewModel.fromStore,
       builder: (BuildContext context, SettingsItemListViewModel vm) {
         return Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              stops: const [0.10, 0.90],
-              colors: [
-                AppColors.accentPrimaryColor.withOpacity(0.7),
-                AppColors.accentSecondaryColor.withOpacity(0.7),
-              ],
-            ),
-          ),
+          decoration: Utility.getCommonBackgroundDecoration(),
           child: Scaffold(
             backgroundColor: Colors.transparent,
             resizeToAvoidBottomInset: false,

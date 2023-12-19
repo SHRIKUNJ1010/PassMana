@@ -15,6 +15,7 @@ import 'package:passmana/utility/assets_utility/assets_paths.dart';
 import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/constants.dart';
 import 'package:passmana/utility/text_utility/text_styles.dart';
+import 'package:passmana/utility/utility.dart';
 
 class PasswordHomeListScreen extends StatelessWidget {
   const PasswordHomeListScreen({super.key});
@@ -27,17 +28,7 @@ class PasswordHomeListScreen extends StatelessWidget {
         final double width = MediaQuery.of(context).size.width;
 
         return Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              stops: const [0.10, 0.90],
-              colors: [
-                AppColors.accentPrimaryColor.withOpacity(0.7),
-                AppColors.accentSecondaryColor.withOpacity(0.7),
-              ],
-            ),
-          ),
+          decoration: Utility.getCommonBackgroundDecoration(),
           child: Scaffold(
             resizeToAvoidBottomInset: false,
             backgroundColor: Colors.transparent,
@@ -68,7 +59,7 @@ class PasswordHomeListScreen extends StatelessWidget {
                       splashColor: AppColors.mBlack.withOpacity(0.2),
                       onTap: () {},
                       child: const Padding(
-                        padding: EdgeInsets.all(8.0),
+                        padding: EdgeInsets.all(10),
                         child: Icon(
                           Icons.alt_route,
                           color: AppColors.primaryColor,
@@ -78,7 +69,7 @@ class PasswordHomeListScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(width: 20),
+                const SizedBox(width: 28),
               ],
             ),
             body: SafeArea(
