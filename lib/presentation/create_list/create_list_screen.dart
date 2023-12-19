@@ -66,7 +66,7 @@ class CreateListScreen extends StatelessWidget {
                     child: Text(
                       getTranslated("store_today?"),
                       softWrap: true,
-                      style: TextStyles.getTitleWhiteText(42),
+                      style: TextStyles.getTitleDarkRedText(42),
                     ),
                   ),
                   getGridList(height, vm),
