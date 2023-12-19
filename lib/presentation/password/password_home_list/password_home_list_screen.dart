@@ -124,7 +124,7 @@ class PasswordHomeListScreen extends StatelessWidget {
             softWrap: true,
             style: TextStyles.getBoldWhiteText(26),
           ),
-          vm.popularGroups.isEmpty
+          vm.popularGroups.length <= 4
               ? const SizedBox()
               : ClipRRect(
                   borderRadius: BorderRadius.circular(16),
@@ -160,7 +160,7 @@ class PasswordHomeListScreen extends StatelessWidget {
             softWrap: true,
             style: TextStyles.getBoldWhiteText(26),
           ),
-          vm.recentlyAddedPasswordList.isEmpty
+          vm.recentlyAddedPasswordList.length <= 10
               ? const SizedBox()
               : ClipRRect(
                   borderRadius: BorderRadius.circular(16),
