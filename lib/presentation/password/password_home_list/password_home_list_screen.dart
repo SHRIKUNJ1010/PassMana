@@ -59,7 +59,7 @@ class PasswordHomeListScreen extends StatelessWidget {
                       splashColor: AppColors.mBlack.withOpacity(0.2),
                       onTap: () {},
                       child: const Padding(
-                        padding: EdgeInsets.all(10),
+                        padding: EdgeInsets.fromLTRB(12, 10, 12, 10),
                         child: Icon(
                           Icons.alt_route,
                           color: AppColors.primaryColor,
@@ -188,7 +188,7 @@ class PasswordHomeListScreen extends StatelessWidget {
   Widget getPasswordListView(double width, PasswordHomeListViewModel vm) {
     return vm.recentlyAddedPasswordList.isEmpty
         ? Padding(
-            padding: const EdgeInsets.fromLTRB(20, 0, 20, 100),
+            padding: const EdgeInsets.fromLTRB(20, 10, 20, 100),
             child: SizedBox(
               width: width - 40,
               child: Center(
