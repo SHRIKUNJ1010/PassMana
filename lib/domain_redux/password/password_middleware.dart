@@ -30,8 +30,15 @@ void Function(Store<AppState> store, CreatePassword action, NextDispatcher next)
     );
     //get all latest passwords
     List<Password> passwords = objectBox.passwordBox.getAllPasswords();
+    //get recently added passwords
+    List<Password> recentlyAddedPasswords = objectBox.passwordBox.getRecentlyAddedPasswords();
     //change the list of passwords in state
-    store.dispatch(PasswordListChanged(passwordList: passwords));
+    store.dispatch(
+      PasswordListChanged(
+        passwordList: passwords,
+        recentlyAddedPasswordList: recentlyAddedPasswords,
+      ),
+    );
   };
 }
 
@@ -42,8 +49,15 @@ void Function(Store<AppState> store, UpdatePassword action, NextDispatcher next)
     objectBox.passwordBox.updatePassword(password: action.password);
     //get all latest passwords
     List<Password> passwords = objectBox.passwordBox.getAllPasswords();
+    //get recently added passwords
+    List<Password> recentlyAddedPasswords = objectBox.passwordBox.getRecentlyAddedPasswords();
     //change the list of passwords in state
-    store.dispatch(PasswordListChanged(passwordList: passwords));
+    store.dispatch(
+      PasswordListChanged(
+        passwordList: passwords,
+        recentlyAddedPasswordList: recentlyAddedPasswords,
+      ),
+    );
   };
 }
 
@@ -54,8 +68,15 @@ void Function(Store<AppState> store, DeletePassword action, NextDispatcher next)
     objectBox.passwordBox.deletePassword(action.passwordId);
     //get all latest passwords
     List<Password> passwords = objectBox.passwordBox.getAllPasswords();
+    //get recently added passwords
+    List<Password> recentlyAddedPasswords = objectBox.passwordBox.getRecentlyAddedPasswords();
     //change the list of passwords in state
-    store.dispatch(PasswordListChanged(passwordList: passwords));
+    store.dispatch(
+      PasswordListChanged(
+        passwordList: passwords,
+        recentlyAddedPasswordList: recentlyAddedPasswords,
+      ),
+    );
   };
 }
 
@@ -64,7 +85,14 @@ void Function(Store<AppState> store, GetAllPasswords action, NextDispatcher next
     next(action);
     //get all latest passwords
     List<Password> passwords = objectBox.passwordBox.getAllPasswords();
+    //get recently added passwords
+    List<Password> recentlyAddedPasswords = objectBox.passwordBox.getRecentlyAddedPasswords();
     //change the list of passwords in state
-    store.dispatch(PasswordListChanged(passwordList: passwords));
+    store.dispatch(
+      PasswordListChanged(
+        passwordList: passwords,
+        recentlyAddedPasswordList: recentlyAddedPasswords,
+      ),
+    );
   };
 }

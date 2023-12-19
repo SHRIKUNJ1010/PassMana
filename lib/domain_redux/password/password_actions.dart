@@ -40,8 +40,10 @@ class DeletePassword {
 
 class PasswordListChanged {
   final List<Password> passwordList;
+  final List<Password> recentlyAddedPasswordList;
 
   PasswordListChanged({
     required this.passwordList,
+    required this.recentlyAddedPasswordList,
   });
 }

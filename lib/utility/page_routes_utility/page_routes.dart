@@ -8,7 +8,8 @@ class AppRoutes {
   static const authentication = '/authentication';
   static const createMobilePin = '/create_mobile_pin';
   static const navigationBar = '/nav_bar';
-  static const passwordList = '/password_list';
+  static const passwordHomeList = '/password_home_list';
+  static const allPasswordList = '/all_password_list';
   static const groupList = '/group_list';
   static const createList = '/create_list';
   static const generatePassword = '/generate_password';

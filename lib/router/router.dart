@@ -13,7 +13,7 @@ import 'package:passmana/presentation/group/group_details/group_details_screen.d
 import 'package:passmana/presentation/navigation_bar/navigation_bar_screen.dart';
 import 'package:passmana/presentation/password/create_update_password/create_update_password_screen.dart';
 import 'package:passmana/presentation/password/password_details/password_details_screen.dart';
-import 'package:passmana/presentation/password/password_list/password_list_screen.dart';
+import 'package:passmana/presentation/password/password_home_list/password_home_list_screen.dart';
 import 'package:passmana/presentation/secret_note/secret_note_list/secret_note_list_screen.dart';
 import 'package:passmana/presentation/settings/change_mobile_pin/change_mobile_pin_screen.dart';
 import 'package:passmana/presentation/settings/settings_item_list/settings_item_list_screen.dart';
@@ -68,6 +68,62 @@ final GoRouter router = GoRouter(
         );
       },
     ),
+    GoRoute(
+      parentNavigatorKey: rootNavigatorKey,
+      path: AppRoutes.createUpdateGroup,
+      pageBuilder: (context, state) {
+        int tempId = state.extra as int;
+        return FadeTransitionPage(
+          child: CreateUpdateGroupScreen(id: tempId),
+          key: state.pageKey,
+        );
+      },
+    ),
+    GoRoute(
+      parentNavigatorKey: rootNavigatorKey,
+      path: AppRoutes.groupDetails,
+      pageBuilder: (context, state) {
+        int tempId = state.extra as int;
+        return FadeTransitionPage(
+          child: GroupDetailsScreen(id: tempId),
+          key: state.pageKey,
+        );
+      },
+    ),
+    GoRoute(
+      parentNavigatorKey: rootNavigatorKey,
+      path: AppRoutes.createUpdatePassword,
+      pageBuilder: (context, state) {
+        int tempId = state.extra as int;
+        return FadeTransitionPage(
+          child: CreateUpdatePasswordScreen(id: tempId),
+          key: state.pageKey,
+        );
+      },
+    ),
+    GoRoute(
+      parentNavigatorKey: rootNavigatorKey,
+      path: AppRoutes.passwordDetails,
+      pageBuilder: (context, state) {
+        int tempId = state.extra as int;
+        return FadeTransitionPage(
+          child: PasswordDetailsScreen(id: tempId),
+          key: state.pageKey,
+        );
+      },
+    ),
+    GoRoute(
+      parentNavigatorKey: rootNavigatorKey,
+      path: AppRoutes.changeMobilePin,
+      pageBuilder: (context, state) {
+        return FadeTransitionPage(
+          child: const ChangeMobilePinScreen(),
+          key: state.pageKey,
+        );
+      },
+    ),
+    // put shell route at the bottom of the route list show that you can find routes
+    // easily
     ShellRoute(
       navigatorKey: shellNavigatorKey,
       builder: (context, state, child) {
@@ -78,10 +134,10 @@ final GoRouter router = GoRouter(
       routes: <RouteBase>[
         GoRoute(
           parentNavigatorKey: shellNavigatorKey,
-          path: AppRoutes.passwordList,
+          path: AppRoutes.passwordHomeList,
           pageBuilder: (context, state) {
             return SlideLeftTransitionPage(
-              child: const PasswordListScreen(),
+              child: const PasswordHomeListScreen(),
               key: state.pageKey,
             );
           },
@@ -147,60 +203,6 @@ final GoRouter router = GoRouter(
           },
         ),
       ],
-    ),
-    GoRoute(
-      parentNavigatorKey: rootNavigatorKey,
-      path: AppRoutes.createUpdateGroup,
-      pageBuilder: (context, state) {
-        int tempId = state.extra as int;
-        return FadeTransitionPage(
-          child: CreateUpdateGroupScreen(id: tempId),
-          key: state.pageKey,
-        );
-      },
-    ),
-    GoRoute(
-      parentNavigatorKey: rootNavigatorKey,
-      path: AppRoutes.groupDetails,
-      pageBuilder: (context, state) {
-        int tempId = state.extra as int;
-        return FadeTransitionPage(
-          child: GroupDetailsScreen(id: tempId),
-          key: state.pageKey,
-        );
-      },
-    ),
-    GoRoute(
-      parentNavigatorKey: rootNavigatorKey,
-      path: AppRoutes.createUpdatePassword,
-      pageBuilder: (context, state) {
-        int tempId = state.extra as int;
-        return FadeTransitionPage(
-          child: CreateUpdatePasswordScreen(id: tempId),
-          key: state.pageKey,
-        );
-      },
-    ),
-    GoRoute(
-      parentNavigatorKey: rootNavigatorKey,
-      path: AppRoutes.passwordDetails,
-      pageBuilder: (context, state) {
-        int tempId = state.extra as int;
-        return FadeTransitionPage(
-          child: PasswordDetailsScreen(id: tempId),
-          key: state.pageKey,
-        );
-      },
-    ),
-    GoRoute(
-      parentNavigatorKey: rootNavigatorKey,
-      path: AppRoutes.changeMobilePin,
-      pageBuilder: (context, state) {
-        return FadeTransitionPage(
-          child: const ChangeMobilePinScreen(),
-          key: state.pageKey,
-        );
-      },
     ),
   ],
 );

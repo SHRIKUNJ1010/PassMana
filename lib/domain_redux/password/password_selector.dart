@@ -13,6 +13,10 @@ List<Password> getPasswordList(AppState state) {
   return state.passwordList ?? [];
 }
 
+List<Password> getRecentlyAddedPasswordList(AppState state) {
+  return state.recentlyAddedPasswordList ?? [];
+}
+
 List<Password> getFilteredPasswordList(AppState state) {
   List<Password> tempList = [];
   if (state.passwordList != null) {

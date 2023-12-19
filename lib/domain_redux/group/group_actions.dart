@@ -34,8 +34,10 @@ class DeleteGroup {
 
 class GroupListChanged {
   final List<Group> groupList;
+  final List<Group> popularGroupList;
 
   GroupListChanged({
     required this.groupList,
+    required this.popularGroupList,
   });
 }

@@ -11,5 +11,8 @@ final groupReducers = <AppState Function(AppState, dynamic)>[
 ];
 
 AppState _onGroupListChanged(AppState state, GroupListChanged action) {
-  return state.copyWith(groupList: action.groupList);
+  return state.copyWith(
+    groupList: action.groupList,
+    popularGroupList: action.popularGroupList,
+  );
 }

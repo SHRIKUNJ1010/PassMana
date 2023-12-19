@@ -47,7 +47,7 @@ class CreateMobilePinViewModel {
           if (getUserPin(store.state) == pinController.text) {
             store.dispatch(UpdatePin(pin: pinController.text));
             pinController.clear();
-            router.go(AppRoutes.passwordList);
+            router.go(AppRoutes.passwordHomeList);
           } else {
             pinController.clear();
           }

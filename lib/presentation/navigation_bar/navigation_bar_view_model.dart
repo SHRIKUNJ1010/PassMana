@@ -15,7 +15,7 @@ import 'package:redux/redux.dart';
 
 class NavigationBarViewModel {
   final List<String> routeList = [
-    AppRoutes.passwordList,
+    AppRoutes.passwordHomeList,
     AppRoutes.cardList,
     AppRoutes.createList,
     AppRoutes.secretNoteList,
@@ -132,7 +132,7 @@ class NavigationBarViewModel {
       onItemTap: (index) {
         switch (index) {
           case 0:
-            router.go(AppRoutes.passwordList);
+            router.go(AppRoutes.passwordHomeList);
             break;
           case 1:
             router.go(AppRoutes.cardList);
@@ -147,11 +147,11 @@ class NavigationBarViewModel {
             router.go(AppRoutes.settings);
             break;
           default:
-            router.go(AppRoutes.passwordList);
+            router.go(AppRoutes.passwordHomeList);
         }
       },
       getCurrentIndex: () {
-        if (router.routerDelegate.currentConfiguration.fullPath.contains(AppRoutes.passwordList)) {
+        if (router.routerDelegate.currentConfiguration.fullPath.contains(AppRoutes.passwordHomeList)) {
           return 0;
         } else if (router.routerDelegate.currentConfiguration.fullPath.contains(AppRoutes.cardList)) {
           return 1;

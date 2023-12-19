@@ -53,7 +53,7 @@
     },
     {
       "id": "3:6243334753350276209",
-      "lastPropertyId": "7:6132687139176641847",
+      "lastPropertyId": "8:2322565834328061491",
       "name": "Password",
       "properties": [
         {
@@ -94,6 +94,11 @@
           "flags": 520,
           "indexId": "1:2431947868288706786",
           "relationTarget": "Group"
+        },
+        {
+          "id": "8:2322565834328061491",
+          "name": "createdDate",
+          "type": 10
         }
       ],
       "relations": []

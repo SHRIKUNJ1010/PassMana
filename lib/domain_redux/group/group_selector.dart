@@ -12,3 +12,7 @@ Group? getGroupById(AppState state, int groupId) => state.groupList?.singleWhere
 List<Group> getGroupList(AppState state) {
   return state.groupList ?? [];
 }
+
+List<Group> getPopularGroupList(AppState state) {
+  return state.popularGroupList ?? [];
+}

@@ -11,5 +11,8 @@ final passwordReducers = <AppState Function(AppState, dynamic)>[
 ];
 
 AppState _onPasswordListChanged(AppState state, PasswordListChanged action) {
-  return state.copyWith(passwordList: action.passwordList);
+  return state.copyWith(
+    passwordList: action.passwordList,
+    recentlyAddedPasswordList: action.recentlyAddedPasswordList,
+  );
 }

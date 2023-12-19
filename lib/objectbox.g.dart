@@ -71,13 +71,12 @@ final _entities = <ModelEntity>[
       ],
       relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[
-        ModelBacklink(
-            name: 'passwords', srcEntity: 'Password', srcField: 'group')
+        ModelBacklink(name: 'passwords', srcEntity: 'Password', srcField: '')
       ]),
   ModelEntity(
       id: const IdUid(3, 6243334753350276209),
       name: 'Password',
-      lastPropertyId: const IdUid(7, 6132687139176641847),
+      lastPropertyId: const IdUid(8, 2322565834328061491),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -116,7 +115,12 @@ final _entities = <ModelEntity>[
             type: 11,
             flags: 520,
             indexId: const IdUid(1, 2431947868288706786),
-            relationTarget: 'Group')
+            relationTarget: 'Group'),
+        ModelProperty(
+            id: const IdUid(8, 2322565834328061491),
+            name: 'createdDate',
+            type: 10,
+            flags: 0)
       ],
       relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[]),
@@ -310,7 +314,7 @@ ModelDefinition getObjectBoxModel() {
           final userNameOffset = fbb.writeString(object.userName);
           final passwordOffset = fbb.writeString(object.password);
           final noteOffset = fbb.writeString(object.note);
-          fbb.startTable(8);
+          fbb.startTable(9);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, titleOffset);
           fbb.addOffset(2, subTitleOffset);
@@ -318,6 +322,7 @@ ModelDefinition getObjectBoxModel() {
           fbb.addOffset(4, passwordOffset);
           fbb.addOffset(5, noteOffset);
           fbb.addInt64(6, object.group.targetId);
+          fbb.addInt64(7, object.createdDate.millisecondsSinceEpoch);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -336,13 +341,16 @@ ModelDefinition getObjectBoxModel() {
               .vTableGet(buffer, rootOffset, 12, '');
           final noteParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 14, '');
+          final createdDateParam = DateTime.fromMillisecondsSinceEpoch(
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 18, 0));
           final object = Password(
               id: idParam,
               title: titleParam,
               subTitle: subTitleParam,
               userName: userNameParam,
               password: passwordParam,
-              note: noteParam);
+              note: noteParam,
+              createdDate: createdDateParam);
           object.group.targetId =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 16, 0);
           object.group.attach(store);
@@ -485,6 +493,10 @@ class Password_ {
   /// see [Password.group]
   static final group =
       QueryRelationToOne<Password, Group>(_entities[2].properties[6]);
+
+  /// see [Password.createdDate]
+  static final createdDate =
+      QueryIntegerProperty<Password>(_entities[2].properties[7]);
 }
 
 /// [Card] entity fields to define ObjectBox queries.

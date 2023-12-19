@@ -14,6 +14,8 @@ class Password {
   String userName;
   String password;
   String note;
+  @Property(type: PropertyType.date)
+  DateTime createdDate;
   final group = ToOne<Group>();
 
   Password({
@@ -23,6 +25,7 @@ class Password {
     this.userName = '',
     this.password = '',
     this.note = '',
+    required this.createdDate,
   });
 
   Password updatePassword({
@@ -39,6 +42,7 @@ class Password {
       userName: userName ?? this.userName,
       password: password ?? this.password,
       note: note ?? this.note,
+      createdDate: createdDate,
     );
   }
 }

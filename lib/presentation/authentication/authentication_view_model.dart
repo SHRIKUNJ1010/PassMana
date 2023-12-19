@@ -30,7 +30,7 @@ class AuthenticationViewModel {
         store.dispatch(
           VerifyUserBiometric(
             onVerified: () {
-              router.go(AppRoutes.passwordList);
+              router.go(AppRoutes.passwordHomeList);
             },
             onNotVerified: () {
               //do nothing
@@ -44,7 +44,7 @@ class AuthenticationViewModel {
             pin: pinController.text,
             onVerified: () {
               pinController.clear();
-              router.go(AppRoutes.passwordList);
+              router.go(AppRoutes.passwordHomeList);
             },
             onNotVerified: () {
               pinController.clear();

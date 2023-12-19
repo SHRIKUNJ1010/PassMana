@@ -2,8 +2,8 @@
 * Created by Shrikunj Patel on 9/4/2023.
 */
 
-import 'package:objectbox/objectbox.dart';
 import 'package:passmana/model/password_model.dart';
+import 'package:passmana/objectbox.g.dart';
 
 class PasswordBox {
   late final Box<Password> _passwordBox;
@@ -26,6 +26,7 @@ class PasswordBox {
         userName: userName,
         password: password,
         note: note,
+        createdDate: DateTime.now(),
       ),
       mode: PutMode.insert,
     );
@@ -50,5 +51,15 @@ class PasswordBox {
 
   deletePassword(int passwordId) {
     _passwordBox.remove(passwordId);
+  }
+
+  List<Password> getRecentlyAddedPasswords() {
+    //build query password based on created date in descending order
+    final Query<Password> query = (_passwordBox.query()..order(Password_.createdDate, flags: Order.descending)).build();
+    //limit query for the count of 10
+    query.limit = 10;
+    //use query to get 10 recently added passwords
+    List<Password> tempList = query.find();
+    return tempList;
   }
 }

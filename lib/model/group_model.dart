@@ -12,7 +12,8 @@ class Group {
   String groupName;
   String description;
 
-  @Backlink('group')
+  //relationship backlink from password's group
+  @Backlink("group")
   final passwords = ToMany<Password>();
 
   Group({

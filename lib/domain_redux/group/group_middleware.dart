@@ -27,8 +27,15 @@ void Function(Store<AppState> store, CreateGroup action, NextDispatcher next) _c
     );
     //get all latest groups
     List<Group> groups = objectBox.groupBox.getAllGroups();
+    //get popular groups
+    List<Group> popularGroups = objectBox.groupBox.getPopularGroups();
     //change the list of groups in state
-    store.dispatch(GroupListChanged(groupList: groups));
+    store.dispatch(
+      GroupListChanged(
+        groupList: groups,
+        popularGroupList: popularGroups,
+      ),
+    );
   };
 }
 
@@ -39,8 +46,15 @@ void Function(Store<AppState> store, UpdateGroup action, NextDispatcher next) _u
     objectBox.groupBox.updateGroup(group: action.group);
     //get all latest groups
     List<Group> groups = objectBox.groupBox.getAllGroups();
+    //get popular groups
+    List<Group> popularGroups = objectBox.groupBox.getPopularGroups();
     //change the list of groups in state
-    store.dispatch(GroupListChanged(groupList: groups));
+    store.dispatch(
+      GroupListChanged(
+        groupList: groups,
+        popularGroupList: popularGroups,
+      ),
+    );
   };
 }
 
@@ -51,8 +65,15 @@ void Function(Store<AppState> store, DeleteGroup action, NextDispatcher next) _d
     objectBox.groupBox.deleteGroup(action.groupId);
     //get all latest groups
     List<Group> groups = objectBox.groupBox.getAllGroups();
+    //get popular groups
+    List<Group> popularGroups = objectBox.groupBox.getPopularGroups();
     //change the list of groups in state
-    store.dispatch(GroupListChanged(groupList: groups));
+    store.dispatch(
+      GroupListChanged(
+        groupList: groups,
+        popularGroupList: popularGroups,
+      ),
+    );
   };
 }
 
@@ -61,7 +82,14 @@ void Function(Store<AppState> store, GetAllGroups action, NextDispatcher next) _
     next(action);
     //get all latest groups
     List<Group> groups = objectBox.groupBox.getAllGroups();
+    //get popular groups
+    List<Group> popularGroups = objectBox.groupBox.getPopularGroups();
     //change the list of groups in state
-    store.dispatch(GroupListChanged(groupList: groups));
+    store.dispatch(
+      GroupListChanged(
+        groupList: groups,
+        popularGroupList: popularGroups,
+      ),
+    );
   };
 }

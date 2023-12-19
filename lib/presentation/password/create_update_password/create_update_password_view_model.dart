@@ -67,7 +67,9 @@ class CreateUpdatePasswordViewModel {
                   password: password,
                   note: note,
                 ) ??
-                Password(),
+                Password(
+                  createdDate: DateTime.now()
+                ),
           ),
         );
       },
