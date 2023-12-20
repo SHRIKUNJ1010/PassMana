@@ -19,6 +19,7 @@ List<Middleware<AppState>> createPasswordMiddleware() {
 
 void Function(Store<AppState> store, CreatePassword action, NextDispatcher next) _createPassword() {
   return (store, action, next) {
+    next(action);
     //add password in object box database
     objectBox.passwordBox.addPassword(
       title: action.title,
@@ -38,12 +39,13 @@ void Function(Store<AppState> store, CreatePassword action, NextDispatcher next)
         recentlyAddedPasswordList: recentlyAddedPasswords,
       ),
     );
-    next(action);
+
   };
 }
 
 void Function(Store<AppState> store, UpdatePassword action, NextDispatcher next) _updatePassword() {
   return (store, action, next) {
+    next(action);
     //update password in object box database
     objectBox.passwordBox.updatePassword(password: action.password);
     //get all latest passwords
@@ -57,7 +59,6 @@ void Function(Store<AppState> store, UpdatePassword action, NextDispatcher next)
         recentlyAddedPasswordList: recentlyAddedPasswords,
       ),
     );
-    next(action);
   };
 }
 
