@@ -29,10 +29,10 @@ class CreateListViewModel {
         router.push(AppRoutes.createUpdateGroup);
       },
       onCardItemTap: () {
-        router.push(AppRoutes.createUpdatePassword);
+        router.push(AppRoutes.createUpdateCard);
       },
       onSecretNoteItemTap: () {
-        router.push(AppRoutes.createUpdatePassword);
+        router.push(AppRoutes.createUpdateSecretNote);
       },
     );
   }

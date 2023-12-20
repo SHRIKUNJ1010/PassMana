@@ -6,6 +6,7 @@ import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/domain_redux/group/group_actions.dart';
 import 'package:passmana/domain_redux/group/group_selector.dart';
 import 'package:passmana/model/group_model.dart';
+import 'package:passmana/router/router.dart';
 import 'package:redux/redux.dart';
 
 class CreateUpdateGroupViewModel {
@@ -18,14 +19,16 @@ class CreateUpdateGroupViewModel {
     required String groupName,
     required String description,
   }) updateGroup;
+  final Function onBackPress;
 
   CreateUpdateGroupViewModel({
     this.group,
     required this.createGroup,
     required this.updateGroup,
+    required this.onBackPress,
   });
 
-  static CreateUpdateGroupViewModel fromStore(Store<AppState> store, int id) {
+  static CreateUpdateGroupViewModel fromStore(Store<AppState> store, int? id) {
     return CreateUpdateGroupViewModel(
       group: getGroupById(store.state, id),
       createGroup: ({
@@ -52,6 +55,9 @@ class CreateUpdateGroupViewModel {
                 Group(),
           ),
         );
+      },
+      onBackPress: () {
+        router.pop();
       },
     );
   }

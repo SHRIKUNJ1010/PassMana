@@ -5,11 +5,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:passmana/domain_redux/app_state.dart';
+import 'package:passmana/localization/app_localization.dart';
+import 'package:passmana/presentation/common/custom_app_bar.dart';
 import 'package:passmana/presentation/group/create_update_group/create_update_group_view_model.dart';
+import 'package:passmana/utility/color.dart';
+import 'package:passmana/utility/text_utility/text_styles.dart';
+import 'package:passmana/utility/utility.dart';
 import 'package:redux/redux.dart';
 
 class CreateUpdateGroupScreen extends StatelessWidget {
-  final int id;
+  final int? id;
 
   const CreateUpdateGroupScreen({
     super.key,
@@ -23,8 +28,56 @@ class CreateUpdateGroupScreen extends StatelessWidget {
         return CreateUpdateGroupViewModel.fromStore(store, id);
       },
       builder: (BuildContext context, CreateUpdateGroupViewModel vm) {
-        return Container();
+        return Container(
+          decoration: Utility.getCommonBackgroundDecoration(),
+          child: Scaffold(
+            resizeToAvoidBottomInset: false,
+            backgroundColor: Colors.transparent,
+            appBar: getAppBar(vm),
+          ),
+        );
       },
+    );
+  }
+
+  CustomAppBar getAppBar(CreateUpdateGroupViewModel vm) {
+    return CustomAppBar(
+      centerWidgetsList: [
+        Expanded(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const SizedBox(width: 20),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Material(
+                  color: AppColors.mWhite,
+                  child: InkWell(
+                    splashColor: AppColors.mBlack.withOpacity(0.2),
+                    onTap: () {
+                      vm.onBackPress.call();
+                    },
+                    child: const Padding(
+                      padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
+                      child: Icon(
+                        Icons.arrow_back,
+                        color: AppColors.primaryColor,
+                        size: 25,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Text(
+          vm.group != null ? getTranslated("update_group") : getTranslated("create_group"),
+          style: TextStyles.getTitleWhiteText(25),
+        ),
+        const Spacer(),
+      ],
     );
   }
 }

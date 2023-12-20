@@ -32,46 +32,7 @@ class PasswordHomeListScreen extends StatelessWidget {
           child: Scaffold(
             resizeToAvoidBottomInset: false,
             backgroundColor: Colors.transparent,
-            appBar: CustomAppBar(
-              centerWidgetsList: [
-                const SizedBox(width: 20),
-                SizedBox(
-                  width: 40,
-                  child: Hero(
-                    tag: AppConstants.appLogo,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Image.asset(AppAssets.appLogoWithoutText),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Text(
-                  getTranslated("password"),
-                  style: TextStyles.getTitleWhiteText(28),
-                ),
-                const Spacer(),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Material(
-                    color: AppColors.mWhite,
-                    child: InkWell(
-                      splashColor: AppColors.mBlack.withOpacity(0.2),
-                      onTap: () {},
-                      child: const Padding(
-                        padding: EdgeInsets.fromLTRB(12, 10, 12, 10),
-                        child: Icon(
-                          Icons.alt_route,
-                          color: AppColors.primaryColor,
-                          size: 25,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 28),
-              ],
-            ),
+            appBar: getAppBar(),
             body: SafeArea(
               child: SingleChildScrollView(
                 child: Column(
@@ -110,6 +71,49 @@ class PasswordHomeListScreen extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  CustomAppBar getAppBar() {
+    return CustomAppBar(
+      centerWidgetsList: [
+        const SizedBox(width: 20),
+        SizedBox(
+          width: 40,
+          child: Hero(
+            tag: AppConstants.appLogo,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image.asset(AppAssets.appLogoWithoutText),
+            ),
+          ),
+        ),
+        const SizedBox(width: 10),
+        Text(
+          getTranslated("password"),
+          style: TextStyles.getTitleWhiteText(28),
+        ),
+        const Spacer(),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: Material(
+            color: AppColors.mWhite,
+            child: InkWell(
+              splashColor: AppColors.mBlack.withOpacity(0.2),
+              onTap: () {},
+              child: const Padding(
+                padding: EdgeInsets.fromLTRB(12, 10, 12, 10),
+                child: Icon(
+                  Icons.alt_route,
+                  color: AppColors.primaryColor,
+                  size: 25,
+                ),
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(width: 28),
+      ],
     );
   }
 

@@ -7,7 +7,7 @@ import 'package:passmana/model/card_model.dart';
 
 Card getCardByIndex(AppState state, int index) => state.cardList![index];
 
-Card? getCardById(AppState state, int cardId) => state.cardList?.singleWhere((element) => element.id == cardId);
+Card? getCardById(AppState state, int? cardId) => state.cardList?.singleWhere((element) => element.id == cardId);
 
 List<Card> getCardList(AppState state) {
   return state.cardList ?? [];

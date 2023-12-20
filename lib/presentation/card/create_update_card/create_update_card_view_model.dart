@@ -6,6 +6,7 @@ import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/domain_redux/card/card_actions.dart';
 import 'package:passmana/domain_redux/card/card_selector.dart';
 import 'package:passmana/model/card_model.dart';
+import 'package:passmana/router/router.dart';
 import 'package:redux/redux.dart';
 
 class CreateUpdateCardViewModel {
@@ -25,14 +26,16 @@ class CreateUpdateCardViewModel {
     required String cvv,
     required String cardPin,
   }) updateCard;
+  final Function onBackPress;
 
   CreateUpdateCardViewModel({
     this.card,
     required this.createCard,
     required this.updateCard,
+    required this.onBackPress,
   });
 
-  static CreateUpdateCardViewModel fromStore(Store<AppState> store, int id) {
+  static CreateUpdateCardViewModel fromStore(Store<AppState> store, int? id) {
     return CreateUpdateCardViewModel(
       card: getCardById(store.state, id),
       createCard: ({
@@ -71,6 +74,9 @@ class CreateUpdateCardViewModel {
                 Card(),
           ),
         );
+      },
+      onBackPress: () {
+        router.pop();
       },
     );
   }

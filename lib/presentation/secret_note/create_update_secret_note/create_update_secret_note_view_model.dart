@@ -6,6 +6,7 @@ import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/domain_redux/secret_note/secret_note_actions.dart';
 import 'package:passmana/domain_redux/secret_note/secret_note_selector.dart';
 import 'package:passmana/model/secret_note_model.dart';
+import 'package:passmana/router/router.dart';
 import 'package:redux/redux.dart';
 
 class CreateUpdateSecretNoteViewModel {
@@ -17,14 +18,16 @@ class CreateUpdateSecretNoteViewModel {
   final Function({
     required String note,
   }) updateSecretNote;
+  final Function onBackPress;
 
   CreateUpdateSecretNoteViewModel({
     this.secretNote,
     required this.createSecretNote,
     required this.updateSecretNote,
+    required this.onBackPress,
   });
 
-  static CreateUpdateSecretNoteViewModel fromStore(Store<AppState> store, int id) {
+  static CreateUpdateSecretNoteViewModel fromStore(Store<AppState> store, int? id) {
     return CreateUpdateSecretNoteViewModel(
       secretNote: getSecretNoteById(store.state, id),
       createSecretNote: ({
@@ -47,6 +50,9 @@ class CreateUpdateSecretNoteViewModel {
                 SecretNote(),
           ),
         );
+      },
+      onBackPress: () {
+        router.pop();
       },
     );
   }
