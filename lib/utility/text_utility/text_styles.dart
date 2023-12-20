@@ -47,6 +47,14 @@ class TextStyles {
         decoration: TextDecoration.none,
       );
 
+  static TextStyle? getTitleOrangeText(double fontSize) => TextStyle(
+    color: AppColors.mFF9C00,
+    fontSize: fontSize,
+    fontWeight: FontWeight.w400,
+    fontFamily: FontsList.muli,
+    decoration: TextDecoration.none,
+  );
+
   static TextStyle? getBoldBlueText(double fontSize) => TextStyle(
         color: AppColors.primaryColor,
         fontSize: fontSize,

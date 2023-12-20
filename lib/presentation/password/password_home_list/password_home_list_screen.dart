@@ -24,6 +24,9 @@ class PasswordHomeListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return StoreConnector<AppState, PasswordHomeListViewModel>(
       converter: PasswordHomeListViewModel.fromStore,
+      onInitialBuild: (PasswordHomeListViewModel vm) {
+        vm.getAllData.call();
+      },
       builder: (BuildContext context, PasswordHomeListViewModel vm) {
         final double width = MediaQuery.of(context).size.width;
 

@@ -25,12 +25,14 @@ class CreateUpdatePasswordViewModel {
     required String password,
     required String note,
   }) updatePassword;
+  final Function deletePassword;
   final Function onBackPress;
 
   CreateUpdatePasswordViewModel({
     this.password,
     required this.createPassword,
     required this.updatePassword,
+    required this.deletePassword,
     required this.onBackPress,
   });
 
@@ -70,9 +72,13 @@ class CreateUpdatePasswordViewModel {
                   password: password,
                   note: note,
                 ) ??
-                Password(createdDate: DateTime.now()),
+                Password(id: id ?? 0, createdDate: DateTime.now()),
           ),
         );
+      },
+      deletePassword: () {
+        //todo: confirmation dialog
+        store.dispatch(DeletePassword(passwordId: id ?? 0));
       },
       onBackPress: () {
         router.pop();

@@ -43,5 +43,10 @@
   "6": "6",
   "7": "7",
   "8": "8",
-  "9": "9"
+  "9": "9",
+  "title": "Title",
+  "subtitle": "Sub Title",
+  "username": "Username",
+  "optional": "Optional",
+  "field_can't_be_empty": "Field Can't be Empty"
 }
