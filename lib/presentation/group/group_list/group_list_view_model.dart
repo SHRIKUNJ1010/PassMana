@@ -5,16 +5,24 @@
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/domain_redux/group/group_selector.dart';
 import 'package:passmana/model/group_model.dart';
+import 'package:passmana/router/router.dart';
 import 'package:redux/redux.dart';
 
 class GroupListViewModel {
   final List<Group> groupList;
+  final Function onBackPress;
 
-  GroupListViewModel({required this.groupList});
+  GroupListViewModel({
+    required this.groupList,
+    required this.onBackPress,
+  });
 
   static GroupListViewModel fromStore(Store<AppState> store) {
     return GroupListViewModel(
       groupList: getGroupList(store.state),
+      onBackPress: () {
+        router.pop();
+      },
     );
   }
 }
