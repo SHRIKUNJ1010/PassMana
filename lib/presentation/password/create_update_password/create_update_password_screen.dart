@@ -68,6 +68,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                         child: ListView(
                           shrinkWrap: true,
                           children: [
+                            //todo: add next button for text field and focus on next field by using it
                             getTitleField(context, titleController),
                             getSubTitleField(context, subTitleController),
                             getUserNameField(context, userNameController),
@@ -84,56 +85,60 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                   left: 0,
                   right: 0,
                   bottom: 0,
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.vertical(
-                      top: Radius.circular(30),
-                    ),
-                    child: Material(
-                      color: AppColors.primaryColor,
-                      borderRadius: const BorderRadius.vertical(
-                        top: Radius.circular(30),
-                      ),
-                      child: InkWell(
-                        splashColor: AppColors.mWhite.withOpacity(0.2),
-                        onTap: () {
-                          if (_formKey.currentState!.validate()) {
-                            if (vm.password != null) {
-                              vm.updatePassword.call(
-                                title: titleController.text,
-                                subTitle: subTitleController.text,
-                                userName: userNameController.text,
-                                password: passwordController.text,
-                                note: noteController.text,
-                              );
-                            } else {
-                              vm.createPassword.call(
-                                title: titleController.text,
-                                subTitle: subTitleController.text,
-                                userName: userNameController.text,
-                                password: passwordController.text,
-                                note: noteController.text,
-                              );
-                            }
-                          }
-                        },
-                        child: Container(
-                          height: 65,
-                          color: Colors.transparent,
-                          alignment: Alignment.center,
-                          child: Text(
-                            vm.password != null ? getTranslated('update') : getTranslated('create'),
-                            style: TextStyles.getTitleWhiteText(24),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  child: getCreateUpdateButton(vm),
                 ),
               ],
             ),
           ),
         );
       },
+    );
+  }
+
+  ClipRRect getCreateUpdateButton(CreateUpdatePasswordViewModel vm) {
+    return ClipRRect(
+      borderRadius: const BorderRadius.vertical(
+        top: Radius.circular(30),
+      ),
+      child: Material(
+        color: AppColors.primaryColor,
+        borderRadius: const BorderRadius.vertical(
+          top: Radius.circular(30),
+        ),
+        child: InkWell(
+          splashColor: AppColors.mWhite.withOpacity(0.2),
+          onTap: () {
+            if (_formKey.currentState!.validate()) {
+              if (vm.password != null) {
+                vm.updatePassword.call(
+                  title: titleController.text,
+                  subTitle: subTitleController.text,
+                  userName: userNameController.text,
+                  password: passwordController.text,
+                  note: noteController.text,
+                );
+              } else {
+                vm.createPassword.call(
+                  title: titleController.text,
+                  subTitle: subTitleController.text,
+                  userName: userNameController.text,
+                  password: passwordController.text,
+                  note: noteController.text,
+                );
+              }
+            }
+          },
+          child: Container(
+            height: 65,
+            color: Colors.transparent,
+            alignment: Alignment.center,
+            child: Text(
+              vm.password != null ? getTranslated('update') : getTranslated('create'),
+              style: TextStyles.getTitleWhiteText(24),
+            ),
+          ),
+        ),
+      ),
     );
   }
 
@@ -179,6 +184,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
   }
 
   //todo: add obscure option
+  //todo: also think of some way to give option of generating password and assigning directly to this field
   Column getPasswordField(BuildContext context, TextEditingController controller) {
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -403,6 +409,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                         child: InkWell(
                           splashColor: AppColors.mWhite.withOpacity(0.2),
                           onTap: () {
+                            //todo: on delete method
                             //vm.onBackPress.call();
                           },
                           child: const Padding(

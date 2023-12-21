@@ -6,6 +6,7 @@ import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/domain_redux/group/group_actions.dart';
 import 'package:passmana/main.dart';
 import 'package:passmana/model/group_model.dart';
+import 'package:passmana/router/router.dart';
 import 'package:redux/redux.dart';
 
 List<Middleware<AppState>> createGroupMiddleware() {
@@ -36,6 +37,8 @@ void Function(Store<AppState> store, CreateGroup action, NextDispatcher next) _c
         popularGroupList: popularGroups,
       ),
     );
+    //pop the route to close the create update screen
+    router.pop();
   };
 }
 
@@ -55,6 +58,8 @@ void Function(Store<AppState> store, UpdateGroup action, NextDispatcher next) _u
         popularGroupList: popularGroups,
       ),
     );
+    //pop the route to close the create update screen
+    router.pop();
   };
 }
 

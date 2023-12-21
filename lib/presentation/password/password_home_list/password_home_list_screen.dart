@@ -240,12 +240,14 @@ class PasswordHomeListScreen extends StatelessWidget {
             )
           : SizedBox(
               width: width - 40,
-              height: width - 40,
+              height: vm.popularGroups.length > 2 ? width - 40 : (width - 40) / 2,
               child: GridView.count(
                 crossAxisCount: 2,
                 mainAxisSpacing: 15,
                 crossAxisSpacing: 15,
-                scrollDirection: Axis.horizontal,
+                scrollDirection: Axis.vertical,
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
                 children: [
                   for (int i = 0; i < vm.popularGroups.length; i++) ...[
                     HomeGroupGridTile(

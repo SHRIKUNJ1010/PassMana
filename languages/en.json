@@ -48,5 +48,7 @@
   "subtitle": "Sub Title",
   "username": "Username",
   "optional": "Optional",
-  "field_can't_be_empty": "Field Can't be Empty"
+  "field_can't_be_empty": "Field Can't be Empty",
+  "group_name": "Group Name",
+  "description": "Description"
 }
