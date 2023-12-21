@@ -56,6 +56,8 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
             key: _formKey,
             child: Stack(
               children: [
+                //TODO: find a way to add loader while creating updating or deleting data for all create update screen
+                //TODO: also add manual delay show that process can be shown that process does loads
                 Scaffold(
                   resizeToAvoidBottomInset: true,
                   backgroundColor: Colors.transparent,

@@ -6,6 +6,7 @@ import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/domain_redux/password/password_actions.dart';
 import 'package:passmana/main.dart';
 import 'package:passmana/model/password_model.dart';
+import 'package:passmana/router/router.dart';
 import 'package:redux/redux.dart';
 
 List<Middleware<AppState>> createPasswordMiddleware() {
@@ -39,6 +40,7 @@ void Function(Store<AppState> store, CreatePassword action, NextDispatcher next)
         recentlyAddedPasswordList: recentlyAddedPasswords,
       ),
     );
+    router.pop();
 
   };
 }
@@ -59,9 +61,11 @@ void Function(Store<AppState> store, UpdatePassword action, NextDispatcher next)
         recentlyAddedPasswordList: recentlyAddedPasswords,
       ),
     );
+    router.pop();
   };
 }
 
+//todo: check if to use router pop for delete which might be used in other screen than create update screen
 void Function(Store<AppState> store, DeletePassword action, NextDispatcher next) _deletePassword() {
   return (store, action, next) {
     next(action);

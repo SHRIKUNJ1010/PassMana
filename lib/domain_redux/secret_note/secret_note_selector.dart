@@ -7,7 +7,8 @@ import 'package:passmana/model/secret_note_model.dart';
 
 SecretNote getSecretNoteByIndex(AppState state, int index) => state.secretNoteList![index];
 
-SecretNote? getSecretNoteById(AppState state, int? secretNoteId) => state.secretNoteList?.singleWhere((element) => element.id == secretNoteId);
+SecretNote? getSecretNoteById(AppState state, int? secretNoteId) =>
+    secretNoteId == null ? null : state.secretNoteList?.singleWhere((element) => element.id == secretNoteId);
 
 List<SecretNote> getSecretNoteList(AppState state) {
   return state.secretNoteList ?? [];

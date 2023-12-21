@@ -7,7 +7,8 @@ import 'package:passmana/model/password_model.dart';
 
 Password getPasswordByIndex(AppState state, int index) => state.passwordList![index];
 
-Password? getPasswordById(AppState state, int? passwordId) => state.passwordList?.singleWhere((element) => element.id == passwordId);
+Password? getPasswordById(AppState state, int? passwordId) =>
+    passwordId == null ? null : state.passwordList?.singleWhere((element) => element.id == passwordId);
 
 List<Password> getPasswordList(AppState state) {
   return state.passwordList ?? [];
