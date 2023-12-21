@@ -115,7 +115,7 @@ class PasswordHomeListScreen extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(width: 28),
+        const SizedBox(width: 20),
       ],
     );
   }
@@ -131,26 +131,28 @@ class PasswordHomeListScreen extends StatelessWidget {
             softWrap: true,
             style: TextStyles.getBoldWhiteText(26),
           ),
-          vm.popularGroups.length <= 4
-              ? const SizedBox()
-              : ClipRRect(
+          vm.seeAllGroups
+              ? ClipRRect(
                   borderRadius: BorderRadius.circular(16),
                   child: Material(
                     color: Colors.transparent,
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        vm.onSeeAllGroupsTap.call();
+                      },
                       splashColor: AppColors.mWhite.withOpacity(0.5),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 7),
                         child: Text(
                           getTranslated("see_all"),
                           softWrap: true,
-                          style: TextStyles.getTitleDarkRedText(24),
+                          style: TextStyles.getTitleDarkRedText400(24),
                         ),
                       ),
                     ),
                   ),
                 )
+              : const SizedBox()
         ],
       ),
     );
@@ -167,14 +169,15 @@ class PasswordHomeListScreen extends StatelessWidget {
             softWrap: true,
             style: TextStyles.getBoldWhiteText(26),
           ),
-          vm.recentlyAddedPasswordList.length <= 10
-              ? const SizedBox()
-              : ClipRRect(
+          vm.seeAllPasswords
+              ? ClipRRect(
                   borderRadius: BorderRadius.circular(16),
                   child: Material(
                     color: Colors.transparent,
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        vm.onSeeAllPasswordsTap.call();
+                      },
                       splashColor: AppColors.mWhite.withOpacity(0.5),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 7),
@@ -187,6 +190,7 @@ class PasswordHomeListScreen extends StatelessWidget {
                     ),
                   ),
                 )
+              : const SizedBox()
         ],
       ),
     );

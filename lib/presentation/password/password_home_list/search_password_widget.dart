@@ -23,9 +23,9 @@ class SearchPasswordWidget extends StatelessWidget {
       child: Material(
         color: AppColors.mWhite,
         elevation: 2,
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(10),
         child: InkWell(
-          splashColor: AppColors.mBlack.withOpacity(0.5),
+          splashColor: AppColors.primaryColor.withOpacity(0.3),
           onTap: () {
             onTap.call();
           },
@@ -35,9 +35,9 @@ class SearchPasswordWidget extends StatelessWidget {
               children: [
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: SizedBox(
-                      height: 70,
+                      height: 50,
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -46,7 +46,6 @@ class SearchPasswordWidget extends StatelessWidget {
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              const SizedBox(width: 10),
                               Text(
                                 getTranslated("search_password"),
                                 style: TextStyles.getTitleTransparentBlackText(fontSize: 20, opacity: 0.8),
@@ -58,23 +57,29 @@ class SearchPasswordWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: Container(
-                    width: 55,
-                    height: 55,
-                    decoration: BoxDecoration(
-                      color: AppColors.secondaryColor,
-                      borderRadius: BorderRadius.circular(13),
-                    ),
-                    alignment: Alignment.center,
-                    child: const Icon(
-                      WebSymbols.search,
-                      size: 25,
-                      color: AppColors.mWhite,
+                Material(
+                  color: AppColors.secondaryColor,
+                  child: InkWell(
+                    splashColor: AppColors.primaryColor.withOpacity(0.3),
+                    onTap: () {
+                      onTap.call();
+                    },
+                    child: Container(
+                      width: 50,
+                      height: 50,
+                      decoration: const BoxDecoration(
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.horizontal(right: Radius.circular(10)),
+                      ),
+                      alignment: Alignment.center,
+                      child: const Icon(
+                        WebSymbols.search,
+                        size: 25,
+                        color: AppColors.mWhite,
+                      ),
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),

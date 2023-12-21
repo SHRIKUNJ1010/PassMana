@@ -15,6 +15,7 @@ import 'package:passmana/presentation/group/create_update_group/create_update_gr
 import 'package:passmana/presentation/group/group_details/group_details_screen.dart';
 import 'package:passmana/presentation/group/group_list/group_list_screen.dart';
 import 'package:passmana/presentation/navigation_bar/navigation_bar_screen.dart';
+import 'package:passmana/presentation/password/all_password_list/all_password_list_screen.dart';
 import 'package:passmana/presentation/password/create_update_password/create_update_password_screen.dart';
 import 'package:passmana/presentation/password/password_details/password_details_screen.dart';
 import 'package:passmana/presentation/password/password_home_list/password_home_list_screen.dart';
@@ -82,6 +83,16 @@ final GoRouter router = GoRouter(
       pageBuilder: (context, state) {
         return SlideLeftTransitionPage(
           child: const GroupListScreen(),
+          key: state.pageKey,
+        );
+      },
+    ),
+    GoRoute(
+      parentNavigatorKey: rootNavigatorKey,
+      path: AppRoutes.allPasswordList,
+      pageBuilder: (context, state) {
+        return SlideLeftTransitionPage(
+          child: const AllPasswordListScreen(),
           key: state.pageKey,
         );
       },

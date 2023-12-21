@@ -31,6 +31,14 @@ class TextStyles {
         decoration: TextDecoration.none,
       );
 
+  static TextStyle? getTitleDarkRedText400(double fontSize) => TextStyle(
+        color: AppColors.secondaryMaterialColor[400],
+        fontSize: fontSize,
+        fontWeight: FontWeight.w400,
+        fontFamily: FontsList.muli,
+        decoration: TextDecoration.none,
+      );
+
   static TextStyle? getTitleWhiteText(double fontSize) => TextStyle(
         color: AppColors.mWhite,
         fontSize: fontSize,
@@ -48,12 +56,12 @@ class TextStyles {
       );
 
   static TextStyle? getTitleOrangeText(double fontSize) => TextStyle(
-    color: AppColors.mFF9C00,
-    fontSize: fontSize,
-    fontWeight: FontWeight.w400,
-    fontFamily: FontsList.muli,
-    decoration: TextDecoration.none,
-  );
+        color: AppColors.mFF9C00,
+        fontSize: fontSize,
+        fontWeight: FontWeight.w400,
+        fontFamily: FontsList.muli,
+        decoration: TextDecoration.none,
+      );
 
   static TextStyle? getBoldBlueText(double fontSize) => TextStyle(
         color: AppColors.primaryColor,
