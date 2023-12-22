@@ -101,7 +101,9 @@ class AllPasswordListScreen extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
                 child: PasswordCommonListTile(
                   password: vm.passwordList[index],
-                  onTap: () {},
+                  onTap: () {
+                    vm.onPasswordTileTap.call(vm.passwordList[index].id);
+                  },
                   onClipboardTap: () {},
                 ),
               );

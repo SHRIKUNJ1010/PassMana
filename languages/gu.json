@@ -44,5 +44,9 @@
   "optional": "Optional",
   "field_can't_be_empty": "Field Can't be Empty",
   "group_name": "Group Name",
-  "description": "Description"
+  "description": "Description",
+  "group_details": "Group Details",
+  "password_details": "Password Details",
+  "card_details": "Card Details",
+  "secret_note_details":"Secret Note Details"
 }

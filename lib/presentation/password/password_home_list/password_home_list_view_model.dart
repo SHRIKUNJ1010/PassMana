@@ -18,20 +18,28 @@ import 'package:redux/redux.dart';
 class PasswordHomeListViewModel {
   final Function getAllData;
   final List<Password> recentlyAddedPasswordList;
+  final Function(int) onPasswordItemTap;
   final List<Group> popularGroups;
+  final Function(int) onGroupItemTap;
   final bool seeAllPasswords;
   final Function onSeeAllPasswordsTap;
   final bool seeAllGroups;
   final Function onSeeAllGroupsTap;
+  final Function onGeneratePasswordTap;
+  final Function onSearchPasswordTap;
 
   PasswordHomeListViewModel({
     required this.getAllData,
     required this.recentlyAddedPasswordList,
+    required this.onPasswordItemTap,
     required this.popularGroups,
+    required this.onGroupItemTap,
     required this.seeAllGroups,
     required this.onSeeAllGroupsTap,
     required this.seeAllPasswords,
     required this.onSeeAllPasswordsTap,
+    required this.onGeneratePasswordTap,
+    required this.onSearchPasswordTap,
   });
 
   static PasswordHomeListViewModel fromStore(Store<AppState> store) {
@@ -51,7 +59,19 @@ class PasswordHomeListViewModel {
         router.push(AppRoutes.allPasswordList);
       },
       recentlyAddedPasswordList: getRecentlyAddedPasswordList(store.state),
+      onPasswordItemTap: (id) {
+        router.push(AppRoutes.passwordDetails, extra: id);
+      },
       popularGroups: getPopularGroupList(store.state),
+      onGroupItemTap: (id) {
+        router.push(AppRoutes.groupDetails, extra: id);
+      },
+      onGeneratePasswordTap: () {
+        router.push(AppRoutes.generatePassword);
+      },
+      onSearchPasswordTap: () {
+        router.push(AppRoutes.filterSearch);
+      },
     );
   }
 }

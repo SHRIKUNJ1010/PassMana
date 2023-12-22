@@ -101,7 +101,9 @@ class GroupListScreen extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
                 child: GroupListTile(
                   group: vm.groupList[index],
-                  onTap: () {},
+                  onTap: () {
+                    vm.onGroupTileTap.call(vm.groupList[index].id);
+                  },
                 ),
               );
             },

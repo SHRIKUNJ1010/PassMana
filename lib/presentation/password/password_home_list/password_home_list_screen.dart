@@ -35,7 +35,7 @@ class PasswordHomeListScreen extends StatelessWidget {
           child: Scaffold(
             resizeToAvoidBottomInset: false,
             backgroundColor: Colors.transparent,
-            appBar: getAppBar(),
+            appBar: getAppBar(vm),
             body: SafeArea(
               child: SingleChildScrollView(
                 child: Column(
@@ -60,7 +60,9 @@ class PasswordHomeListScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
                       child: SearchPasswordWidget(
-                        onTap: () {},
+                        onTap: () {
+                          vm.onSearchPasswordTap.call();
+                        },
                       ),
                     ),
                     getGroupGridHeader(vm),
@@ -77,7 +79,7 @@ class PasswordHomeListScreen extends StatelessWidget {
     );
   }
 
-  CustomAppBar getAppBar() {
+  CustomAppBar getAppBar(PasswordHomeListViewModel vm) {
     return CustomAppBar(
       centerWidgetsList: [
         const SizedBox(width: 20),
@@ -103,7 +105,9 @@ class PasswordHomeListScreen extends StatelessWidget {
             color: AppColors.mWhite,
             child: InkWell(
               splashColor: AppColors.mBlack.withOpacity(0.2),
-              onTap: () {},
+              onTap: () {
+                vm.onGeneratePasswordTap.call();
+              },
               child: const Padding(
                 padding: EdgeInsets.fromLTRB(12, 10, 12, 10),
                 child: Icon(
@@ -220,7 +224,9 @@ class PasswordHomeListScreen extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
                   child: PasswordCommonListTile(
                     password: vm.recentlyAddedPasswordList[i],
-                    onTap: () {},
+                    onTap: () {
+                      vm.onPasswordItemTap.call(vm.recentlyAddedPasswordList[i].id);
+                    },
                     onClipboardTap: () {},
                   ),
                 ),
@@ -256,7 +262,9 @@ class PasswordHomeListScreen extends StatelessWidget {
                   for (int i = 0; i < vm.popularGroups.length; i++) ...[
                     HomeGroupGridTile(
                       group: vm.popularGroups[i],
-                      onTap: () {},
+                      onTap: () {
+                        vm.onGroupItemTap.call(vm.popularGroups[i].id);
+                      },
                     ),
                   ],
                 ],
