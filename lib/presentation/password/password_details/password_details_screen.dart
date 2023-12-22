@@ -39,7 +39,7 @@ class PasswordDetailsScreen extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(20, 20, 20, 80),
               shrinkWrap: true,
               children: [
-
+                SizedBox(height: width),
               ],
             ),
           ),

@@ -48,5 +48,6 @@
   "group_details": "Group Details",
   "password_details": "Password Details",
   "card_details": "Card Details",
-  "secret_note_details":"Secret Note Details"
+  "secret_note_details":"Secret Note Details",
+  "no_password_assigned": "No Password Assigned"
 }
