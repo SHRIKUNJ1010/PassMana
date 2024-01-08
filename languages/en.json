@@ -57,5 +57,9 @@
   "password_details": "Password Details",
   "card_details": "Card Details",
   "secret_note_details": "Secret Note Details",
-  "no_password_assigned": "No Password Assigned"
+  "no_password_assigned": "No Password Assigned",
+  "email_or_username": "Email/Username",
+  "details": "Details",
+  "category_group": "Category Group",
+  "none": "None"
 }

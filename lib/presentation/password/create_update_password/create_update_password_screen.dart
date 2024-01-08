@@ -239,7 +239,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 5, 0, 10),
               child: Text(
-                "${getTranslated('username')}:",
+                "${getTranslated('email_or_username')}:",
                 style: TextStyles.getTitleWhiteText(20),
               ),
             ),
