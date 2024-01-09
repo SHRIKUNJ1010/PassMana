@@ -2,6 +2,7 @@
 * Created by Shrikunj Patel on 9/4/2023.
 */
 
+import 'package:passmana/model/group_model.dart';
 import 'package:passmana/model/password_model.dart';
 import 'package:passmana/objectbox.g.dart';
 
@@ -61,5 +62,13 @@ class PasswordBox {
     //use query to get 10 recently added passwords
     List<Password> tempList = query.find();
     return tempList;
+  }
+
+  assignPasswordToGroup(Password password, Group group) {
+    password.group.target = group;
+    _passwordBox.put(
+      password,
+      mode: PutMode.update,
+    );
   }
 }

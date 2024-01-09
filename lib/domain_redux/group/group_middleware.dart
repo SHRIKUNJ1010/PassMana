@@ -4,8 +4,10 @@
 
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/domain_redux/group/group_actions.dart';
+import 'package:passmana/domain_redux/password/password_actions.dart';
 import 'package:passmana/main.dart';
 import 'package:passmana/model/group_model.dart';
+import 'package:passmana/model/password_model.dart';
 import 'package:passmana/router/router.dart';
 import 'package:redux/redux.dart';
 
@@ -25,6 +27,17 @@ void Function(Store<AppState> store, CreateGroup action, NextDispatcher next) _c
     objectBox.groupBox.addGroup(
       groupName: action.groupName,
       description: action.description,
+    );
+    //get all latest passwords
+    List<Password> passwords = objectBox.passwordBox.getAllPasswords();
+    //get recently added passwords
+    List<Password> recentlyAddedPasswords = objectBox.passwordBox.getRecentlyAddedPasswords();
+    //change the list of passwords in state
+    store.dispatch(
+      PasswordListChanged(
+        passwordList: passwords,
+        recentlyAddedPasswordList: recentlyAddedPasswords,
+      ),
     );
     //get all latest groups
     List<Group> groups = objectBox.groupBox.getAllGroups();
@@ -47,6 +60,17 @@ void Function(Store<AppState> store, UpdateGroup action, NextDispatcher next) _u
     next(action);
     //update group in object box database
     objectBox.groupBox.updateGroup(group: action.group);
+    //get all latest passwords
+    List<Password> passwords = objectBox.passwordBox.getAllPasswords();
+    //get recently added passwords
+    List<Password> recentlyAddedPasswords = objectBox.passwordBox.getRecentlyAddedPasswords();
+    //change the list of passwords in state
+    store.dispatch(
+      PasswordListChanged(
+        passwordList: passwords,
+        recentlyAddedPasswordList: recentlyAddedPasswords,
+      ),
+    );
     //get all latest groups
     List<Group> groups = objectBox.groupBox.getAllGroups();
     //get popular groups
@@ -68,6 +92,17 @@ void Function(Store<AppState> store, DeleteGroup action, NextDispatcher next) _d
     next(action);
     //delete group from object box database
     objectBox.groupBox.deleteGroup(action.groupId);
+    //get all latest passwords
+    List<Password> passwords = objectBox.passwordBox.getAllPasswords();
+    //get recently added passwords
+    List<Password> recentlyAddedPasswords = objectBox.passwordBox.getRecentlyAddedPasswords();
+    //change the list of passwords in state
+    store.dispatch(
+      PasswordListChanged(
+        passwordList: passwords,
+        recentlyAddedPasswordList: recentlyAddedPasswords,
+      ),
+    );
     //get all latest groups
     List<Group> groups = objectBox.groupBox.getAllGroups();
     //get popular groups
@@ -85,6 +120,17 @@ void Function(Store<AppState> store, DeleteGroup action, NextDispatcher next) _d
 void Function(Store<AppState> store, GetAllGroups action, NextDispatcher next) _getAllGroups() {
   return (store, action, next) {
     next(action);
+    //get all latest passwords
+    List<Password> passwords = objectBox.passwordBox.getAllPasswords();
+    //get recently added passwords
+    List<Password> recentlyAddedPasswords = objectBox.passwordBox.getRecentlyAddedPasswords();
+    //change the list of passwords in state
+    store.dispatch(
+      PasswordListChanged(
+        passwordList: passwords,
+        recentlyAddedPasswordList: recentlyAddedPasswords,
+      ),
+    );
     //get all latest groups
     List<Group> groups = objectBox.groupBox.getAllGroups();
     //get popular groups

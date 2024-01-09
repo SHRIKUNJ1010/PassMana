@@ -99,6 +99,7 @@ class PasswordDetailsScreen extends StatelessWidget {
                     getAssignedToGroupContainer(vm),
                   ],
                 ),
+                const SizedBox(height: 800),
               ],
             ),
           ),
@@ -124,6 +125,14 @@ class PasswordDetailsScreen extends StatelessWidget {
 
   Widget getAssignedToGroupContainer(PasswordDetailsViewModel vm) {
     return DropdownSearch<Group>(
+      itemAsString: (item) => item.groupName,
+      items: vm.groupList,
+      selectedItem: vm.password.group.target,
+      onChanged: (item) {
+        if (item != null) {
+          vm.onGroupSelect.call(vm.password, item);
+        }
+      },
       selectedItemBuilder: (item, onTap) {
         return ClipRRect(
           borderRadius: BorderRadius.circular(5),

@@ -4,6 +4,7 @@
 
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/domain_redux/group/group_selector.dart';
+import 'package:passmana/domain_redux/password/password_actions.dart';
 import 'package:passmana/domain_redux/password/password_selector.dart';
 import 'package:passmana/model/group_model.dart';
 import 'package:passmana/model/password_model.dart';
@@ -14,11 +15,13 @@ class PasswordDetailsViewModel {
   final Password password;
   final List<Group> groupList;
   final Function onBackPress;
+  final Function(Password, Group) onGroupSelect;
 
   PasswordDetailsViewModel({
     required this.password,
     required this.groupList,
     required this.onBackPress,
+    required this.onGroupSelect,
   });
 
   static PasswordDetailsViewModel fromStore(Store<AppState> store, int id) {
@@ -27,6 +30,14 @@ class PasswordDetailsViewModel {
       groupList: getGroupList(store.state),
       onBackPress: () {
         router.pop();
+      },
+      onGroupSelect: (password, group) {
+        store.dispatch(
+          AssignPasswordToGroup(
+            password: password,
+            group: group,
+          ),
+        );
       },
     );
   }

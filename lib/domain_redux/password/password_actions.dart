@@ -2,6 +2,7 @@
 * Created by Shrikunj Patel on 9/12/2023.
 */
 
+import 'package:passmana/model/group_model.dart';
 import 'package:passmana/model/password_model.dart';
 
 class GetAllPasswords {}
@@ -45,5 +46,15 @@ class PasswordListChanged {
   PasswordListChanged({
     required this.passwordList,
     required this.recentlyAddedPasswordList,
+  });
+}
+
+class AssignPasswordToGroup {
+  final Password password;
+  final Group group;
+
+  AssignPasswordToGroup({
+    required this.password,
+    required this.group,
   });
 }

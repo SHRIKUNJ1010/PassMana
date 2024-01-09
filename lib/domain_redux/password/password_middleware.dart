@@ -3,8 +3,10 @@
 */
 
 import 'package:passmana/domain_redux/app_state.dart';
+import 'package:passmana/domain_redux/group/group_actions.dart';
 import 'package:passmana/domain_redux/password/password_actions.dart';
 import 'package:passmana/main.dart';
+import 'package:passmana/model/group_model.dart';
 import 'package:passmana/model/password_model.dart';
 import 'package:passmana/router/router.dart';
 import 'package:redux/redux.dart';
@@ -15,6 +17,7 @@ List<Middleware<AppState>> createPasswordMiddleware() {
     TypedMiddleware<AppState, UpdatePassword>(_updatePassword()),
     TypedMiddleware<AppState, DeletePassword>(_deletePassword()),
     TypedMiddleware<AppState, GetAllPasswords>(_getAllPasswords()),
+    TypedMiddleware<AppState, AssignPasswordToGroup>(_assignPasswordToGroup()),
   ];
 }
 
@@ -40,8 +43,19 @@ void Function(Store<AppState> store, CreatePassword action, NextDispatcher next)
         recentlyAddedPasswordList: recentlyAddedPasswords,
       ),
     );
+    //get all latest groups
+    List<Group> groups = objectBox.groupBox.getAllGroups();
+    //get popular groups
+    List<Group> popularGroups = objectBox.groupBox.getPopularGroups();
+    //change the list of groups in state
+    store.dispatch(
+      GroupListChanged(
+        groupList: groups,
+        popularGroupList: popularGroups,
+      ),
+    );
+    //pop the route to close the create update screen
     router.pop();
-
   };
 }
 
@@ -61,6 +75,18 @@ void Function(Store<AppState> store, UpdatePassword action, NextDispatcher next)
         recentlyAddedPasswordList: recentlyAddedPasswords,
       ),
     );
+    //get all latest groups
+    List<Group> groups = objectBox.groupBox.getAllGroups();
+    //get popular groups
+    List<Group> popularGroups = objectBox.groupBox.getPopularGroups();
+    //change the list of groups in state
+    store.dispatch(
+      GroupListChanged(
+        groupList: groups,
+        popularGroupList: popularGroups,
+      ),
+    );
+    //pop the route to close the create update screen
     router.pop();
   };
 }
@@ -82,6 +108,17 @@ void Function(Store<AppState> store, DeletePassword action, NextDispatcher next)
         recentlyAddedPasswordList: recentlyAddedPasswords,
       ),
     );
+    //get all latest groups
+    List<Group> groups = objectBox.groupBox.getAllGroups();
+    //get popular groups
+    List<Group> popularGroups = objectBox.groupBox.getPopularGroups();
+    //change the list of groups in state
+    store.dispatch(
+      GroupListChanged(
+        groupList: groups,
+        popularGroupList: popularGroups,
+      ),
+    );
   };
 }
 
@@ -97,6 +134,47 @@ void Function(Store<AppState> store, GetAllPasswords action, NextDispatcher next
       PasswordListChanged(
         passwordList: passwords,
         recentlyAddedPasswordList: recentlyAddedPasswords,
+      ),
+    );
+    //get all latest groups
+    List<Group> groups = objectBox.groupBox.getAllGroups();
+    //get popular groups
+    List<Group> popularGroups = objectBox.groupBox.getPopularGroups();
+    //change the list of groups in state
+    store.dispatch(
+      GroupListChanged(
+        groupList: groups,
+        popularGroupList: popularGroups,
+      ),
+    );
+  };
+}
+
+void Function(Store<AppState> store, AssignPasswordToGroup action, NextDispatcher next) _assignPasswordToGroup() {
+  return (store, action, next) {
+    next(action);
+    //assign password to group
+    objectBox.passwordBox.assignPasswordToGroup(action.password, action.group);
+    //get all latest passwords
+    List<Password> passwords = objectBox.passwordBox.getAllPasswords();
+    //get recently added passwords
+    List<Password> recentlyAddedPasswords = objectBox.passwordBox.getRecentlyAddedPasswords();
+    //change the list of passwords in state
+    store.dispatch(
+      PasswordListChanged(
+        passwordList: passwords,
+        recentlyAddedPasswordList: recentlyAddedPasswords,
+      ),
+    );
+    //get all latest groups
+    List<Group> groups = objectBox.groupBox.getAllGroups();
+    //get popular groups
+    List<Group> popularGroups = objectBox.groupBox.getPopularGroups();
+    //change the list of groups in state
+    store.dispatch(
+      GroupListChanged(
+        groupList: groups,
+        popularGroupList: popularGroups,
       ),
     );
   };

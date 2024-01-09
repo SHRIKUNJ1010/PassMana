@@ -140,7 +140,7 @@ class GroupDetailsScreen extends StatelessWidget {
                           ),
                         ],
                       ],
-                      const SizedBox(height: 80),
+                      SizedBox(height: vm.group.passwords.length < 5 ? 400 : 80),
                     ],
                   ),
                 ),
