@@ -188,7 +188,35 @@ class GroupDetailsScreen extends StatelessWidget {
           getTranslated("group_details"),
           style: TextStyles.getTitleWhiteText(25),
         ),
-        const Spacer(),
+        Expanded(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Material(
+                  color: AppColors.mWhite,
+                  child: InkWell(
+                    splashColor: AppColors.mBlack.withOpacity(0.2),
+                    onTap: () {
+                      vm.onEditTap.call();
+                    },
+                    child: const Padding(
+                      padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
+                      child: Icon(
+                        Icons.edit,
+                        color: AppColors.primaryColor,
+                        size: 25,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 20),
+            ],
+          ),
+        ),
       ],
     );
   }

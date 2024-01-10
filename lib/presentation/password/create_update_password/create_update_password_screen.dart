@@ -5,8 +5,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:passmana/domain_redux/app_state.dart';
+import 'package:passmana/domain_redux/password/password_selector.dart';
 import 'package:passmana/localization/app_localization.dart';
+import 'package:passmana/model/group_model.dart';
 import 'package:passmana/presentation/common/custom_app_bar.dart';
+import 'package:passmana/presentation/common/drop_down_search_custom/dropdown_search.dart';
+import 'package:passmana/presentation/common/drop_down_search_custom/src/properties/menu_props.dart';
+import 'package:passmana/presentation/common/drop_down_search_custom/src/properties/popup_props.dart';
 import 'package:passmana/presentation/password/create_update_password/create_update_password_view_model.dart';
 import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/text_utility/text_styles.dart';
@@ -32,6 +37,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
   final TextEditingController userNameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController noteController = TextEditingController();
+  final TextEditingController groupTargetController = TextEditingController();
 
   @override
   void dispose() {
@@ -40,6 +46,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
     userNameController.dispose();
     passwordController.dispose();
     noteController.dispose();
+    groupTargetController.dispose();
     super.dispose();
   }
 
@@ -48,6 +55,16 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
     return StoreConnector<AppState, CreateUpdatePasswordViewModel>(
       converter: (Store<AppState> store) {
         return CreateUpdatePasswordViewModel.fromStore(store, widget.id);
+      },
+      onInit: (Store<AppState> store) {
+        if (widget.id != null) {
+          titleController.text = getPasswordById(store.state, widget.id)?.title ?? "";
+          subTitleController.text = getPasswordById(store.state, widget.id)?.subTitle ?? "";
+          userNameController.text = getPasswordById(store.state, widget.id)?.userName ?? "";
+          passwordController.text = getPasswordById(store.state, widget.id)?.password ?? "";
+          noteController.text = getPasswordById(store.state, widget.id)?.note ?? "";
+          groupTargetController.text = getPasswordById(store.state, widget.id)?.group.target?.groupName ?? "None";
+        }
       },
       builder: (BuildContext context, CreateUpdatePasswordViewModel vm) {
         return Container(
@@ -74,7 +91,8 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                             getUserNameField(context, userNameController),
                             getPasswordField(context, passwordController),
                             getNoteField(context, noteController),
-                            const SizedBox(height: 80),
+                            getGroupSelectField(context, vm, groupTargetController),
+                            const SizedBox(height: 350),
                           ],
                         ),
                       ),
@@ -95,6 +113,130 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
     );
   }
 
+  Column getGroupSelectField(BuildContext context, CreateUpdatePasswordViewModel vm, TextEditingController controller) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 5, 0, 10),
+              child: Text(
+                "${getTranslated('category_group')}:",
+                style: TextStyles.getTitleWhiteText(20),
+              ),
+            ),
+          ],
+        ),
+        DropdownSearch<Group?>(
+          itemAsString: (item) => item?.groupName ?? "None",
+          items: vm.groupSelectOptionList,
+          compareFn: (g1, g2) => g1?.id == g2?.id,
+          selectedItem: vm.password?.group.target,
+          popupProps: PopupProps.menu(
+            showSelectedItems: true,
+            containerBuilder: (context, child) {
+              return Container(
+                decoration: BoxDecoration(
+                  color: AppColors.primaryColor.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: child,
+              );
+            },
+            itemBuilder: (context, item, isSelected) {
+              if (isSelected) {
+                return Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: getSelectedPopupMenuItem(item),
+                );
+              } else {
+                return Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: getNonSelectedPopupMenuItem(item),
+                );
+              }
+            },
+            menuProps: MenuProps(
+              borderRadius: BorderRadius.circular(10),
+              barrierLabel: getTranslated("groups"),
+            ),
+          ),
+          onChanged: (item) {
+            if (item != null) {
+              controller.text = item.groupName;
+            } else {
+              controller.text = "None";
+            }
+          },
+          selectedItemBuilder: (item, onTap) {
+            return InkWell(
+              onTap: () {
+                onTap.call();
+              },
+              splashColor: AppColors.primaryColor.withOpacity(0.2),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+                child: TextFormField(
+                  controller: controller,
+                  validator: (text) => null,
+                  enabled: false,
+                  style: TextStyles.getTitleBlueText(18),
+                  decoration: InputDecoration(
+                    fillColor: AppColors.mWhite,
+                    filled: true,
+                    contentPadding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
+                    errorStyle: TextStyles.getTitleOrangeText(20),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    suffixIcon: const Icon(
+                      Icons.keyboard_arrow_down,
+                      color: AppColors.primaryColor,
+                      size: 30,
+                    ),
+                  ),
+                  onTapOutside: (pointerDown) {
+                    FocusScope.of(context).unfocus();
+                  },
+                ),
+              ),
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  Container getNonSelectedPopupMenuItem(Group? item) {
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.mWhite,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      padding: const EdgeInsets.fromLTRB(15, 15, 15, 15),
+      child: Text(
+        item?.groupName ?? "None",
+        style: TextStyles.getTitleBlueText(17),
+      ),
+    );
+  }
+
+  Container getSelectedPopupMenuItem(Group? item) {
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.primaryColor,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      padding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
+      child: Text(
+        item?.groupName ?? "None",
+        style: TextStyles.getTitleWhiteText(17),
+      ),
+    );
+  }
+
   ClipRRect getCreateUpdateButton(CreateUpdatePasswordViewModel vm) {
     return ClipRRect(
       borderRadius: const BorderRadius.vertical(
@@ -109,7 +251,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
           splashColor: AppColors.mWhite.withOpacity(0.2),
           onTap: () {
             if (_formKey.currentState!.validate()) {
-              if (vm.password != null) {
+              if (widget.id != null) {
                 vm.updatePassword.call(
                   title: titleController.text,
                   subTitle: subTitleController.text,

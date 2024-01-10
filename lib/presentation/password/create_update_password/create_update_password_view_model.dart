@@ -3,14 +3,17 @@
 */
 
 import 'package:passmana/domain_redux/app_state.dart';
+import 'package:passmana/domain_redux/group/group_selector.dart';
 import 'package:passmana/domain_redux/password/password_actions.dart';
 import 'package:passmana/domain_redux/password/password_selector.dart';
+import 'package:passmana/model/group_model.dart';
 import 'package:passmana/model/password_model.dart';
 import 'package:passmana/router/router.dart';
 import 'package:redux/redux.dart';
 
 class CreateUpdatePasswordViewModel {
   final Password? password;
+  final List<Group> groupSelectOptionList;
   final Function({
     required String title,
     required String subTitle,
@@ -30,6 +33,7 @@ class CreateUpdatePasswordViewModel {
 
   CreateUpdatePasswordViewModel({
     this.password,
+    required this.groupSelectOptionList,
     required this.createPassword,
     required this.updatePassword,
     required this.deletePassword,
@@ -39,6 +43,7 @@ class CreateUpdatePasswordViewModel {
   static CreateUpdatePasswordViewModel fromStore(Store<AppState> store, int? id) {
     return CreateUpdatePasswordViewModel(
       password: getPasswordById(store.state, id),
+      groupSelectOptionList: getGroupList(store.state),
       createPassword: ({
         required String title,
         required String subTitle,

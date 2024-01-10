@@ -6,9 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/localization/app_localization.dart';
-import 'package:passmana/model/group_model.dart';
 import 'package:passmana/presentation/common/custom_app_bar.dart';
-import 'package:passmana/presentation/common/drop_down_search_custom/dropdown_search.dart';
 import 'package:passmana/presentation/password/password_details/password_details_view_model.dart';
 import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/text_utility/text_styles.dart';
@@ -30,7 +28,6 @@ class PasswordDetailsScreen extends StatelessWidget {
         return PasswordDetailsViewModel.fromStore(store, id);
       },
       builder: (BuildContext context, PasswordDetailsViewModel vm) {
-        final double width = MediaQuery.of(context).size.width;
         return Container(
           decoration: Utility.getCommonBackgroundDecoration(),
           child: Scaffold(
@@ -38,7 +35,7 @@ class PasswordDetailsScreen extends StatelessWidget {
             backgroundColor: Colors.transparent,
             appBar: getAppBar(vm),
             body: ListView(
-              padding: const EdgeInsets.fromLTRB(10, 10, 10, 80),
+              padding: const EdgeInsets.fromLTRB(20, 10, 20, 80),
               shrinkWrap: true,
               children: [
                 const SizedBox(height: 10),
@@ -65,40 +62,18 @@ class PasswordDetailsScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(height: 10),
-                getCommonContainer(
-                  width,
-                  [
-                    getTitleContainer(vm),
-                    vm.password.subTitle.isEmpty ? const SizedBox() : const SizedBox(height: 7),
-                    vm.password.subTitle.isEmpty ? const SizedBox() : getSubTitleContainer(vm),
-                  ],
-                ),
-                const SizedBox(height: 15),
-                getCommonContainer(
-                  width,
-                  [
-                    getUsernameContainer(vm),
-                    const SizedBox(height: 7),
-                    getPasswordContainer(vm),
-                  ],
-                ),
-                vm.password.note.isEmpty ? const SizedBox() : const SizedBox(height: 15),
-                vm.password.note.isEmpty
-                    ? const SizedBox()
-                    : getCommonContainer(
-                        width,
-                        [
-                          getNoteContainer(vm),
-                        ],
-                      ),
-                const SizedBox(height: 15),
-                getCommonContainer(
-                  width,
-                  [
-                    getAssignedToGroupContainer(vm),
-                  ],
-                ),
+                const SizedBox(height: 20),
+                getTitleContainer(vm),
+                vm.password.subTitle.isEmpty ? const SizedBox() : const SizedBox(height: 7),
+                vm.password.subTitle.isEmpty ? const SizedBox() : getSubTitleContainer(vm),
+                const SizedBox(height: 20),
+                getUsernameContainer(vm),
+                const SizedBox(height: 7),
+                getPasswordContainer(vm),
+                vm.password.note.isEmpty ? const SizedBox() : const SizedBox(height: 20),
+                getNoteContainer(vm),
+                const SizedBox(height: 20),
+                getAssignedToGroupContainer(vm),
                 const SizedBox(height: 800),
               ],
             ),
@@ -108,23 +83,49 @@ class PasswordDetailsScreen extends StatelessWidget {
     );
   }
 
-  Container getCommonContainer(double width, List<Widget> children) {
+  Container getCommonContainer({
+    required Widget child,
+  }) {
     return Container(
-      width: width,
       decoration: BoxDecoration(
-        color: AppColors.accentPrimary[100],
-        borderRadius: BorderRadius.circular(7),
+        borderRadius: BorderRadius.circular(5),
+        color: AppColors.mWhite,
       ),
-      padding: const EdgeInsets.fromLTRB(7, 7, 7, 7),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: children,
-      ),
+      padding: const EdgeInsets.fromLTRB(10, 7, 10, 7),
+      child: child,
     );
   }
 
   Widget getAssignedToGroupContainer(PasswordDetailsViewModel vm) {
-    return DropdownSearch<Group>(
+    return getCommonContainer(
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "${getTranslated("category_group")}:",
+                  style: TextStyles.getTitleDarkRedText(17),
+                ),
+                Text(
+                  vm.password.group.target?.groupName ?? getTranslated('none'),
+                  maxLines: 5,
+                  softWrap: true,
+                  style: TextStyles.getTitleTransparentBlackText(
+                    fontSize: 17,
+                    opacity: 1,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+    /*DropdownSearch<Group>(
       itemAsString: (item) => item.groupName,
       items: vm.groupList,
       selectedItem: vm.password.group.target,
@@ -134,85 +135,13 @@ class PasswordDetailsScreen extends StatelessWidget {
         }
       },
       selectedItemBuilder: (item, onTap) {
-        return ClipRRect(
-          borderRadius: BorderRadius.circular(5),
-          child: Material(
-            color: AppColors.mWhite,
-            child: InkWell(
-              onTap: () {
-                onTap.call();
-              },
-              splashColor: AppColors.secondaryColor.withOpacity(0.2),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Colors.transparent,
-                ),
-                padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "${getTranslated("category_group")}:",
-                            style: TextStyles.getTitleDarkRedText(17),
-                          ),
-                          Text(
-                            item?.groupName ?? getTranslated('none'),
-                            maxLines: 5,
-                            softWrap: true,
-                            style: TextStyles.getTitleTransparentBlackText(
-                              fontSize: 17,
-                              opacity: 1,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Material(
-                          color: Colors.transparent,
-                          child: InkWell(
-                            splashColor: AppColors.primaryColor.withOpacity(0.2),
-                            onTap: () {
-                              onTap.call();
-                            },
-                            child: const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Icon(
-                                Icons.keyboard_arrow_down_outlined,
-                                color: AppColors.mBlack,
-                                size: 25,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        );
+        return ;
       },
-    );
+    )*/
   }
 
   Container getNoteContainer(PasswordDetailsViewModel vm) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        color: AppColors.mWhite,
-      ),
-      padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+    return getCommonContainer(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -243,12 +172,7 @@ class PasswordDetailsScreen extends StatelessWidget {
   }
 
   Container getPasswordContainer(PasswordDetailsViewModel vm) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        color: AppColors.mWhite,
-      ),
-      padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+    return getCommonContainer(
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -300,12 +224,7 @@ class PasswordDetailsScreen extends StatelessWidget {
   }
 
   Container getUsernameContainer(PasswordDetailsViewModel vm) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        color: AppColors.mWhite,
-      ),
-      padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+    return getCommonContainer(
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -357,12 +276,7 @@ class PasswordDetailsScreen extends StatelessWidget {
   }
 
   Container getSubTitleContainer(PasswordDetailsViewModel vm) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        color: AppColors.mWhite,
-      ),
-      padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+    return getCommonContainer(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -393,12 +307,7 @@ class PasswordDetailsScreen extends StatelessWidget {
   }
 
   Container getTitleContainer(PasswordDetailsViewModel vm) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        color: AppColors.mWhite,
-      ),
-      padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+    return getCommonContainer(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -464,7 +373,35 @@ class PasswordDetailsScreen extends StatelessWidget {
           getTranslated("password_details"),
           style: TextStyles.getTitleWhiteText(25),
         ),
-        const Spacer(),
+        Expanded(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Material(
+                  color: AppColors.mWhite,
+                  child: InkWell(
+                    splashColor: AppColors.mBlack.withOpacity(0.2),
+                    onTap: () {
+                      vm.onEditTap.call();
+                    },
+                    child: const Padding(
+                      padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
+                      child: Icon(
+                        Icons.edit,
+                        color: AppColors.primaryColor,
+                        size: 25,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 20),
+            ],
+          ),
+        ),
       ],
     );
   }

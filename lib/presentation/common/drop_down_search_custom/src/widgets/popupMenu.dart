@@ -106,27 +106,31 @@ class _PopupMenuRoute<T> extends PopupRoute<T> {
   String? get barrierLabel => menuModeProps.barrierLabel;
 
   @override
-  Animation<double>? get animation =>
-      menuModeProps.animation ?? super.animation;
+  Animation<double>? get animation => menuModeProps.animation ?? super.animation;
 
   @override
   Curve get barrierCurve => menuModeProps.barrierCurve ?? super.barrierCurve;
 
   @override
-  Widget buildPage(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation) {
+  Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
     final PopupMenuThemeData popupMenuTheme = PopupMenuTheme.of(context);
-    final menu = Material(
-      shape: menuModeProps.shape ?? popupMenuTheme.shape,
-      color: menuModeProps.backgroundColor ?? popupMenuTheme.color,
-      type: MaterialType.card,
-      elevation: menuModeProps.elevation ?? popupMenuTheme.elevation ?? 8.0,
-      clipBehavior: menuModeProps.clipBehavior,
-      borderRadius: menuModeProps.borderRadius,
-      animationDuration: menuModeProps.animationDuration,
-      shadowColor: menuModeProps.shadowColor,
-      borderOnForeground: menuModeProps.borderOnForeground,
-      child: child,
+    final menu = Padding(
+      padding: const EdgeInsets.fromLTRB(20, 5, 20, 0),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: Material(
+          shape: menuModeProps.shape ?? popupMenuTheme.shape,
+          color: menuModeProps.backgroundColor ?? popupMenuTheme.color,
+          type: MaterialType.card,
+          elevation: menuModeProps.elevation ?? popupMenuTheme.elevation ?? 8.0,
+          clipBehavior: menuModeProps.clipBehavior,
+          borderRadius: menuModeProps.borderRadius,
+          animationDuration: menuModeProps.animationDuration,
+          shadowColor: menuModeProps.shadowColor,
+          borderOnForeground: menuModeProps.borderOnForeground,
+          child: child,
+        ),
+      ),
     );
 
     return CustomSingleChildLayout(

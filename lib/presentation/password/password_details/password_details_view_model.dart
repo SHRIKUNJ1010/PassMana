@@ -3,41 +3,31 @@
 */
 
 import 'package:passmana/domain_redux/app_state.dart';
-import 'package:passmana/domain_redux/group/group_selector.dart';
-import 'package:passmana/domain_redux/password/password_actions.dart';
 import 'package:passmana/domain_redux/password/password_selector.dart';
-import 'package:passmana/model/group_model.dart';
 import 'package:passmana/model/password_model.dart';
 import 'package:passmana/router/router.dart';
+import 'package:passmana/utility/page_routes_utility/page_routes.dart';
 import 'package:redux/redux.dart';
 
 class PasswordDetailsViewModel {
   final Password password;
-  final List<Group> groupList;
   final Function onBackPress;
-  final Function(Password, Group) onGroupSelect;
+  final Function onEditTap;
 
   PasswordDetailsViewModel({
     required this.password,
-    required this.groupList,
     required this.onBackPress,
-    required this.onGroupSelect,
+    required this.onEditTap,
   });
 
   static PasswordDetailsViewModel fromStore(Store<AppState> store, int id) {
     return PasswordDetailsViewModel(
       password: getPasswordById(store.state, id) ?? Password(createdDate: DateTime.now()),
-      groupList: getGroupList(store.state),
       onBackPress: () {
         router.pop();
       },
-      onGroupSelect: (password, group) {
-        store.dispatch(
-          AssignPasswordToGroup(
-            password: password,
-            group: group,
-          ),
-        );
+      onEditTap: () {
+        router.push(AppRoutes.createUpdatePassword,extra: id);
       },
     );
   }

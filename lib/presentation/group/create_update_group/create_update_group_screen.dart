@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:passmana/domain_redux/app_state.dart';
+import 'package:passmana/domain_redux/group/group_selector.dart';
 import 'package:passmana/localization/app_localization.dart';
 import 'package:passmana/presentation/common/custom_app_bar.dart';
 import 'package:passmana/presentation/group/create_update_group/create_update_group_view_model.dart';
@@ -42,6 +43,12 @@ class _CreateUpdateGroupScreenState extends State<CreateUpdateGroupScreen> {
     return StoreConnector<AppState, CreateUpdateGroupViewModel>(
       converter: (Store<AppState> store) {
         return CreateUpdateGroupViewModel.fromStore(store, widget.id);
+      },
+      onInit: (Store<AppState> store) {
+        if (widget.id != null) {
+          groupNameController.text = getGroupById(store.state, widget.id)?.groupName ?? "";
+          descriptionController.text = getGroupById(store.state, widget.id)?.description ?? "";
+        }
       },
       builder: (BuildContext context, CreateUpdateGroupViewModel vm) {
         return Container(
@@ -186,7 +193,7 @@ class _CreateUpdateGroupScreenState extends State<CreateUpdateGroupScreen> {
           splashColor: AppColors.mWhite.withOpacity(0.2),
           onTap: () {
             if (_formKey.currentState!.validate()) {
-              if (vm.group != null) {
+              if (widget.id != null) {
                 vm.updateGroup.call(
                   groupName: groupNameController.text,
                   description: descriptionController.text,
@@ -251,35 +258,35 @@ class _CreateUpdateGroupScreenState extends State<CreateUpdateGroupScreen> {
         ),
         vm.group != null
             ? Expanded(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Material(
-                  color: AppColors.secondaryMaterialColor[700],
-                  child: InkWell(
-                    splashColor: AppColors.mWhite.withOpacity(0.2),
-                    onTap: () {
-                      //todo: on delete method
-                      //vm.onBackPress.call();
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
-                      child: Icon(
-                        Icons.delete,
-                        color: AppColors.mWhite,
-                        size: 25,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Material(
+                        color: AppColors.secondaryMaterialColor[700],
+                        child: InkWell(
+                          splashColor: AppColors.mWhite.withOpacity(0.2),
+                          onTap: () {
+                            //todo: on delete method
+                            //vm.onBackPress.call();
+                          },
+                          child: const Padding(
+                            padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
+                            child: Icon(
+                              Icons.delete,
+                              color: AppColors.mWhite,
+                              size: 25,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                    const SizedBox(width: 20),
+                  ],
                 ),
-              ),
-              const SizedBox(width: 20),
-            ],
-          ),
-        )
+              )
             : const Spacer(),
       ],
     );
