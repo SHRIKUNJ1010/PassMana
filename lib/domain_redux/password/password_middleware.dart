@@ -8,7 +8,6 @@ import 'package:passmana/domain_redux/password/password_actions.dart';
 import 'package:passmana/main.dart';
 import 'package:passmana/model/group_model.dart';
 import 'package:passmana/model/password_model.dart';
-import 'package:passmana/router/router.dart';
 import 'package:redux/redux.dart';
 
 List<Middleware<AppState>> createPasswordMiddleware() {
@@ -55,8 +54,6 @@ void Function(Store<AppState> store, CreatePassword action, NextDispatcher next)
         popularGroupList: popularGroups,
       ),
     );
-    //pop the route to close the create update screen
-    router.pop();
   };
 }
 
@@ -87,8 +84,6 @@ void Function(Store<AppState> store, UpdatePassword action, NextDispatcher next)
         popularGroupList: popularGroups,
       ),
     );
-    //pop the route to close the create update screen
-    router.pop();
   };
 }
 
@@ -119,9 +114,6 @@ void Function(Store<AppState> store, DeletePassword action, NextDispatcher next)
         popularGroupList: popularGroups,
       ),
     );
-    //pop the router two times after deleting password
-    router.pop();
-    router.pop();
   };
 }
 

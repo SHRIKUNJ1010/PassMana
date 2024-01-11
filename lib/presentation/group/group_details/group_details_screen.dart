@@ -137,8 +137,12 @@ class GroupDetailsScreen extends StatelessWidget {
                                 GroupPasswordListTile(
                                   width: width,
                                   item: vm.group.passwords[i],
-                                  onItemTap: () {},
-                                  onClipboardTap: () {},
+                                  onItemTap: () {
+                                    vm.onPasswordItemTap.call(vm.group.passwords[i].id);
+                                  },
+                                  onClipboardTap: () {
+                                    vm.onCopyPasswordTap.call(vm.group.passwords[i].password);
+                                  },
                                 ),
                               ],
                             ],

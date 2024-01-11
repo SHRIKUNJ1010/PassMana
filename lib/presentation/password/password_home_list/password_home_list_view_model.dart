@@ -13,12 +13,14 @@ import 'package:passmana/model/group_model.dart';
 import 'package:passmana/model/password_model.dart';
 import 'package:passmana/router/router.dart';
 import 'package:passmana/utility/page_routes_utility/page_routes.dart';
+import 'package:passmana/utility/utility.dart';
 import 'package:redux/redux.dart';
 
 class PasswordHomeListViewModel {
   final Function getAllData;
   final List<Password> recentlyAddedPasswordList;
   final Function(int) onPasswordItemTap;
+  final Function(String) onCopyPasswordTap;
   final List<Group> popularGroups;
   final Function(int) onGroupItemTap;
   final bool seeAllPasswords;
@@ -32,6 +34,7 @@ class PasswordHomeListViewModel {
     required this.getAllData,
     required this.recentlyAddedPasswordList,
     required this.onPasswordItemTap,
+    required this.onCopyPasswordTap,
     required this.popularGroups,
     required this.onGroupItemTap,
     required this.seeAllGroups,
@@ -61,6 +64,9 @@ class PasswordHomeListViewModel {
       recentlyAddedPasswordList: getRecentlyAddedPasswordList(store.state),
       onPasswordItemTap: (id) {
         router.push(AppRoutes.passwordDetails, extra: id);
+      },
+      onCopyPasswordTap: (val) async {
+        await Utility.copyToClipboard(val);
       },
       popularGroups: getPopularGroupList(store.state),
       onGroupItemTap: (id) {

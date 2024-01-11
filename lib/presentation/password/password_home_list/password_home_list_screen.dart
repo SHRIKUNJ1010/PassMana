@@ -227,7 +227,9 @@ class PasswordHomeListScreen extends StatelessWidget {
                     onTap: () {
                       vm.onPasswordItemTap.call(vm.recentlyAddedPasswordList[i].id);
                     },
-                    onClipboardTap: () {},
+                    onClipboardTap: () {
+                      vm.onCopyPasswordTap.call(vm.recentlyAddedPasswordList[i].password);
+                    },
                   ),
                 ),
               ],

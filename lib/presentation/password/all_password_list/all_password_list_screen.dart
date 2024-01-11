@@ -104,7 +104,9 @@ class AllPasswordListScreen extends StatelessWidget {
                   onTap: () {
                     vm.onPasswordTileTap.call(vm.passwordList[index].id);
                   },
-                  onClipboardTap: () {},
+                  onClipboardTap: () {
+                    vm.onCopyTap.call(vm.passwordList[index].password);
+                  },
                 ),
               );
             },

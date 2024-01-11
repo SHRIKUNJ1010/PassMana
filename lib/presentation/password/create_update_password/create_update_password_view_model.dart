@@ -9,6 +9,7 @@ import 'package:passmana/domain_redux/password/password_selector.dart';
 import 'package:passmana/model/group_model.dart';
 import 'package:passmana/model/password_model.dart';
 import 'package:passmana/router/router.dart';
+import 'package:passmana/utility/page_routes_utility/page_routes.dart';
 import 'package:redux/redux.dart';
 
 class CreateUpdatePasswordViewModel {
@@ -57,6 +58,7 @@ class CreateUpdatePasswordViewModel {
         store.dispatch(
           CreatePassword(title: title, subTitle: subTitle, userName: userName, password: password, note: note, targetGroup: targetGroup),
         );
+        router.pop();
       },
       updatePassword: ({
         required String title,
@@ -89,10 +91,12 @@ class CreateUpdatePasswordViewModel {
             password: tempPassword,
           ),
         );
+        router.pop();
       },
       deletePassword: () {
         //todo: confirmation dialog
         store.dispatch(DeletePassword(passwordId: id ?? 0));
+        router.go(AppRoutes.passwordHomeList);
       },
       onBackPress: () {
         router.pop();

@@ -207,7 +207,9 @@ class PasswordDetailsScreen extends StatelessWidget {
                 color: Colors.transparent,
                 child: InkWell(
                   splashColor: AppColors.primaryColor.withOpacity(0.2),
-                  onTap: () {},
+                  onTap: () {
+                    vm.onPasswordCopyTap.call(vm.password.password);
+                  },
                   child: const Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Icon(
@@ -259,7 +261,9 @@ class PasswordDetailsScreen extends StatelessWidget {
                 color: Colors.transparent,
                 child: InkWell(
                   splashColor: AppColors.primaryColor.withOpacity(0.2),
-                  onTap: () {},
+                  onTap: () {
+                    vm.onUsernameCopyTap.call(vm.password.userName);
+                  },
                   child: const Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Icon(
