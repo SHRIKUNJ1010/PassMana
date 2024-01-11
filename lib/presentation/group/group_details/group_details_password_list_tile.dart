@@ -23,64 +23,79 @@ class GroupPasswordListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: width - 40,
-      height: 70,
-      margin: const EdgeInsets.fromLTRB(20, 5, 20, 5),
-      decoration: BoxDecoration(
-        color: AppColors.primaryMaterialColor[300],
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+      child: ClipRRect(
         borderRadius: BorderRadius.circular(12),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            width: 50,
-            height: 50,
-            margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-            decoration: BoxDecoration(
-              color: AppColors.mWhite,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            alignment: Alignment.center,
-            child: Text(
-              item.title.trim()[0].toUpperCase(),
-              style: TextStyles.getBoldRedText(26),
-            ),
-          ),
-          Expanded(
-            child: Text(
-              item.title,
-              maxLines: 1,
-              softWrap: true,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyles.getTitleWhiteText(20),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Material(
+        child: Material(
+          color: AppColors.primaryMaterialColor[300],
+          borderRadius: BorderRadius.circular(12),
+          child: InkWell(
+            onTap: () {
+              onItemTap.call();
+            },
+            splashColor: AppColors.accentSecondaryColor.withOpacity(0.2),
+            child: Container(
+              width: width - 40,
+              height: 70,
+              decoration: BoxDecoration(
                 color: Colors.transparent,
-                child: InkWell(
-                  splashColor: AppColors.mWhite.withOpacity(0.2),
-                  onTap: () {
-                    onClipboardTap.call();
-                  },
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Icon(
-                      Icons.copy,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 50,
+                    height: 50,
+                    margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    decoration: BoxDecoration(
                       color: AppColors.mWhite,
-                      size: 25,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    alignment: Alignment.center,
+                    child: Text(
+                      item.title.trim()[0].toUpperCase(),
+                      style: TextStyles.getBoldRedText(26),
                     ),
                   ),
-                ),
+                  Expanded(
+                    child: Text(
+                      item.title,
+                      maxLines: 1,
+                      softWrap: true,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyles.getTitleWhiteText(20),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          splashColor: AppColors.mWhite.withOpacity(0.2),
+                          onTap: () {
+                            onClipboardTap.call();
+                          },
+                          child: const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Icon(
+                              Icons.copy,
+                              color: AppColors.mWhite,
+                              size: 25,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
-        ],
+        ),
       ),
     );
   }
