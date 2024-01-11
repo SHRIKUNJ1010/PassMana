@@ -55,14 +55,7 @@ class CreateUpdatePasswordViewModel {
         Group? targetGroup,
       }) {
         store.dispatch(
-          CreatePassword(
-            title: title,
-            subTitle: subTitle,
-            userName: userName,
-            password: password,
-            note: note,
-            targetGroup: targetGroup
-          ),
+          CreatePassword(title: title, subTitle: subTitle, userName: userName, password: password, note: note, targetGroup: targetGroup),
         );
       },
       updatePassword: ({
@@ -82,10 +75,12 @@ class CreateUpdatePasswordViewModel {
               userName: userName,
               password: password,
               note: note,
+              lastUpdatedOn: DateTime.now(),
             ) ??
             Password(
               id: id ?? 0,
-              createdDate: DateTime.now(),
+              createdOn: DateTime.now(),
+              lastUpdatedOn: DateTime.now(),
             );
 
         tempPassword.group.target = targetGroup;

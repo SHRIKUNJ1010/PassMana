@@ -26,6 +26,8 @@ class CardBox {
         cardHolderName: cardHolderName,
         cvv: cvv,
         cardPin: cardPin,
+        createdOn: DateTime.now(),
+        lastUpdatedOn: DateTime.now(),
       ),
       mode: PutMode.insert,
     );

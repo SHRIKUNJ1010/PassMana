@@ -22,7 +22,11 @@ class GroupDetailsViewModel {
 
   static GroupDetailsViewModel fromStore(Store<AppState> store, int id) {
     return GroupDetailsViewModel(
-      group: getGroupById(store.state, id) ?? Group(),
+      group: getGroupById(store.state, id) ??
+          Group(
+            createdOn: DateTime.now(),
+            lastUpdatedOn: DateTime.now(),
+          ),
       onBackPress: () {
         router.pop();
       },

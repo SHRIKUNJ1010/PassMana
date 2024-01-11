@@ -50,7 +50,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(2, 7022352903906742617),
       name: 'Group',
-      lastPropertyId: const IdUid(3, 3294534142306290642),
+      lastPropertyId: const IdUid(5, 2488162487370813123),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -67,16 +67,27 @@ final _entities = <ModelEntity>[
             id: const IdUid(3, 3294534142306290642),
             name: 'description',
             type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(4, 7786535575115060581),
+            name: 'createdOn',
+            type: 10,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(5, 2488162487370813123),
+            name: 'lastUpdatedOn',
+            type: 10,
             flags: 0)
       ],
       relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[
-        ModelBacklink(name: 'passwords', srcEntity: 'Password', srcField: '')
+        ModelBacklink(
+            name: 'passwords', srcEntity: 'Password', srcField: 'group')
       ]),
   ModelEntity(
       id: const IdUid(3, 6243334753350276209),
       name: 'Password',
-      lastPropertyId: const IdUid(8, 2322565834328061491),
+      lastPropertyId: const IdUid(10, 75545063630210098),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -117,8 +128,13 @@ final _entities = <ModelEntity>[
             indexId: const IdUid(1, 2431947868288706786),
             relationTarget: 'Group'),
         ModelProperty(
-            id: const IdUid(8, 2322565834328061491),
-            name: 'createdDate',
+            id: const IdUid(9, 6634348962119217579),
+            name: 'createdOn',
+            type: 10,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(10, 75545063630210098),
+            name: 'lastUpdatedOn',
             type: 10,
             flags: 0)
       ],
@@ -127,7 +143,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(4, 7319612359426061167),
       name: 'Card',
-      lastPropertyId: const IdUid(6, 934914539446613746),
+      lastPropertyId: const IdUid(8, 4301313653865467201),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -159,6 +175,16 @@ final _entities = <ModelEntity>[
             id: const IdUid(6, 934914539446613746),
             name: 'cardPin',
             type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(7, 892688795755671774),
+            name: 'createdOn',
+            type: 10,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(8, 4301313653865467201),
+            name: 'lastUpdatedOn',
+            type: 10,
             flags: 0)
       ],
       relations: <ModelRelation>[],
@@ -166,7 +192,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(5, 4333211291667404215),
       name: 'SecretNote',
-      lastPropertyId: const IdUid(2, 888198510703763420),
+      lastPropertyId: const IdUid(4, 4783214407881965047),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -178,6 +204,16 @@ final _entities = <ModelEntity>[
             id: const IdUid(2, 888198510703763420),
             name: 'note',
             type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 7489765409637473024),
+            name: 'createdOn',
+            type: 10,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(4, 4783214407881965047),
+            name: 'lastUpdatedOn',
+            type: 10,
             flags: 0)
       ],
       relations: <ModelRelation>[],
@@ -217,7 +253,7 @@ ModelDefinition getObjectBoxModel() {
       lastSequenceId: const IdUid(0, 0),
       retiredEntityUids: const [],
       retiredIndexUids: const [],
-      retiredPropertyUids: const [3417414018983795265],
+      retiredPropertyUids: const [3417414018983795265, 2322565834328061491],
       retiredRelationUids: const [],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
@@ -272,10 +308,12 @@ ModelDefinition getObjectBoxModel() {
         objectToFB: (Group object, fb.Builder fbb) {
           final groupNameOffset = fbb.writeString(object.groupName);
           final descriptionOffset = fbb.writeString(object.description);
-          fbb.startTable(4);
+          fbb.startTable(6);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, groupNameOffset);
           fbb.addOffset(2, descriptionOffset);
+          fbb.addInt64(3, object.createdOn.millisecondsSinceEpoch);
+          fbb.addInt64(4, object.lastUpdatedOn.millisecondsSinceEpoch);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -289,10 +327,16 @@ ModelDefinition getObjectBoxModel() {
           final descriptionParam =
               const fb.StringReader(asciiOptimization: true)
                   .vTableGet(buffer, rootOffset, 8, '');
+          final createdOnParam = DateTime.fromMillisecondsSinceEpoch(
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0));
+          final lastUpdatedOnParam = DateTime.fromMillisecondsSinceEpoch(
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 12, 0));
           final object = Group(
               id: idParam,
               groupName: groupNameParam,
-              description: descriptionParam);
+              description: descriptionParam,
+              createdOn: createdOnParam,
+              lastUpdatedOn: lastUpdatedOnParam);
           InternalToManyAccess.setRelInfo<Group>(
               object.passwords,
               store,
@@ -314,7 +358,7 @@ ModelDefinition getObjectBoxModel() {
           final userNameOffset = fbb.writeString(object.userName);
           final passwordOffset = fbb.writeString(object.password);
           final noteOffset = fbb.writeString(object.note);
-          fbb.startTable(9);
+          fbb.startTable(11);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, titleOffset);
           fbb.addOffset(2, subTitleOffset);
@@ -322,7 +366,8 @@ ModelDefinition getObjectBoxModel() {
           fbb.addOffset(4, passwordOffset);
           fbb.addOffset(5, noteOffset);
           fbb.addInt64(6, object.group.targetId);
-          fbb.addInt64(7, object.createdDate.millisecondsSinceEpoch);
+          fbb.addInt64(8, object.createdOn.millisecondsSinceEpoch);
+          fbb.addInt64(9, object.lastUpdatedOn.millisecondsSinceEpoch);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -341,8 +386,10 @@ ModelDefinition getObjectBoxModel() {
               .vTableGet(buffer, rootOffset, 12, '');
           final noteParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 14, '');
-          final createdDateParam = DateTime.fromMillisecondsSinceEpoch(
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 18, 0));
+          final createdOnParam = DateTime.fromMillisecondsSinceEpoch(
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 20, 0));
+          final lastUpdatedOnParam = DateTime.fromMillisecondsSinceEpoch(
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 22, 0));
           final object = Password(
               id: idParam,
               title: titleParam,
@@ -350,7 +397,8 @@ ModelDefinition getObjectBoxModel() {
               userName: userNameParam,
               password: passwordParam,
               note: noteParam,
-              createdDate: createdDateParam);
+              createdOn: createdOnParam,
+              lastUpdatedOn: lastUpdatedOnParam);
           object.group.targetId =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 16, 0);
           object.group.attach(store);
@@ -370,13 +418,15 @@ ModelDefinition getObjectBoxModel() {
           final cardHolderNameOffset = fbb.writeString(object.cardHolderName);
           final cvvOffset = fbb.writeString(object.cvv);
           final cardPinOffset = fbb.writeString(object.cardPin);
-          fbb.startTable(7);
+          fbb.startTable(9);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, bankAndCardNameOffset);
           fbb.addOffset(2, cardNumberOffset);
           fbb.addOffset(3, cardHolderNameOffset);
           fbb.addOffset(4, cvvOffset);
           fbb.addOffset(5, cardPinOffset);
+          fbb.addInt64(6, object.createdOn.millisecondsSinceEpoch);
+          fbb.addInt64(7, object.lastUpdatedOn.millisecondsSinceEpoch);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -397,13 +447,19 @@ ModelDefinition getObjectBoxModel() {
               .vTableGet(buffer, rootOffset, 14, '');
           final cvvParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 12, '');
+          final createdOnParam = DateTime.fromMillisecondsSinceEpoch(
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 16, 0));
+          final lastUpdatedOnParam = DateTime.fromMillisecondsSinceEpoch(
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 18, 0));
           final object = Card(
               id: idParam,
               bankAndCardName: bankAndCardNameParam,
               cardNumber: cardNumberParam,
               cardHolderName: cardHolderNameParam,
               cardPin: cardPinParam,
-              cvv: cvvParam);
+              cvv: cvvParam,
+              createdOn: createdOnParam,
+              lastUpdatedOn: lastUpdatedOnParam);
 
           return object;
         }),
@@ -417,9 +473,11 @@ ModelDefinition getObjectBoxModel() {
         },
         objectToFB: (SecretNote object, fb.Builder fbb) {
           final noteOffset = fbb.writeString(object.note);
-          fbb.startTable(3);
+          fbb.startTable(5);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, noteOffset);
+          fbb.addInt64(2, object.createdOn.millisecondsSinceEpoch);
+          fbb.addInt64(3, object.lastUpdatedOn.millisecondsSinceEpoch);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -430,7 +488,15 @@ ModelDefinition getObjectBoxModel() {
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
           final noteParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 6, '');
-          final object = SecretNote(id: idParam, note: noteParam);
+          final createdOnParam = DateTime.fromMillisecondsSinceEpoch(
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 8, 0));
+          final lastUpdatedOnParam = DateTime.fromMillisecondsSinceEpoch(
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0));
+          final object = SecretNote(
+              id: idParam,
+              note: noteParam,
+              createdOn: createdOnParam,
+              lastUpdatedOn: lastUpdatedOnParam);
 
           return object;
         })
@@ -464,6 +530,14 @@ class Group_ {
   /// see [Group.description]
   static final description =
       QueryStringProperty<Group>(_entities[1].properties[2]);
+
+  /// see [Group.createdOn]
+  static final createdOn =
+      QueryIntegerProperty<Group>(_entities[1].properties[3]);
+
+  /// see [Group.lastUpdatedOn]
+  static final lastUpdatedOn =
+      QueryIntegerProperty<Group>(_entities[1].properties[4]);
 }
 
 /// [Password] entity fields to define ObjectBox queries.
@@ -494,9 +568,13 @@ class Password_ {
   static final group =
       QueryRelationToOne<Password, Group>(_entities[2].properties[6]);
 
-  /// see [Password.createdDate]
-  static final createdDate =
+  /// see [Password.createdOn]
+  static final createdOn =
       QueryIntegerProperty<Password>(_entities[2].properties[7]);
+
+  /// see [Password.lastUpdatedOn]
+  static final lastUpdatedOn =
+      QueryIntegerProperty<Password>(_entities[2].properties[8]);
 }
 
 /// [Card] entity fields to define ObjectBox queries.
@@ -521,6 +599,14 @@ class Card_ {
 
   /// see [Card.cardPin]
   static final cardPin = QueryStringProperty<Card>(_entities[3].properties[5]);
+
+  /// see [Card.createdOn]
+  static final createdOn =
+      QueryIntegerProperty<Card>(_entities[3].properties[6]);
+
+  /// see [Card.lastUpdatedOn]
+  static final lastUpdatedOn =
+      QueryIntegerProperty<Card>(_entities[3].properties[7]);
 }
 
 /// [SecretNote] entity fields to define ObjectBox queries.
@@ -532,4 +618,12 @@ class SecretNote_ {
   /// see [SecretNote.note]
   static final note =
       QueryStringProperty<SecretNote>(_entities[4].properties[1]);
+
+  /// see [SecretNote.createdOn]
+  static final createdOn =
+      QueryIntegerProperty<SecretNote>(_entities[4].properties[2]);
+
+  /// see [SecretNote.lastUpdatedOn]
+  static final lastUpdatedOn =
+      QueryIntegerProperty<SecretNote>(_entities[4].properties[3]);
 }

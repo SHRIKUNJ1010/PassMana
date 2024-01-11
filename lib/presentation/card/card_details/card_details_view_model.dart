@@ -19,7 +19,10 @@ class CardDetailsViewModel {
 
   static CardDetailsViewModel fromStore(Store<AppState> store, int id) {
     return CardDetailsViewModel(
-      card: getCardById(store.state, id) ?? Card(),
+      card: getCardById(store.state, id) ?? Card(
+        createdOn: DateTime.now(),
+        lastUpdatedOn: DateTime.now(),
+      ),
       onBackPress: () {
         router.pop();
       },

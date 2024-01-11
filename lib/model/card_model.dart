@@ -13,6 +13,10 @@ class Card {
   String cardHolderName;
   String cvv;
   String cardPin;
+  @Property(type: PropertyType.date)
+  DateTime createdOn;
+  @Property(type: PropertyType.date)
+  DateTime lastUpdatedOn;
 
   Card({
     this.id = 0,
@@ -21,6 +25,8 @@ class Card {
     this.cardHolderName = '',
     this.cardPin = '',
     this.cvv = '',
+    required this.createdOn,
+    required this.lastUpdatedOn,
   });
 
   Card updateCard({
@@ -29,6 +35,7 @@ class Card {
     String? cardHolderName,
     String? cardPin,
     String? cvv,
+    required DateTime lastUpdatedOn,
   }) {
     return Card(
       id: id,
@@ -37,7 +44,8 @@ class Card {
       cardHolderName: cardHolderName ?? this.cardHolderName,
       cardPin: cardPin ?? this.cardPin,
       cvv: cvv ?? this.cvv,
+      createdOn: createdOn,
+      lastUpdatedOn: lastUpdatedOn,
     );
   }
-
 }

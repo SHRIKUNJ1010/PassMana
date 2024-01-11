@@ -70,8 +70,12 @@ class CreateUpdateCardViewModel {
                   cardHolderName: cardHolderName,
                   cardPin: cardPin,
                   cvv: cvv,
+                  lastUpdatedOn: DateTime.now(),
                 ) ??
-                Card(),
+                Card(
+                  createdOn: DateTime.now(),
+                  lastUpdatedOn: DateTime.now(),
+                ),
           ),
         );
       },

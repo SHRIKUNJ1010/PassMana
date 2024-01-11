@@ -18,6 +18,8 @@ class SecretNoteBox {
     _secretNoteBox.put(
       SecretNote(
         note: note,
+        createdOn: DateTime.now(),
+        lastUpdatedOn: DateTime.now(),
       ),
       mode: PutMode.insert,
     );

@@ -46,8 +46,12 @@ class CreateUpdateSecretNoteViewModel {
           UpdateSecretNote(
             secretNote: getSecretNoteById(store.state, id)?.updateSecretNote(
                   note: note,
+                  lastUpdatedOn: DateTime.now(),
                 ) ??
-                SecretNote(),
+                SecretNote(
+                  createdOn: DateTime.now(),
+                  lastUpdatedOn: DateTime.now(),
+                ),
           ),
         );
       },

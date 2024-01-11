@@ -22,12 +22,16 @@ class PasswordDetailsViewModel {
 
   static PasswordDetailsViewModel fromStore(Store<AppState> store, int id) {
     return PasswordDetailsViewModel(
-      password: getPasswordById(store.state, id) ?? Password(createdDate: DateTime.now()),
+      password: getPasswordById(store.state, id) ??
+          Password(
+            createdOn: DateTime.now(),
+            lastUpdatedOn: DateTime.now(),
+          ),
       onBackPress: () {
         router.pop();
       },
       onEditTap: () {
-        router.push(AppRoutes.createUpdatePassword,extra: id);
+        router.push(AppRoutes.createUpdatePassword, extra: id);
       },
     );
   }

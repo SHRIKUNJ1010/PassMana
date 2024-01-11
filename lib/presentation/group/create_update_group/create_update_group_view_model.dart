@@ -51,8 +51,12 @@ class CreateUpdateGroupViewModel {
             group: getGroupById(store.state, id)?.updateGroupInfo(
                   groupName: groupName,
                   description: description,
+                  lastUpdatedOn: DateTime.now(),
                 ) ??
-                Group(),
+                Group(
+                  createdOn: DateTime.now(),
+                  lastUpdatedOn: DateTime.now(),
+                ),
           ),
         );
       },

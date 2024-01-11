@@ -21,6 +21,8 @@ class GroupBox {
       Group(
         groupName: groupName,
         description: description,
+        createdOn: DateTime.now(),
+        lastUpdatedOn: DateTime.now(),
       ),
       mode: PutMode.insert,
     );

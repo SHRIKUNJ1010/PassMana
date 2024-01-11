@@ -27,7 +27,8 @@ class PasswordBox {
       userName: userName,
       password: password,
       note: note,
-      createdDate: DateTime.now(),
+      createdOn: DateTime.now(),
+      lastUpdatedOn: DateTime.now(),
     );
     tempPassword.group.target = targetGroup;
     _passwordBox.put(
@@ -59,7 +60,7 @@ class PasswordBox {
 
   List<Password> getRecentlyAddedPasswords() {
     //build query password based on created date in descending order
-    final Query<Password> query = (_passwordBox.query()..order(Password_.createdDate, flags: Order.descending)).build();
+    final Query<Password> query = (_passwordBox.query()..order(Password_.createdOn, flags: Order.descending)).build();
     //limit query for the count of 10
     query.limit = 10;
     //use query to get 10 recently added passwords
