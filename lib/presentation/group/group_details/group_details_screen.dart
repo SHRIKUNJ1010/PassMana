@@ -37,115 +37,117 @@ class GroupDetailsScreen extends StatelessWidget {
             resizeToAvoidBottomInset: false,
             backgroundColor: Colors.transparent,
             appBar: getAppBar(vm),
-            body: ListView(
-              padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-              shrinkWrap: true,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
+            body: vm.group.id == 0
+                ? const SizedBox()
+                : ListView(
+                    padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                    shrinkWrap: true,
                     children: [
-                      Container(
-                        width: 80,
-                        height: 80,
-                        decoration: BoxDecoration(
-                          color: AppColors.mWhite,
-                          borderRadius: BorderRadius.circular(40),
-                        ),
-                        margin: const EdgeInsets.fromLTRB(0, 20, 0, 5),
-                        alignment: Alignment.center,
-                        child: Text(
-                          vm.group.groupName.trim()[0].toUpperCase(),
-                          style: TextStyles.getBoldRedText(34),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        vm.group.groupName,
-                        maxLines: 3,
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyles.getTitleWhiteText(32),
-                      ),
-                    ],
-                  ),
-                ),
-                vm.group.description.isEmpty ? const SizedBox() : const SizedBox(height: 5),
-                vm.group.description.isEmpty
-                    ? const SizedBox()
-                    : Padding(
+                      Padding(
                         padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Expanded(
-                              child: Center(
-                                child: Text(
-                                  vm.group.description,
-                                  maxLines: 10000,
-                                  softWrap: true,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyles.getTitleWhiteText(16),
-                                ),
+                            Container(
+                              width: 80,
+                              height: 80,
+                              decoration: BoxDecoration(
+                                color: AppColors.mWhite,
+                                borderRadius: BorderRadius.circular(40),
+                              ),
+                              margin: const EdgeInsets.fromLTRB(0, 20, 0, 5),
+                              alignment: Alignment.center,
+                              child: Text(
+                                vm.group.groupName.trim()[0].toUpperCase(),
+                                style: TextStyles.getBoldRedText(34),
                               ),
                             ),
                           ],
                         ),
                       ),
-                const SizedBox(height: 25),
-                Container(
-                  width: width,
-                  decoration: const BoxDecoration(
-                    color: AppColors.mWhite,
-                    borderRadius: BorderRadius.vertical(top: Radius.circular(35)),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const SizedBox(height: 15),
-                      Text(
-                        getTranslated("passwords"),
-                        style: TextStyles.getTitleDarkRedText(26),
-                      ),
-                      const SizedBox(height: 15),
-                      if (vm.group.passwords.isEmpty) ...[
-                        SizedBox(
-                          width: width - 40,
-                          height: height * 0.5,
-                          child: Center(
-                            child: Text(
-                              getTranslated('no_password_assigned'),
-                              style: TextStyles.getTitleBlueText(26),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              vm.group.groupName,
+                              maxLines: 3,
+                              softWrap: true,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyles.getTitleWhiteText(32),
                             ),
-                          ),
+                          ],
                         ),
-                      ] else ...[
-                        for (int i = 0; i < vm.group.passwords.length; i++) ...[
-                          GroupPasswordListTile(
-                            width: width,
-                            item: vm.group.passwords[i],
-                            onItemTap: () {},
-                            onClipboardTap: () {},
-                          ),
-                        ],
-                      ],
-                      SizedBox(height: vm.group.passwords.length < 5 ? 400 : 80),
+                      ),
+                      vm.group.description.isEmpty ? const SizedBox() : const SizedBox(height: 5),
+                      vm.group.description.isEmpty
+                          ? const SizedBox()
+                          : Padding(
+                              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Expanded(
+                                    child: Center(
+                                      child: Text(
+                                        vm.group.description,
+                                        maxLines: 10000,
+                                        softWrap: true,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyles.getTitleWhiteText(16),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                      const SizedBox(height: 25),
+                      Container(
+                        width: width,
+                        decoration: const BoxDecoration(
+                          color: AppColors.mWhite,
+                          borderRadius: BorderRadius.vertical(top: Radius.circular(35)),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const SizedBox(height: 15),
+                            Text(
+                              getTranslated("passwords"),
+                              style: TextStyles.getTitleDarkRedText(26),
+                            ),
+                            const SizedBox(height: 15),
+                            if (vm.group.passwords.isEmpty) ...[
+                              SizedBox(
+                                width: width - 40,
+                                height: height * 0.5,
+                                child: Center(
+                                  child: Text(
+                                    getTranslated('no_password_assigned'),
+                                    style: TextStyles.getTitleBlueText(26),
+                                  ),
+                                ),
+                              ),
+                            ] else ...[
+                              for (int i = 0; i < vm.group.passwords.length; i++) ...[
+                                GroupPasswordListTile(
+                                  width: width,
+                                  item: vm.group.passwords[i],
+                                  onItemTap: () {},
+                                  onClipboardTap: () {},
+                                ),
+                              ],
+                            ],
+                            SizedBox(height: vm.group.passwords.length < 5 ? 400 : 80),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
-                ),
-              ],
-            ),
           ),
         );
       },

@@ -19,12 +19,14 @@ class CreateUpdateGroupViewModel {
     required String groupName,
     required String description,
   }) updateGroup;
+  final Function deleteGroup;
   final Function onBackPress;
 
   CreateUpdateGroupViewModel({
     this.group,
     required this.createGroup,
     required this.updateGroup,
+    required this.deleteGroup,
     required this.onBackPress,
   });
 
@@ -59,6 +61,10 @@ class CreateUpdateGroupViewModel {
                 ),
           ),
         );
+      },
+      deleteGroup: () {
+        //todo: confirmation dialog
+        store.dispatch(DeleteGroup(groupId: id ?? 0));
       },
       onBackPress: () {
         router.pop();

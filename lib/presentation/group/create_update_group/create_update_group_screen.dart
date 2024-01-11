@@ -69,7 +69,6 @@ class _CreateUpdateGroupScreenState extends State<CreateUpdateGroupScreen> {
                         child: ListView(
                           shrinkWrap: true,
                           children: [
-                            //todo: add next button for text field and focus on next field by using it
                             getGroupNameField(context, groupNameController),
                             getDescriptionField(context, descriptionController),
                             const SizedBox(height: 80),
@@ -129,6 +128,7 @@ class _CreateUpdateGroupScreenState extends State<CreateUpdateGroupScreen> {
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
+            textInputAction: TextInputAction.next,
             onTapOutside: (pointerDown) {
               FocusScope.of(context).unfocus();
             },
@@ -170,6 +170,7 @@ class _CreateUpdateGroupScreenState extends State<CreateUpdateGroupScreen> {
               ),
             ),
             maxLines: 5,
+            textInputAction: TextInputAction.done,
             onTapOutside: (pointerDown) {
               FocusScope.of(context).unfocus();
             },
@@ -269,8 +270,7 @@ class _CreateUpdateGroupScreenState extends State<CreateUpdateGroupScreen> {
                         child: InkWell(
                           splashColor: AppColors.mWhite.withOpacity(0.2),
                           onTap: () {
-                            //todo: on delete method
-                            //vm.onBackPress.call();
+                            vm.deleteGroup.call();
                           },
                           child: const Padding(
                             padding: EdgeInsets.fromLTRB(10, 8, 10, 8),

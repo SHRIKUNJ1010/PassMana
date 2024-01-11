@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/domain_redux/password/password_selector.dart';
 import 'package:passmana/localization/app_localization.dart';
@@ -38,6 +39,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController noteController = TextEditingController();
   Group? selectedGroup;
+  bool showPassword = false;
 
   @override
   void dispose() {
@@ -84,7 +86,6 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                         child: ListView(
                           shrinkWrap: true,
                           children: [
-                            //todo: add next button for text field and focus on next field by using it
                             getTitleField(context, titleController),
                             getSubTitleField(context, subTitleController),
                             getUserNameField(context, userNameController),
@@ -324,6 +325,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
               ),
             ),
             maxLines: 5,
+            textInputAction: TextInputAction.done,
             onTapOutside: (pointerDown) {
               FocusScope.of(context).unfocus();
             },
@@ -333,7 +335,6 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
     );
   }
 
-  //todo: add obscure option
   //todo: also think of some way to give option of generating password and assigning directly to this field
   Column getPasswordField(BuildContext context, TextEditingController controller) {
     return Column(
@@ -370,7 +371,42 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                 borderSide: BorderSide.none,
                 borderRadius: BorderRadius.circular(10),
               ),
+              suffixIcon: Container(
+                alignment: Alignment.center,
+                height: 25,
+                width: 25,
+                margin: const EdgeInsets.only(right: 5),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(6),
+                  child: Material(
+                    color: AppColors.mWhite,
+                    child: InkWell(
+                      onTap: () {
+                        showPassword = !showPassword;
+                        setState(() {});
+                      },
+                      splashColor: AppColors.secondaryColor.withOpacity(0.2),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: showPassword
+                            ? const Icon(
+                                FontAwesome5.eye,
+                                color: AppColors.primaryColor,
+                                size: 17,
+                              )
+                            : const Icon(
+                                FontAwesome5.eye_slash,
+                                color: AppColors.primaryColor,
+                                size: 17,
+                              ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ),
+            obscureText: !showPassword,
+            textInputAction: TextInputAction.next,
             onTapOutside: (pointerDown) {
               FocusScope.of(context).unfocus();
             },
@@ -416,6 +452,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
+            textInputAction: TextInputAction.next,
             onTapOutside: (pointerDown) {
               FocusScope.of(context).unfocus();
             },
@@ -456,6 +493,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
+            textInputAction: TextInputAction.next,
             onTapOutside: (pointerDown) {
               FocusScope.of(context).unfocus();
             },
@@ -501,6 +539,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
+            textInputAction: TextInputAction.next,
             onTapOutside: (pointerDown) {
               FocusScope.of(context).unfocus();
             },
@@ -559,8 +598,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                         child: InkWell(
                           splashColor: AppColors.mWhite.withOpacity(0.2),
                           onTap: () {
-                            //todo: on delete method
-                            //vm.onBackPress.call();
+                            vm.deletePassword.call();
                           },
                           child: const Padding(
                             padding: EdgeInsets.fromLTRB(10, 8, 10, 8),

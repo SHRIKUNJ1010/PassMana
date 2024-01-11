@@ -34,49 +34,51 @@ class PasswordDetailsScreen extends StatelessWidget {
             resizeToAvoidBottomInset: false,
             backgroundColor: Colors.transparent,
             appBar: getAppBar(vm),
-            body: ListView(
-              padding: const EdgeInsets.fromLTRB(20, 10, 20, 80),
-              shrinkWrap: true,
-              children: [
-                const SizedBox(height: 10),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
+            body: vm.password.id == 0
+                ? const SizedBox()
+                : ListView(
+                    padding: const EdgeInsets.fromLTRB(20, 10, 20, 80),
+                    shrinkWrap: true,
                     children: [
-                      Container(
-                        width: 80,
-                        height: 80,
-                        decoration: BoxDecoration(
-                          color: AppColors.mWhite,
-                          borderRadius: BorderRadius.circular(40),
-                        ),
-                        margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                        alignment: Alignment.center,
-                        child: Text(
-                          vm.password.title.trim()[0].toUpperCase(),
-                          style: TextStyles.getBoldRedText(34),
+                      const SizedBox(height: 10),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 80,
+                              height: 80,
+                              decoration: BoxDecoration(
+                                color: AppColors.mWhite,
+                                borderRadius: BorderRadius.circular(40),
+                              ),
+                              margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                              alignment: Alignment.center,
+                              child: Text(
+                                vm.password.title.trim()[0].toUpperCase(),
+                                style: TextStyles.getBoldRedText(34),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
+                      const SizedBox(height: 20),
+                      getTitleContainer(vm),
+                      vm.password.subTitle.isEmpty ? const SizedBox() : const SizedBox(height: 7),
+                      vm.password.subTitle.isEmpty ? const SizedBox() : getSubTitleContainer(vm),
+                      const SizedBox(height: 20),
+                      getUsernameContainer(vm),
+                      const SizedBox(height: 7),
+                      getPasswordContainer(vm),
+                      vm.password.note.isEmpty ? const SizedBox() : const SizedBox(height: 20),
+                      vm.password.note.isEmpty ? const SizedBox() : getNoteContainer(vm),
+                      const SizedBox(height: 20),
+                      getAssignedToGroupContainer(vm),
+                      const SizedBox(height: 80),
                     ],
                   ),
-                ),
-                const SizedBox(height: 20),
-                getTitleContainer(vm),
-                vm.password.subTitle.isEmpty ? const SizedBox() : const SizedBox(height: 7),
-                vm.password.subTitle.isEmpty ? const SizedBox() : getSubTitleContainer(vm),
-                const SizedBox(height: 20),
-                getUsernameContainer(vm),
-                const SizedBox(height: 7),
-                getPasswordContainer(vm),
-                vm.password.note.isEmpty ? const SizedBox() : const SizedBox(height: 20),
-                getNoteContainer(vm),
-                const SizedBox(height: 20),
-                getAssignedToGroupContainer(vm),
-                const SizedBox(height: 80),
-              ],
-            ),
           ),
         );
       },

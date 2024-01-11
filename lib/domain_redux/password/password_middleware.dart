@@ -92,7 +92,6 @@ void Function(Store<AppState> store, UpdatePassword action, NextDispatcher next)
   };
 }
 
-//todo: check if to use router pop for delete which might be used in other screen than create update screen
 void Function(Store<AppState> store, DeletePassword action, NextDispatcher next) _deletePassword() {
   return (store, action, next) {
     next(action);
@@ -120,6 +119,9 @@ void Function(Store<AppState> store, DeletePassword action, NextDispatcher next)
         popularGroupList: popularGroups,
       ),
     );
+    //pop the router two times after deleting password
+    router.pop();
+    router.pop();
   };
 }
 

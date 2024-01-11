@@ -114,6 +114,9 @@ void Function(Store<AppState> store, DeleteGroup action, NextDispatcher next) _d
         popularGroupList: popularGroups,
       ),
     );
+    //pop the router two times after deleting group
+    router.pop();
+    router.pop();
   };
 }
 
