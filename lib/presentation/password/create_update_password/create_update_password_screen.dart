@@ -37,7 +37,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
   final TextEditingController userNameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController noteController = TextEditingController();
-  final TextEditingController groupTargetController = TextEditingController();
+  Group? selectedGroup;
 
   @override
   void dispose() {
@@ -46,7 +46,6 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
     userNameController.dispose();
     passwordController.dispose();
     noteController.dispose();
-    groupTargetController.dispose();
     super.dispose();
   }
 
@@ -63,7 +62,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
           userNameController.text = getPasswordById(store.state, widget.id)?.userName ?? "";
           passwordController.text = getPasswordById(store.state, widget.id)?.password ?? "";
           noteController.text = getPasswordById(store.state, widget.id)?.note ?? "";
-          groupTargetController.text = getPasswordById(store.state, widget.id)?.group.target?.groupName ?? "None";
+          selectedGroup = getPasswordById(store.state, widget.id)?.group.target;
         }
       },
       builder: (BuildContext context, CreateUpdatePasswordViewModel vm) {
@@ -91,7 +90,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                             getUserNameField(context, userNameController),
                             getPasswordField(context, passwordController),
                             getNoteField(context, noteController),
-                            getGroupSelectField(context, vm, groupTargetController),
+                            getGroupSelectField(context, vm),
                             const SizedBox(height: 350),
                           ],
                         ),
@@ -113,7 +112,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
     );
   }
 
-  Column getGroupSelectField(BuildContext context, CreateUpdatePasswordViewModel vm, TextEditingController controller) {
+  Column getGroupSelectField(BuildContext context, CreateUpdatePasswordViewModel vm) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -130,9 +129,9 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
         ),
         DropdownSearch<Group?>(
           itemAsString: (item) => item?.groupName ?? "None",
-          items: vm.groupSelectOptionList,
+          items: [null, ...vm.groupSelectOptionList],
           compareFn: (g1, g2) => g1?.id == g2?.id,
-          selectedItem: vm.password?.group.target,
+          selectedItem: selectedGroup,
           popupProps: PopupProps.menu(
             showSelectedItems: true,
             containerBuilder: (context, child) {
@@ -164,42 +163,49 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
           ),
           onChanged: (item) {
             if (item != null) {
-              controller.text = item.groupName;
+              selectedGroup = item;
             } else {
-              controller.text = "None";
+              selectedGroup = null;
             }
+            setState(() {});
           },
           selectedItemBuilder: (item, onTap) {
-            return InkWell(
-              onTap: () {
-                onTap.call();
-              },
-              splashColor: AppColors.primaryColor.withOpacity(0.2),
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
-                child: TextFormField(
-                  controller: controller,
-                  validator: (text) => null,
-                  enabled: false,
-                  style: TextStyles.getTitleBlueText(18),
-                  decoration: InputDecoration(
-                    fillColor: AppColors.mWhite,
-                    filled: true,
-                    contentPadding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
-                    errorStyle: TextStyles.getTitleOrangeText(20),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    suffixIcon: const Icon(
-                      Icons.keyboard_arrow_down,
-                      color: AppColors.primaryColor,
-                      size: 30,
+            return Padding(
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Material(
+                  color: AppColors.mWhite,
+                  borderRadius: BorderRadius.circular(10),
+                  child: InkWell(
+                    onTap: () {
+                      onTap.call();
+                    },
+                    splashColor: AppColors.primaryColor.withOpacity(0.2),
+                    child: Container(
+                      padding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
+                      decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              item?.groupName ?? "None",
+                              style: TextStyles.getTitleBlueText(18),
+                            ),
+                          ),
+                          const Icon(
+                            Icons.keyboard_arrow_down,
+                            color: AppColors.primaryColor,
+                            size: 30,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  onTapOutside: (pointerDown) {
-                    FocusScope.of(context).unfocus();
-                  },
                 ),
               ),
             );
@@ -258,6 +264,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                   userName: userNameController.text,
                   password: passwordController.text,
                   note: noteController.text,
+                  targetGroup: selectedGroup,
                 );
               } else {
                 vm.createPassword.call(
@@ -266,6 +273,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                   userName: userNameController.text,
                   password: passwordController.text,
                   note: noteController.text,
+                  targetGroup: selectedGroup,
                 );
               }
             }

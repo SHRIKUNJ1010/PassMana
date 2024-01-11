@@ -74,7 +74,7 @@ class PasswordDetailsScreen extends StatelessWidget {
                 getNoteContainer(vm),
                 const SizedBox(height: 20),
                 getAssignedToGroupContainer(vm),
-                const SizedBox(height: 800),
+                const SizedBox(height: 80),
               ],
             ),
           ),

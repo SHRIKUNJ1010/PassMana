@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:passmana/presentation/common/drop_down_search_custom/src/properties/popup_props.dart';
+import 'package:passmana/utility/color.dart';
 
 import '../../dropdown_search.dart';
 import 'checkbox_widget.dart';
@@ -55,7 +56,7 @@ class SelectionWidgetState<T> extends State<SelectionWidget<T>> {
     searchBoxController = widget.popupProps.searchFieldProps.controller ?? TextEditingController();
     searchBoxController.addListener(() {
       Future.delayed(
-        widget.popupProps.searchDelay ?? Duration(milliseconds: 500),
+        widget.popupProps.searchDelay ?? const Duration(milliseconds: 500),
         () => _onTextChanged(searchBoxController.text),
       );
     });
@@ -191,15 +192,15 @@ class SelectionWidgetState<T> extends State<SelectionWidget<T>> {
   void closePopup() => Navigator.pop(context);
 
   Widget _multiSelectionValidation() {
-    if (!widget.isMultiSelectionMode) return SizedBox.shrink();
+    if (!widget.isMultiSelectionMode) return const SizedBox.shrink();
 
     Widget defaultValidation = Padding(
-      padding: EdgeInsets.all(8),
+      padding: const EdgeInsets.all(8),
       child: Align(
         alignment: Alignment.centerRight,
         child: ElevatedButton(
           onPressed: onValidate,
-          child: Text("OK"),
+          child: const Text("OK"),
         ),
       ),
     );
@@ -217,11 +218,11 @@ class SelectionWidgetState<T> extends State<SelectionWidget<T>> {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Error while getting online items"),
+          title: const Text("Error while getting online items"),
           content: _errorWidget(error),
           actions: <Widget>[
             TextButton(
-              child: new Text("OK"),
+              child: const Text("OK"),
               onPressed: () {
                 Navigator.of(context).pop(false);
               },
@@ -233,33 +234,35 @@ class SelectionWidgetState<T> extends State<SelectionWidget<T>> {
   }
 
   Widget _noDataWidget() {
-    if (widget.popupProps.emptyBuilder != null)
+    if (widget.popupProps.emptyBuilder != null) {
       return widget.popupProps.emptyBuilder!(
         context,
         searchBoxController.text,
       );
-    else
+    } else {
       return Container(
         height: 70,
         alignment: Alignment.center,
-        child: Text("No data found"),
+        child: const Text("No data found"),
       );
+    }
   }
 
   Widget _errorWidget(dynamic error) {
-    if (widget.popupProps.errorBuilder != null)
+    if (widget.popupProps.errorBuilder != null) {
       return widget.popupProps.errorBuilder!(
         context,
         searchBoxController.text,
         error,
       );
-    else
+    } else {
       return Container(
         alignment: Alignment.center,
         child: Text(
           error?.toString() ?? 'Unknown Error',
         ),
       );
+    }
   }
 
   Widget _loadingWidget() {
@@ -267,17 +270,18 @@ class SelectionWidgetState<T> extends State<SelectionWidget<T>> {
         valueListenable: _loadingNotifier,
         builder: (context, bool isLoading, wid) {
           if (isLoading) {
-            if (widget.popupProps.loadingBuilder != null)
+            if (widget.popupProps.loadingBuilder != null) {
               return widget.popupProps.loadingBuilder!(
                 context,
                 searchBoxController.text,
               );
-            else
+            } else {
               return Container(
                 height: 70,
                 alignment: Alignment.center,
                 child: const CircularProgressIndicator(),
               );
+            }
           }
           return const SizedBox.shrink();
         });
@@ -295,11 +299,11 @@ class SelectionWidgetState<T> extends State<SelectionWidget<T>> {
 
     List<T> applyFilter(String filter) {
       return _cachedItems.where((i) {
-        if (widget.filterFn != null)
+        if (widget.filterFn != null) {
           return (widget.filterFn!(i, filter));
-        else if (i.toString().toLowerCase().contains(filter.toLowerCase()))
+        } else if (i.toString().toLowerCase().contains(filter.toLowerCase())) {
           return true;
-        else if (widget.itemAsString != null) {
+        } else if (widget.itemAsString != null) {
           return (widget.itemAsString!(i)).toLowerCase().contains(filter.toLowerCase());
         }
         return false;
@@ -330,10 +334,11 @@ class SelectionWidgetState<T> extends State<SelectionWidget<T>> {
         _cachedItems.addAll(onlineItems);
 
         //don't filter data , they are already filtered online and local data are already filtered
-        if (widget.popupProps.isFilterOnline == true)
+        if (widget.popupProps.isFilterOnline == true) {
           _addDataToStream(_cachedItems);
-        else
+        } else {
           _addDataToStream(applyFilter(filter));
+        }
       } catch (e) {
         _addErrorToStream(e);
         //if offline items count > 0 , the error will be not visible for the user
@@ -372,14 +377,16 @@ class SelectionWidgetState<T> extends State<SelectionWidget<T>> {
         !widget.popupProps.showSelectedItems ? false : _isSelectedItem(item),
       );
 
-      if (widget.popupProps.interceptCallBacks)
+      if (widget.popupProps.interceptCallBacks) {
         return w;
-      else
+      } else {
         return InkWell(
           // ignore pointers in itemBuilder
-          child: IgnorePointer(child: w),
+          splashColor: AppColors.accentPrimaryColor,
           onTap: _isDisabled(item) ? null : () => _handleSelectedItem(item),
+          child: w /*IgnorePointer(child: )*/,
         );
+      }
     } else {
       return ListTile(
         enabled: !_isDisabled(item),
@@ -463,7 +470,7 @@ class SelectionWidgetState<T> extends State<SelectionWidget<T>> {
                 textAlignVertical: widget.popupProps.searchFieldProps.textAlignVertical,
                 textDirection: widget.popupProps.searchFieldProps.textDirection,
                 readOnly: widget.popupProps.searchFieldProps.readOnly,
-                toolbarOptions: widget.popupProps.searchFieldProps.toolbarOptions,
+                /*toolbarOptions: widget.popupProps.searchFieldProps.toolbarOptions,*/
                 showCursor: widget.popupProps.searchFieldProps.showCursor,
                 obscuringCharacter: widget.popupProps.searchFieldProps.obscuringCharacter,
                 obscureText: widget.popupProps.searchFieldProps.obscureText,
@@ -524,7 +531,7 @@ class SelectionWidgetState<T> extends State<SelectionWidget<T>> {
     if (favoriteItems.isEmpty) return Container();
 
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 8),
       child: LayoutBuilder(builder: (context, constraints) {
         return SingleChildScrollView(
           scrollDirection: Axis.horizontal,
@@ -538,7 +545,7 @@ class SelectionWidgetState<T> extends State<SelectionWidget<T>> {
                       (f) => InkWell(
                         onTap: () => _handleSelectedItem(f),
                         child: Container(
-                          margin: EdgeInsets.only(right: 4),
+                          margin: const EdgeInsets.only(right: 4),
                           child: widget.popupProps.favoriteItemProps.favoriteItemBuilder != null
                               ? widget.popupProps.favoriteItemProps.favoriteItemBuilder!(
                                   context,
@@ -573,19 +580,19 @@ class SelectionWidgetState<T> extends State<SelectionWidget<T>> {
 
   Widget _favoriteItemDefaultWidget(T item) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Theme.of(context).primaryColorLight),
       child: Row(
         children: [
           Text(
             _selectedItemAsString(item),
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.subtitle1,
+            style: Theme.of(context).textTheme.titleMedium,
           ),
-          Padding(padding: EdgeInsets.only(left: 8)),
+          const Padding(padding: EdgeInsets.only(left: 8)),
           Visibility(
-            child: Icon(Icons.check_box_outlined),
             visible: _isSelectedItem(item),
+            child: const Icon(Icons.check_box_outlined),
           )
         ],
       ),
@@ -605,12 +612,12 @@ class SelectionWidgetState<T> extends State<SelectionWidget<T>> {
 
   void selectItems(List<T> itemsToSelect) {
     List<T> newSelectedItems = _selectedItems;
-    itemsToSelect.forEach((i) {
+    for (var i in itemsToSelect) {
       if (!_isSelectedItem(i) /*check if the item is already selected*/ && !_isDisabled(i) /*escape disabled items*/) {
         newSelectedItems.add(i);
         if (widget.popupProps.onItemAdded != null) widget.popupProps.onItemAdded!(_selectedItems, i);
       }
-    });
+    }
     _selectedItemsNotifier.value = List.from(newSelectedItems);
   }
 
@@ -620,13 +627,13 @@ class SelectionWidgetState<T> extends State<SelectionWidget<T>> {
 
   void deselectItems(List<T> itemsToDeselect) {
     List<T> newSelectedItems = _selectedItems;
-    itemsToDeselect.forEach((i) {
+    for (var i in itemsToDeselect) {
       var index = _itemIndexInList(newSelectedItems, i);
       if (index > -1) /*check if the item is already selected*/ {
         newSelectedItems.removeAt(index);
         if (widget.popupProps.onItemRemoved != null) widget.popupProps.onItemRemoved!(_selectedItems, i);
       }
-    });
+    }
     _selectedItemsNotifier.value = List.from(newSelectedItems);
   }
 

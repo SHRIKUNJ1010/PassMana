@@ -20,6 +20,7 @@ class CreateUpdatePasswordViewModel {
     required String userName,
     required String password,
     required String note,
+    Group? targetGroup,
   }) createPassword;
   final Function({
     required String title,
@@ -27,6 +28,7 @@ class CreateUpdatePasswordViewModel {
     required String userName,
     required String password,
     required String note,
+    Group? targetGroup,
   }) updatePassword;
   final Function deletePassword;
   final Function onBackPress;
@@ -50,6 +52,7 @@ class CreateUpdatePasswordViewModel {
         required String userName,
         required String password,
         required String note,
+        Group? targetGroup,
       }) {
         store.dispatch(
           CreatePassword(
@@ -58,6 +61,7 @@ class CreateUpdatePasswordViewModel {
             userName: userName,
             password: password,
             note: note,
+            targetGroup: targetGroup
           ),
         );
       },
@@ -67,17 +71,27 @@ class CreateUpdatePasswordViewModel {
         required String userName,
         required String password,
         required String note,
+        Group? targetGroup,
       }) {
+        final Password tempPassword = getPasswordById(
+              store.state,
+              id,
+            )?.updatePassword(
+              title: title,
+              subTitle: subTitle,
+              userName: userName,
+              password: password,
+              note: note,
+            ) ??
+            Password(
+              id: id ?? 0,
+              createdDate: DateTime.now(),
+            );
+
+        tempPassword.group.target = targetGroup;
         store.dispatch(
           UpdatePassword(
-            password: getPasswordById(store.state, id)?.updatePassword(
-                  title: title,
-                  subTitle: subTitle,
-                  userName: userName,
-                  password: password,
-                  note: note,
-                ) ??
-                Password(id: id ?? 0, createdDate: DateTime.now()),
+            password: tempPassword,
           ),
         );
       },

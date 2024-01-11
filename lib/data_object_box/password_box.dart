@@ -19,16 +19,19 @@ class PasswordBox {
     String userName = '',
     String password = '',
     String note = '',
+    Group? targetGroup,
   }) {
+    final tempPassword = Password(
+      title: title,
+      subTitle: subTitle,
+      userName: userName,
+      password: password,
+      note: note,
+      createdDate: DateTime.now(),
+    );
+    tempPassword.group.target = targetGroup;
     _passwordBox.put(
-      Password(
-        title: title,
-        subTitle: subTitle,
-        userName: userName,
-        password: password,
-        note: note,
-        createdDate: DateTime.now(),
-      ),
+      tempPassword,
       mode: PutMode.insert,
     );
   }

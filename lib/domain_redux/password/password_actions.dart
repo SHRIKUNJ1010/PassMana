@@ -13,6 +13,7 @@ class CreatePassword {
   final String userName;
   final String password;
   final String note;
+  final Group? targetGroup;
 
   CreatePassword({
     required this.title,
@@ -20,6 +21,7 @@ class CreatePassword {
     required this.userName,
     required this.password,
     required this.note,
+    this.targetGroup,
   });
 }
 
