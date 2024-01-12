@@ -11,6 +11,7 @@ import 'package:passmana/localization/app_localization.dart';
 import 'package:passmana/model/group_model.dart';
 import 'package:passmana/presentation/common/custom_app_bar.dart';
 import 'package:passmana/presentation/common/drop_down_search_custom/dropdown_search.dart';
+import 'package:passmana/presentation/common/drop_down_search_custom/src/properties/list_view_props.dart';
 import 'package:passmana/presentation/common/drop_down_search_custom/src/properties/menu_props.dart';
 import 'package:passmana/presentation/common/drop_down_search_custom/src/properties/popup_props.dart';
 import 'package:passmana/presentation/password/create_update_password/create_update_password_view_model.dart';
@@ -128,52 +129,53 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
             ),
           ],
         ),
-        DropdownSearch<Group?>(
-          itemAsString: (item) => item?.groupName ?? "None",
-          items: [null, ...vm.groupSelectOptionList],
-          compareFn: (g1, g2) => g1?.id == g2?.id,
-          selectedItem: selectedGroup,
-          popupProps: PopupProps.menu(
-            showSelectedItems: true,
-            containerBuilder: (context, child) {
-              return Container(
-                decoration: BoxDecoration(
-                  color: AppColors.primaryColor.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: child,
-              );
-            },
-            itemBuilder: (context, item, isSelected) {
-              if (isSelected) {
-                return Padding(
-                  padding: const EdgeInsets.all(5),
-                  child: getSelectedPopupMenuItem(item),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+          child: DropdownSearch<Group?>(
+            itemAsString: (item) => item?.groupName ?? "None",
+            items: [null, ...vm.groupSelectOptionList],
+            compareFn: (g1, g2) => g1?.id == g2?.id,
+            selectedItem: selectedGroup,
+            popupProps: PopupProps.menu(
+              showSelectedItems: true,
+              listViewProps: const ListViewProps(shrinkWrap: true),
+              containerBuilder: (context, child) {
+                return Container(
+                  decoration: BoxDecoration(
+                    color: AppColors.primaryColor.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: child,
                 );
-              } else {
-                return Padding(
-                  padding: const EdgeInsets.all(5),
-                  child: getNonSelectedPopupMenuItem(item),
-                );
-              }
-            },
-            menuProps: MenuProps(
-              borderRadius: BorderRadius.circular(10),
-              barrierLabel: getTranslated("groups"),
+              },
+              itemBuilder: (context, item, isSelected) {
+                if (isSelected) {
+                  return Padding(
+                    padding: const EdgeInsets.all(5),
+                    child: getSelectedPopupMenuItem(item),
+                  );
+                } else {
+                  return Padding(
+                    padding: const EdgeInsets.all(5),
+                    child: getNonSelectedPopupMenuItem(item),
+                  );
+                }
+              },
+              menuProps: MenuProps(
+                borderRadius: BorderRadius.circular(10),
+                barrierLabel: getTranslated("groups"),
+              ),
             ),
-          ),
-          onChanged: (item) {
-            if (item != null) {
-              selectedGroup = item;
-            } else {
-              selectedGroup = null;
-            }
-            setState(() {});
-          },
-          selectedItemBuilder: (item, onTap) {
-            return Padding(
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
-              child: ClipRRect(
+            onChanged: (item) {
+              if (item != null) {
+                selectedGroup = item;
+              } else {
+                selectedGroup = null;
+              }
+              setState(() {});
+            },
+            selectedItemBuilder: (item, onTap) {
+              return ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: Material(
                   color: AppColors.mWhite,
@@ -208,9 +210,9 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                     ),
                   ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       ],
     );

@@ -7,8 +7,13 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/localization/app_localization.dart';
 import 'package:passmana/presentation/common/custom_app_bar.dart';
+import 'package:passmana/presentation/common/drop_down_search_custom/dropdown_search.dart';
+import 'package:passmana/presentation/common/drop_down_search_custom/src/properties/list_view_props.dart';
+import 'package:passmana/presentation/common/drop_down_search_custom/src/properties/menu_props.dart';
+import 'package:passmana/presentation/common/drop_down_search_custom/src/properties/popup_props.dart';
 import 'package:passmana/presentation/settings/settings_item_list/settings_item_list_view_model.dart';
 import 'package:passmana/utility/assets_utility/assets_paths.dart';
+import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/constants.dart';
 import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:passmana/utility/utility.dart';
@@ -47,9 +52,195 @@ class SettingsItemListScreen extends StatelessWidget {
                 const Spacer(),
               ],
             ),
+            body: ListView(
+              children: [
+                const SizedBox(height: 20),
+                getCommonContainer(
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          getTranslated("enable_autofill"),
+                          style: TextStyles.getTitleBlueText(20),
+                        ),
+                      ),
+                      Switch(
+                        value: false,
+                        onChanged: (val) {},
+                      ),
+                    ],
+                  ),
+                ),
+                getCommonContainer(
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          getTranslated("enable_biometric"),
+                          style: TextStyles.getTitleBlueText(20),
+                        ),
+                      ),
+                      Switch(
+                        value: true,
+                        onChanged: (val) {},
+                      ),
+                    ],
+                  ),
+                ),
+                getCommonContainer(
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          getTranslated("language"),
+                          style: TextStyles.getTitleBlueText(20),
+                        ),
+                      ),
+                      DropdownSearch<Locale>(
+                        itemAsString: (item) => Utility.getLanguageNameFromLanguageCode(item.languageCode),
+                        items: const [
+                          Locale(AppConstants.english),
+                          Locale(AppConstants.gujarati),
+                          Locale(AppConstants.hindi),
+                        ],
+                        compareFn: (g1, g2) => g1.languageCode == g2.languageCode,
+                        popupProps: PopupProps.menu(
+                          showSelectedItems: true,
+                          listViewProps: const ListViewProps(shrinkWrap: true),
+                          containerBuilder: (context, child) {
+                            return Container(
+                              decoration: BoxDecoration(
+                                color: AppColors.primaryColor.withOpacity(0.2),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              constraints: const BoxConstraints(maxHeight: 330, minHeight: 0),
+                              child: child,
+                            );
+                          },
+                          itemBuilder: (context, item, isSelected) {
+                            if (isSelected) {
+                              return Padding(
+                                padding: const EdgeInsets.fromLTRB(4, 4, 4, 4),
+                                child: getSelectedPopupMenuItem(item),
+                              );
+                            } else {
+                              return Padding(
+                                padding: const EdgeInsets.fromLTRB(4, 4, 4, 4),
+                                child: getNonSelectedPopupMenuItem(item),
+                              );
+                            }
+                          },
+                          menuProps: MenuProps(
+                            borderRadius: BorderRadius.circular(10),
+                            barrierLabel: getTranslated("language"),
+                          ),
+                        ),
+                        onChanged: (item) {
+                          if (item != null) {
+                            //assign
+                          }
+                        },
+                        selectedItem: const Locale(AppConstants.english),
+                        selectedItemBuilder: (item, onTap) {
+                          return SizedBox(
+                            width: 105,
+                            child: Material(
+                              color: AppColors.mWhite,
+                              child: InkWell(
+                                onTap: () {
+                                  onTap.call();
+                                },
+                                splashColor: AppColors.secondaryColor.withOpacity(0.2),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    border: Border.all(color: AppColors.primaryColor),
+                                    color: Colors.transparent,
+                                  ),
+                                  padding: const EdgeInsets.fromLTRB(10, 4, 3, 4),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: Text(
+                                          Utility.getLanguageNameFromLanguageCode(item?.languageCode ?? AppConstants.english),
+                                          style: TextStyles.getTitleBlueText(16),
+                                        ),
+                                      ),
+                                      const Icon(
+                                        Icons.keyboard_arrow_down,
+                                        color: AppColors.primaryColor,
+                                        size: 24,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                getCommonContainer(
+                  child: Text(
+                    getTranslated("change_mobile_pin"),
+                    style: TextStyles.getTitleBlueText(20),
+                  ),
+                ),
+                getCommonContainer(
+                  child: Text(
+                    getTranslated("generate_password"),
+                    style: TextStyles.getTitleBlueText(20),
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },
+    );
+  }
+
+  Container getNonSelectedPopupMenuItem(Locale item) {
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.mWhite,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
+      child: Text(
+        Utility.getLanguageNameFromLanguageCode(item.languageCode),
+        style: TextStyles.getTitleBlueText(16),
+      ),
+    );
+  }
+
+  Container getSelectedPopupMenuItem(Locale item) {
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.primaryColor,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
+      child: Text(
+        Utility.getLanguageNameFromLanguageCode(item.languageCode),
+        style: TextStyles.getTitleWhiteText(16),
+      ),
+    );
+  }
+
+  Container getCommonContainer({
+    required Widget child,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(5),
+        color: AppColors.mWhite,
+      ),
+      margin: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+      padding: const EdgeInsets.fromLTRB(15, 15, 10, 15),
+      child: child,
     );
   }
 }

@@ -115,7 +115,7 @@ class _PopupMenuRoute<T> extends PopupRoute<T> {
   Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
     final PopupMenuThemeData popupMenuTheme = PopupMenuTheme.of(context);
     final menu = Padding(
-      padding: const EdgeInsets.fromLTRB(20, 5, 20, 0),
+      padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: Material(

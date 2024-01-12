@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:passmana/utility/color.dart';
+import 'package:passmana/utility/constants.dart';
 
 class Utility {
   //printing log when app is in debug mode
@@ -32,5 +33,18 @@ class Utility {
         ],
       ),
     );
+  }
+
+  static String getLanguageNameFromLanguageCode(String code) {
+    switch (code) {
+      case AppConstants.english:
+        return AppConstants.englishName;
+      case AppConstants.hindi:
+        return AppConstants.hindiName;
+      case AppConstants.gujarati:
+        return AppConstants.gujaratiName;
+      default:
+        return AppConstants.englishName;
+    }
   }
 }

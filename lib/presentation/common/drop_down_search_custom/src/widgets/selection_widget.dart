@@ -94,7 +94,7 @@ class SelectionWidgetState<T> extends State<SelectionWidget<T>> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: widget.popupProps.constraints,
+      constraints: const BoxConstraints(maxHeight: 330, minHeight: 0),
       child: widget.popupProps.containerBuilder == null ? _defaultWidget() : widget.popupProps.containerBuilder!(context, _defaultWidget()),
     );
   }
@@ -107,10 +107,10 @@ class SelectionWidgetState<T> extends State<SelectionWidget<T>> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              _searchField(),
-              _favoriteItemsWidget(),
+              /*_searchField(),
+              _favoriteItemsWidget(),*/
               Flexible(
-                fit: widget.popupProps.fit,
+                fit: FlexFit.tight,
                 child: Stack(
                   children: <Widget>[
                     StreamBuilder<List<T>>(
@@ -153,7 +153,7 @@ class SelectionWidgetState<T> extends State<SelectionWidget<T>> {
                             reverse: widget.popupProps.listViewProps.reverse,
                             primary: widget.popupProps.listViewProps.primary,
                             physics: widget.popupProps.listViewProps.physics,
-                            itemExtent: widget.popupProps.listViewProps.itemExtent,
+                            /*itemExtent: widget.popupProps.listViewProps.itemExtent,*/
                             addAutomaticKeepAlives: widget.popupProps.listViewProps.addAutomaticKeepAlives,
                             addRepaintBoundaries: widget.popupProps.listViewProps.addRepaintBoundaries,
                             addSemanticIndexes: widget.popupProps.listViewProps.addSemanticIndexes,
@@ -384,7 +384,7 @@ class SelectionWidgetState<T> extends State<SelectionWidget<T>> {
           // ignore pointers in itemBuilder
           splashColor: AppColors.accentPrimaryColor,
           onTap: _isDisabled(item) ? null : () => _handleSelectedItem(item),
-          child: w /*IgnorePointer(child: )*/,
+          child: IgnorePointer(child: w),
         );
       }
     } else {

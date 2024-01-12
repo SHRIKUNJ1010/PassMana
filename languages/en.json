@@ -62,5 +62,8 @@
   "email_or_username": "Email/Username",
   "details": "Details",
   "category_group": "Category Group",
-  "none": "None"
+  "none": "None",
+  "enable_autofill": "Enable Autofill",
+  "enable_biometric": "Enable Biometric",
+  "language": "Language"
 }
