@@ -43,7 +43,7 @@ class CreateListScreen extends StatelessWidget {
                 ),
                 const SizedBox(width: 10),
                 Text(
-                  getTranslated("passmana"),
+                  getTranslated("passmana", context),
                   style: TextStyles.getTitleWhiteText(28),
                 ),
                 const Spacer(),
@@ -56,7 +56,7 @@ class CreateListScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(20, 40, 20, 0),
                     child: Text(
-                      getTranslated("what_do_you_want_to"),
+                      getTranslated("what_do_you_want_to", context),
                       softWrap: true,
                       style: TextStyles.getTitleWhiteText(18),
                     ),
@@ -64,12 +64,12 @@ class CreateListScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
                     child: Text(
-                      getTranslated("store_today?"),
+                      getTranslated("store_today?", context),
                       softWrap: true,
                       style: TextStyles.getTitleDarkRedText(42),
                     ),
                   ),
-                  getGridList(height, vm),
+                  getGridList(height, vm, context),
                 ],
               ),
             ),
@@ -79,7 +79,7 @@ class CreateListScreen extends StatelessWidget {
     );
   }
 
-  Container getGridList(double height, CreateListViewModel vm) {
+  Container getGridList(double height, CreateListViewModel vm, BuildContext context) {
     return Container(
       height: 0.5 * height,
       margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -93,7 +93,7 @@ class CreateListScreen extends StatelessWidget {
                     onTap: () {
                       vm.onPasswordItemTap.call();
                     },
-                    title: getTranslated("password"),
+                    title: getTranslated("password", context),
                     icon: Icon(
                       Icons.lock,
                       color: AppColors.mBlack.withOpacity(0.6),
@@ -106,7 +106,7 @@ class CreateListScreen extends StatelessWidget {
                     onTap: () {
                       vm.onGroupItemTap.call();
                     },
-                    title: getTranslated("group"),
+                    title: getTranslated("group", context),
                     icon: Icon(
                       Icons.people,
                       color: AppColors.mBlack.withOpacity(0.6),
@@ -125,7 +125,7 @@ class CreateListScreen extends StatelessWidget {
                     onTap: () {
                       vm.onCardItemTap.call();
                     },
-                    title: getTranslated("card"),
+                    title: getTranslated("card", context),
                     icon: Icon(
                       Icons.credit_card,
                       color: AppColors.mBlack.withOpacity(0.6),
@@ -138,7 +138,7 @@ class CreateListScreen extends StatelessWidget {
                     onTap: () {
                       vm.onSecretNoteItemTap.call();
                     },
-                    title: getTranslated("secret_note"),
+                    title: getTranslated("secret_note", context),
                     icon: Icon(
                       Icons.note_alt,
                       color: AppColors.mBlack.withOpacity(0.6),

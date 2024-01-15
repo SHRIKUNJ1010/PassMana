@@ -36,7 +36,7 @@ class GroupDetailsScreen extends StatelessWidget {
           child: Scaffold(
             resizeToAvoidBottomInset: false,
             backgroundColor: Colors.transparent,
-            appBar: getAppBar(vm),
+            appBar: getAppBar(vm,context),
             body: vm.group.id == 0
                 ? const SizedBox()
                 : ListView(
@@ -117,7 +117,7 @@ class GroupDetailsScreen extends StatelessWidget {
                           children: [
                             const SizedBox(height: 15),
                             Text(
-                              getTranslated("passwords"),
+                              getTranslated("passwords",context),
                               style: TextStyles.getTitleDarkRedText(26),
                             ),
                             const SizedBox(height: 15),
@@ -127,7 +127,7 @@ class GroupDetailsScreen extends StatelessWidget {
                                 height: height * 0.5,
                                 child: Center(
                                   child: Text(
-                                    getTranslated('no_password_assigned'),
+                                    getTranslated('no_password_assigned',context),
                                     style: TextStyles.getTitleBlueText(26),
                                   ),
                                 ),
@@ -158,7 +158,7 @@ class GroupDetailsScreen extends StatelessWidget {
     );
   }
 
-  CustomAppBar getAppBar(GroupDetailsViewModel vm) {
+  CustomAppBar getAppBar(GroupDetailsViewModel vm,BuildContext context) {
     return CustomAppBar(
       centerWidgetsList: [
         Expanded(
@@ -191,7 +191,7 @@ class GroupDetailsScreen extends StatelessWidget {
           ),
         ),
         Text(
-          getTranslated("group_details"),
+          getTranslated("group_details",context),
           style: TextStyles.getTitleWhiteText(25),
         ),
         Expanded(

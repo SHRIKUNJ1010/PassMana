@@ -33,7 +33,7 @@ class PasswordDetailsScreen extends StatelessWidget {
           child: Scaffold(
             resizeToAvoidBottomInset: false,
             backgroundColor: Colors.transparent,
-            appBar: getAppBar(vm),
+            appBar: getAppBar(vm, context),
             body: vm.password.id == 0
                 ? const SizedBox()
                 : ListView(
@@ -65,17 +65,17 @@ class PasswordDetailsScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 20),
-                      getTitleContainer(vm),
+                      getTitleContainer(vm, context),
                       vm.password.subTitle.isEmpty ? const SizedBox() : const SizedBox(height: 7),
-                      vm.password.subTitle.isEmpty ? const SizedBox() : getSubTitleContainer(vm),
+                      vm.password.subTitle.isEmpty ? const SizedBox() : getSubTitleContainer(vm, context),
                       const SizedBox(height: 20),
-                      getUsernameContainer(vm),
+                      getUsernameContainer(vm, context),
                       const SizedBox(height: 7),
-                      getPasswordContainer(vm),
+                      getPasswordContainer(vm, context),
                       vm.password.note.isEmpty ? const SizedBox() : const SizedBox(height: 20),
-                      vm.password.note.isEmpty ? const SizedBox() : getNoteContainer(vm),
+                      vm.password.note.isEmpty ? const SizedBox() : getNoteContainer(vm, context),
                       const SizedBox(height: 20),
-                      getAssignedToGroupContainer(vm),
+                      getAssignedToGroupContainer(vm, context),
                       const SizedBox(height: 80),
                     ],
                   ),
@@ -98,7 +98,7 @@ class PasswordDetailsScreen extends StatelessWidget {
     );
   }
 
-  Widget getAssignedToGroupContainer(PasswordDetailsViewModel vm) {
+  Widget getAssignedToGroupContainer(PasswordDetailsViewModel vm, BuildContext context) {
     return getCommonContainer(
       child: Row(
         mainAxisSize: MainAxisSize.max,
@@ -109,11 +109,11 @@ class PasswordDetailsScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "${getTranslated("category_group")}:",
+                  "${getTranslated("category_group", context)}:",
                   style: TextStyles.getTitleDarkRedText(17),
                 ),
                 Text(
-                  vm.password.group.target?.groupName ?? getTranslated('none'),
+                  vm.password.group.target?.groupName ?? getTranslated('none', context),
                   maxLines: 5,
                   softWrap: true,
                   style: TextStyles.getTitleTransparentBlackText(
@@ -127,28 +127,15 @@ class PasswordDetailsScreen extends StatelessWidget {
         ],
       ),
     );
-    /*DropdownSearch<Group>(
-      itemAsString: (item) => item.groupName,
-      items: vm.groupList,
-      selectedItem: vm.password.group.target,
-      onChanged: (item) {
-        if (item != null) {
-          vm.onGroupSelect.call(vm.password, item);
-        }
-      },
-      selectedItemBuilder: (item, onTap) {
-        return ;
-      },
-    )*/
   }
 
-  Container getNoteContainer(PasswordDetailsViewModel vm) {
+  Container getNoteContainer(PasswordDetailsViewModel vm, BuildContext context) {
     return getCommonContainer(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "${getTranslated("note")}:",
+            "${getTranslated("note", context)}:",
             style: TextStyles.getTitleDarkRedText(17),
           ),
           Row(
@@ -173,7 +160,7 @@ class PasswordDetailsScreen extends StatelessWidget {
     );
   }
 
-  Container getPasswordContainer(PasswordDetailsViewModel vm) {
+  Container getPasswordContainer(PasswordDetailsViewModel vm, BuildContext context) {
     return getCommonContainer(
       child: Row(
         mainAxisSize: MainAxisSize.max,
@@ -184,7 +171,7 @@ class PasswordDetailsScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "${getTranslated("password")}:",
+                  "${getTranslated("password", context)}:",
                   style: TextStyles.getTitleDarkRedText(17),
                 ),
                 Text(
@@ -227,7 +214,7 @@ class PasswordDetailsScreen extends StatelessWidget {
     );
   }
 
-  Container getUsernameContainer(PasswordDetailsViewModel vm) {
+  Container getUsernameContainer(PasswordDetailsViewModel vm, BuildContext context) {
     return getCommonContainer(
       child: Row(
         mainAxisSize: MainAxisSize.max,
@@ -238,7 +225,7 @@ class PasswordDetailsScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "${getTranslated("email_or_username")}:",
+                  "${getTranslated("email_or_username", context)}:",
                   style: TextStyles.getTitleDarkRedText(17),
                 ),
                 Text(
@@ -281,13 +268,13 @@ class PasswordDetailsScreen extends StatelessWidget {
     );
   }
 
-  Container getSubTitleContainer(PasswordDetailsViewModel vm) {
+  Container getSubTitleContainer(PasswordDetailsViewModel vm, BuildContext context) {
     return getCommonContainer(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "${getTranslated("subtitle")}:",
+            "${getTranslated("subtitle", context)}:",
             style: TextStyles.getTitleDarkRedText(17),
           ),
           Row(
@@ -312,13 +299,13 @@ class PasswordDetailsScreen extends StatelessWidget {
     );
   }
 
-  Container getTitleContainer(PasswordDetailsViewModel vm) {
+  Container getTitleContainer(PasswordDetailsViewModel vm, BuildContext context) {
     return getCommonContainer(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "${getTranslated("title")}:",
+            "${getTranslated("title", context)}:",
             style: TextStyles.getTitleDarkRedText(17),
           ),
           Row(
@@ -343,7 +330,7 @@ class PasswordDetailsScreen extends StatelessWidget {
     );
   }
 
-  CustomAppBar getAppBar(PasswordDetailsViewModel vm) {
+  CustomAppBar getAppBar(PasswordDetailsViewModel vm, BuildContext context) {
     return CustomAppBar(
       centerWidgetsList: [
         Expanded(
@@ -376,7 +363,7 @@ class PasswordDetailsScreen extends StatelessWidget {
           ),
         ),
         Text(
-          getTranslated("password_details"),
+          getTranslated("password_details", context),
           style: TextStyles.getTitleWhiteText(25),
         ),
         Expanded(

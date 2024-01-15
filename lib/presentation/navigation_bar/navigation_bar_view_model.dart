@@ -14,121 +14,134 @@ import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:redux/redux.dart';
 
 class NavigationBarViewModel {
-  final List<String> routeList = [
-    AppRoutes.passwordHomeList,
-    AppRoutes.cardList,
-    AppRoutes.createList,
-    AppRoutes.secretNoteList,
-    AppRoutes.settings,
-  ];
-  final List<Widget> notSelectedIconWidgets = const <Widget>[
-    Icon(
-      Icons.lock_outline_rounded,
-      color: AppColors.mWhite,
-      size: 24,
-    ),
-    Icon(
-      FontAwesome.credit_card,
-      color: AppColors.mWhite,
-      size: 23,
-    ),
-    Icon(
-      Icons.add,
-      color: AppColors.mWhite,
-      size: 30,
-    ),
-    Icon(
-      Icons.note_alt_outlined,
-      color: AppColors.mWhite,
-      size: 28,
-    ),
-    Icon(
-      Icons.settings_outlined,
-      color: AppColors.mWhite,
-      size: 25,
-    ),
-  ];
-  final List<Widget> notSelectedTextWidgets = <Widget>[
-    Text(
-      getTranslated('password'),
-      style: TextStyles.getTitleWhiteText(10),
-    ),
-    Text(
-      getTranslated('card'),
-      style: TextStyles.getTitleWhiteText(10),
-    ),
-    Text(
-      getTranslated('create'),
-      style: TextStyles.getTitleWhiteText(10),
-    ),
-    Text(
-      getTranslated('secret_note'),
-      style: TextStyles.getTitleWhiteText(10),
-    ),
-    Text(
-      getTranslated('settings'),
-      style: TextStyles.getTitleWhiteText(10),
-    ),
-  ];
-  final List<Widget> selectedIconWidgets = <Widget>[
-    Icon(
-      Icons.lock,
-      color: AppColors.secondaryMaterialColor[400],
-      size: 24,
-    ),
-    Icon(
-      FontAwesome5.credit_card,
-      color: AppColors.secondaryMaterialColor[400],
-      size: 22,
-    ),
-    const Icon(
-      Icons.add,
-      color: AppColors.mWhite,
-      size: 30,
-    ),
-    Icon(
-      Icons.note_alt_rounded,
-      color: AppColors.secondaryMaterialColor[400],
-      size: 28,
-    ),
-    Icon(
-      Icons.settings,
-      color: AppColors.secondaryMaterialColor[400],
-      size: 25,
-    )
-  ];
-  final List<Widget> selectedTextWidgets = <Widget>[
-    Text(
-      getTranslated('password'),
-      style: TextStyles.getTitleDarkRedText(10),
-    ),
-    Text(
-      getTranslated('card'),
-      style: TextStyles.getTitleDarkRedText(10),
-    ),
-    Text(
-      getTranslated('create'),
-      style: TextStyles.getTitleDarkRedText(10),
-    ),
-    Text(
-      getTranslated('secret_note'),
-      style: TextStyles.getTitleDarkRedText(10),
-    ),
-    Text(
-      getTranslated('settings'),
-      style: TextStyles.getTitleDarkRedText(10),
-    ),
-  ];
+  final List<String> routeList;
+  final List<Widget> notSelectedIconWidgets;
+  final List<Widget> notSelectedTextWidgets;
+
+  final List<Widget> selectedIconWidgets;
+
+  final List<Widget> selectedTextWidgets;
+
   final int Function() getCurrentIndex;
   final Function(int) onItemTap;
 
   NavigationBarViewModel({
     required this.getCurrentIndex,
     required this.onItemTap,
+    required this.routeList,
+    required this.notSelectedIconWidgets,
+    required this.selectedTextWidgets,
+    required this.notSelectedTextWidgets,
+    required this.selectedIconWidgets,
   });
 
-  static NavigationBarViewModel fromStore(Store<AppState> store) {
+  static NavigationBarViewModel fromStore(Store<AppState> store,BuildContext context) {
     return NavigationBarViewModel(
+      routeList: [
+        AppRoutes.passwordHomeList,
+        AppRoutes.cardList,
+        AppRoutes.createList,
+        AppRoutes.secretNoteList,
+        AppRoutes.settings,
+      ],
+      notSelectedIconWidgets: const <Widget>[
+        Icon(
+          Icons.lock_outline_rounded,
+          color: AppColors.mWhite,
+          size: 24,
+        ),
+        Icon(
+          FontAwesome.credit_card,
+          color: AppColors.mWhite,
+          size: 23,
+        ),
+        Icon(
+          Icons.add,
+          color: AppColors.mWhite,
+          size: 30,
+        ),
+        Icon(
+          Icons.note_alt_outlined,
+          color: AppColors.mWhite,
+          size: 28,
+        ),
+        Icon(
+          Icons.settings_outlined,
+          color: AppColors.mWhite,
+          size: 25,
+        ),
+      ],
+      selectedIconWidgets: <Widget>[
+        Icon(
+          Icons.lock,
+          color: AppColors.secondaryMaterialColor[400],
+          size: 24,
+        ),
+        Icon(
+          FontAwesome5.credit_card,
+          color: AppColors.secondaryMaterialColor[400],
+          size: 22,
+        ),
+        const Icon(
+          Icons.add,
+          color: AppColors.mWhite,
+          size: 30,
+        ),
+        Icon(
+          Icons.note_alt_rounded,
+          color: AppColors.secondaryMaterialColor[400],
+          size: 28,
+        ),
+        Icon(
+          Icons.settings,
+          color: AppColors.secondaryMaterialColor[400],
+          size: 25,
+        )
+      ],
+      notSelectedTextWidgets: <Widget>[
+        Text(
+          getTranslated('password',context),
+          style: TextStyles.getTitleWhiteText(10),
+        ),
+        Text(
+          getTranslated('card',context),
+          style: TextStyles.getTitleWhiteText(10),
+        ),
+        Text(
+          getTranslated('create',context),
+          style: TextStyles.getTitleWhiteText(10),
+        ),
+        Text(
+          getTranslated('secret_note',context),
+          style: TextStyles.getTitleWhiteText(10),
+        ),
+        Text(
+          getTranslated('settings',context),
+          style: TextStyles.getTitleWhiteText(10),
+        ),
+      ],
+      selectedTextWidgets: <Widget>[
+        Text(
+          getTranslated('password',context),
+          style: TextStyles.getTitleDarkRedText(10),
+        ),
+        Text(
+          getTranslated('card',context),
+          style: TextStyles.getTitleDarkRedText(10),
+        ),
+        Text(
+          getTranslated('create',context),
+          style: TextStyles.getTitleDarkRedText(10),
+        ),
+        Text(
+          getTranslated('secret_note',context),
+          style: TextStyles.getTitleDarkRedText(10),
+        ),
+        Text(
+          getTranslated('settings',context),
+          style: TextStyles.getTitleDarkRedText(10),
+        ),
+      ],
       onItemTap: (index) {
         switch (index) {
           case 0:

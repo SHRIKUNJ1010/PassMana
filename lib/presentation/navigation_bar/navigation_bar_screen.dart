@@ -7,6 +7,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/presentation/common/custom_bottom_navigation_bar.dart';
 import 'package:passmana/presentation/navigation_bar/navigation_bar_view_model.dart';
+import 'package:redux/redux.dart';
 
 class NavigationBarScreen extends StatefulWidget {
   final Widget child;
@@ -24,7 +25,9 @@ class _NavigationBarScreenState extends State<NavigationBarScreen> {
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, NavigationBarViewModel>(
-      converter: NavigationBarViewModel.fromStore,
+      converter: (Store<AppState> store) {
+        return NavigationBarViewModel.fromStore(store, context);
+      },
       builder: (BuildContext context, NavigationBarViewModel vm) {
         return Scaffold(
           resizeToAvoidBottomInset: false,

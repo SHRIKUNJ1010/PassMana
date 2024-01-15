@@ -77,6 +77,7 @@ class CommonWidgets {
     required Widget bottomRightButtonChild,
     required Function onBottomLeftButtonTap,
     required Function onBottomRightButtonTap,
+    required BuildContext context,
   }) {
     return ConstrainedBox(
       constraints: const BoxConstraints(
@@ -93,7 +94,7 @@ class CommonWidgets {
                     controller.text += '1';
                   },
                   child: Text(
-                    getTranslated('1'),
+                    getTranslated('1', context),
                     style: TextStyles.getButtonWhiteText(32),
                   ),
                 ),
@@ -102,7 +103,7 @@ class CommonWidgets {
                     controller.text += '2';
                   },
                   child: Text(
-                    getTranslated('2'),
+                    getTranslated('2', context),
                     style: TextStyles.getButtonWhiteText(32),
                   ),
                 ),
@@ -111,7 +112,7 @@ class CommonWidgets {
                     controller.text += '3';
                   },
                   child: Text(
-                    getTranslated('3'),
+                    getTranslated('3', context),
                     style: TextStyles.getButtonWhiteText(32),
                   ),
                 ),
@@ -126,7 +127,7 @@ class CommonWidgets {
                     controller.text += '4';
                   },
                   child: Text(
-                    getTranslated('4'),
+                    getTranslated('4', context),
                     style: TextStyles.getButtonWhiteText(32),
                   ),
                 ),
@@ -135,7 +136,7 @@ class CommonWidgets {
                     controller.text += '5';
                   },
                   child: Text(
-                    getTranslated('5'),
+                    getTranslated('5', context),
                     style: TextStyles.getButtonWhiteText(32),
                   ),
                 ),
@@ -144,7 +145,7 @@ class CommonWidgets {
                     controller.text += '6';
                   },
                   child: Text(
-                    getTranslated('6'),
+                    getTranslated('6', context),
                     style: TextStyles.getButtonWhiteText(32),
                   ),
                 ),
@@ -159,7 +160,7 @@ class CommonWidgets {
                     controller.text += '7';
                   },
                   child: Text(
-                    getTranslated('7'),
+                    getTranslated('7', context),
                     style: TextStyles.getButtonWhiteText(32),
                   ),
                 ),
@@ -168,7 +169,7 @@ class CommonWidgets {
                     controller.text += '8';
                   },
                   child: Text(
-                    getTranslated('8'),
+                    getTranslated('8', context),
                     style: TextStyles.getButtonWhiteText(32),
                   ),
                 ),
@@ -177,7 +178,7 @@ class CommonWidgets {
                     controller.text += '9';
                   },
                   child: Text(
-                    getTranslated('9'),
+                    getTranslated('9', context),
                     style: TextStyles.getButtonWhiteText(32),
                   ),
                 ),
@@ -198,7 +199,7 @@ class CommonWidgets {
                     controller.text += '0';
                   },
                   child: Text(
-                    getTranslated('0'),
+                    getTranslated('0', context),
                     style: TextStyles.getButtonWhiteText(32),
                   ),
                 ),
@@ -292,7 +293,7 @@ class CommonWidgets {
               onTap.call();
             },
             child: SizedBox(
-              height: 50,
+              height: 52,
               child: Column(
                 children: [
                   const SizedBox(height: 5),
@@ -323,7 +324,7 @@ class CommonWidgets {
   }) {
     return Expanded(
       child: SizedBox(
-        height: 50,
+        height: 52,
         child: Column(
           children: [
             const SizedBox(height: 5),

@@ -34,7 +34,7 @@ class CardDetailsScreen extends StatelessWidget {
           child: Scaffold(
             resizeToAvoidBottomInset: false,
             backgroundColor: Colors.transparent,
-            appBar: getAppBar(vm),
+            appBar: getAppBar(vm,context),
             body: ListView(
               padding: const EdgeInsets.fromLTRB(20, 20, 20, 80),
               shrinkWrap: true,
@@ -48,7 +48,7 @@ class CardDetailsScreen extends StatelessWidget {
     );
   }
 
-  CustomAppBar getAppBar(CardDetailsViewModel vm) {
+  CustomAppBar getAppBar(CardDetailsViewModel vm,BuildContext context) {
     return CustomAppBar(
       centerWidgetsList: [
         Expanded(
@@ -81,7 +81,7 @@ class CardDetailsScreen extends StatelessWidget {
           ),
         ),
         Text(
-          getTranslated("card_details"),
+          getTranslated("card_details",context),
           style: TextStyles.getTitleWhiteText(25),
         ),
         const Spacer(),

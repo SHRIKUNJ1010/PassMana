@@ -5,13 +5,12 @@
 import 'dart:async' show Future;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:passmana/router/router.dart';
 import 'dart:convert';
 
 import 'package:passmana/utility/constants.dart';
 
-String getTranslated(String key) {
-  return AppLocalizations.of(rootNavigatorKey.currentContext!)!.translate(key);
+String getTranslated(String key, BuildContext context) {
+  return AppLocalizations.of(context)?.translate(key) ?? key;
 }
 
 class AppLocalizations {

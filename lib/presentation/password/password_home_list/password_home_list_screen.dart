@@ -35,7 +35,7 @@ class PasswordHomeListScreen extends StatelessWidget {
           child: Scaffold(
             resizeToAvoidBottomInset: false,
             backgroundColor: Colors.transparent,
-            appBar: getAppBar(vm),
+            appBar: getAppBar(vm, context),
             body: SafeArea(
               child: SingleChildScrollView(
                 child: Column(
@@ -44,7 +44,7 @@ class PasswordHomeListScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(20, 15, 20, 7),
                       child: Text(
-                        getTranslated("hello_user,"),
+                        getTranslated("hello_user,", context),
                         softWrap: true,
                         style: TextStyles.getBoldRedText(26),
                       ),
@@ -52,7 +52,7 @@ class PasswordHomeListScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
                       child: Text(
-                        getTranslated("find_your_password"),
+                        getTranslated("find_your_password", context),
                         softWrap: true,
                         style: TextStyles.getTitleWhiteText(22),
                       ),
@@ -65,10 +65,10 @@ class PasswordHomeListScreen extends StatelessWidget {
                         },
                       ),
                     ),
-                    getGroupGridHeader(vm),
-                    getGroupGridView(width, vm),
-                    getPasswordListHeader(vm),
-                    getPasswordListView(width, vm),
+                    getGroupGridHeader(vm, context),
+                    getGroupGridView(width, vm, context),
+                    getPasswordListHeader(vm, context),
+                    getPasswordListView(width, vm, context),
                   ],
                 ),
               ),
@@ -79,7 +79,7 @@ class PasswordHomeListScreen extends StatelessWidget {
     );
   }
 
-  CustomAppBar getAppBar(PasswordHomeListViewModel vm) {
+  CustomAppBar getAppBar(PasswordHomeListViewModel vm, BuildContext context) {
     return CustomAppBar(
       centerWidgetsList: [
         const SizedBox(width: 20),
@@ -95,7 +95,7 @@ class PasswordHomeListScreen extends StatelessWidget {
         ),
         const SizedBox(width: 10),
         Text(
-          getTranslated("password"),
+          getTranslated("password", context),
           style: TextStyles.getTitleWhiteText(28),
         ),
         const Spacer(),
@@ -124,14 +124,14 @@ class PasswordHomeListScreen extends StatelessWidget {
     );
   }
 
-  Widget getGroupGridHeader(PasswordHomeListViewModel vm) {
+  Widget getGroupGridHeader(PasswordHomeListViewModel vm, BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            getTranslated("popular_groups"),
+            getTranslated("popular_groups", context),
             softWrap: true,
             style: TextStyles.getBoldWhiteText(26),
           ),
@@ -148,7 +148,7 @@ class PasswordHomeListScreen extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 7),
                         child: Text(
-                          getTranslated("see_all"),
+                          getTranslated("see_all", context),
                           softWrap: true,
                           style: TextStyles.getTitleDarkRedText400(24),
                         ),
@@ -162,14 +162,14 @@ class PasswordHomeListScreen extends StatelessWidget {
     );
   }
 
-  Widget getPasswordListHeader(PasswordHomeListViewModel vm) {
+  Widget getPasswordListHeader(PasswordHomeListViewModel vm, BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            getTranslated("recently_added"),
+            getTranslated("recently_added", context),
             softWrap: true,
             style: TextStyles.getBoldWhiteText(26),
           ),
@@ -186,7 +186,7 @@ class PasswordHomeListScreen extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 7),
                         child: Text(
-                          getTranslated("see_all"),
+                          getTranslated("see_all", context),
                           softWrap: true,
                           style: TextStyles.getTitleBlueText(24),
                         ),
@@ -200,7 +200,7 @@ class PasswordHomeListScreen extends StatelessWidget {
     );
   }
 
-  Widget getPasswordListView(double width, PasswordHomeListViewModel vm) {
+  Widget getPasswordListView(double width, PasswordHomeListViewModel vm, BuildContext context) {
     return vm.recentlyAddedPasswordList.isEmpty
         ? Padding(
             padding: const EdgeInsets.fromLTRB(20, 10, 20, 100),
@@ -208,7 +208,7 @@ class PasswordHomeListScreen extends StatelessWidget {
               width: width - 40,
               child: Center(
                 child: Text(
-                  getTranslated('no_passwords_found'),
+                  getTranslated('no_passwords_found', context),
                   style: TextStyles.getTitleWhiteText(20),
                 ),
               ),
@@ -237,7 +237,7 @@ class PasswordHomeListScreen extends StatelessWidget {
           );
   }
 
-  Widget getGroupGridView(double width, PasswordHomeListViewModel vm) {
+  Widget getGroupGridView(double width, PasswordHomeListViewModel vm, BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
       child: vm.popularGroups.isEmpty
@@ -245,7 +245,7 @@ class PasswordHomeListScreen extends StatelessWidget {
               width: width - 40,
               child: Center(
                 child: Text(
-                  getTranslated('no_groups_found'),
+                  getTranslated('no_groups_found', context),
                   style: TextStyles.getTitleWhiteText(20),
                 ),
               ),

@@ -41,7 +41,7 @@ class SecretNoteListScreen extends StatelessWidget {
                 ),
                 const SizedBox(width: 10),
                 Text(
-                  getTranslated("secret_note"),
+                  getTranslated("secret_note",context),
                   style: TextStyles.getTitleWhiteText(28),
                 ),
                 const Spacer(),

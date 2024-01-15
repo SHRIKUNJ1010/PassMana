@@ -2,14 +2,11 @@
 * Created by Shrikunj Patel on 8/25/2023.
 */
 
-import 'dart:ui';
-
 import 'package:passmana/model/card_model.dart';
 import 'package:passmana/model/group_model.dart';
 import 'package:passmana/model/password_model.dart';
 import 'package:passmana/model/secret_note_model.dart';
 import 'package:passmana/model/user_model.dart';
-import 'package:passmana/utility/constants.dart';
 
 class AppState {
   final User? user;
@@ -21,7 +18,6 @@ class AppState {
   final List<SecretNote>? secretNoteList;
   final List<Map<Group, bool>>? selectedGroupsForFilterList;
   final String searchKeyword;
-  final Locale locale;
 
   AppState({
     this.user,
@@ -33,7 +29,6 @@ class AppState {
     this.secretNoteList,
     this.selectedGroupsForFilterList,
     this.searchKeyword = '',
-    this.locale = const Locale(AppConstants.english),
   });
 
   AppState copyWith({
@@ -46,7 +41,6 @@ class AppState {
     List<SecretNote>? secretNoteList,
     List<Map<Group, bool>>? selectedGroupsForFilterList,
     String? searchKeyword,
-    Locale? locale,
   }) {
     return AppState(
       user: user ?? this.user,
@@ -58,7 +52,6 @@ class AppState {
       secretNoteList: secretNoteList ?? this.secretNoteList,
       selectedGroupsForFilterList: selectedGroupsForFilterList ?? this.selectedGroupsForFilterList,
       searchKeyword: searchKeyword ?? this.searchKeyword,
-      locale: locale ?? this.locale,
     );
   }
 
@@ -72,8 +65,7 @@ class AppState {
       cardList.hashCode ^
       secretNoteList.hashCode ^
       searchKeyword.hashCode ^
-      selectedGroupsForFilterList.hashCode ^
-      locale.hashCode;
+      selectedGroupsForFilterList.hashCode;
 
   @override
   bool operator ==(Object other) {
@@ -88,7 +80,6 @@ class AppState {
             cardList == other.cardList &&
             secretNoteList == other.secretNoteList &&
             searchKeyword == other.searchKeyword &&
-            selectedGroupsForFilterList == other.selectedGroupsForFilterList &&
-            locale == other.locale;
+            selectedGroupsForFilterList == other.selectedGroupsForFilterList;
   }
 }

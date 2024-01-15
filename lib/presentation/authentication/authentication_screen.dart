@@ -4,13 +4,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:passmana/domain_redux/app_state.dart';
+import 'package:passmana/domain_redux/user/user_actions.dart';
+import 'package:passmana/domain_redux/user/user_selector.dart';
 import 'package:passmana/localization/app_localization.dart';
 import 'package:passmana/presentation/authentication/authentication_view_model.dart';
 import 'package:passmana/presentation/common/custom_pin_field.dart';
+import 'package:passmana/router/router.dart';
 import 'package:passmana/utility/assets_utility/assets_paths.dart';
 import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/constants.dart';
+import 'package:passmana/utility/page_routes_utility/page_routes.dart';
 import 'package:passmana/utility/text_utility/text_styles.dart';
+import 'package:redux/redux.dart';
 
 class AuthenticationScreen extends StatelessWidget {
   const AuthenticationScreen({super.key});
@@ -19,8 +24,23 @@ class AuthenticationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return StoreConnector<AppState, AuthenticationViewModel>(
       converter: AuthenticationViewModel.fromStore,
+      onInit: (Store<AppState> store) {
+        if (getIsBiometricEnabled(store.state)) {
+          store.dispatch(
+            VerifyUserBiometric(
+              onVerified: () {
+                router.go(AppRoutes.passwordHomeList);
+              },
+              onNotVerified: () {
+                //do nothing
+              },
+            ),
+          );
+        }
+      },
       builder: (BuildContext context, AuthenticationViewModel vm) {
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           body: Container(
             color: AppColors.primaryColor,
             child: SafeArea(
@@ -43,7 +63,7 @@ class AuthenticationScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    getTranslated('enter_your_pin'),
+                    getTranslated('enter_your_pin', context),
                     style: TextStyles.getTitleWhiteText(24),
                   ),
                   Expanded(

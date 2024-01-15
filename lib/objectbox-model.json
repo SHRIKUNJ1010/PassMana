@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:2379576262382179893",
-      "lastPropertyId": "4:1167460715826724220",
+      "lastPropertyId": "6:618954020366196552",
       "name": "User",
       "properties": [
         {
@@ -23,6 +23,16 @@
           "id": "4:1167460715826724220",
           "name": "isBiometricEnabled",
           "type": 1
+        },
+        {
+          "id": "5:1658336171682286313",
+          "name": "isAutofillEnabled",
+          "type": 1
+        },
+        {
+          "id": "6:618954020366196552",
+          "name": "localeString",
+          "type": 9
         }
       ],
       "relations": []

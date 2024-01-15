@@ -27,9 +27,9 @@ class AllPasswordListScreen extends StatelessWidget {
           child: Scaffold(
             resizeToAvoidBottomInset: false,
             backgroundColor: Colors.transparent,
-            appBar: getAppBar(vm),
+            appBar: getAppBar(vm,context),
             body: SafeArea(
-              child: getPasswordListView(width, vm),
+              child: getPasswordListView(width, vm,context),
             ),
           ),
         );
@@ -37,7 +37,7 @@ class AllPasswordListScreen extends StatelessWidget {
     );
   }
 
-  CustomAppBar getAppBar(AllPasswordListViewModel vm) {
+  CustomAppBar getAppBar(AllPasswordListViewModel vm,BuildContext context) {
     return CustomAppBar(
       centerWidgetsList: [
         Expanded(
@@ -70,7 +70,7 @@ class AllPasswordListScreen extends StatelessWidget {
           ),
         ),
         Text(
-          getTranslated("passwords"),
+          getTranslated("passwords",context),
           style: TextStyles.getTitleWhiteText(25),
         ),
         const Spacer(),
@@ -78,7 +78,7 @@ class AllPasswordListScreen extends StatelessWidget {
     );
   }
 
-  Widget getPasswordListView(double width, AllPasswordListViewModel vm) {
+  Widget getPasswordListView(double width, AllPasswordListViewModel vm,BuildContext context) {
     return vm.passwordList.isEmpty
         ? Padding(
             padding: const EdgeInsets.fromLTRB(20, 20, 20, 100),
@@ -86,7 +86,7 @@ class AllPasswordListScreen extends StatelessWidget {
               width: width - 40,
               child: Center(
                 child: Text(
-                  getTranslated('no_passwords_found'),
+                  getTranslated('no_passwords_found',context),
                   style: TextStyles.getTitleWhiteText(20),
                 ),
               ),

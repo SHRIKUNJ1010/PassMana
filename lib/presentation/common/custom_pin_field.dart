@@ -48,6 +48,7 @@ class _CustomPinFieldState extends State<CustomPinField> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
+      resizeToAvoidBottomInset: false,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.end,
@@ -57,6 +58,7 @@ class _CustomPinFieldState extends State<CustomPinField> {
           CommonWidgets.getCommonHiddenPinField(controller: _pinController),
           const Spacer(),
           CommonWidgets.getCommonNumericKeyboard(
+            context: context,
             controller: _pinController,
             disableBottomLeft: widget.disableBottomLeft,
             disableBottomRight: widget.disableBottomRight,

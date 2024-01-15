@@ -16,7 +16,24 @@ List<Middleware<AppState>> createUserMiddleware() {
     TypedMiddleware<AppState, VerifyUserPin>(_verifyUserPin()),
     TypedMiddleware<AppState, VerifyUserBiometric>(_verifyUserBiometric()),
     TypedMiddleware<AppState, SwitchBiometricOption>(_switchBiometricOption()),
+    TypedMiddleware<AppState, SwitchAutoFillOption>(_switchAutoFillOption()),
+    TypedMiddleware<AppState, ChangeLanguage>(_changeLanguage()),
+    TypedMiddleware<AppState, LoadUser>(_loadUser()),
   ];
+}
+
+void Function(Store<AppState> store, LoadUser action, NextDispatcher next) _loadUser() {
+  return (store, action, next) {
+    next(action);
+    //get user from database
+    User user = objectBox.userBox.getUser() ?? User();
+    //change the user in state
+    store.dispatch(
+      UserChanged(
+        user: user,
+      ),
+    );
+  };
 }
 
 void Function(Store<AppState> store, CreateUser action, NextDispatcher next) _createUser() {
@@ -27,13 +44,7 @@ void Function(Store<AppState> store, CreateUser action, NextDispatcher next) _cr
     //for remaining parameter change its value
     objectBox.userBox.changeCreatePin(action.pin);
     //change latest value for user in state
-    store.dispatch(
-      UserChanged(
-        user: User(
-          pin: action.pin,
-        ),
-      ),
-    );
+    store.dispatch(LoadUser());
   };
 }
 
@@ -44,11 +55,7 @@ void Function(Store<AppState> store, UpdatePin action, NextDispatcher next) _upd
     // it will create new user and update pin value
     objectBox.userBox.changeCreatePin(action.pin);
     //change latest value for user in state
-    store.dispatch(
-      UserChanged(
-        user: store.state.user?.setPin(action.pin) ?? User(),
-      ),
-    );
+    store.dispatch(LoadUser());
   };
 }
 
@@ -78,16 +85,44 @@ void Function(Store<AppState> store, VerifyUserBiometric action, NextDispatcher 
   };
 }
 
+void Function(Store<AppState> store, ChangeLanguage action, NextDispatcher next) _changeLanguage() {
+  return (store, action, next) {
+    next(action);
+    //get new biometric value
+    String localeNewValue = action.languageValue;
+    // get new user value
+    //final User changedUser = store.state.user?.changeLanguage(localeNewValue) ?? User();
+    //change the value of biometric option for user
+    objectBox.userBox.changeLanguage(localeNewValue);
+    //change latest value for user in state
+    store.dispatch(LoadUser());
+  };
+}
+
+void Function(Store<AppState> store, SwitchAutoFillOption action, NextDispatcher next) _switchAutoFillOption() {
+  return (store, action, next) {
+    next(action);
+    //get new biometric value
+    bool changedOption = !(store.state.user?.isAutofillEnabled ?? false);
+    // get new user value
+    //final User changedUser = store.state.user?.changeAutofillOption(changedOption) ?? User();
+    //change the value of biometric option for user
+    objectBox.userBox.changeAutofillOption(changedOption);
+    //change latest value for user in state
+    store.dispatch(LoadUser());
+  };
+}
+
 void Function(Store<AppState> store, SwitchBiometricOption action, NextDispatcher next) _switchBiometricOption() {
   return (store, action, next) {
     next(action);
+    //get new biometric value
+    bool changedOption = !(store.state.user?.isBiometricEnabled ?? false);
+    // get new user value
+    //final User changedUser = store.state.user?.changeBiometricOption(changedOption) ?? User();
     //change the value of biometric option for user
-    objectBox.userBox.changeBiometricOption(!(store.state.user?.isBiometricEnabled ?? false));
+    objectBox.userBox.changeBiometricOption(changedOption);
     //change latest value for user in state
-    store.dispatch(
-      UserChanged(
-        user: store.state.user?.changeBiometricOption(!(store.state.user?.isBiometricEnabled ?? false)),
-      ),
-    );
+    store.dispatch(LoadUser());
   };
 }

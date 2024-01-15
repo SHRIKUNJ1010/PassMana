@@ -123,7 +123,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 5, 0, 10),
               child: Text(
-                "${getTranslated('category_group')}:",
+                "${getTranslated('category_group',context)}:",
                 style: TextStyles.getTitleWhiteText(20),
               ),
             ),
@@ -163,7 +163,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
               },
               menuProps: MenuProps(
                 borderRadius: BorderRadius.circular(10),
-                barrierLabel: getTranslated("groups"),
+                barrierLabel: getTranslated("groups",context),
               ),
             ),
             onChanged: (item) {
@@ -286,7 +286,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
             color: Colors.transparent,
             alignment: Alignment.center,
             child: Text(
-              vm.password != null ? getTranslated('update') : getTranslated('create'),
+              vm.password != null ? getTranslated('update',context) : getTranslated('create',context),
               style: TextStyles.getTitleWhiteText(24),
             ),
           ),
@@ -304,7 +304,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 5, 0, 10),
               child: Text(
-                "${getTranslated('note')}: (${getTranslated('optional')})",
+                "${getTranslated('note',context)}: (${getTranslated('optional',context)})",
                 style: TextStyles.getTitleWhiteText(20),
               ),
             ),
@@ -347,7 +347,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 5, 0, 10),
               child: Text(
-                "${getTranslated('password')}:",
+                "${getTranslated('password',context)}:",
                 style: TextStyles.getTitleWhiteText(20),
               ),
             ),
@@ -359,7 +359,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
             controller: controller,
             validator: (text) {
               if (text == null || text.isEmpty) {
-                return getTranslated("field_can't_be_empty");
+                return getTranslated("field_can't_be_empty",context);
               }
               return null;
             },
@@ -427,7 +427,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 5, 0, 10),
               child: Text(
-                "${getTranslated('email_or_username')}:",
+                "${getTranslated('email_or_username',context)}:",
                 style: TextStyles.getTitleWhiteText(20),
               ),
             ),
@@ -439,7 +439,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
             controller: controller,
             validator: (text) {
               if (text == null || text.isEmpty) {
-                return getTranslated("field_can't_be_empty");
+                return getTranslated("field_can't_be_empty",context);
               }
               return null;
             },
@@ -473,7 +473,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 5, 0, 10),
               child: Text(
-                "${getTranslated('subtitle')}: (${getTranslated('optional')})",
+                "${getTranslated('subtitle',context)}: (${getTranslated('optional',context)})",
                 style: TextStyles.getTitleWhiteText(20),
               ),
             ),
@@ -514,7 +514,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 20, 0, 10),
               child: Text(
-                "${getTranslated('title')}:",
+                "${getTranslated('title',context)}:",
                 style: TextStyles.getTitleWhiteText(20),
               ),
             ),
@@ -526,7 +526,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
             controller: controller,
             validator: (text) {
               if (text == null || text.isEmpty) {
-                return getTranslated("field_can't_be_empty");
+                return getTranslated("field_can't_be_empty",context);
               }
               return null;
             },
@@ -584,7 +584,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
           ),
         ),
         Text(
-          vm.password != null ? getTranslated("update_password") : getTranslated("create_password"),
+          vm.password != null ? getTranslated("update_password",context) : getTranslated("create_password",context),
           style: TextStyles.getTitleWhiteText(25),
         ),
         vm.password != null

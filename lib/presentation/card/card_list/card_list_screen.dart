@@ -41,7 +41,7 @@ class CardListScreen extends StatelessWidget {
                 ),
                 const SizedBox(width: 10),
                 Text(
-                  getTranslated("card"),
+                  getTranslated("card",context),
                   style: TextStyles.getTitleWhiteText(28),
                 ),
                 const Spacer(),

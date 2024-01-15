@@ -62,7 +62,7 @@ class _CreateUpdateGroupScreenState extends State<CreateUpdateGroupScreen> {
                 Scaffold(
                   resizeToAvoidBottomInset: true,
                   backgroundColor: Colors.transparent,
-                  appBar: getAppBar(vm),
+                  appBar: getAppBar(vm,context),
                   body: Column(
                     children: [
                       Expanded(
@@ -82,7 +82,7 @@ class _CreateUpdateGroupScreenState extends State<CreateUpdateGroupScreen> {
                   left: 0,
                   right: 0,
                   bottom: 0,
-                  child: getCreateUpdateButton(vm),
+                  child: getCreateUpdateButton(vm,context),
                 ),
               ],
             ),
@@ -101,7 +101,7 @@ class _CreateUpdateGroupScreenState extends State<CreateUpdateGroupScreen> {
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 20, 0, 10),
               child: Text(
-                "${getTranslated('group_name')}:",
+                "${getTranslated('group_name', context)}:",
                 style: TextStyles.getTitleWhiteText(20),
               ),
             ),
@@ -113,7 +113,7 @@ class _CreateUpdateGroupScreenState extends State<CreateUpdateGroupScreen> {
             controller: controller,
             validator: (text) {
               if (text == null || text.isEmpty) {
-                return getTranslated("field_can't_be_empty");
+                return getTranslated("field_can't_be_empty", context);
               }
               return null;
             },
@@ -147,7 +147,7 @@ class _CreateUpdateGroupScreenState extends State<CreateUpdateGroupScreen> {
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 5, 0, 10),
               child: Text(
-                "${getTranslated('description')}: (${getTranslated('optional')})",
+                "${getTranslated('description', context)}: (${getTranslated('optional', context)})",
                 style: TextStyles.getTitleWhiteText(20),
               ),
             ),
@@ -180,7 +180,7 @@ class _CreateUpdateGroupScreenState extends State<CreateUpdateGroupScreen> {
     );
   }
 
-  ClipRRect getCreateUpdateButton(CreateUpdateGroupViewModel vm) {
+  ClipRRect getCreateUpdateButton(CreateUpdateGroupViewModel vm,BuildContext context) {
     return ClipRRect(
       borderRadius: const BorderRadius.vertical(
         top: Radius.circular(30),
@@ -212,7 +212,7 @@ class _CreateUpdateGroupScreenState extends State<CreateUpdateGroupScreen> {
             color: Colors.transparent,
             alignment: Alignment.center,
             child: Text(
-              vm.group != null ? getTranslated('update') : getTranslated('create'),
+              vm.group != null ? getTranslated('update', context) : getTranslated('create', context),
               style: TextStyles.getTitleWhiteText(24),
             ),
           ),
@@ -221,7 +221,7 @@ class _CreateUpdateGroupScreenState extends State<CreateUpdateGroupScreen> {
     );
   }
 
-  CustomAppBar getAppBar(CreateUpdateGroupViewModel vm) {
+  CustomAppBar getAppBar(CreateUpdateGroupViewModel vm,BuildContext context) {
     return CustomAppBar(
       centerWidgetsList: [
         Expanded(
@@ -254,7 +254,7 @@ class _CreateUpdateGroupScreenState extends State<CreateUpdateGroupScreen> {
           ),
         ),
         Text(
-          vm.group != null ? getTranslated("update_group") : getTranslated("create_group"),
+          vm.group != null ? getTranslated("update_group", context) : getTranslated("create_group", context),
           style: TextStyles.getTitleWhiteText(25),
         ),
         vm.group != null

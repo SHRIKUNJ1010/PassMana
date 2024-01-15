@@ -28,7 +28,19 @@ class UserChanged {
   });
 }
 
+class LoadUser {}
+
 class SwitchBiometricOption {}
+
+class SwitchAutoFillOption {}
+
+class ChangeLanguage {
+  String languageValue;
+
+  ChangeLanguage({
+    required this.languageValue,
+  });
+}
 
 class VerifyUserPin {
   final String pin;

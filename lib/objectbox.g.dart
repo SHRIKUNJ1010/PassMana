@@ -26,7 +26,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(1, 2379576262382179893),
       name: 'User',
-      lastPropertyId: const IdUid(4, 1167460715826724220),
+      lastPropertyId: const IdUid(6, 618954020366196552),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -43,6 +43,16 @@ final _entities = <ModelEntity>[
             id: const IdUid(4, 1167460715826724220),
             name: 'isBiometricEnabled',
             type: 1,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(5, 1658336171682286313),
+            name: 'isAutofillEnabled',
+            type: 1,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(6, 618954020366196552),
+            name: 'localeString',
+            type: 9,
             flags: 0)
       ],
       relations: <ModelRelation>[],
@@ -270,10 +280,13 @@ ModelDefinition getObjectBoxModel() {
         },
         objectToFB: (User object, fb.Builder fbb) {
           final pinOffset = fbb.writeString(object.pin);
-          fbb.startTable(5);
+          final localeStringOffset = fbb.writeString(object.localeString);
+          fbb.startTable(7);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, pinOffset);
           fbb.addBool(3, object.isBiometricEnabled);
+          fbb.addBool(4, object.isAutofillEnabled);
+          fbb.addOffset(5, localeStringOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -286,10 +299,17 @@ ModelDefinition getObjectBoxModel() {
               .vTableGet(buffer, rootOffset, 6, '');
           final isBiometricEnabledParam =
               const fb.BoolReader().vTableGet(buffer, rootOffset, 10, false);
+          final isAutofillEnabledParam =
+              const fb.BoolReader().vTableGet(buffer, rootOffset, 12, false);
+          final localeStringParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 14, '');
           final object = User(
               id: idParam,
               pin: pinParam,
-              isBiometricEnabled: isBiometricEnabledParam);
+              isBiometricEnabled: isBiometricEnabledParam,
+              isAutofillEnabled: isAutofillEnabledParam,
+              localeString: localeStringParam);
 
           return object;
         }),
@@ -516,6 +536,14 @@ class User_ {
   /// see [User.isBiometricEnabled]
   static final isBiometricEnabled =
       QueryBooleanProperty<User>(_entities[0].properties[2]);
+
+  /// see [User.isAutofillEnabled]
+  static final isAutofillEnabled =
+      QueryBooleanProperty<User>(_entities[0].properties[3]);
+
+  /// see [User.localeString]
+  static final localeString =
+      QueryStringProperty<User>(_entities[0].properties[4]);
 }
 
 /// [Group] entity fields to define ObjectBox queries.

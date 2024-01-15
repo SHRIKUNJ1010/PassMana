@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:passmana/presentation/common/drop_down_search_custom/src/properties/popup_props.dart';
 import 'package:passmana/utility/color.dart';
 
@@ -443,7 +442,7 @@ class SelectionWidgetState<T> extends State<SelectionWidget<T>> {
     }
   }
 
-  Widget _searchField() {
+  /*Widget _searchField() {
     return Column(crossAxisAlignment: CrossAxisAlignment.stretch, mainAxisSize: MainAxisSize.min, children: <Widget>[
       widget.popupProps.title ?? const SizedBox.shrink(),
       if (widget.popupProps.showSearchBox)
@@ -470,7 +469,9 @@ class SelectionWidgetState<T> extends State<SelectionWidget<T>> {
                 textAlignVertical: widget.popupProps.searchFieldProps.textAlignVertical,
                 textDirection: widget.popupProps.searchFieldProps.textDirection,
                 readOnly: widget.popupProps.searchFieldProps.readOnly,
-                /*toolbarOptions: widget.popupProps.searchFieldProps.toolbarOptions,*/
+                */
+  /*toolbarOptions: widget.popupProps.searchFieldProps.toolbarOptions,*/
+  /*
                 showCursor: widget.popupProps.searchFieldProps.showCursor,
                 obscuringCharacter: widget.popupProps.searchFieldProps.obscuringCharacter,
                 obscureText: widget.popupProps.searchFieldProps.obscureText,
@@ -525,9 +526,9 @@ class SelectionWidgetState<T> extends State<SelectionWidget<T>> {
     }
 
     return Container();
-  }
+  }*/
 
-  Widget _buildFavoriteItems(List<T> favoriteItems) {
+  /*Widget _buildFavoriteItems(List<T> favoriteItems) {
     if (favoriteItems.isEmpty) return Container();
 
     return Container(
@@ -561,7 +562,7 @@ class SelectionWidgetState<T> extends State<SelectionWidget<T>> {
         );
       }),
     );
-  }
+  }*/
 
   void _handleSelectedItem(T newSelectedItem) {
     if (widget.isMultiSelectionMode) {
@@ -578,7 +579,7 @@ class SelectionWidgetState<T> extends State<SelectionWidget<T>> {
     }
   }
 
-  Widget _favoriteItemDefaultWidget(T item) {
+  /*Widget _favoriteItemDefaultWidget(T item) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Theme.of(context).primaryColorLight),
@@ -597,7 +598,7 @@ class SelectionWidgetState<T> extends State<SelectionWidget<T>> {
         ],
       ),
     );
-  }
+  }*/
 
   ///function that return the String value of an object
   String _selectedItemAsString(T data) {

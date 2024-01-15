@@ -39,4 +39,24 @@ class UserBox {
       );
     }
   }
+
+  void changeAutofillOption(bool isAutofillOption) {
+    User? user = getUser();
+    if (user != null) {
+      _userBox.put(
+        user.changeAutofillOption(isAutofillOption),
+        mode: PutMode.update,
+      );
+    }
+  }
+
+  void changeLanguage(String localeString) {
+    User? user = getUser();
+    if (user != null) {
+      _userBox.put(
+        user.changeLanguage(localeString),
+        mode: PutMode.update,
+      );
+    }
+  }
 }

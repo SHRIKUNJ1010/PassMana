@@ -46,7 +46,7 @@ class SettingsItemListScreen extends StatelessWidget {
                 ),
                 const SizedBox(width: 10),
                 Text(
-                  getTranslated("settings"),
+                  getTranslated("settings",context),
                   style: TextStyles.getTitleWhiteText(28),
                 ),
                 const Spacer(),
@@ -60,13 +60,15 @@ class SettingsItemListScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          getTranslated("enable_autofill"),
+                          getTranslated("enable_autofill",context),
                           style: TextStyles.getTitleBlueText(20),
                         ),
                       ),
                       Switch(
-                        value: false,
-                        onChanged: (val) {},
+                        value: vm.isAutofillEnabled,
+                        onChanged: (val) {
+                          vm.onChangeAutofill.call(val);
+                        },
                       ),
                     ],
                   ),
@@ -76,13 +78,15 @@ class SettingsItemListScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          getTranslated("enable_biometric"),
+                          getTranslated("enable_biometric",context),
                           style: TextStyles.getTitleBlueText(20),
                         ),
                       ),
                       Switch(
-                        value: true,
-                        onChanged: (val) {},
+                        value: vm.isBiometricEnabled,
+                        onChanged: (val) {
+                          vm.onChangeBiometric.call(val);
+                        },
                       ),
                     ],
                   ),
@@ -92,7 +96,7 @@ class SettingsItemListScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          getTranslated("language"),
+                          getTranslated("language",context),
                           style: TextStyles.getTitleBlueText(20),
                         ),
                       ),
@@ -132,18 +136,18 @@ class SettingsItemListScreen extends StatelessWidget {
                           },
                           menuProps: MenuProps(
                             borderRadius: BorderRadius.circular(10),
-                            barrierLabel: getTranslated("language"),
+                            barrierLabel: getTranslated("language",context),
                           ),
                         ),
                         onChanged: (item) {
                           if (item != null) {
-                            //assign
+                            vm.onChangeLocaleTap.call(item);
                           }
                         },
-                        selectedItem: const Locale(AppConstants.english),
+                        selectedItem: vm.selectedLanguage,
                         selectedItemBuilder: (item, onTap) {
                           return SizedBox(
-                            width: 105,
+                            width: 110,
                             child: Material(
                               color: AppColors.mWhite,
                               child: InkWell(
@@ -182,16 +186,56 @@ class SettingsItemListScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                getCommonContainer(
-                  child: Text(
-                    getTranslated("change_mobile_pin"),
-                    style: TextStyles.getTitleBlueText(20),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(5),
+                    child: Material(
+                      color: AppColors.mWhite,
+                      child: InkWell(
+                        onTap: () {
+                          vm.onChangeMobilePinTap.call();
+                        },
+                        splashColor: AppColors.primaryColor.withOpacity(0.2),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: Colors.transparent,
+                          ),
+                          padding: const EdgeInsets.fromLTRB(15, 15, 10, 15),
+                          child: Text(
+                            getTranslated("change_mobile_pin",context),
+                            style: TextStyles.getTitleBlueText(20),
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
-                getCommonContainer(
-                  child: Text(
-                    getTranslated("generate_password"),
-                    style: TextStyles.getTitleBlueText(20),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(5),
+                    child: Material(
+                      color: AppColors.mWhite,
+                      child: InkWell(
+                        onTap: () {
+                          vm.onGeneratePasswordTap.call();
+                        },
+                        splashColor: AppColors.primaryColor.withOpacity(0.2),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: Colors.transparent,
+                          ),
+                          padding: const EdgeInsets.fromLTRB(15, 15, 10, 15),
+                          child: Text(
+                            getTranslated("generate_password",context),
+                            style: TextStyles.getTitleBlueText(20),
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ],

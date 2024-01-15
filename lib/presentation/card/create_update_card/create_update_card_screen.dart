@@ -33,14 +33,14 @@ class CreateUpdateCardScreen extends StatelessWidget {
           child: Scaffold(
             resizeToAvoidBottomInset: false,
             backgroundColor: Colors.transparent,
-            appBar: getAppBar(vm),
+            appBar: getAppBar(vm,context),
           ),
         );
       },
     );
   }
 
-  CustomAppBar getAppBar(CreateUpdateCardViewModel vm) {
+  CustomAppBar getAppBar(CreateUpdateCardViewModel vm,BuildContext context) {
     return CustomAppBar(
       centerWidgetsList: [
         Expanded(
@@ -73,7 +73,7 @@ class CreateUpdateCardScreen extends StatelessWidget {
           ),
         ),
         Text(
-          vm.card != null ? getTranslated("update_card") : getTranslated("create_card"),
+          vm.card != null ? getTranslated("update_card",context) : getTranslated("create_card",context),
           style: TextStyles.getTitleWhiteText(25),
         ),
         const Spacer(),

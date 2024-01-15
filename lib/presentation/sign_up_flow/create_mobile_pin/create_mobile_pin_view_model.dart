@@ -31,6 +31,7 @@ class CreateMobilePinViewModel {
         // if is not confirm pin which invert of is confirm pin
         // for is confirm pin state of user is changed for pin but
         // database of user is not changed
+        //todo: this is a make do logic please think of a better logic to implement this logic
         if (!getIsConfirmPin(store.state)) {
           store.dispatch(
             //this action is part of reducer which changes state

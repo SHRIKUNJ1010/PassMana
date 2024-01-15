@@ -10,6 +10,7 @@ import 'package:passmana/domain_redux/filter_search/filter_search_middleware.dar
 import 'package:passmana/domain_redux/group/group_middleware.dart';
 import 'package:passmana/domain_redux/password/password_middleware.dart';
 import 'package:passmana/domain_redux/secret_note/secret_note_middleware.dart';
+import 'package:passmana/domain_redux/user/user_actions.dart';
 import 'package:passmana/domain_redux/user/user_middleware.dart';
 import 'package:passmana/localization/app_localization.dart';
 import 'package:passmana/router/router.dart';
@@ -54,36 +55,46 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return flutter_redux.StoreProvider<AppState>(
       store: store,
-      child: MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          //primarySwatch: AppColors.primaryMaterialColor,
-          useMaterial3: true,
-          colorSchemeSeed: AppColors.primaryMaterialColor,
-        ),
-        locale: store.state.locale,
-        supportedLocales: const [
-          Locale(AppConstants.english),
-          Locale(AppConstants.hindi),
-          Locale(AppConstants.gujarati),
-        ],
-        localizationsDelegates: [
-          AppLocalizationDelegate(),
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        localeResolutionCallback: (locale, supportedLocales) {
-          for (var supportedLocale in supportedLocales) {
-            if (supportedLocale.languageCode == locale?.languageCode && supportedLocale.countryCode == locale?.countryCode) {
-              return supportedLocale;
-            }
-          }
-          return supportedLocales.first;
+      child: flutter_redux.StoreConnector<AppState, String>(
+        onInit: (store) {
+          store.dispatch(LoadUser());
         },
-        routeInformationProvider: router.routeInformationProvider,
-        routeInformationParser: router.routeInformationParser,
-        routerDelegate: router.routerDelegate,
+        converter: (redux.Store<AppState> store) {
+          return store.state.user?.localeString ?? AppConstants.english;
+        },
+        builder: (context, localeString) {
+          return MaterialApp.router(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              //primarySwatch: AppColors.primaryMaterialColor,
+              useMaterial3: true,
+              colorSchemeSeed: AppColors.primaryMaterialColor,
+            ),
+            locale: Locale(localeString),
+            supportedLocales: const [
+              Locale(AppConstants.english),
+              Locale(AppConstants.hindi),
+              Locale(AppConstants.gujarati),
+            ],
+            localizationsDelegates: [
+              AppLocalizationDelegate(),
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            localeResolutionCallback: (locale, supportedLocales) {
+              for (var supportedLocale in supportedLocales) {
+                if (supportedLocale.languageCode == locale?.languageCode && supportedLocale.countryCode == locale?.countryCode) {
+                  return supportedLocale;
+                }
+              }
+              return supportedLocales.first;
+            },
+            routeInformationProvider: router.routeInformationProvider,
+            routeInformationParser: router.routeInformationParser,
+            routerDelegate: router.routerDelegate,
+          );
+        },
       ),
     );
   }

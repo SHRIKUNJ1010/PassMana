@@ -47,7 +47,7 @@ class SearchPasswordWidget extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Text(
-                                getTranslated("search_password"),
+                                getTranslated("search_password",context),
                                 style: TextStyles.getTitleTransparentBlackText(fontSize: 20, opacity: 0.8),
                               ),
                             ],

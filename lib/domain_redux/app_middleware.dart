@@ -12,7 +12,6 @@ import 'package:redux/redux.dart';
 List<Middleware<AppState>> createStoreMiddleware() {
   return [
     TypedMiddleware<AppState, CheckAndManageNewUser>(_checkAndManageNewUser()),
-    TypedMiddleware<AppState, ChangeLocale>(_changeLocale()),
   ];
 }
 
@@ -27,12 +26,5 @@ void Function(Store<AppState> store, CheckAndManageNewUser action, NextDispatche
     } else {
       router.go(AppRoutes.getStarted);
     }
-  };
-}
-
-void Function(Store<AppState> store, ChangeLocale action, NextDispatcher next) _changeLocale() {
-  return (store, action, next) {
-    next(action);
-    store.dispatch(LocaleChanged(locale: action.locale));
   };
 }

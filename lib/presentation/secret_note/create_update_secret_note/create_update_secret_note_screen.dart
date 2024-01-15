@@ -33,14 +33,14 @@ class CreateUpdateSecretNoteScreen extends StatelessWidget {
           child: Scaffold(
             resizeToAvoidBottomInset: false,
             backgroundColor: Colors.transparent,
-            appBar: getAppBar(vm),
+            appBar: getAppBar(vm,context),
           ),
         );
       },
     );
   }
 
-  CustomAppBar getAppBar(CreateUpdateSecretNoteViewModel vm) {
+  CustomAppBar getAppBar(CreateUpdateSecretNoteViewModel vm, BuildContext context) {
     return CustomAppBar(
       centerWidgetsList: [
         Expanded(
@@ -73,7 +73,7 @@ class CreateUpdateSecretNoteScreen extends StatelessWidget {
           ),
         ),
         Text(
-          vm.secretNote != null ? getTranslated("update_secret_note") : getTranslated("create_secret_note"),
+          vm.secretNote != null ? getTranslated("update_secret_note", context) : getTranslated("create_secret_note", context),
           style: TextStyles.getTitleWhiteText(25),
         ),
         const Spacer(),

@@ -46,7 +46,7 @@ class GetStartedScreen extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 30),
                               child: Text(
-                                getTranslated('empowering_privacy_offline').toUpperCase(),
+                                getTranslated('empowering_privacy_offline',context).toUpperCase(),
                                 softWrap: true,
                                 style: TextStyles.getTitleRedText(36),
                               ),
@@ -63,7 +63,7 @@ class GetStartedScreen extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 30),
                               child: Text(
-                                getTranslated('where_your_passwords_find_sanctuary'),
+                                getTranslated('where_your_passwords_find_sanctuary',context),
                                 softWrap: true,
                                 style: TextStyles.getTitleWhiteText(30),
                               ),
@@ -76,7 +76,7 @@ class GetStartedScreen extends StatelessWidget {
                   ),
                 ),
                 CommonWidgets.getCommonButtonWithSplash(
-                  title: getTranslated('get_started'),
+                  title: getTranslated('get_started',context),
                   height: 55,
                   context: context,
                   onTap: () {
