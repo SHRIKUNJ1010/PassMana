@@ -55,7 +55,13 @@ class SettingsItemListScreen extends StatelessWidget {
             body: ListView(
               children: [
                 const SizedBox(height: 20),
-                getCommonContainer(
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: AppColors.mWhite,
+                  ),
+                  margin: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                  padding: const EdgeInsets.fromLTRB(15, 10, 10, 10),
                   child: Row(
                     children: [
                       Expanded(
@@ -73,7 +79,13 @@ class SettingsItemListScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                getCommonContainer(
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: AppColors.mWhite,
+                  ),
+                  margin: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                  padding: const EdgeInsets.fromLTRB(15, 10, 10, 10),
                   child: Row(
                     children: [
                       Expanded(
