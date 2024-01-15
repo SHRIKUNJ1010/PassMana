@@ -13,8 +13,15 @@ import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/constants.dart';
 import 'package:passmana/utility/text_utility/text_styles.dart';
 
-class CreateMobilePinScreen extends StatelessWidget {
+class CreateMobilePinScreen extends StatefulWidget {
   const CreateMobilePinScreen({super.key});
+
+  @override
+  State<CreateMobilePinScreen> createState() => _CreateMobilePinScreenState();
+}
+
+class _CreateMobilePinScreenState extends State<CreateMobilePinScreen> {
+  String pin = "";
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +51,7 @@ class CreateMobilePinScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    vm.isConfirm ? getTranslated('confirm_your_pin',context) : getTranslated('create_your_pin',context),
+                    pin.isNotEmpty ? getTranslated('confirm_your_pin', context) : getTranslated('create_your_pin', context),
                     style: TextStyles.getTitleWhiteText(24),
                   ),
                   Expanded(
@@ -56,8 +63,33 @@ class CreateMobilePinScreen extends StatelessWidget {
                         color: AppColors.mWhite,
                         size: 25,
                       ),
-                      onBottomRightButtonTap: vm.onBackTap,
-                      onPinCompleted: vm.onSubmitTap,
+                      onBottomRightButtonTap: (controller) {
+                        if (controller.text.isNotEmpty) {
+                          controller.text = controller.text.substring(0, controller.text.length - 1);
+                        } else {
+                          if (pin.isNotEmpty) {
+                            pin = "";
+                            setState(() {});
+                          } else {
+                            vm.onBackTap.call();
+                          }
+                        }
+                      },
+                      onPinCompleted: (controller) {
+                        if (pin.isNotEmpty) {
+                          if (controller.text == pin) {
+                            vm.onPinSave.call(controller.text);
+                            controller.clear();
+                          } else {
+                            //todo: generate wrong confirm password error
+                            controller.clear();
+                          }
+                        } else {
+                          pin = controller.text;
+                          controller.clear();
+                          setState(() {});
+                        }
+                      },
                       bottomLeftButtonChild: const SizedBox(),
                       onBottomLeftButtonTap: (controller) {},
                     ),
