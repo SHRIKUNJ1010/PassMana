@@ -10,6 +10,7 @@ import 'package:passmana/model/group_model.dart';
 import 'package:passmana/model/password_model.dart';
 import 'package:passmana/router/router.dart';
 import 'package:passmana/utility/page_routes_utility/page_routes.dart';
+import 'package:passmana/utility/utility.dart';
 import 'package:redux/redux.dart';
 
 class CreateUpdatePasswordViewModel {
@@ -93,10 +94,12 @@ class CreateUpdatePasswordViewModel {
         );
         router.pop();
       },
-      deletePassword: () {
-        //todo: confirmation dialog
-        store.dispatch(DeletePassword(passwordId: id ?? 0));
-        router.go(AppRoutes.passwordHomeList);
+      deletePassword: () async {
+        bool hasConfirmed = await Utility.deleteConfirmationDialog();
+        if (hasConfirmed) {
+          store.dispatch(DeletePassword(passwordId: id ?? 0));
+          router.go(AppRoutes.passwordHomeList);
+        }
       },
       onBackPress: () {
         router.pop();

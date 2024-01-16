@@ -5,6 +5,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:passmana/localization/app_localization.dart';
+import 'package:passmana/presentation/common/common_confirmation_dialog.dart';
+import 'package:passmana/router/router.dart';
 import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/constants.dart';
 
@@ -46,5 +49,20 @@ class Utility {
       default:
         return AppConstants.englishName;
     }
+  }
+
+  static Future<bool> deleteConfirmationDialog() async {
+    bool value = await showDialog(
+      context: rootNavigatorKey.currentContext!,
+      builder: (BuildContext context) {
+        return CommonConfirmationDialog(
+          title: getTranslated("confirmation", context),
+          message: getTranslated("delete_confirmation", context),
+          positiveBtnText: getTranslated("yes", context),
+          negativeBtnText: getTranslated("no", context),
+        );
+      },
+    );
+    return value;
   }
 }

@@ -98,5 +98,18 @@ class TextStyles {
         fontFamily: FontsList.muli,
         decoration: TextDecoration.none,
       );
+
+  static TextStyle? getTitleTransparentBlackCustomWeightText({
+    required double fontSize,
+    required double opacity,
+    required FontWeight fontWeight,
+  }) =>
+      TextStyle(
+        color: AppColors.mBlack.withOpacity(opacity),
+        fontSize: fontSize,
+        fontWeight: fontWeight,
+        fontFamily: FontsList.muli,
+        decoration: TextDecoration.none,
+      );
 }
 //ac244b

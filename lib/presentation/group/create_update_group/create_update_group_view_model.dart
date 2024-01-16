@@ -8,6 +8,7 @@ import 'package:passmana/domain_redux/group/group_selector.dart';
 import 'package:passmana/model/group_model.dart';
 import 'package:passmana/router/router.dart';
 import 'package:passmana/utility/page_routes_utility/page_routes.dart';
+import 'package:passmana/utility/utility.dart';
 import 'package:redux/redux.dart';
 
 class CreateUpdateGroupViewModel {
@@ -65,10 +66,12 @@ class CreateUpdateGroupViewModel {
         );
         router.pop();
       },
-      deleteGroup: () {
-        //todo: confirmation dialog
-        store.dispatch(DeleteGroup(groupId: id ?? 0));
-        router.go(AppRoutes.passwordHomeList);
+      deleteGroup: () async {
+        bool hasConfirmed = await Utility.deleteConfirmationDialog();
+        if (hasConfirmed) {
+          store.dispatch(DeleteGroup(groupId: id ?? 0));
+          router.go(AppRoutes.passwordHomeList);
+        }
       },
       onBackPress: () {
         router.pop();
