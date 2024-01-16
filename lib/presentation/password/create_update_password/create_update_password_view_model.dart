@@ -19,6 +19,7 @@ class CreateUpdatePasswordViewModel {
   final Function({
     required String title,
     required String subTitle,
+    required String websiteUrl,
     required String userName,
     required String password,
     required String note,
@@ -27,6 +28,7 @@ class CreateUpdatePasswordViewModel {
   final Function({
     required String title,
     required String subTitle,
+    required String websiteUrl,
     required String userName,
     required String password,
     required String note,
@@ -51,19 +53,29 @@ class CreateUpdatePasswordViewModel {
       createPassword: ({
         required String title,
         required String subTitle,
+        required String websiteUrl,
         required String userName,
         required String password,
         required String note,
         Group? targetGroup,
       }) {
         store.dispatch(
-          CreatePassword(title: title, subTitle: subTitle, userName: userName, password: password, note: note, targetGroup: targetGroup),
+          CreatePassword(
+            title: title,
+            subTitle: subTitle,
+            websiteUrl: websiteUrl,
+            userName: userName,
+            password: password,
+            note: note,
+            targetGroup: targetGroup,
+          ),
         );
         router.pop();
       },
       updatePassword: ({
         required String title,
         required String subTitle,
+        required String websiteUrl,
         required String userName,
         required String password,
         required String note,
@@ -75,6 +87,7 @@ class CreateUpdatePasswordViewModel {
             )?.updatePassword(
               title: title,
               subTitle: subTitle,
+              websiteUrl: websiteUrl,
               userName: userName,
               password: password,
               note: note,

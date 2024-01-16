@@ -49,6 +49,7 @@
   "9": "9",
   "title": "Title",
   "subtitle": "Sub Title",
+  "website_url": "Website Url",
   "username": "Username",
   "optional": "Optional",
   "field_can't_be_empty": "Field Can't be Empty",

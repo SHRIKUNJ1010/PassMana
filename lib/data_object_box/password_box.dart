@@ -16,6 +16,7 @@ class PasswordBox {
   addPassword({
     String title = '',
     String subTitle = '',
+    String websiteUrl = '',
     String userName = '',
     String password = '',
     String note = '',
@@ -24,6 +25,7 @@ class PasswordBox {
     final tempPassword = Password(
       title: title,
       subTitle: subTitle,
+      websiteUrl: websiteUrl,
       userName: userName,
       password: password,
       note: note,

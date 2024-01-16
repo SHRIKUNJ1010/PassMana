@@ -10,6 +10,7 @@ class GetAllPasswords {}
 class CreatePassword {
   final String title;
   final String subTitle;
+  final String websiteUrl;
   final String userName;
   final String password;
   final String note;
@@ -18,6 +19,7 @@ class CreatePassword {
   CreatePassword({
     required this.title,
     required this.subTitle,
+    required this.websiteUrl,
     required this.userName,
     required this.password,
     required this.note,

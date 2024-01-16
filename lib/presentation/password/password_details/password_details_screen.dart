@@ -1,6 +1,7 @@
 /*
 * Created by Shrikunj Patel on 9/12/2023.
 */
+import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -66,14 +67,16 @@ class PasswordDetailsScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 20),
                       getTitleContainer(vm, context),
-                      vm.password.subTitle.isEmpty ? const SizedBox() : const SizedBox(height: 7),
-                      vm.password.subTitle.isEmpty ? const SizedBox() : getSubTitleContainer(vm, context),
+                      if (vm.password.subTitle.isNotEmpty) const SizedBox(height: 7),
+                      if (vm.password.subTitle.isNotEmpty) getSubTitleContainer(vm, context),
                       const SizedBox(height: 20),
+                      if (vm.password.websiteUrl.isNotEmpty) getWebsiteUrlContainer(vm, context),
+                      if (vm.password.websiteUrl.isNotEmpty) const SizedBox(height: 7),
                       getUsernameContainer(vm, context),
                       const SizedBox(height: 7),
                       getPasswordContainer(vm, context),
-                      vm.password.note.isEmpty ? const SizedBox() : const SizedBox(height: 20),
-                      vm.password.note.isEmpty ? const SizedBox() : getNoteContainer(vm, context),
+                      if (vm.password.note.isNotEmpty) const SizedBox(height: 20),
+                      if (vm.password.note.isNotEmpty) getNoteContainer(vm, context),
                       const SizedBox(height: 20),
                       getAssignedToGroupContainer(vm, context),
                       const SizedBox(height: 80),
@@ -203,6 +206,63 @@ class PasswordDetailsScreen extends StatelessWidget {
                       Icons.copy,
                       color: AppColors.mBlack,
                       size: 25,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Container getWebsiteUrlContainer(PasswordDetailsViewModel vm, BuildContext context) {
+    return getCommonContainer(
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "${getTranslated("website_url", context)}:",
+                  style: TextStyles.getTitleDarkRedText(17),
+                ),
+                Text(
+                  vm.password.websiteUrl,
+                  maxLines: 5,
+                  softWrap: true,
+                  style: TextStyles.getTitleTransparentBlackText(
+                    fontSize: 17,
+                    opacity: 1,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  splashColor: AppColors.primaryColor.withOpacity(0.2),
+                  onTap: () {
+                    vm.onWebsiteUrlTap.call(vm.password.websiteUrl);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Transform.rotate(
+                      angle: -math.pi / 4,
+                      child: const Icon(
+                        Icons.arrow_right_alt,
+                        color: AppColors.mBlack,
+                        size: 30,
+                      ),
                     ),
                   ),
                 ),

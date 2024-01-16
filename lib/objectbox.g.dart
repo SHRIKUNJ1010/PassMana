@@ -97,7 +97,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(3, 6243334753350276209),
       name: 'Password',
-      lastPropertyId: const IdUid(10, 75545063630210098),
+      lastPropertyId: const IdUid(11, 1662591505840291357),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -146,6 +146,11 @@ final _entities = <ModelEntity>[
             id: const IdUid(10, 75545063630210098),
             name: 'lastUpdatedOn',
             type: 10,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(11, 1662591505840291357),
+            name: 'websiteUrl',
+            type: 9,
             flags: 0)
       ],
       relations: <ModelRelation>[],
@@ -378,7 +383,8 @@ ModelDefinition getObjectBoxModel() {
           final userNameOffset = fbb.writeString(object.userName);
           final passwordOffset = fbb.writeString(object.password);
           final noteOffset = fbb.writeString(object.note);
-          fbb.startTable(11);
+          final websiteUrlOffset = fbb.writeString(object.websiteUrl);
+          fbb.startTable(12);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, titleOffset);
           fbb.addOffset(2, subTitleOffset);
@@ -388,6 +394,7 @@ ModelDefinition getObjectBoxModel() {
           fbb.addInt64(6, object.group.targetId);
           fbb.addInt64(8, object.createdOn.millisecondsSinceEpoch);
           fbb.addInt64(9, object.lastUpdatedOn.millisecondsSinceEpoch);
+          fbb.addOffset(10, websiteUrlOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -400,6 +407,8 @@ ModelDefinition getObjectBoxModel() {
               .vTableGet(buffer, rootOffset, 6, '');
           final subTitleParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 8, '');
+          final websiteUrlParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 24, '');
           final userNameParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 10, '');
           final passwordParam = const fb.StringReader(asciiOptimization: true)
@@ -414,6 +423,7 @@ ModelDefinition getObjectBoxModel() {
               id: idParam,
               title: titleParam,
               subTitle: subTitleParam,
+              websiteUrl: websiteUrlParam,
               userName: userNameParam,
               password: passwordParam,
               note: noteParam,
@@ -603,6 +613,10 @@ class Password_ {
   /// see [Password.lastUpdatedOn]
   static final lastUpdatedOn =
       QueryIntegerProperty<Password>(_entities[2].properties[8]);
+
+  /// see [Password.websiteUrl]
+  static final websiteUrl =
+      QueryStringProperty<Password>(_entities[2].properties[9]);
 }
 
 /// [Card] entity fields to define ObjectBox queries.

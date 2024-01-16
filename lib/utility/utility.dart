@@ -10,6 +10,7 @@ import 'package:passmana/presentation/common/common_confirmation_dialog.dart';
 import 'package:passmana/router/router.dart';
 import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/constants.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Utility {
   //printing log when app is in debug mode
@@ -22,6 +23,16 @@ class Utility {
   //function to copy string data to clip board
   static Future<void> copyToClipboard(String data) async {
     await Clipboard.setData(ClipboardData(text: data));
+  }
+
+  //launch given url to external application
+  static Future<void> launchUrlInExternalApplication(String url) async {
+    Uri tempUri = Uri.parse(url);
+    try {
+      await launchUrl(tempUri, mode: LaunchMode.externalApplication);
+    } catch (e) {
+      Utility.printLog("Error While Launching Url: $url ::::: ${e.toString()}");
+    }
   }
 
   static BoxDecoration getCommonBackgroundDecoration() {

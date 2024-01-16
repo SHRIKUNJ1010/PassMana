@@ -27,6 +27,7 @@ void Function(Store<AppState> store, CreatePassword action, NextDispatcher next)
     objectBox.passwordBox.addPassword(
       title: action.title,
       subTitle: action.subTitle,
+      websiteUrl: action.websiteUrl,
       userName: action.userName,
       password: action.password,
       note: action.note,

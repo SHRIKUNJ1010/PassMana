@@ -57,19 +57,22 @@ class _CustomPinFieldState extends State<CustomPinField> {
           const Spacer(),
           CommonWidgets.getCommonHiddenPinField(controller: _pinController),
           const Spacer(),
-          CommonWidgets.getCommonNumericKeyboard(
-            context: context,
-            controller: _pinController,
-            disableBottomLeft: widget.disableBottomLeft,
-            disableBottomRight: widget.disableBottomRight,
-            bottomLeftButtonChild: widget.bottomLeftButtonChild,
-            bottomRightButtonChild: widget.bottomRightButtonChild,
-            onBottomLeftButtonTap: () {
-              widget.onBottomLeftButtonTap.call(_pinController);
-            },
-            onBottomRightButtonTap: () {
-              widget.onBottomRightButtonTap.call(_pinController);
-            },
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: CommonWidgets.getCommonNumericKeyboard(
+              context: context,
+              controller: _pinController,
+              disableBottomLeft: widget.disableBottomLeft,
+              disableBottomRight: widget.disableBottomRight,
+              bottomLeftButtonChild: widget.bottomLeftButtonChild,
+              bottomRightButtonChild: widget.bottomRightButtonChild,
+              onBottomLeftButtonTap: () {
+                widget.onBottomLeftButtonTap.call(_pinController);
+              },
+              onBottomRightButtonTap: () {
+                widget.onBottomRightButtonTap.call(_pinController);
+              },
+            ),
           ),
         ],
       ),

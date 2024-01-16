@@ -36,6 +36,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
   final _formKey = GlobalKey<FormState>();
   final TextEditingController titleController = TextEditingController();
   final TextEditingController subTitleController = TextEditingController();
+  final TextEditingController websiteUrlController = TextEditingController();
   final TextEditingController userNameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController noteController = TextEditingController();
@@ -46,6 +47,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
   void dispose() {
     titleController.dispose();
     subTitleController.dispose();
+    websiteUrlController.dispose();
     userNameController.dispose();
     passwordController.dispose();
     noteController.dispose();
@@ -62,6 +64,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
         if (widget.id != null) {
           titleController.text = getPasswordById(store.state, widget.id)?.title ?? "";
           subTitleController.text = getPasswordById(store.state, widget.id)?.subTitle ?? "";
+          websiteUrlController.text = getPasswordById(store.state, widget.id)?.websiteUrl ?? "";
           userNameController.text = getPasswordById(store.state, widget.id)?.userName ?? "";
           passwordController.text = getPasswordById(store.state, widget.id)?.password ?? "";
           noteController.text = getPasswordById(store.state, widget.id)?.note ?? "";
@@ -89,6 +92,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                           children: [
                             getTitleField(context, titleController),
                             getSubTitleField(context, subTitleController),
+                            getWebsiteUrlField(context, websiteUrlController),
                             getUserNameField(context, userNameController),
                             getPasswordField(context, passwordController),
                             getNoteField(context, noteController),
@@ -123,7 +127,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 5, 0, 10),
               child: Text(
-                "${getTranslated('category_group',context)}:",
+                "${getTranslated('category_group', context)}:",
                 style: TextStyles.getTitleWhiteText(20),
               ),
             ),
@@ -163,7 +167,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
               },
               menuProps: MenuProps(
                 borderRadius: BorderRadius.circular(10),
-                barrierLabel: getTranslated("groups",context),
+                barrierLabel: getTranslated("groups", context),
               ),
             ),
             onChanged: (item) {
@@ -264,6 +268,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                 vm.updatePassword.call(
                   title: titleController.text,
                   subTitle: subTitleController.text,
+                  websiteUrl: websiteUrlController.text,
                   userName: userNameController.text,
                   password: passwordController.text,
                   note: noteController.text,
@@ -273,6 +278,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                 vm.createPassword.call(
                   title: titleController.text,
                   subTitle: subTitleController.text,
+                  websiteUrl: websiteUrlController.text,
                   userName: userNameController.text,
                   password: passwordController.text,
                   note: noteController.text,
@@ -286,7 +292,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
             color: Colors.transparent,
             alignment: Alignment.center,
             child: Text(
-              vm.password != null ? getTranslated('update',context) : getTranslated('create',context),
+              vm.password != null ? getTranslated('update', context) : getTranslated('create', context),
               style: TextStyles.getTitleWhiteText(24),
             ),
           ),
@@ -304,7 +310,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 5, 0, 10),
               child: Text(
-                "${getTranslated('note',context)}: (${getTranslated('optional',context)})",
+                "${getTranslated('note', context)}: (${getTranslated('optional', context)})",
                 style: TextStyles.getTitleWhiteText(20),
               ),
             ),
@@ -347,7 +353,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 5, 0, 10),
               child: Text(
-                "${getTranslated('password',context)}:",
+                "${getTranslated('password', context)}:",
                 style: TextStyles.getTitleWhiteText(20),
               ),
             ),
@@ -359,7 +365,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
             controller: controller,
             validator: (text) {
               if (text == null || text.isEmpty) {
-                return getTranslated("field_can't_be_empty",context);
+                return getTranslated("field_can't_be_empty", context);
               }
               return null;
             },
@@ -427,7 +433,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 5, 0, 10),
               child: Text(
-                "${getTranslated('email_or_username',context)}:",
+                "${getTranslated('email_or_username', context)}:",
                 style: TextStyles.getTitleWhiteText(20),
               ),
             ),
@@ -439,7 +445,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
             controller: controller,
             validator: (text) {
               if (text == null || text.isEmpty) {
-                return getTranslated("field_can't_be_empty",context);
+                return getTranslated("field_can't_be_empty", context);
               }
               return null;
             },
@@ -473,7 +479,48 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 5, 0, 10),
               child: Text(
-                "${getTranslated('subtitle',context)}: (${getTranslated('optional',context)})",
+                "${getTranslated('subtitle', context)}: (${getTranslated('optional', context)})",
+                style: TextStyles.getTitleWhiteText(20),
+              ),
+            ),
+          ],
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+          child: TextFormField(
+            controller: controller,
+            validator: (text) => null,
+            style: TextStyles.getTitleBlueText(18),
+            decoration: InputDecoration(
+              fillColor: AppColors.mWhite,
+              filled: true,
+              contentPadding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
+              errorStyle: TextStyles.getTitleOrangeText(20),
+              border: OutlineInputBorder(
+                borderSide: BorderSide.none,
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+            textInputAction: TextInputAction.next,
+            onTapOutside: (pointerDown) {
+              FocusScope.of(context).unfocus();
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  Column getWebsiteUrlField(BuildContext context, TextEditingController controller) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 5, 0, 10),
+              child: Text(
+                "${getTranslated('website_url', context)}: (${getTranslated('optional', context)})",
                 style: TextStyles.getTitleWhiteText(20),
               ),
             ),
@@ -514,7 +561,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 20, 0, 10),
               child: Text(
-                "${getTranslated('title',context)}:",
+                "${getTranslated('title', context)}:",
                 style: TextStyles.getTitleWhiteText(20),
               ),
             ),
@@ -526,7 +573,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
             controller: controller,
             validator: (text) {
               if (text == null || text.isEmpty) {
-                return getTranslated("field_can't_be_empty",context);
+                return getTranslated("field_can't_be_empty", context);
               }
               return null;
             },
@@ -584,7 +631,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
           ),
         ),
         Text(
-          vm.password != null ? getTranslated("update_password",context) : getTranslated("create_password",context),
+          vm.password != null ? getTranslated("update_password", context) : getTranslated("create_password", context),
           style: TextStyles.getTitleWhiteText(25),
         ),
         vm.password != null

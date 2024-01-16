@@ -14,6 +14,7 @@ class PasswordDetailsViewModel {
   final Password password;
   final Function onBackPress;
   final Function onEditTap;
+  final Function(String) onWebsiteUrlTap;
   final Function(String) onUsernameCopyTap;
   final Function(String) onPasswordCopyTap;
 
@@ -21,6 +22,7 @@ class PasswordDetailsViewModel {
     required this.password,
     required this.onBackPress,
     required this.onEditTap,
+    required this.onWebsiteUrlTap,
     required this.onPasswordCopyTap,
     required this.onUsernameCopyTap,
   });
@@ -44,6 +46,9 @@ class PasswordDetailsViewModel {
       onUsernameCopyTap: (val) async {
         await Utility.copyToClipboard(val);
       },
+      onWebsiteUrlTap: (val) async{
+        await Utility.launchUrlInExternalApplication(val);
+      }
     );
   }
 }

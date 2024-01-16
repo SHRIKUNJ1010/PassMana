@@ -9,21 +9,28 @@ import 'package:passmana/model/group_model.dart';
 class Password {
   @Id()
   int id;
+  //
   String title;
   String subTitle;
+  //
+  String websiteUrl;
   String userName;
   String password;
+  //
   String note;
+  //
   @Property(type: PropertyType.date)
   DateTime createdOn;
   @Property(type: PropertyType.date)
   DateTime lastUpdatedOn;
+
   final group = ToOne<Group>();
 
   Password({
     this.id = 0,
     this.title = '',
     this.subTitle = '',
+    this.websiteUrl = '',
     this.userName = '',
     this.password = '',
     this.note = '',
@@ -34,6 +41,7 @@ class Password {
   Password updatePassword({
     String? title,
     String? subTitle,
+    String? websiteUrl,
     String? userName,
     String? password,
     String? note,
@@ -43,6 +51,7 @@ class Password {
       id: id,
       title: title ?? this.title,
       subTitle: subTitle ?? this.subTitle,
+      websiteUrl: websiteUrl ?? this.websiteUrl,
       userName: userName ?? this.userName,
       password: password ?? this.password,
       note: note ?? this.note,
