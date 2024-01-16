@@ -126,7 +126,7 @@ class _ChangeMobilePinScreenState extends State<ChangeMobilePinScreen> {
                             controller.clear();
                             setState(() {});
                           } else {
-                            //todo: generate wrong pin entered
+                            //todo: generate error wrong pin entered
                             controller.clear();
                           }
                         }
