@@ -13,7 +13,6 @@ import 'package:redux/redux.dart';
 
 class SettingsItemListViewModel {
   final Function() onChangeMobilePinTap;
-  final Function() onGeneratePasswordTap;
   final Function(Locale) onChangeLocaleTap;
   final Function(bool) onChangeAutofill;
   final Function(bool) onChangeBiometric;
@@ -23,7 +22,6 @@ class SettingsItemListViewModel {
 
   SettingsItemListViewModel({
     required this.onChangeMobilePinTap,
-    required this.onGeneratePasswordTap,
     required this.onChangeLocaleTap,
     required this.onChangeAutofill,
     required this.onChangeBiometric,
@@ -46,9 +44,6 @@ class SettingsItemListViewModel {
       },
       onChangeMobilePinTap: () {
         router.push(AppRoutes.changeMobilePin);
-      },
-      onGeneratePasswordTap: () {
-        router.push(AppRoutes.generatePassword);
       },
       onChangeAutofill: (val) {},
       onChangeBiometric: (val) {

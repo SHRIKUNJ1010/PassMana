@@ -46,7 +46,7 @@ class SettingsItemListScreen extends StatelessWidget {
                 ),
                 const SizedBox(width: 10),
                 Text(
-                  getTranslated("settings",context),
+                  getTranslated("settings", context),
                   style: TextStyles.getTitleWhiteText(28),
                 ),
                 const Spacer(),
@@ -66,7 +66,7 @@ class SettingsItemListScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          getTranslated("enable_autofill",context),
+                          getTranslated("enable_autofill", context),
                           style: TextStyles.getTitleBlueText(20),
                         ),
                       ),
@@ -90,7 +90,7 @@ class SettingsItemListScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          getTranslated("enable_biometric",context),
+                          getTranslated("enable_biometric", context),
                           style: TextStyles.getTitleBlueText(20),
                         ),
                       ),
@@ -108,7 +108,7 @@ class SettingsItemListScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          getTranslated("language",context),
+                          getTranslated("language", context),
                           style: TextStyles.getTitleBlueText(20),
                         ),
                       ),
@@ -148,7 +148,7 @@ class SettingsItemListScreen extends StatelessWidget {
                           },
                           menuProps: MenuProps(
                             borderRadius: BorderRadius.circular(10),
-                            barrierLabel: getTranslated("language",context),
+                            barrierLabel: getTranslated("language", context),
                           ),
                         ),
                         onChanged: (item) {
@@ -216,33 +216,7 @@ class SettingsItemListScreen extends StatelessWidget {
                           ),
                           padding: const EdgeInsets.fromLTRB(15, 15, 10, 15),
                           child: Text(
-                            getTranslated("change_mobile_pin",context),
-                            style: TextStyles.getTitleBlueText(20),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(5),
-                    child: Material(
-                      color: AppColors.mWhite,
-                      child: InkWell(
-                        onTap: () {
-                          vm.onGeneratePasswordTap.call();
-                        },
-                        splashColor: AppColors.primaryColor.withOpacity(0.2),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: Colors.transparent,
-                          ),
-                          padding: const EdgeInsets.fromLTRB(15, 15, 10, 15),
-                          child: Text(
-                            getTranslated("generate_password",context),
+                            getTranslated("change_mobile_pin", context),
                             style: TextStyles.getTitleBlueText(20),
                           ),
                         ),

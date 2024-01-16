@@ -293,7 +293,7 @@ class CommonWidgets {
               onTap.call();
             },
             child: SizedBox(
-              height: 52,
+              height: 54,
               child: Column(
                 children: [
                   const SizedBox(height: 5),
@@ -324,7 +324,7 @@ class CommonWidgets {
   }) {
     return Expanded(
       child: SizedBox(
-        height: 52,
+        height: 54,
         child: Column(
           children: [
             const SizedBox(height: 5),
