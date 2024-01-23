@@ -97,7 +97,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(3, 6243334753350276209),
       name: 'Password',
-      lastPropertyId: const IdUid(11, 1662591505840291357),
+      lastPropertyId: const IdUid(12, 2236766573529191337),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -150,6 +150,11 @@ final _entities = <ModelEntity>[
         ModelProperty(
             id: const IdUid(11, 1662591505840291357),
             name: 'websiteUrl',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(12, 2236766573529191337),
+            name: 'dynamicDataField',
             type: 9,
             flags: 0)
       ],
@@ -384,7 +389,9 @@ ModelDefinition getObjectBoxModel() {
           final passwordOffset = fbb.writeString(object.password);
           final noteOffset = fbb.writeString(object.note);
           final websiteUrlOffset = fbb.writeString(object.websiteUrl);
-          fbb.startTable(12);
+          final dynamicDataFieldOffset =
+              fbb.writeString(object.dynamicDataField);
+          fbb.startTable(13);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, titleOffset);
           fbb.addOffset(2, subTitleOffset);
@@ -395,6 +402,7 @@ ModelDefinition getObjectBoxModel() {
           fbb.addInt64(8, object.createdOn.millisecondsSinceEpoch);
           fbb.addInt64(9, object.lastUpdatedOn.millisecondsSinceEpoch);
           fbb.addOffset(10, websiteUrlOffset);
+          fbb.addOffset(11, dynamicDataFieldOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -415,6 +423,9 @@ ModelDefinition getObjectBoxModel() {
               .vTableGet(buffer, rootOffset, 12, '');
           final noteParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 14, '');
+          final dynamicDataFieldParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 26, '');
           final createdOnParam = DateTime.fromMillisecondsSinceEpoch(
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 20, 0));
           final lastUpdatedOnParam = DateTime.fromMillisecondsSinceEpoch(
@@ -427,6 +438,7 @@ ModelDefinition getObjectBoxModel() {
               userName: userNameParam,
               password: passwordParam,
               note: noteParam,
+              dynamicDataField: dynamicDataFieldParam,
               createdOn: createdOnParam,
               lastUpdatedOn: lastUpdatedOnParam);
           object.group.targetId =
@@ -617,6 +629,10 @@ class Password_ {
   /// see [Password.websiteUrl]
   static final websiteUrl =
       QueryStringProperty<Password>(_entities[2].properties[9]);
+
+  /// see [Password.dynamicDataField]
+  static final dynamicDataField =
+      QueryStringProperty<Password>(_entities[2].properties[10]);
 }
 
 /// [Card] entity fields to define ObjectBox queries.

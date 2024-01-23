@@ -31,6 +31,7 @@ void Function(Store<AppState> store, CreatePassword action, NextDispatcher next)
       userName: action.userName,
       password: action.password,
       note: action.note,
+      dynamicDataField: action.dynamicDataField,
       targetGroup: action.targetGroup,
     );
     //get all latest passwords

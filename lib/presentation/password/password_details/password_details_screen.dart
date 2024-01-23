@@ -77,6 +77,17 @@ class PasswordDetailsScreen extends StatelessWidget {
                       getPasswordContainer(vm, context),
                       if (vm.password.note.isNotEmpty) const SizedBox(height: 20),
                       if (vm.password.note.isNotEmpty) getNoteContainer(vm, context),
+                      if (vm.dynamicFields.call().isNotEmpty) const SizedBox(height: 20),
+                      if (vm.dynamicFields.call().isNotEmpty) ...[
+                        for (int i = 0; i < vm.dynamicFields.call().length; i++) ...[
+                          getCustomFieldItemContainer(
+                            vm.dynamicFields.call()[i].title ?? "",
+                            vm.dynamicFields.call()[i].value ?? "",
+                            context,
+                          ),
+                          if (i != (vm.dynamicFields.call().length - 1)) const SizedBox(height: 7),
+                        ],
+                      ],
                       const SizedBox(height: 20),
                       getAssignedToGroupContainer(vm, context),
                       const SizedBox(height: 80),
@@ -117,6 +128,37 @@ class PasswordDetailsScreen extends StatelessWidget {
                 ),
                 Text(
                   vm.password.group.target?.groupName ?? getTranslated('none', context),
+                  maxLines: 5,
+                  softWrap: true,
+                  style: TextStyles.getTitleTransparentBlackText(
+                    fontSize: 17,
+                    opacity: 1,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget getCustomFieldItemContainer(String title, String value, BuildContext context) {
+    return getCommonContainer(
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "$title:",
+                  style: TextStyles.getTitleDarkRedText(17),
+                ),
+                Text(
+                  value,
                   maxLines: 5,
                   softWrap: true,
                   style: TextStyles.getTitleTransparentBlackText(

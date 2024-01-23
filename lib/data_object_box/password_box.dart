@@ -20,6 +20,7 @@ class PasswordBox {
     String userName = '',
     String password = '',
     String note = '',
+    String dynamicDataField = '{}',
     Group? targetGroup,
   }) {
     final tempPassword = Password(
@@ -29,6 +30,7 @@ class PasswordBox {
       userName: userName,
       password: password,
       note: note,
+      dynamicDataField: dynamicDataField,
       createdOn: DateTime.now(),
       lastUpdatedOn: DateTime.now(),
     );

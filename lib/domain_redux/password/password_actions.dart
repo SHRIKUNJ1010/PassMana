@@ -14,6 +14,7 @@ class CreatePassword {
   final String userName;
   final String password;
   final String note;
+  final String dynamicDataField;
   final Group? targetGroup;
 
   CreatePassword({
@@ -23,6 +24,7 @@ class CreatePassword {
     required this.userName,
     required this.password,
     required this.note,
+    required this.dynamicDataField,
     this.targetGroup,
   });
 }

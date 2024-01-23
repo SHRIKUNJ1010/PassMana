@@ -2,6 +2,8 @@
 * Created by Shrikunj Patel on 9/12/2023.
 */
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
@@ -9,12 +11,14 @@ import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/domain_redux/password/password_selector.dart';
 import 'package:passmana/localization/app_localization.dart';
 import 'package:passmana/model/group_model.dart';
+import 'package:passmana/model/password_dynamic_field_model.dart';
 import 'package:passmana/presentation/common/custom_app_bar.dart';
 import 'package:passmana/presentation/common/drop_down_search_custom/dropdown_search.dart';
 import 'package:passmana/presentation/common/drop_down_search_custom/src/properties/list_view_props.dart';
 import 'package:passmana/presentation/common/drop_down_search_custom/src/properties/menu_props.dart';
 import 'package:passmana/presentation/common/drop_down_search_custom/src/properties/popup_props.dart';
 import 'package:passmana/presentation/password/create_update_password/create_update_password_view_model.dart';
+import 'package:passmana/presentation/password/create_update_password/password_dynamic_field_list_item_widget.dart';
 import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:passmana/utility/utility.dart';
@@ -42,6 +46,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
   final TextEditingController noteController = TextEditingController();
   Group? selectedGroup;
   bool showPassword = false;
+  List<PasswordDynamicField> dynamicFieldList = [];
 
   @override
   void dispose() {
@@ -62,6 +67,20 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
       },
       onInit: (Store<AppState> store) {
         if (widget.id != null) {
+          List<PasswordDynamicField> tempDynamicList = [];
+          try {
+            tempDynamicList = PasswordDynamicFieldList.fromJson(
+                  jsonDecode(
+                    getPasswordById(store.state, widget.id)?.dynamicDataField ?? "{}",
+                  ),
+                ).dynamicField ??
+                [];
+          } catch (e) {
+            tempDynamicList = [];
+          }
+          if (tempDynamicList.isEmpty) {
+            tempDynamicList.add(PasswordDynamicField());
+          }
           titleController.text = getPasswordById(store.state, widget.id)?.title ?? "";
           subTitleController.text = getPasswordById(store.state, widget.id)?.subTitle ?? "";
           websiteUrlController.text = getPasswordById(store.state, widget.id)?.websiteUrl ?? "";
@@ -69,6 +88,9 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
           passwordController.text = getPasswordById(store.state, widget.id)?.password ?? "";
           noteController.text = getPasswordById(store.state, widget.id)?.note ?? "";
           selectedGroup = getPasswordById(store.state, widget.id)?.group.target;
+          dynamicFieldList = tempDynamicList;
+        } else {
+          dynamicFieldList = [PasswordDynamicField()];
         }
       },
       builder: (BuildContext context, CreateUpdatePasswordViewModel vm) {
@@ -97,6 +119,77 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                             getPasswordField(context, passwordController),
                             getNoteField(context, noteController),
                             getGroupSelectField(context, vm),
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(20, 5, 0, 10),
+                                  child: Text(
+                                    "${getTranslated('custom_fields', context)}: (${getTranslated('optional', context)})",
+                                    style: TextStyles.getTitleWhiteText(20),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            ListView.builder(
+                              itemCount: dynamicFieldList.length,
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+                                  child: PasswordDynamicFieldListItemWidget(
+                                    key: ValueKey(dynamicFieldList[index].hashCode),
+                                    item: dynamicFieldList[index],
+                                    onCancelTap: () {
+                                      if (dynamicFieldList.length != 1) {
+                                        dynamicFieldList.removeAt(index);
+                                        setState(() {});
+                                      } else {
+                                        //do nothing
+                                      }
+                                    },
+                                  ),
+                                );
+                              },
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Material(
+                                  color: AppColors.mWhite,
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Container(
+                                    height: 45,
+                                    color: Colors.transparent,
+                                    child: InkWell(
+                                      onTap: () {
+                                        dynamicFieldList.add(PasswordDynamicField());
+                                        setState(() {});
+                                      },
+                                      splashColor: AppColors.primaryColor.withOpacity(0.3),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          const Icon(
+                                            Icons.add,
+                                            color: AppColors.primaryColor,
+                                            size: 24,
+                                          ),
+                                          const SizedBox(width: 5),
+                                          Text(
+                                            getTranslated('add_field', context),
+                                            style: TextStyles.getTitleBlueText(18),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
                             const SizedBox(height: 350),
                           ],
                         ),
@@ -127,7 +220,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 5, 0, 10),
               child: Text(
-                "${getTranslated('category_group', context)}:",
+                "${getTranslated('category_group', context)}: (${getTranslated('optional', context)})",
                 style: TextStyles.getTitleWhiteText(20),
               ),
             ),
@@ -273,6 +366,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                   password: passwordController.text,
                   note: noteController.text,
                   targetGroup: selectedGroup,
+                  dynamicDataField: jsonEncode(PasswordDynamicFieldList(dynamicField: dynamicFieldList).toJson()),
                 );
               } else {
                 vm.createPassword.call(
@@ -283,6 +377,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                   password: passwordController.text,
                   note: noteController.text,
                   targetGroup: selectedGroup,
+                  dynamicDataField: jsonEncode(PasswordDynamicFieldList(dynamicField: dynamicFieldList).toJson()),
                 );
               }
             }

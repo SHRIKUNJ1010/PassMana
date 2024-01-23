@@ -73,7 +73,7 @@
     },
     {
       "id": "3:6243334753350276209",
-      "lastPropertyId": "11:1662591505840291357",
+      "lastPropertyId": "12:2236766573529191337",
       "name": "Password",
       "properties": [
         {
@@ -128,6 +128,11 @@
         {
           "id": "11:1662591505840291357",
           "name": "websiteUrl",
+          "type": 9
+        },
+        {
+          "id": "12:2236766573529191337",
+          "name": "dynamicDataField",
           "type": 9
         }
       ],

@@ -9,16 +9,23 @@ import 'package:passmana/model/group_model.dart';
 class Password {
   @Id()
   int id;
-  //
+
+  //data1
   String title;
   String subTitle;
-  //
+
+  //data2
   String websiteUrl;
   String userName;
   String password;
-  //
+
+  //data3
   String note;
-  //
+
+  //data4
+  String dynamicDataField;
+
+  //data5
   @Property(type: PropertyType.date)
   DateTime createdOn;
   @Property(type: PropertyType.date)
@@ -34,6 +41,7 @@ class Password {
     this.userName = '',
     this.password = '',
     this.note = '',
+    this.dynamicDataField = '{}',
     required this.createdOn,
     required this.lastUpdatedOn,
   });
@@ -45,6 +53,7 @@ class Password {
     String? userName,
     String? password,
     String? note,
+    String? dynamicDataField,
     required DateTime lastUpdatedOn,
   }) {
     return Password(
@@ -55,6 +64,7 @@ class Password {
       userName: userName ?? this.userName,
       password: password ?? this.password,
       note: note ?? this.note,
+      dynamicDataField: dynamicDataField ?? this.dynamicDataField,
       createdOn: createdOn,
       lastUpdatedOn: lastUpdatedOn,
     );

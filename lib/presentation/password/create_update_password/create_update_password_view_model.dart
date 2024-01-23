@@ -23,6 +23,7 @@ class CreateUpdatePasswordViewModel {
     required String userName,
     required String password,
     required String note,
+    required String dynamicDataField,
     Group? targetGroup,
   }) createPassword;
   final Function({
@@ -32,6 +33,7 @@ class CreateUpdatePasswordViewModel {
     required String userName,
     required String password,
     required String note,
+    required String dynamicDataField,
     Group? targetGroup,
   }) updatePassword;
   final Function deletePassword;
@@ -57,6 +59,7 @@ class CreateUpdatePasswordViewModel {
         required String userName,
         required String password,
         required String note,
+        required String dynamicDataField,
         Group? targetGroup,
       }) {
         store.dispatch(
@@ -67,6 +70,7 @@ class CreateUpdatePasswordViewModel {
             userName: userName,
             password: password,
             note: note,
+            dynamicDataField: dynamicDataField,
             targetGroup: targetGroup,
           ),
         );
@@ -79,6 +83,7 @@ class CreateUpdatePasswordViewModel {
         required String userName,
         required String password,
         required String note,
+        required String dynamicDataField,
         Group? targetGroup,
       }) {
         final Password tempPassword = getPasswordById(
@@ -91,6 +96,7 @@ class CreateUpdatePasswordViewModel {
               userName: userName,
               password: password,
               note: note,
+              dynamicDataField: dynamicDataField,
               lastUpdatedOn: DateTime.now(),
             ) ??
             Password(
