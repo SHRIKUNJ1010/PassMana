@@ -76,4 +76,19 @@ class Utility {
     );
     return value;
   }
+
+  static Future<bool> discardDataConfirmationDialog() async {
+    bool value = await showDialog(
+      context: rootNavigatorKey.currentContext!,
+      builder: (BuildContext context) {
+        return CommonConfirmationDialog(
+          title: getTranslated("confirmation", context),
+          message: getTranslated("discard_confirmation", context),
+          positiveBtnText: getTranslated("yes", context),
+          negativeBtnText: getTranslated("no", context),
+        );
+      },
+    );
+    return value;
+  }
 }

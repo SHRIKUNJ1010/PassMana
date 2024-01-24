@@ -530,7 +530,6 @@ class _GeneratePasswordStatefulContainerState extends State<GeneratePasswordStat
                   child: InkWell(
                     splashColor: AppColors.mBlack.withOpacity(0.2),
                     onTap: () {
-                      //todo: confirmation dialog of discard changes
                       vm.onBackPress.call();
                     },
                     child: const Padding(

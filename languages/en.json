@@ -69,6 +69,7 @@
   "language": "Language",
   "confirmation": "Confirmation",
   "delete_confirmation": "Are You Sure you want to delete this record?",
+  "discard_confirmation": "There may be unsaved changes on this page. Do you really want discard them and exit?",
   "yes": "Yes",
   "no": "No",
   "custom_fields": "Custom Fields",
