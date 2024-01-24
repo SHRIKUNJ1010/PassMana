@@ -3,24 +3,31 @@
 */
 
 import 'package:passmana/domain_redux/app_state.dart';
+import 'package:passmana/model/screen_argument_models/create_update_password_screen_arguments.dart';
+import 'package:passmana/router/router.dart';
+import 'package:passmana/utility/cryptography_utility/password_generator.dart';
+import 'package:passmana/utility/page_routes_utility/page_routes.dart';
+import 'package:passmana/utility/utility.dart';
 import 'package:redux/redux.dart';
 
 class GeneratePasswordViewModel {
-  final Function({
+  final String Function({
     required bool hasLowercase,
     required bool hasUppercase,
     required bool hasNumeric,
     required bool hasSpecialCharacter,
-    required bool hasUmlauts,
-    required bool isReadable,
     required int passwordLength,
+    required bool isReadable,
   }) generatePassword;
-
-  final Function(String) copyToClipboard;
+  final Function(String) onCopyPasswordTap;
+  final Function(String) onUsePasswordTap;
+  final Function onBackPress;
 
   GeneratePasswordViewModel({
     required this.generatePassword,
-    required this.copyToClipboard,
+    required this.onCopyPasswordTap,
+    required this.onUsePasswordTap,
+    required this.onBackPress,
   });
 
   static GeneratePasswordViewModel fromStore(Store<AppState> store) {
@@ -30,12 +37,43 @@ class GeneratePasswordViewModel {
         required bool hasUppercase,
         required bool hasNumeric,
         required bool hasSpecialCharacter,
-        required bool hasUmlauts,
-        required bool isReadable,
         required int passwordLength,
+        required bool isReadable,
       }) {
+        String tempPassword = "";
+        if (isReadable) {
+          tempPassword = PasswordGenerator.generatePronounceablePassword(
+            length: passwordLength,
+            withLowerCase: hasLowercase,
+            withUpperCase: hasUppercase,
+            withSpecialChar: hasSpecialCharacter,
+            withDigits: hasNumeric,
+          );
+        } else {
+          tempPassword = PasswordGenerator.generateRandomPassword(
+            length: passwordLength,
+            withLowerCase: hasLowercase,
+            withUpperCase: hasUppercase,
+            withSpecialChar: hasSpecialCharacter,
+            withDigits: hasNumeric,
+          );
+        }
+        return tempPassword;
       },
-      copyToClipboard: (value) {
+      onUsePasswordTap: (value) {
+        router.go(AppRoutes.passwordHomeList);
+        router.push(
+          AppRoutes.createUpdatePassword,
+          extra: CreateUpdatePasswordScreenArguments(
+            generatedPassword: value,
+          ),
+        );
+      },
+      onCopyPasswordTap: (value) {
+        Utility.copyToClipboard(value);
+      },
+      onBackPress: () {
+        router.pop();
       },
     );
   }

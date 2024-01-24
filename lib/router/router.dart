@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:passmana/model/screen_argument_models/create_update_password_screen_arguments.dart';
 import 'package:passmana/presentation/authentication/authentication_screen.dart';
 import 'package:passmana/presentation/card/card_details/card_details_screen.dart';
 import 'package:passmana/presentation/card/card_list/card_list_screen.dart';
@@ -167,9 +168,9 @@ final GoRouter router = GoRouter(
       parentNavigatorKey: rootNavigatorKey,
       path: AppRoutes.createUpdatePassword,
       pageBuilder: (context, state) {
-        int? tempId = state.extra as int?;
+        CreateUpdatePasswordScreenArguments? tempArgument = state.extra as CreateUpdatePasswordScreenArguments?;
         return FadeTransitionPage(
-          child: CreateUpdatePasswordScreen(id: tempId),
+          child: CreateUpdatePasswordScreen(argument: tempArgument ?? CreateUpdatePasswordScreenArguments()),
           key: state.pageKey,
         );
       },

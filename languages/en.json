@@ -73,5 +73,13 @@
   "no": "No",
   "custom_fields": "Custom Fields",
   "add_field": "Add Field",
-  "value": "Value"
+  "value": "Value",
+  "pronounceable": "Pronounceable",
+  "special": "Special",
+  "lowercase": "Lowercase",
+  "uppercase": "Uppercase",
+  "numeric": "Numeric",
+  "length": "Length",
+  "regenerate_password": "Regenerate Password",
+  "use_password": "Use Password"
 }

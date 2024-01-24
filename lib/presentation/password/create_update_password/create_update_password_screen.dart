@@ -12,6 +12,7 @@ import 'package:passmana/domain_redux/password/password_selector.dart';
 import 'package:passmana/localization/app_localization.dart';
 import 'package:passmana/model/group_model.dart';
 import 'package:passmana/model/password_dynamic_field_model.dart';
+import 'package:passmana/model/screen_argument_models/create_update_password_screen_arguments.dart';
 import 'package:passmana/presentation/common/custom_app_bar.dart';
 import 'package:passmana/presentation/common/drop_down_search_custom/dropdown_search.dart';
 import 'package:passmana/presentation/common/drop_down_search_custom/src/properties/list_view_props.dart';
@@ -25,11 +26,11 @@ import 'package:passmana/utility/utility.dart';
 import 'package:redux/redux.dart';
 
 class CreateUpdatePasswordScreen extends StatefulWidget {
-  final int? id;
+  final CreateUpdatePasswordScreenArguments argument;
 
   const CreateUpdatePasswordScreen({
     super.key,
-    required this.id,
+    required this.argument,
   });
 
   @override
@@ -63,15 +64,15 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
   Widget build(BuildContext context) {
     return StoreConnector<AppState, CreateUpdatePasswordViewModel>(
       converter: (Store<AppState> store) {
-        return CreateUpdatePasswordViewModel.fromStore(store, widget.id);
+        return CreateUpdatePasswordViewModel.fromStore(store, widget.argument.id);
       },
       onInit: (Store<AppState> store) {
-        if (widget.id != null) {
+        if (widget.argument.id != null) {
           List<PasswordDynamicField> tempDynamicList = [];
           try {
             tempDynamicList = PasswordDynamicFieldList.fromJson(
                   jsonDecode(
-                    getPasswordById(store.state, widget.id)?.dynamicDataField ?? "{}",
+                    getPasswordById(store.state, widget.argument.id)?.dynamicDataField ?? "{}",
                   ),
                 ).dynamicField ??
                 [];
@@ -81,15 +82,18 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
           if (tempDynamicList.isEmpty) {
             tempDynamicList.add(PasswordDynamicField());
           }
-          titleController.text = getPasswordById(store.state, widget.id)?.title ?? "";
-          subTitleController.text = getPasswordById(store.state, widget.id)?.subTitle ?? "";
-          websiteUrlController.text = getPasswordById(store.state, widget.id)?.websiteUrl ?? "";
-          userNameController.text = getPasswordById(store.state, widget.id)?.userName ?? "";
-          passwordController.text = getPasswordById(store.state, widget.id)?.password ?? "";
-          noteController.text = getPasswordById(store.state, widget.id)?.note ?? "";
-          selectedGroup = getPasswordById(store.state, widget.id)?.group.target;
+          titleController.text = getPasswordById(store.state, widget.argument.id)?.title ?? "";
+          subTitleController.text = getPasswordById(store.state, widget.argument.id)?.subTitle ?? "";
+          websiteUrlController.text = getPasswordById(store.state, widget.argument.id)?.websiteUrl ?? "";
+          userNameController.text = getPasswordById(store.state, widget.argument.id)?.userName ?? "";
+          passwordController.text = getPasswordById(store.state, widget.argument.id)?.password ?? "";
+          noteController.text = getPasswordById(store.state, widget.argument.id)?.note ?? "";
+          selectedGroup = getPasswordById(store.state, widget.argument.id)?.group.target;
           dynamicFieldList = tempDynamicList;
         } else {
+          if (widget.argument.generatedPassword != null) {
+            passwordController.text = widget.argument.generatedPassword ?? "";
+          }
           dynamicFieldList = [PasswordDynamicField()];
         }
       },
@@ -357,7 +361,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
           splashColor: AppColors.mWhite.withOpacity(0.2),
           onTap: () {
             if (_formKey.currentState!.validate()) {
-              if (widget.id != null) {
+              if (widget.argument.id != null) {
                 vm.updatePassword.call(
                   title: titleController.text,
                   subTitle: subTitleController.text,
