@@ -62,23 +62,26 @@ class _GeneratePasswordDialogState extends State<GeneratePasswordDialog> {
     return AlertDialog(
       insetPadding: const EdgeInsets.symmetric(horizontal: 10),
       contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-      title: Text(
-        getTranslated('generate_password', context),
-        style: TextStyles.getTitleTransparentBlackCustomWeightText(
-          fontSize: 16,
-          opacity: 1,
-          fontWeight: FontWeight.w600,
-        ),
+      title: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            getTranslated('generate_password', context),
+            style: TextStyles.getTitleBlueText(20),
+          ),
+        ],
       ),
       backgroundColor: AppColors.mWhite,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          const SizedBox(height: 10),
           Container(
             padding: const EdgeInsets.fromLTRB(10, 12, 10, 12),
             decoration: BoxDecoration(
-              color: AppColors.primaryColor,
+              color: AppColors.secondaryColor,
               borderRadius: BorderRadius.circular(5),
             ),
             child: Row(
@@ -87,20 +90,11 @@ class _GeneratePasswordDialogState extends State<GeneratePasswordDialog> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "${getTranslated("password", context)}:",
-                        style: TextStyles.getTitleDarkRedText(17),
-                      ),
-                      Text(
-                        generatedPassword,
-                        maxLines: 5,
-                        softWrap: true,
-                        style: TextStyles.getTitleWhiteText(17),
-                      ),
-                    ],
+                  child: Text(
+                    generatedPassword,
+                    maxLines: 5,
+                    softWrap: true,
+                    style: TextStyles.getTitleWhiteText(17),
                   ),
                 ),
                 Padding(
