@@ -442,7 +442,6 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
     );
   }
 
-  //todo: also think of some way to give option of generating password and assigning directly to this field
   Column getPasswordField(BuildContext context, TextEditingController controller) {
     return Column(
       mainAxisSize: MainAxisSize.min,
