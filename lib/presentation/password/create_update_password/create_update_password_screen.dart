@@ -460,63 +460,94 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
-          child: TextFormField(
-            controller: controller,
-            validator: (text) {
-              if (text == null || text.isEmpty) {
-                return getTranslated("field_can't_be_empty", context);
-              }
-              return null;
-            },
-            style: TextStyles.getTitleBlueText(18),
-            decoration: InputDecoration(
-              fillColor: AppColors.mWhite,
-              filled: true,
-              contentPadding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
-              errorStyle: TextStyles.getTitleOrangeText(20),
-              border: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(10),
+          child: Row(
+            children: [
+              Expanded(
+                child: TextFormField(
+                  controller: controller,
+                  validator: (text) {
+                    if (text == null || text.isEmpty) {
+                      return getTranslated("field_can't_be_empty", context);
+                    }
+                    return null;
+                  },
+                  style: TextStyles.getTitleBlueText(18),
+                  decoration: InputDecoration(
+                    fillColor: AppColors.mWhite,
+                    filled: true,
+                    contentPadding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
+                    errorStyle: TextStyles.getTitleOrangeText(20),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    suffixIcon: Container(
+                      alignment: Alignment.center,
+                      height: 25,
+                      width: 25,
+                      margin: const EdgeInsets.only(right: 5),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(6),
+                        child: Material(
+                          color: AppColors.mWhite,
+                          child: InkWell(
+                            onTap: () {
+                              showPassword = !showPassword;
+                              setState(() {});
+                            },
+                            splashColor: AppColors.secondaryColor.withOpacity(0.2),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: showPassword
+                                  ? const Icon(
+                                      FontAwesome5.eye,
+                                      color: AppColors.primaryColor,
+                                      size: 17,
+                                    )
+                                  : const Icon(
+                                      FontAwesome5.eye_slash,
+                                      color: AppColors.primaryColor,
+                                      size: 17,
+                                    ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  obscureText: !showPassword,
+                  textInputAction: TextInputAction.next,
+                  onTapOutside: (pointerDown) {
+                    FocusScope.of(context).unfocus();
+                  },
+                ),
               ),
-              suffixIcon: Container(
-                alignment: Alignment.center,
-                height: 25,
-                width: 25,
-                margin: const EdgeInsets.only(right: 5),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(6),
-                  child: Material(
-                    color: AppColors.mWhite,
-                    child: InkWell(
-                      onTap: () {
-                        showPassword = !showPassword;
+              const SizedBox(width: 10),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Material(
+                  color: AppColors.mWhite,
+                  child: InkWell(
+                    splashColor: AppColors.mBlack.withOpacity(0.2),
+                    onTap: () async {
+                      String tempPassword = await Utility.generatePasswordDialog();
+                      if (tempPassword.isNotEmpty) {
+                        passwordController.text = tempPassword;
                         setState(() {});
-                      },
-                      splashColor: AppColors.secondaryColor.withOpacity(0.2),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: showPassword
-                            ? const Icon(
-                                FontAwesome5.eye,
-                                color: AppColors.primaryColor,
-                                size: 17,
-                              )
-                            : const Icon(
-                                FontAwesome5.eye_slash,
-                                color: AppColors.primaryColor,
-                                size: 17,
-                              ),
+                      }
+                    },
+                    child: const Padding(
+                      padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
+                      child: Icon(
+                        Icons.alt_route,
+                        color: AppColors.primaryColor,
+                        size: 25,
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-            obscureText: !showPassword,
-            textInputAction: TextInputAction.next,
-            onTapOutside: (pointerDown) {
-              FocusScope.of(context).unfocus();
-            },
+            ],
           ),
         ),
       ],

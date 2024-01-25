@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:passmana/localization/app_localization.dart';
 import 'package:passmana/presentation/common/common_confirmation_dialog.dart';
+import 'package:passmana/presentation/common/generate_password_dialog.dart';
 import 'package:passmana/router/router.dart';
 import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/constants.dart';
@@ -60,6 +61,16 @@ class Utility {
       default:
         return AppConstants.englishName;
     }
+  }
+
+  static Future<String> generatePasswordDialog() async {
+    String value = await showDialog(
+      context: rootNavigatorKey.currentContext!,
+      builder: (BuildContext context) {
+        return const GeneratePasswordDialog();
+      },
+    );
+    return value;
   }
 
   static Future<bool> deleteConfirmationDialog() async {
