@@ -82,5 +82,7 @@
   "numeric": "Numeric",
   "length": "Length",
   "regenerate_password": "Regenerate Password",
-  "use_password": "Use Password"
+  "use_password": "Use Password",
+  "cancel": "Cancel",
+  "confirm": "Confirm"
 }

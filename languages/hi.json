@@ -69,9 +69,20 @@
   "language": "भाषा",
   "confirmation": "पुष्टीकरण",
   "delete_confirmation": "क्या आप वाकई इस रिकॉर्ड को हटाना चाहते हैं?",
+  "discard_confirmation": "इस पेज़ पर सेव न किये हुए परिवर्तन हो सकते हैं. क्या आप सचमुच उन्हें त्याग कर बाहर निकलना चाहते हैं?",
   "yes": "हां",
   "no": "नहीं",
   "custom_fields": "कस्तम फ़िल्डे",
   "add_field": "फ़िल्ड जोड़ें",
-  "value": "वेल्यु"
+  "value": "वेल्यु",
+  "pronounceable": "उच्चारणीय",
+  "special": "सिम्बोल",
+  "lowercase": "लोअरकेस",
+  "uppercase": "अपरकेस",
+  "numeric": "संख्या",
+  "length": "लंबाई",
+  "regenerate_password": "पासवर्ड फिर से बनाए",
+  "use_password": "पासवर्ड उपयोग करें",
+  "cancel": "रद्द करें",
+  "confirm": "पुष्टि करें"
 }
