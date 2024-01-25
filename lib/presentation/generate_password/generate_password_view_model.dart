@@ -73,7 +73,7 @@ class GeneratePasswordViewModel {
         Utility.copyToClipboard(value);
       },
       onBackPress: () async {
-        bool value = await Utility.discardDataConfirmationDialog();
+        bool? value = await Utility.discardDataConfirmationDialog();
         if (value) {
           router.pop();
         }

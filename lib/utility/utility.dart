@@ -64,17 +64,17 @@ class Utility {
   }
 
   static Future<String> generatePasswordDialog() async {
-    String value = await showDialog(
+    String? value = await showDialog(
       context: rootNavigatorKey.currentContext!,
       builder: (BuildContext context) {
         return const GeneratePasswordDialog();
       },
     );
-    return value;
+    return value ?? "";
   }
 
   static Future<bool> deleteConfirmationDialog() async {
-    bool value = await showDialog(
+    bool? value = await showDialog(
       context: rootNavigatorKey.currentContext!,
       builder: (BuildContext context) {
         return CommonConfirmationDialog(
@@ -85,11 +85,11 @@ class Utility {
         );
       },
     );
-    return value;
+    return value ?? false;
   }
 
   static Future<bool> discardDataConfirmationDialog() async {
-    bool value = await showDialog(
+    bool? value = await showDialog(
       context: rootNavigatorKey.currentContext!,
       builder: (BuildContext context) {
         return CommonConfirmationDialog(
@@ -100,6 +100,6 @@ class Utility {
         );
       },
     );
-    return value;
+    return value ?? false;
   }
 }
