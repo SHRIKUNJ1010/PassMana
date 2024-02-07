@@ -12,6 +12,8 @@ class CreateCard {
   final String cvv;
   final String cardHolderName;
   final String cardPin;
+  final bool hasSecurityGrid;
+  final Map<String,String> securityGridNumber;
 
   CreateCard({
     required this.bankAndCardName,
@@ -19,6 +21,8 @@ class CreateCard {
     required this.cardHolderName,
     required this.cardPin,
     required this.cvv,
+    required this.hasSecurityGrid,
+    required this.securityGridNumber,
   });
 }
 

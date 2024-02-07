@@ -11,6 +11,8 @@ class Card {
   String bankAndCardName;
   String cardNumber;
   String cardHolderName;
+  bool hasSecurityGrid;
+  Map<String,String> securityGridNumber;
   String cvv;
   String cardPin;
   @Property(type: PropertyType.date)
@@ -25,6 +27,8 @@ class Card {
     this.cardHolderName = '',
     this.cardPin = '',
     this.cvv = '',
+    this.hasSecurityGrid = false,
+    this.securityGridNumber = const <String,String>{},
     required this.createdOn,
     required this.lastUpdatedOn,
   });
@@ -35,6 +39,8 @@ class Card {
     String? cardHolderName,
     String? cardPin,
     String? cvv,
+    bool? hasSecurityGrid,
+    Map<String,String>? securityGridNumber,
     required DateTime lastUpdatedOn,
   }) {
     return Card(
@@ -44,6 +50,8 @@ class Card {
       cardHolderName: cardHolderName ?? this.cardHolderName,
       cardPin: cardPin ?? this.cardPin,
       cvv: cvv ?? this.cvv,
+      hasSecurityGrid: hasSecurityGrid ?? this.hasSecurityGrid,
+      securityGridNumber: securityGridNumber ?? this.securityGridNumber,
       createdOn: createdOn,
       lastUpdatedOn: lastUpdatedOn,
     );

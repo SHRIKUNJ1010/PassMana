@@ -18,6 +18,8 @@ class CardBox {
     String cardHolderName = '',
     String cvv = '',
     String cardPin = '',
+    bool hasSecurityGrid = false,
+    Map<String, String> securityGridNumber = const <String, String>{},
   }) {
     _cardBox.put(
       Card(
@@ -26,6 +28,8 @@ class CardBox {
         cardHolderName: cardHolderName,
         cvv: cvv,
         cardPin: cardPin,
+        hasSecurityGrid: hasSecurityGrid,
+        securityGridNumber: securityGridNumber,
         createdOn: DateTime.now(),
         lastUpdatedOn: DateTime.now(),
       ),

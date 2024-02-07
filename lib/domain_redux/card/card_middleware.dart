@@ -27,6 +27,8 @@ void Function(Store<AppState> store, CreateCard action, NextDispatcher next) _cr
       cvv: action.cvv,
       cardHolderName: action.cardHolderName,
       cardPin: action.cardPin,
+      hasSecurityGrid: action.hasSecurityGrid,
+      securityGridNumber: action.securityGridNumber,
     );
     //get all latest cards
     List<Card> cards = objectBox.cardBox.getAllCards();
