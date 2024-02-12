@@ -12,6 +12,7 @@ class CreateCard {
   final String cvv;
   final String cardHolderName;
   final String cardPin;
+  final String expiryDate;
   final bool hasSecurityGrid;
   final Map<String,String> securityGridNumber;
 
@@ -21,6 +22,7 @@ class CreateCard {
     required this.cardHolderName,
     required this.cardPin,
     required this.cvv,
+    required this.expiryDate,
     required this.hasSecurityGrid,
     required this.securityGridNumber,
   });

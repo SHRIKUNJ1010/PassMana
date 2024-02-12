@@ -25,6 +25,7 @@ void Function(Store<AppState> store, CreateCard action, NextDispatcher next) _cr
       bankAndCardName: action.bankAndCardName,
       cardNumber: action.cardNumber,
       cvv: action.cvv,
+      expiryDate: action.expiryDate,
       cardHolderName: action.cardHolderName,
       cardPin: action.cardPin,
       hasSecurityGrid: action.hasSecurityGrid,
