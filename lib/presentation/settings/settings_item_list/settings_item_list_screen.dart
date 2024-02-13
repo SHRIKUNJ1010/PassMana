@@ -129,7 +129,6 @@ class SettingsItemListScreen extends StatelessWidget {
                                 color: AppColors.primaryColor.withOpacity(0.2),
                                 borderRadius: BorderRadius.circular(10),
                               ),
-                              constraints: const BoxConstraints(maxHeight: 330, minHeight: 0),
                               child: child,
                             );
                           },
