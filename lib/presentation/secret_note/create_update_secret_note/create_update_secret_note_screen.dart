@@ -201,7 +201,7 @@ class _CreateUpdateSecretNoteScreenState extends State<CreateUpdateSecretNoteScr
           vm.secretNote != null
               ? getTranslated("update_secret_note", context)
               : getTranslated("create_secret_note", context),
-          style: TextStyles.getTitleWhiteText(25),
+          style: TextStyles.getTitleWhiteText(24),
         ),
         const Spacer(),
       ],

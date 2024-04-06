@@ -85,7 +85,13 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
                       child: ListView(
                         shrinkWrap: true,
                         children: [
-                          const SizedBox(height: 80),
+                          getBankAndCardName(context, bankAndCardNameController),
+                          getCardNumber(context, cardNumberController),
+                          getCardHolderName(context, cardHolderNameController),
+                          getCvv(context, cvvController),
+                          getExpiryDate(context, expiryDateController),
+                          getCardPinField(context, cardPinController),
+                          const SizedBox(height: 180),
                         ],
                       ),
                     ),
@@ -121,7 +127,7 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
           ],
         ),
         Padding(
-          padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
           child: TextFormField(
             controller: controller,
             validator: (text) {
@@ -167,7 +173,7 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
           ],
         ),
         Padding(
-          padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
           child: TextFormField(
             controller: controller,
             validator: (text) {
@@ -213,7 +219,7 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
           ],
         ),
         Padding(
-          padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
           child: TextFormField(
             controller: controller,
             validator: (text) {
@@ -259,7 +265,7 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
           ],
         ),
         Padding(
-          padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
           child: TextFormField(
             controller: controller,
             validator: (text) {
@@ -305,7 +311,7 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
           ],
         ),
         Padding(
-          padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
           child: TextFormField(
             controller: controller,
             validator: (text) {
@@ -342,7 +348,7 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
         Row(
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(20, 5, 0, 10),
+              padding: const EdgeInsets.fromLTRB(20, 20, 0, 10),
               child: Text(
                 "${getTranslated('card_pin', context)}:",
                 style: TextStyles.getTitleWhiteText(20),
@@ -351,7 +357,7 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
           ],
         ),
         Padding(
-          padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
           child: TextFormField(
             controller: controller,
             validator: (text) {
