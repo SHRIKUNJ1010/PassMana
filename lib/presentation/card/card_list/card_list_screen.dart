@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/localization/app_localization.dart';
+import 'package:passmana/presentation/card/card_common_list_tile.dart';
 import 'package:passmana/presentation/card/card_list/card_list_view_model.dart';
 import 'package:passmana/presentation/common/custom_app_bar.dart';
 import 'package:passmana/utility/assets_utility/assets_paths.dart';
@@ -21,6 +22,7 @@ class CardListScreen extends StatelessWidget {
     return StoreConnector<AppState, CardListViewModel>(
       converter: CardListViewModel.fromStore,
       builder: (BuildContext context, CardListViewModel vm) {
+        final double width = MediaQuery.of(context).size.width;
         return Container(
           decoration: Utility.getCommonBackgroundDecoration(),
           child: Scaffold(
@@ -41,11 +43,42 @@ class CardListScreen extends StatelessWidget {
                 ),
                 const SizedBox(width: 10),
                 Text(
-                  getTranslated("card",context),
+                  getTranslated("card", context),
                   style: TextStyles.getTitleWhiteText(28),
                 ),
                 const Spacer(),
               ],
+            ),
+            body: SafeArea(
+              child: vm.cardList.isEmpty
+                  ? Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 20, 20, 100),
+                      child: SizedBox(
+                        width: width - 40,
+                        child: Center(
+                          child: Text(
+                            getTranslated('no_card_found', context),
+                            style: TextStyles.getTitleWhiteText(20),
+                          ),
+                        ),
+                      ),
+                    )
+                  : ListView.builder(
+                      padding: const EdgeInsets.fromLTRB(20, 20, 20, 80),
+                      shrinkWrap: true,
+                      itemCount: vm.cardList.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+                          child: CardCommonListTile(
+                            card: vm.cardList[index],
+                            onTap: () {
+                              //vm.onPasswordTileTap.call(vm.passwordList[index].id);
+                            },
+                          ),
+                        );
+                      },
+                    ),
             ),
           ),
         );

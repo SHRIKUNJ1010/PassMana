@@ -71,40 +71,43 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
       builder: (BuildContext context, CreateUpdateCardViewModel vm) {
         return Container(
           decoration: Utility.getCommonBackgroundDecoration(),
-          child: Stack(
-            children: [
-              //TODO: find a way to add loader while creating updating or deleting data for all create update screen
-              //TODO: also add manual delay show that process can be shown that process does loads
-              Scaffold(
-                resizeToAvoidBottomInset: true,
-                backgroundColor: Colors.transparent,
-                appBar: getAppBar(vm, context),
-                body: Column(
-                  children: [
-                    Expanded(
-                      child: ListView(
-                        shrinkWrap: true,
-                        children: [
-                          getBankAndCardName(context, bankAndCardNameController),
-                          getCardNumber(context, cardNumberController),
-                          getCardHolderName(context, cardHolderNameController),
-                          getCvv(context, cvvController),
-                          getExpiryDate(context, expiryDateController),
-                          getCardPinField(context, cardPinController),
-                          const SizedBox(height: 180),
-                        ],
+          child: Form(
+            key: _formKey,
+            child: Stack(
+              children: [
+                //TODO: find a way to add loader while creating updating or deleting data for all create update screen
+                //TODO: also add manual delay show that process can be shown that process does loads
+                Scaffold(
+                  resizeToAvoidBottomInset: true,
+                  backgroundColor: Colors.transparent,
+                  appBar: getAppBar(vm, context),
+                  body: Column(
+                    children: [
+                      Expanded(
+                        child: ListView(
+                          shrinkWrap: true,
+                          children: [
+                            getBankAndCardName(context, bankAndCardNameController),
+                            getCardNumber(context, cardNumberController),
+                            getCardHolderName(context, cardHolderNameController),
+                            getCvv(context, cvvController),
+                            getExpiryDate(context, expiryDateController),
+                            getCardPinField(context, cardPinController),
+                            const SizedBox(height: 180),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              Positioned(
-                left: 0,
-                right: 0,
-                bottom: 0,
-                child: getCreateUpdateButton(vm, context),
-              ),
-            ],
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  child: getCreateUpdateButton(vm, context),
+                ),
+              ],
+            ),
           ),
         );
       },

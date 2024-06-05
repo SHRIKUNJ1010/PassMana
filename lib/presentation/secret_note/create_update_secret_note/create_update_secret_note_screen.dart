@@ -44,35 +44,38 @@ class _CreateUpdateSecretNoteScreenState extends State<CreateUpdateSecretNoteScr
       builder: (BuildContext context, CreateUpdateSecretNoteViewModel vm) {
         return Container(
           decoration: Utility.getCommonBackgroundDecoration(),
-          child: Stack(
-            children: [
-              //TODO: find a way to add loader while creating updating or deleting data for all create update screen
-              //TODO: also add manual delay show that process can be shown that process does loads
-              Scaffold(
-                resizeToAvoidBottomInset: true,
-                backgroundColor: Colors.transparent,
-                appBar: getAppBar(vm, context),
-                body: Column(
-                  children: [
-                    Expanded(
-                      child: ListView(
-                        shrinkWrap: true,
-                        children: [
-                          getNoteField(context, noteController),
-                          const SizedBox(height: 80),
-                        ],
+          child: Form(
+            key: _formKey,
+            child: Stack(
+              children: [
+                //TODO: find a way to add loader while creating updating or deleting data for all create update screen
+                //TODO: also add manual delay show that process can be shown that process does loads
+                Scaffold(
+                  resizeToAvoidBottomInset: true,
+                  backgroundColor: Colors.transparent,
+                  appBar: getAppBar(vm, context),
+                  body: Column(
+                    children: [
+                      Expanded(
+                        child: ListView(
+                          shrinkWrap: true,
+                          children: [
+                            getNoteField(context, noteController),
+                            const SizedBox(height: 80),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              Positioned(
-                left: 0,
-                right: 0,
-                bottom: 0,
-                child: getCreateUpdateButton(vm, context),
-              ),
-            ],
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  child: getCreateUpdateButton(vm, context),
+                ),
+              ],
+            ),
           ),
         );
       },
