@@ -43,8 +43,8 @@ class Utility {
         end: Alignment.bottomRight,
         stops: const [0.10, 0.90],
         colors: [
-          AppColors.accentPrimaryColor.withOpacity(0.7),
-          AppColors.accentSecondaryColor.withOpacity(0.7),
+          AppColors.accentPrimaryColor.withOpacity(0.9),
+          AppColors.accentSecondaryColor.withOpacity(0.9),
         ],
       ),
     );

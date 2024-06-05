@@ -84,5 +84,11 @@
   "regenerate_password": "Regenerate Password",
   "use_password": "Use Password",
   "cancel": "Cancel",
-  "confirm": "Confirm"
+  "confirm": "Confirm",
+  "bank_and_card_name": "Bank And Card Name",
+  "card_number": "Card Number",
+  "card_holder_name": "Card Holder Name",
+  "cvv": "CVV",
+  "expiry_date": "Expiry Date",
+  "card_pin": "Card Pin"
 }
