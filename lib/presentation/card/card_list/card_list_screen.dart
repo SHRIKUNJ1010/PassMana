@@ -69,11 +69,11 @@ class CardListScreen extends StatelessWidget {
                       itemCount: vm.cardList.length,
                       itemBuilder: (BuildContext context, int index) {
                         return Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+                          padding: const EdgeInsets.fromLTRB(0, 7, 0, 7),
                           child: CardCommonListTile(
                             card: vm.cardList[index],
                             onTap: () {
-                              //vm.onPasswordTileTap.call(vm.passwordList[index].id);
+                              vm.onCardTileTap.call(vm.cardList[index].id);
                             },
                           ),
                         );

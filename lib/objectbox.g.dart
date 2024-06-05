@@ -163,7 +163,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(4, 7319612359426061167),
       name: 'Card',
-      lastPropertyId: const IdUid(8, 4301313653865467201),
+      lastPropertyId: const IdUid(10, 1738504638277915009),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -205,6 +205,16 @@ final _entities = <ModelEntity>[
             id: const IdUid(8, 4301313653865467201),
             name: 'lastUpdatedOn',
             type: 10,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(9, 687379100988768860),
+            name: 'hasSecurityGrid',
+            type: 1,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(10, 1738504638277915009),
+            name: 'expiryDate',
+            type: 9,
             flags: 0)
       ],
       relations: <ModelRelation>[],
@@ -460,7 +470,8 @@ ModelDefinition getObjectBoxModel() {
           final cardHolderNameOffset = fbb.writeString(object.cardHolderName);
           final cvvOffset = fbb.writeString(object.cvv);
           final cardPinOffset = fbb.writeString(object.cardPin);
-          fbb.startTable(9);
+          final expiryDateOffset = fbb.writeString(object.expiryDate);
+          fbb.startTable(11);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, bankAndCardNameOffset);
           fbb.addOffset(2, cardNumberOffset);
@@ -469,6 +480,8 @@ ModelDefinition getObjectBoxModel() {
           fbb.addOffset(5, cardPinOffset);
           fbb.addInt64(6, object.createdOn.millisecondsSinceEpoch);
           fbb.addInt64(7, object.lastUpdatedOn.millisecondsSinceEpoch);
+          fbb.addBool(8, object.hasSecurityGrid);
+          fbb.addOffset(9, expiryDateOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -489,6 +502,10 @@ ModelDefinition getObjectBoxModel() {
               .vTableGet(buffer, rootOffset, 14, '');
           final cvvParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 12, '');
+          final expiryDateParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 22, '');
+          final hasSecurityGridParam =
+              const fb.BoolReader().vTableGet(buffer, rootOffset, 20, false);
           final createdOnParam = DateTime.fromMillisecondsSinceEpoch(
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 16, 0));
           final lastUpdatedOnParam = DateTime.fromMillisecondsSinceEpoch(
@@ -500,6 +517,8 @@ ModelDefinition getObjectBoxModel() {
               cardHolderName: cardHolderNameParam,
               cardPin: cardPinParam,
               cvv: cvvParam,
+              expiryDate: expiryDateParam,
+              hasSecurityGrid: hasSecurityGridParam,
               createdOn: createdOnParam,
               lastUpdatedOn: lastUpdatedOnParam);
 
@@ -665,6 +684,14 @@ class Card_ {
   /// see [Card.lastUpdatedOn]
   static final lastUpdatedOn =
       QueryIntegerProperty<Card>(_entities[3].properties[7]);
+
+  /// see [Card.hasSecurityGrid]
+  static final hasSecurityGrid =
+      QueryBooleanProperty<Card>(_entities[3].properties[8]);
+
+  /// see [Card.expiryDate]
+  static final expiryDate =
+      QueryStringProperty<Card>(_entities[3].properties[9]);
 }
 
 /// [SecretNote] entity fields to define ObjectBox queries.

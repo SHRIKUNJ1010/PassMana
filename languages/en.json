@@ -92,5 +92,6 @@
   "expiry_date": "Expiry Date",
   "card_pin": "Card Pin",
   "no_secret_note_found": "No Secret Note Found",
-  "no_card_found": "No Card Found"
+  "no_card_found": "No Card Found",
+  "exp_date": "Exp. Date"
 }

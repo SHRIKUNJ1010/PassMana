@@ -38,6 +38,7 @@ class CreateUpdateSecretNoteViewModel {
             note: note,
           ),
         );
+        router.pop();
       },
       updateSecretNote: ({
         required String note,
@@ -54,6 +55,7 @@ class CreateUpdateSecretNoteViewModel {
                 ),
           ),
         );
+        router.pop();
       },
       onBackPress: () {
         router.pop();

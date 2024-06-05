@@ -73,7 +73,7 @@ class SecretNoteListScreen extends StatelessWidget {
                           child: SecretNoteCommonListTile(
                             secretNote: vm.secretNoteList[index],
                             onTap: () {
-                              //vm.onPasswordTileTap.call(vm.passwordList[index].id);
+                              vm.onSecretNoteTileTap.call(vm.secretNoteList[index].id);
                             },
                           ),
                         );

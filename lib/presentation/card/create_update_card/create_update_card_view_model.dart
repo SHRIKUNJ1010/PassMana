@@ -66,6 +66,7 @@ class CreateUpdateCardViewModel {
             securityGridNumber: securityGridNumber,
           ),
         );
+        router.pop();
       },
       updateCard: ({
         required String bankAndCardName,
@@ -96,6 +97,7 @@ class CreateUpdateCardViewModel {
                 ),
           ),
         );
+        router.pop();
       },
       onBackPress: () {
         router.pop();
