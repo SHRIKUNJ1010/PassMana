@@ -18,6 +18,7 @@ import 'package:passmana/presentation/group/group_list/group_list_screen.dart';
 import 'package:passmana/presentation/navigation_bar/navigation_bar_screen.dart';
 import 'package:passmana/presentation/password/all_password_list/all_password_list_screen.dart';
 import 'package:passmana/presentation/password/create_update_password/create_update_password_screen.dart';
+import 'package:passmana/presentation/password/filter_search/filter_search_screen.dart';
 import 'package:passmana/presentation/password/password_details/password_details_screen.dart';
 import 'package:passmana/presentation/password/password_home_list/password_home_list_screen.dart';
 import 'package:passmana/presentation/secret_note/create_update_secret_note/create_update_secret_note_screen.dart';
@@ -114,6 +115,16 @@ final GoRouter router = GoRouter(
       pageBuilder: (context, state) {
         return SlideLeftTransitionPage(
           child: const GeneratePasswordScreen(),
+          key: state.pageKey,
+        );
+      },
+    ),
+    GoRoute(
+      parentNavigatorKey: rootNavigatorKey,
+      path: AppRoutes.filterSearch,
+      pageBuilder: (context, state) {
+        return SlideLeftTransitionPage(
+          child: const FilterSearchScreen(),
           key: state.pageKey,
         );
       },

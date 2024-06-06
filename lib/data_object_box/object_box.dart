@@ -12,7 +12,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
 
 //provides the access to the object box store throughout the app
-//todo: "flutter pub run build_runner build" run this command if object box schema
+//TODO: "flutter pub run build_runner build" run this command if object box schema
 // changed for any of the object box
 class ObjectBox {
   late final Store _store;

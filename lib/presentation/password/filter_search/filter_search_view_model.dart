@@ -6,6 +6,7 @@ import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/domain_redux/filter_search/filter_search_actions.dart';
 import 'package:passmana/domain_redux/filter_search/filter_search_selector.dart';
 import 'package:passmana/model/group_model.dart';
+import 'package:passmana/router/router.dart';
 import 'package:redux/redux.dart';
 
 class FilterSearchViewModel {
@@ -13,12 +14,14 @@ class FilterSearchViewModel {
   final List<Map<Group, bool>> selectedGroupsForFilterList;
   final Function(int) changeSelectionOfGroup;
   final Function(String) changeKeyword;
+  final Function onBackPress;
 
   FilterSearchViewModel({
     required this.searchKeyword,
     required this.selectedGroupsForFilterList,
     required this.changeSelectionOfGroup,
     required this.changeKeyword,
+    required this.onBackPress,
   });
 
   static FilterSearchViewModel fromStore(Store<AppState> store) {
@@ -30,6 +33,9 @@ class FilterSearchViewModel {
       },
       changeKeyword: (String searchKeyword) {
         store.dispatch(ChangeKeyword(searchKeyword: searchKeyword));
+      },
+      onBackPress: () {
+        router.pop();
       },
     );
   }
