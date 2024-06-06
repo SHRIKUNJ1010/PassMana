@@ -11,6 +11,7 @@ import 'package:passmana/presentation/common/generate_password_dialog.dart';
 import 'package:passmana/router/router.dart';
 import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/constants.dart';
+import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Utility {
@@ -71,6 +72,45 @@ class Utility {
       },
     );
     return value ?? "";
+  }
+
+  static exportedDbFileLocationDialog(String filePath) async {
+    await showDialog(
+      context: rootNavigatorKey.currentContext!,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            getTranslated('db_file_location', context),
+            style: TextStyles.getTitleTransparentBlackCustomWeightText(
+              fontSize: 16,
+              opacity: 1,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          content: Text(
+            "${getTranslated('your_db_file_location_is', context)}: $filePath",
+            style: TextStyles.getTitleTransparentBlackCustomWeightText(
+              fontSize: 16,
+              opacity: 1,
+              fontWeight: FontWeight.normal,
+            ),
+          ),
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                getTranslated('confirm', context),
+                style: TextStyles.getTitleBlueText(16),
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   static Future<bool> deleteConfirmationDialog() async {

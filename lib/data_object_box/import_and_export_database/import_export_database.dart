@@ -35,7 +35,7 @@ class ImportExportDatabase {
     return '${appDir.path}/db_file.zip';
   }
 
-  static void import(String filePath) async {
+  static Future<void> import(String filePath) async {
     List<Password> tempPasswords = <Password>[];
     List<Group> tempGroups = <Group>[];
     List<Card> tempCards = <Card>[];
@@ -81,5 +81,6 @@ class ImportExportDatabase {
         objectBox.secretNoteBox.addAllSecretNote(tempSecretNotes);
       }
     }
+    return;
   }
 }

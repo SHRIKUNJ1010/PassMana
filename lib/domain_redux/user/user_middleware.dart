@@ -2,11 +2,18 @@
 * Created by Shrikunj Patel on 8/28/2023.
 */
 
+import 'package:passmana/data_object_box/import_and_export_database/import_export_database.dart';
 import 'package:passmana/domain_redux/app_state.dart';
+import 'package:passmana/domain_redux/card/card_actions.dart';
+import 'package:passmana/domain_redux/group/group_actions.dart';
+import 'package:passmana/domain_redux/password/password_actions.dart';
+import 'package:passmana/domain_redux/secret_note/secret_note_actions.dart';
 import 'package:passmana/domain_redux/user/user_actions.dart';
 import 'package:passmana/main.dart';
 import 'package:passmana/model/user_model.dart';
+import 'package:passmana/utility/file_utility/file_utility.dart';
 import 'package:passmana/utility/method_channel_utility/biometric_verification_channel.dart';
+import 'package:passmana/utility/utility.dart';
 import 'package:redux/redux.dart';
 
 List<Middleware<AppState>> createUserMiddleware() {
@@ -19,7 +26,33 @@ List<Middleware<AppState>> createUserMiddleware() {
     TypedMiddleware<AppState, SwitchAutoFillOption>(_switchAutoFillOption()),
     TypedMiddleware<AppState, ChangeLanguage>(_changeLanguage()),
     TypedMiddleware<AppState, LoadUser>(_loadUser()),
+    TypedMiddleware<AppState, ImportDataToDatabase>(_importDataToDatabase()),
+    TypedMiddleware<AppState, ExportDataFromDatabase>(_exportDataFromDatabase()),
   ];
+}
+
+Future<void> Function(Store<AppState> store, ImportDataToDatabase action, NextDispatcher next) _importDataToDatabase() {
+  return (store, action, next) async {
+    next(action);
+    String? importedFilePath = await FileUtility.pickFileFromStorage();
+    if (importedFilePath == null) return;
+    //Import Data to Database
+    await ImportExportDatabase.import(importedFilePath);
+    store.dispatch(GetAllPasswords());
+    store.dispatch(GetAllCards());
+    store.dispatch(GetAllGroups());
+    store.dispatch(GetAllSecretNotes());
+  };
+}
+
+Future<void> Function(Store<AppState> store, ExportDataFromDatabase action, NextDispatcher next) _exportDataFromDatabase() {
+  return (store, action, next) async {
+    next(action);
+    String exportedFilePath = await ImportExportDatabase.export();
+    if (exportedFilePath.isNotEmpty) {
+      Utility.exportedDbFileLocationDialog(exportedFilePath);
+    }
+  };
 }
 
 void Function(Store<AppState> store, LoadUser action, NextDispatcher next) _loadUser() {

@@ -34,6 +34,10 @@ class SwitchBiometricOption {}
 
 class SwitchAutoFillOption {}
 
+class ImportDataToDatabase {}
+
+class ExportDataFromDatabase {}
+
 class ChangeLanguage {
   String languageValue;
 
