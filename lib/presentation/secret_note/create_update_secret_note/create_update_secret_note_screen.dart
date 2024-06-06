@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:passmana/domain_redux/app_state.dart';
+import 'package:passmana/domain_redux/secret_note/secret_note_selector.dart';
 import 'package:passmana/localization/app_localization.dart';
 import 'package:passmana/presentation/common/custom_app_bar.dart';
 import 'package:passmana/presentation/secret_note/create_update_secret_note/create_update_secret_note_view_model.dart';
@@ -41,6 +42,11 @@ class _CreateUpdateSecretNoteScreenState extends State<CreateUpdateSecretNoteScr
       converter: (Store<AppState> store) {
         return CreateUpdateSecretNoteViewModel.fromStore(store, widget.id);
       },
+      onInit: (Store<AppState> store) {
+        if (widget.id != null) {
+          noteController.text = getSecretNoteById(store.state, widget.id)?.note ?? '';
+        }
+      },
       builder: (BuildContext context, CreateUpdateSecretNoteViewModel vm) {
         return Container(
           decoration: Utility.getCommonBackgroundDecoration(),
@@ -54,19 +60,7 @@ class _CreateUpdateSecretNoteScreenState extends State<CreateUpdateSecretNoteScr
                   resizeToAvoidBottomInset: true,
                   backgroundColor: Colors.transparent,
                   appBar: getAppBar(vm, context),
-                  body: Column(
-                    children: [
-                      Expanded(
-                        child: ListView(
-                          shrinkWrap: true,
-                          children: [
-                            getNoteField(context, noteController),
-                            const SizedBox(height: 80),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+                  body: getNoteField(context, noteController),
                 ),
                 Positioned(
                   left: 0,
@@ -82,50 +76,34 @@ class _CreateUpdateSecretNoteScreenState extends State<CreateUpdateSecretNoteScr
     );
   }
 
-  Column getNoteField(BuildContext context, TextEditingController controller) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 5, 0, 10),
-              child: Text(
-                "${getTranslated('note', context)}:",
-                style: TextStyles.getTitleWhiteText(20),
-              ),
-            ),
-          ],
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
-          child: TextFormField(
-            controller: controller,
-            validator: (text) {
-              if (text == null || text.isEmpty) {
-                return getTranslated("field_can't_be_empty", context);
-              }
-              return null;
-            },
-            style: TextStyles.getTitleBlueText(18),
-            decoration: InputDecoration(
-              fillColor: AppColors.mWhite,
-              filled: true,
-              contentPadding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
-              errorStyle: TextStyles.getTitleOrangeText(20),
-              border: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-            maxLines: 5,
-            textInputAction: TextInputAction.done,
-            onTapOutside: (pointerDown) {
-              FocusScope.of(context).unfocus();
-            },
+  Widget getNoteField(BuildContext context, TextEditingController controller) {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(20, 20, 20, 90),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+      color: AppColors.mWhite,
+      ),
+      child: TextFormField(
+        controller: controller,
+        validator: (text) {
+          if (text == null || text.isEmpty) {
+            return getTranslated("field_can't_be_empty", context);
+          }
+          return null;
+        },
+        style: TextStyles.getTitleBlueText(18),
+        decoration: const InputDecoration(
+          contentPadding: EdgeInsets.fromLTRB(15, 13, 15, 13),
+          border: OutlineInputBorder(
+            borderSide: BorderSide.none,
           ),
         ),
-      ],
+        maxLines: 1000,
+        textInputAction: TextInputAction.done,
+        onTapOutside: (pointerDown) {
+          FocusScope.of(context).unfocus();
+        },
+      ),
     );
   }
 
@@ -201,12 +179,40 @@ class _CreateUpdateSecretNoteScreenState extends State<CreateUpdateSecretNoteScr
           ),
         ),
         Text(
-          vm.secretNote != null
-              ? getTranslated("update_secret_note", context)
-              : getTranslated("create_secret_note", context),
+          vm.secretNote != null ? getTranslated("update_secret_note", context) : getTranslated("create_secret_note", context),
           style: TextStyles.getTitleWhiteText(24),
         ),
-        const Spacer(),
+        vm.secretNote != null
+            ? Expanded(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Material(
+                  color: AppColors.secondaryMaterialColor[700],
+                  child: InkWell(
+                    splashColor: AppColors.mWhite.withOpacity(0.2),
+                    onTap: () {
+                      vm.deleteSecretNote.call();
+                    },
+                    child: const Padding(
+                      padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
+                      child: Icon(
+                        Icons.delete,
+                        color: AppColors.mWhite,
+                        size: 25,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 20),
+            ],
+          ),
+        )
+            : const Spacer(),
       ],
     );
   }

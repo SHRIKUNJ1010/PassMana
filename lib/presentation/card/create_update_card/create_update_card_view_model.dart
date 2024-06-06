@@ -7,6 +7,8 @@ import 'package:passmana/domain_redux/card/card_actions.dart';
 import 'package:passmana/domain_redux/card/card_selector.dart';
 import 'package:passmana/model/card_model.dart';
 import 'package:passmana/router/router.dart';
+import 'package:passmana/utility/page_routes_utility/page_routes.dart';
+import 'package:passmana/utility/utility.dart';
 import 'package:redux/redux.dart';
 
 class CreateUpdateCardViewModel {
@@ -32,12 +34,14 @@ class CreateUpdateCardViewModel {
     required bool hasSecurityGrid,
     required Map<String, String> securityGridNumber,
   }) updateCard;
+  final Function deleteCard;
   final Function onBackPress;
 
   CreateUpdateCardViewModel({
     this.card,
     required this.createCard,
     required this.updateCard,
+    required this.deleteCard,
     required this.onBackPress,
   });
 
@@ -98,6 +102,13 @@ class CreateUpdateCardViewModel {
           ),
         );
         router.pop();
+      },
+      deleteCard: () async {
+        bool hasConfirmed = await Utility.deleteConfirmationDialog();
+        if (hasConfirmed) {
+          store.dispatch(DeleteCard(cardId: id ?? 0));
+          router.go(AppRoutes.cardList);
+        }
       },
       onBackPress: () {
         router.pop();

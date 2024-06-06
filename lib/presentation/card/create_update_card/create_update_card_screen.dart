@@ -513,7 +513,37 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
           vm.card != null ? getTranslated("update_card", context) : getTranslated("create_card", context),
           style: TextStyles.getTitleWhiteText(25),
         ),
-        const Spacer(),
+        vm.card != null
+            ? Expanded(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Material(
+                  color: AppColors.secondaryMaterialColor[700],
+                  child: InkWell(
+                    splashColor: AppColors.mWhite.withOpacity(0.2),
+                    onTap: () {
+                      vm.deleteCard.call();
+                    },
+                    child: const Padding(
+                      padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
+                      child: Icon(
+                        Icons.delete,
+                        color: AppColors.mWhite,
+                        size: 25,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 20),
+            ],
+          ),
+        )
+            : const Spacer(),
       ],
     );
   }
