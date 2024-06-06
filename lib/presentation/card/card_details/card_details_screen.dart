@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/localization/app_localization.dart';
 import 'package:passmana/presentation/card/card_details/card_details_view_model.dart';
@@ -13,7 +14,7 @@ import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:passmana/utility/utility.dart';
 import 'package:redux/redux.dart';
 
-class CardDetailsScreen extends StatelessWidget {
+class CardDetailsScreen extends StatefulWidget {
   final int id;
 
   const CardDetailsScreen({
@@ -22,33 +23,263 @@ class CardDetailsScreen extends StatelessWidget {
   });
 
   @override
+  State<CardDetailsScreen> createState() => _CardDetailsScreenState();
+}
+
+class _CardDetailsScreenState extends State<CardDetailsScreen> {
+  bool showCardPin = false;
+
+  @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, CardDetailsViewModel>(
       converter: (Store<AppState> store) {
-        return CardDetailsViewModel.fromStore(store, id);
+        return CardDetailsViewModel.fromStore(store, widget.id);
       },
       builder: (BuildContext context, CardDetailsViewModel vm) {
-        final double width = MediaQuery.of(context).size.width;
         return Container(
           decoration: Utility.getCommonBackgroundDecoration(),
           child: Scaffold(
             resizeToAvoidBottomInset: false,
             backgroundColor: Colors.transparent,
-            appBar: getAppBar(vm,context),
-            body: ListView(
-              padding: const EdgeInsets.fromLTRB(20, 20, 20, 80),
-              shrinkWrap: true,
-              children: [
-                SizedBox(height: width),
-              ],
-            ),
+            appBar: getAppBar(vm, context),
+            body: vm.card.id == 0
+                ? const SizedBox()
+                : ListView(
+                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 80),
+                    shrinkWrap: true,
+                    children: [
+                      const SizedBox(height: 10),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            vm.card.bankAndCardName,
+                            style: TextStyles.getBoldWhiteText(30),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      getCardHolderNameContainer(vm, context),
+                      const SizedBox(height: 10),
+                      getCardNumberContainer(vm, context),
+                      const SizedBox(height: 10),
+                      getExpiryDateAndCvvContainer(vm, context),
+                      const SizedBox(height: 10),
+                      getCardPinContainer(vm, context),
+                    ],
+                  ),
           ),
         );
       },
     );
   }
 
-  CustomAppBar getAppBar(CardDetailsViewModel vm,BuildContext context) {
+  Container getCardHolderNameContainer(CardDetailsViewModel vm, BuildContext context) {
+    return getCommonContainer(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "${getTranslated("card_holder_name", context)}:",
+            style: TextStyles.getTitleDarkRedText(17),
+          ),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Text(
+                  vm.card.cardHolderName,
+                  maxLines: 5,
+                  softWrap: true,
+                  style: TextStyles.getTitleTransparentBlackText(
+                    fontSize: 17,
+                    opacity: 1,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Container getCardNumberContainer(CardDetailsViewModel vm, BuildContext context) {
+    return getCommonContainer(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "${getTranslated("card_number", context)}:",
+            style: TextStyles.getTitleDarkRedText(17),
+          ),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Text(
+                  vm.card.cardNumber,
+                  maxLines: 5,
+                  softWrap: true,
+                  style: TextStyles.getTitleTransparentBlackText(
+                    fontSize: 17,
+                    opacity: 1,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Row getExpiryDateAndCvvContainer(CardDetailsViewModel vm, BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: getCommonContainer(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "${getTranslated("exp_date", context)}:",
+                  style: TextStyles.getTitleDarkRedText(17),
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        vm.card.expiryDate,
+                        maxLines: 5,
+                        softWrap: true,
+                        style: TextStyles.getTitleTransparentBlackText(
+                          fontSize: 17,
+                          opacity: 1,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(width: 10),
+        Expanded(
+          child: getCommonContainer(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "${getTranslated("cvv", context)}:",
+                  style: TextStyles.getTitleDarkRedText(17),
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        vm.card.cvv,
+                        maxLines: 5,
+                        softWrap: true,
+                        style: TextStyles.getTitleTransparentBlackText(
+                          fontSize: 17,
+                          opacity: 1,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Container getCardPinContainer(CardDetailsViewModel vm, BuildContext context) {
+    return getCommonContainer(
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "${getTranslated("card_pin", context)}:",
+                  style: TextStyles.getTitleDarkRedText(17),
+                ),
+                Text(
+                  showCardPin ? vm.card.cardPin : vm.card.cardPin.replaceAll(RegExp(r"."), "*"),
+                  maxLines: 5,
+                  softWrap: true,
+                  style: TextStyles.getTitleTransparentBlackText(
+                    fontSize: 17,
+                    opacity: 1,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  splashColor: AppColors.primaryColor.withOpacity(0.2),
+                  onTap: () {
+                    showCardPin = !showCardPin;
+                    setState(() {});
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: showCardPin
+                        ? const Icon(
+                            FontAwesome5.eye,
+                            color: AppColors.primaryColor,
+                            size: 17,
+                          )
+                        : const Icon(
+                            FontAwesome5.eye_slash,
+                            color: AppColors.primaryColor,
+                            size: 17,
+                          ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Container getCommonContainer({
+    required Widget child,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(5),
+        color: AppColors.mWhite,
+      ),
+      padding: const EdgeInsets.fromLTRB(10, 7, 10, 7),
+      child: child,
+    );
+  }
+
+  CustomAppBar getAppBar(CardDetailsViewModel vm, BuildContext context) {
     return CustomAppBar(
       centerWidgetsList: [
         Expanded(
@@ -81,7 +312,7 @@ class CardDetailsScreen extends StatelessWidget {
           ),
         ),
         Text(
-          getTranslated("card_details",context),
+          getTranslated("card_details", context),
           style: TextStyles.getTitleWhiteText(25),
         ),
         Expanded(

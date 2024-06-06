@@ -11,6 +11,7 @@ class Card {
   String bankAndCardName;
   String cardNumber;
   String cardHolderName;
+  //TODO: pending security grid implementation
   bool hasSecurityGrid;
   Map<String,String> securityGridNumber;
   String cvv;
