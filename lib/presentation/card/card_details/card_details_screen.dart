@@ -121,7 +121,7 @@ class _CardDetailsScreenState extends State<CardDetailsScreen> {
             children: [
               Expanded(
                 child: Text(
-                  vm.card.cardNumber,
+                  vm.card.cardNumber.replaceAllMapped(RegExp(r'.{4}'), (match) => '${match.group(0)} '),
                   maxLines: 5,
                   softWrap: true,
                   style: TextStyles.getTitleTransparentBlackText(

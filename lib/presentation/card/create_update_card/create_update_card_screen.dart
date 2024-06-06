@@ -3,6 +3,7 @@
 */
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:passmana/domain_redux/app_state.dart';
@@ -11,6 +12,7 @@ import 'package:passmana/localization/app_localization.dart';
 import 'package:passmana/presentation/card/create_update_card/create_update_card_view_model.dart';
 import 'package:passmana/presentation/common/custom_app_bar.dart';
 import 'package:passmana/utility/color.dart';
+import 'package:passmana/utility/text_utility/card_text_field_formatter.dart';
 import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:passmana/utility/utility.dart';
 import 'package:redux/redux.dart';
@@ -60,7 +62,7 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
       onInit: (Store<AppState> store) {
         if (widget.id != null) {
           bankAndCardNameController.text = getCardById(store.state, widget.id)?.bankAndCardName ?? "";
-          cardNumberController.text = getCardById(store.state, widget.id)?.cardNumber ?? "";
+          cardNumberController.text = (getCardById(store.state, widget.id)?.cardNumber ?? "").replaceAllMapped(RegExp(r'.{4}'), (match) => '${match.group(0)} ');
           cardHolderNameController.text = getCardById(store.state, widget.id)?.cardHolderName ?? "";
           cvvController.text = getCardById(store.state, widget.id)?.cvv ?? "";
           expiryDateController.text = getCardById(store.state, widget.id)?.expiryDate ?? "";
@@ -200,6 +202,11 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
+            inputFormatters: [
+              FilteringTextInputFormatter.digitsOnly,
+              CardNumberFormatter(),
+            ],
+            keyboardType: TextInputType.number,
             textInputAction: TextInputAction.next,
             onTapOutside: (pointerDown) {
               FocusScope.of(context).unfocus();
@@ -296,6 +303,10 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
+            inputFormatters: [
+              FilteringTextInputFormatter.digitsOnly,
+            ],
+            keyboardType: TextInputType.number,
             textInputAction: TextInputAction.next,
             onTapOutside: (pointerDown) {
               FocusScope.of(context).unfocus();
@@ -425,6 +436,10 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
                 ),
               ),
             ),
+            inputFormatters: [
+              FilteringTextInputFormatter.digitsOnly,
+            ],
+            keyboardType: TextInputType.number,
             obscureText: !showCardPin,
             textInputAction: TextInputAction.next,
             onTapOutside: (pointerDown) {
@@ -453,7 +468,7 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
               if (widget.id != null) {
                 vm.updateCard.call(
                   bankAndCardName: bankAndCardNameController.text,
-                  cardNumber: cardNumberController.text,
+                  cardNumber: cardNumberController.text.replaceAll(' ', ''),
                   cardHolderName: cardHolderNameController.text,
                   cvv: cvvController.text,
                   expiryDate: expiryDateController.text,
@@ -464,7 +479,7 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
               } else {
                 vm.createCard.call(
                   bankAndCardName: bankAndCardNameController.text,
-                  cardNumber: cardNumberController.text,
+                  cardNumber: cardNumberController.text.replaceAll(' ', ''),
                   cardHolderName: cardHolderNameController.text,
                   cvv: cvvController.text,
                   expiryDate: expiryDateController.text,
