@@ -41,6 +41,10 @@ class GroupBox {
     return _groupBox.getAll();
   }
 
+  addAllGroups(List<Group> tempGroups) {
+    _groupBox.putMany(tempGroups);
+  }
+
   List<Group> getPopularGroups() {
     //take all groups from object box
     final List<Group> allGroups = _groupBox.getAll();

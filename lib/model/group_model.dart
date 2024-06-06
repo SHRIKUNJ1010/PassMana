@@ -41,4 +41,22 @@ class Group {
       lastUpdatedOn: lastUpdatedOn,
     );
   }
+
+  factory Group.fromJson(Map<String, dynamic> json) => Group(
+        id: json['id'],
+        groupName: json['group_name'],
+        description: json['description'],
+        createdOn: json['created_on'],
+        lastUpdatedOn: json['last_updated_on'],
+      );
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['group_name'] = groupName;
+    data['description'] = description;
+    data['created_on'] = createdOn;
+    data['last_updated_on'] = lastUpdatedOn;
+    return data;
+  }
 }

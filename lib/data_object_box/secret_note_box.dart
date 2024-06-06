@@ -38,6 +38,10 @@ class SecretNoteBox {
     return _secretNoteBox.getAll();
   }
 
+  addAllSecretNote(List<SecretNote> tempSecretNotes) {
+    _secretNoteBox.putMany(tempSecretNotes);
+  }
+
   SecretNote? getOneSecretNote(int secretNoteId) {
     return _secretNoteBox.get(secretNoteId);
   }

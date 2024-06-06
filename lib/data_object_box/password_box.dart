@@ -54,6 +54,10 @@ class PasswordBox {
     return _passwordBox.getAll();
   }
 
+  addAllPasswords(List<Password> tempPasswords) {
+    _passwordBox.putMany(tempPasswords);
+  }
+
   Password? getOnePassword(int passwordId) {
     return _passwordBox.get(passwordId);
   }

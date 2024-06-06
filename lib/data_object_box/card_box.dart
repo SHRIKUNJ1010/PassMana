@@ -52,6 +52,10 @@ class CardBox {
     return _cardBox.getAll();
   }
 
+  addAllCards(List<Card> tempCards) {
+    _cardBox.putMany(tempCards);
+  }
+
   Card? getOneCard(int cardId) {
     return _cardBox.get(cardId);
   }

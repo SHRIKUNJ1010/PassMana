@@ -11,9 +11,10 @@ class Card {
   String bankAndCardName;
   String cardNumber;
   String cardHolderName;
+
   //TODO: pending security grid implementation
   bool hasSecurityGrid;
-  Map<String,String> securityGridNumber;
+  Map<String, String> securityGridNumber;
   String cvv;
   String cardPin;
   String expiryDate;
@@ -31,7 +32,7 @@ class Card {
     this.cvv = '',
     this.expiryDate = '',
     this.hasSecurityGrid = false,
-    this.securityGridNumber = const <String,String>{},
+    this.securityGridNumber = const <String, String>{},
     required this.createdOn,
     required this.lastUpdatedOn,
   });
@@ -44,7 +45,7 @@ class Card {
     String? cvv,
     String? expiryDate,
     bool? hasSecurityGrid,
-    Map<String,String>? securityGridNumber,
+    Map<String, String>? securityGridNumber,
     required DateTime lastUpdatedOn,
   }) {
     return Card(
@@ -60,5 +61,35 @@ class Card {
       createdOn: createdOn,
       lastUpdatedOn: lastUpdatedOn,
     );
+  }
+
+  factory Card.fromJson(Map<String, dynamic> json) => Card(
+        id: json['id'],
+        bankAndCardName: json['bank_and_card_name'],
+        cardNumber: json['card_number'],
+        cardHolderName: json['card_holder_name'],
+        cardPin: json['card_pin'],
+        cvv: json['cvv'],
+        expiryDate: json['expiry_date'],
+        hasSecurityGrid: json['has_security'],
+        securityGridNumber: json['security_grid_number'],
+        createdOn: json['created_on'],
+        lastUpdatedOn: json['last_updated_on'],
+      );
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['bank_and_card_name'] = bankAndCardName;
+    data['card_number'] = cardNumber;
+    data['card_holder_name'] = cardHolderName;
+    data['card_pin'] = cardPin;
+    data['cvv'] = cvv;
+    data['expiry_date'] = expiryDate;
+    data['has_security'] = hasSecurityGrid;
+    data['security_grid_number'] = securityGridNumber;
+    data['created_on'] = createdOn;
+    data['last_updated_on'] = lastUpdatedOn;
+    return data;
   }
 }

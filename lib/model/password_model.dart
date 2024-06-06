@@ -69,4 +69,33 @@ class Password {
       lastUpdatedOn: lastUpdatedOn,
     );
   }
+
+  factory Password.fromJson(Map<String, dynamic> json) => Password(
+        id: json['id'],
+        title: json['title'],
+        subTitle: json['sub_title'],
+        websiteUrl: json['website_url'],
+        userName: json['user_name'],
+        password: json['password'],
+        note: json['note'],
+        dynamicDataField: json['dynamic_data_field'],
+        createdOn: json['created_on'],
+        lastUpdatedOn: json['last_updated_on'],
+      );
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['title'] = title;
+    data['sub_title'] = subTitle;
+    data['website_url'] = websiteUrl;
+    data['user_name'] = userName;
+    data['password'] = password;
+    data['note'] = note;
+    data['dynamic_data_field'] = dynamicDataField;
+    data['created_on'] = createdOn;
+    data['last_updated_on'] = lastUpdatedOn;
+    data['target_group'] = group.target?.id;
+    return data;
+  }
 }
