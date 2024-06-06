@@ -121,6 +121,8 @@ class _CreateUpdateGroupScreenState extends State<CreateUpdateGroupScreen> {
             decoration: InputDecoration(
               fillColor: AppColors.mWhite,
               filled: true,
+              hintText: getTranslated("group_name", context),
+              hintStyle: TextStyles.getTitleBlueText(18),
               contentPadding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
               errorStyle: TextStyles.getTitleOrangeText(20),
               border: OutlineInputBorder(
@@ -162,6 +164,8 @@ class _CreateUpdateGroupScreenState extends State<CreateUpdateGroupScreen> {
             decoration: InputDecoration(
               fillColor: AppColors.mWhite,
               filled: true,
+              hintText: getTranslated("description", context),
+              hintStyle: TextStyles.getTitleBlueText(18),
               contentPadding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
               errorStyle: TextStyles.getTitleOrangeText(20),
               border: OutlineInputBorder(

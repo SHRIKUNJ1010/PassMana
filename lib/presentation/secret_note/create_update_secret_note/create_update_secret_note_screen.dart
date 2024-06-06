@@ -77,33 +77,52 @@ class _CreateUpdateSecretNoteScreenState extends State<CreateUpdateSecretNoteScr
   }
 
   Widget getNoteField(BuildContext context, TextEditingController controller) {
-    return Container(
-      margin: const EdgeInsets.fromLTRB(20, 20, 20, 90),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: AppColors.mWhite,
-      ),
-      child: TextFormField(
-        controller: controller,
-        validator: (text) {
-          if (text == null || text.isEmpty) {
-            return getTranslated("field_can't_be_empty", context);
-          }
-          return null;
-        },
-        style: TextStyles.getTitleBlueText(18),
-        decoration: const InputDecoration(
-          contentPadding: EdgeInsets.fromLTRB(15, 13, 15, 13),
-          border: OutlineInputBorder(
-            borderSide: BorderSide.none,
+    return Column(
+      children: [
+        Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
+              child: Text(
+                "${getTranslated('secret_note', context)}:",
+                style: TextStyles.getTitleWhiteText(20),
+              ),
+            ),
+          ],
+        ),
+        Expanded(
+          child: Container(
+            margin: const EdgeInsets.fromLTRB(20, 10, 20, 90),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: AppColors.mWhite,
+            ),
+            child: TextFormField(
+              controller: controller,
+              validator: (text) {
+                if (text == null || text.isEmpty) {
+                  return getTranslated("field_can't_be_empty", context);
+                }
+                return null;
+              },
+              style: TextStyles.getTitleBlueText(18),
+              decoration: InputDecoration(
+                hintText: getTranslated("write_your_note_here", context),
+                hintStyle: TextStyles.getTitleBlueText(18),
+                contentPadding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
+                border: const OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                ),
+              ),
+              maxLines: 1000,
+              textInputAction: TextInputAction.done,
+              onTapOutside: (pointerDown) {
+                FocusScope.of(context).unfocus();
+              },
+            ),
           ),
         ),
-        maxLines: 1000,
-        textInputAction: TextInputAction.done,
-        onTapOutside: (pointerDown) {
-          FocusScope.of(context).unfocus();
-        },
-      ),
+      ],
     );
   }
 

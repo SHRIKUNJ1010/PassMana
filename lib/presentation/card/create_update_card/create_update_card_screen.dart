@@ -143,6 +143,8 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
             decoration: InputDecoration(
               fillColor: AppColors.mWhite,
               filled: true,
+              hintText: getTranslated("bank_and_card_name", context),
+              hintStyle: TextStyles.getTitleBlueText(18),
               contentPadding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
               errorStyle: TextStyles.getTitleOrangeText(20),
               border: OutlineInputBorder(
@@ -189,6 +191,8 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
             decoration: InputDecoration(
               fillColor: AppColors.mWhite,
               filled: true,
+              hintText: getTranslated("card_number", context),
+              hintStyle: TextStyles.getTitleBlueText(18),
               contentPadding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
               errorStyle: TextStyles.getTitleOrangeText(20),
               border: OutlineInputBorder(
@@ -235,6 +239,8 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
             decoration: InputDecoration(
               fillColor: AppColors.mWhite,
               filled: true,
+              hintText: getTranslated("card_holder_name", context),
+              hintStyle: TextStyles.getTitleBlueText(18),
               contentPadding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
               errorStyle: TextStyles.getTitleOrangeText(20),
               border: OutlineInputBorder(
@@ -281,6 +287,8 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
             decoration: InputDecoration(
               fillColor: AppColors.mWhite,
               filled: true,
+              hintText: getTranslated("cvv", context),
+              hintStyle: TextStyles.getTitleBlueText(18),
               contentPadding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
               errorStyle: TextStyles.getTitleOrangeText(20),
               border: OutlineInputBorder(
@@ -327,6 +335,8 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
             decoration: InputDecoration(
               fillColor: AppColors.mWhite,
               filled: true,
+              hintText: getTranslated("expiry_date", context),
+              hintStyle: TextStyles.getTitleBlueText(18),
               contentPadding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
               errorStyle: TextStyles.getTitleOrangeText(20),
               border: OutlineInputBorder(
@@ -373,6 +383,8 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
             decoration: InputDecoration(
               fillColor: AppColors.mWhite,
               filled: true,
+              hintText: getTranslated("card_pin", context),
+              hintStyle: TextStyles.getTitleBlueText(18),
               contentPadding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
               errorStyle: TextStyles.getTitleOrangeText(20),
               border: OutlineInputBorder(

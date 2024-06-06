@@ -424,6 +424,8 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
             decoration: InputDecoration(
               fillColor: AppColors.mWhite,
               filled: true,
+              hintText: getTranslated("note", context),
+              hintStyle: TextStyles.getTitleBlueText(18),
               contentPadding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
               errorStyle: TextStyles.getTitleOrangeText(20),
               border: OutlineInputBorder(
@@ -474,6 +476,8 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                   decoration: InputDecoration(
                     fillColor: AppColors.mWhite,
                     filled: true,
+                    hintText: getTranslated("password", context),
+                    hintStyle: TextStyles.getTitleBlueText(18),
                     contentPadding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
                     errorStyle: TextStyles.getTitleOrangeText(20),
                     border: OutlineInputBorder(
@@ -582,6 +586,8 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
             decoration: InputDecoration(
               fillColor: AppColors.mWhite,
               filled: true,
+              hintText: getTranslated("email_or_username", context),
+              hintStyle: TextStyles.getTitleBlueText(18),
               contentPadding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
               errorStyle: TextStyles.getTitleOrangeText(20),
               border: OutlineInputBorder(
@@ -623,6 +629,8 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
             decoration: InputDecoration(
               fillColor: AppColors.mWhite,
               filled: true,
+              hintText: getTranslated("subtitle", context),
+              hintStyle: TextStyles.getTitleBlueText(18),
               contentPadding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
               errorStyle: TextStyles.getTitleOrangeText(20),
               border: OutlineInputBorder(
@@ -664,6 +672,8 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
             decoration: InputDecoration(
               fillColor: AppColors.mWhite,
               filled: true,
+              hintText: getTranslated("website_url", context),
+              hintStyle: TextStyles.getTitleBlueText(18),
               contentPadding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
               errorStyle: TextStyles.getTitleOrangeText(20),
               border: OutlineInputBorder(
@@ -710,6 +720,8 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
             decoration: InputDecoration(
               fillColor: AppColors.mWhite,
               filled: true,
+              hintText: getTranslated("title", context),
+              hintStyle: TextStyles.getTitleBlueText(18),
               contentPadding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
               errorStyle: TextStyles.getTitleOrangeText(20),
               border: OutlineInputBorder(
