@@ -81,7 +81,7 @@ class _CreateUpdateSecretNoteScreenState extends State<CreateUpdateSecretNoteScr
       margin: const EdgeInsets.fromLTRB(20, 20, 20, 90),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-      color: AppColors.mWhite,
+        color: AppColors.mWhite,
       ),
       child: TextFormField(
         controller: controller,
@@ -184,34 +184,34 @@ class _CreateUpdateSecretNoteScreenState extends State<CreateUpdateSecretNoteScr
         ),
         vm.secretNote != null
             ? Expanded(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Material(
-                  color: AppColors.secondaryMaterialColor[700],
-                  child: InkWell(
-                    splashColor: AppColors.mWhite.withOpacity(0.2),
-                    onTap: () {
-                      vm.deleteSecretNote.call();
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
-                      child: Icon(
-                        Icons.delete,
-                        color: AppColors.mWhite,
-                        size: 25,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Material(
+                        color: AppColors.secondaryMaterialColor[700],
+                        child: InkWell(
+                          splashColor: AppColors.mWhite.withOpacity(0.2),
+                          onTap: () {
+                            vm.deleteSecretNote.call();
+                          },
+                          child: const Padding(
+                            padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
+                            child: Icon(
+                              Icons.delete,
+                              color: AppColors.mWhite,
+                              size: 25,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                    const SizedBox(width: 20),
+                  ],
                 ),
-              ),
-              const SizedBox(width: 20),
-            ],
-          ),
-        )
+              )
             : const Spacer(),
       ],
     );

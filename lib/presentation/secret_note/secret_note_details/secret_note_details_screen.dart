@@ -34,13 +34,25 @@ class SecretNoteDetailsScreen extends StatelessWidget {
           child: Scaffold(
             resizeToAvoidBottomInset: false,
             backgroundColor: Colors.transparent,
-            appBar: getAppBar(vm,context),
-            body: ListView(
-              padding: const EdgeInsets.fromLTRB(20, 20, 20, 80),
-              shrinkWrap: true,
-              children: [
-                SizedBox(height: width),
-              ],
+            appBar: getAppBar(vm, context),
+            body: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: AppColors.mWhite,
+              ),
+              margin: const EdgeInsets.fromLTRB(20, 20, 20, 30),
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+              child: ListView(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 60),
+                shrinkWrap: true,
+                children: [
+                  SizedBox(width: width),
+                  Text(
+                    vm.secretNote.note,
+                    style: TextStyles.getTitleBlueText(18),
+                  ),
+                ],
+              ),
             ),
           ),
         );
@@ -48,7 +60,7 @@ class SecretNoteDetailsScreen extends StatelessWidget {
     );
   }
 
-  CustomAppBar getAppBar(SecretNoteDetailsViewModel vm,BuildContext context) {
+  CustomAppBar getAppBar(SecretNoteDetailsViewModel vm, BuildContext context) {
     return CustomAppBar(
       centerWidgetsList: [
         Expanded(
@@ -81,7 +93,7 @@ class SecretNoteDetailsScreen extends StatelessWidget {
           ),
         ),
         Text(
-          getTranslated("secret_note_details",context),
+          getTranslated("secret_note_details", context),
           style: TextStyles.getTitleWhiteText(25),
         ),
         Expanded(
