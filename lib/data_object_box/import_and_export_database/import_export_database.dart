@@ -30,7 +30,8 @@ class ImportExportDatabase {
     final archive = Archive()..addFile(archiveFile);
     final encodedArchive = ZipEncoder().encode(archive);
     if (encodedArchive == null) return '';
-    Directory appDir = await getApplicationDocumentsDirectory();
+    Directory? appDir = (Platform.isAndroid ? await getExternalStorageDirectory() : await getDownloadsDirectory());
+    if (appDir == null) return '';
     await File('${appDir.path}/db_file.zip').writeAsBytes(encodedArchive);
     return '${appDir.path}/db_file.zip';
   }

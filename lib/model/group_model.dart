@@ -7,7 +7,7 @@ import 'package:passmana/model/password_model.dart';
 
 @Entity()
 class Group {
-  @Id()
+  @Id(assignable: true)
   int id;
   String groupName;
   String description;
@@ -46,8 +46,8 @@ class Group {
         id: json['id'],
         groupName: json['group_name'],
         description: json['description'],
-        createdOn: json['created_on'],
-        lastUpdatedOn: json['last_updated_on'],
+        createdOn: DateTime.tryParse(json['created_on']) ?? DateTime.now(),
+        lastUpdatedOn: DateTime.tryParse(json['last_updated_on']) ?? DateTime.now(),
       );
 
   Map<String, dynamic> toJson() {
@@ -55,8 +55,8 @@ class Group {
     data['id'] = id;
     data['group_name'] = groupName;
     data['description'] = description;
-    data['created_on'] = createdOn;
-    data['last_updated_on'] = lastUpdatedOn;
+    data['created_on'] = createdOn.toString();
+    data['last_updated_on'] = lastUpdatedOn.toString();
     return data;
   }
 }

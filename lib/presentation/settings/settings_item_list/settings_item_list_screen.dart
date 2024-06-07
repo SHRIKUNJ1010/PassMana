@@ -223,6 +223,58 @@ class SettingsItemListScreen extends StatelessWidget {
                     ),
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(5),
+                    child: Material(
+                      color: AppColors.mWhite,
+                      child: InkWell(
+                        onTap: () {
+                          vm.onImportMobileDataTap.call();
+                        },
+                        splashColor: AppColors.primaryColor.withOpacity(0.2),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: Colors.transparent,
+                          ),
+                          padding: const EdgeInsets.fromLTRB(15, 15, 10, 15),
+                          child: Text(
+                            getTranslated("import_your_data", context),
+                            style: TextStyles.getTitleBlueText(20),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(5),
+                    child: Material(
+                      color: AppColors.mWhite,
+                      child: InkWell(
+                        onTap: () {
+                          vm.onExportMobileDataTap.call();
+                        },
+                        splashColor: AppColors.primaryColor.withOpacity(0.2),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: Colors.transparent,
+                          ),
+                          padding: const EdgeInsets.fromLTRB(15, 15, 10, 15),
+                          child: Text(
+                            getTranslated("export_your_data", context),
+                            style: TextStyles.getTitleBlueText(20),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

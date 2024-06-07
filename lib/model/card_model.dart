@@ -2,11 +2,13 @@
 * Created by Shrikunj Patel on 12/12/2023.
 */
 
+import 'dart:convert';
+
 import 'package:objectbox/objectbox.dart';
 
 @Entity()
 class Card {
-  @Id()
+  @Id(assignable: true)
   int id;
   String bankAndCardName;
   String cardNumber;
@@ -72,9 +74,9 @@ class Card {
         cvv: json['cvv'],
         expiryDate: json['expiry_date'],
         hasSecurityGrid: json['has_security'],
-        securityGridNumber: json['security_grid_number'],
-        createdOn: json['created_on'],
-        lastUpdatedOn: json['last_updated_on'],
+        //securityGridNumber: jsonDecode(json['security_grid_number']),
+        createdOn: DateTime.tryParse(json['created_on']) ?? DateTime.now(),
+        lastUpdatedOn: DateTime.tryParse(json['last_updated_on']) ?? DateTime.now(),
       );
 
   Map<String, dynamic> toJson() {
@@ -87,9 +89,9 @@ class Card {
     data['cvv'] = cvv;
     data['expiry_date'] = expiryDate;
     data['has_security'] = hasSecurityGrid;
-    data['security_grid_number'] = securityGridNumber;
-    data['created_on'] = createdOn;
-    data['last_updated_on'] = lastUpdatedOn;
+    data['security_grid_number'] = jsonEncode(securityGridNumber);
+    data['created_on'] = createdOn.toString();
+    data['last_updated_on'] = lastUpdatedOn.toString();
     return data;
   }
 }

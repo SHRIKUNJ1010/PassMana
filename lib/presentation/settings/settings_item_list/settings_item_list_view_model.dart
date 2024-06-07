@@ -13,6 +13,8 @@ import 'package:redux/redux.dart';
 
 class SettingsItemListViewModel {
   final Function() onChangeMobilePinTap;
+  final Function() onImportMobileDataTap;
+  final Function() onExportMobileDataTap;
   final Function(Locale) onChangeLocaleTap;
   final Function(bool) onChangeAutofill;
   final Function(bool) onChangeBiometric;
@@ -21,6 +23,8 @@ class SettingsItemListViewModel {
   final Locale selectedLanguage;
 
   SettingsItemListViewModel({
+    required this.onImportMobileDataTap,
+    required this.onExportMobileDataTap,
     required this.onChangeMobilePinTap,
     required this.onChangeLocaleTap,
     required this.onChangeAutofill,
@@ -44,6 +48,12 @@ class SettingsItemListViewModel {
       },
       onChangeMobilePinTap: () {
         router.push(AppRoutes.changeMobilePin);
+      },
+      onExportMobileDataTap: () {
+        store.dispatch(ExportDataFromDatabase());
+      },
+      onImportMobileDataTap: () {
+        store.dispatch(ImportDataToDatabase());
       },
       onChangeAutofill: (val) {},
       onChangeBiometric: (val) {

@@ -6,7 +6,7 @@ import 'package:objectbox/objectbox.dart';
 
 @Entity()
 class SecretNote {
-  @Id()
+  @Id(assignable: true)
   int id;
   String note;
   @Property(type: PropertyType.date)
@@ -36,16 +36,16 @@ class SecretNote {
   factory SecretNote.fromJson(Map<String, dynamic> json) => SecretNote(
         id: json['id'],
         note: json['note'],
-        createdOn: json['created_on'],
-        lastUpdatedOn: json['last_updated_on'],
+        createdOn: DateTime.tryParse(json['created_on']) ?? DateTime.now(),
+        lastUpdatedOn: DateTime.tryParse(json['last_updated_on']) ?? DateTime.now(),
       );
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['note'] = note;
-    data['created_on'] = createdOn;
-    data['last_updated_on'] = lastUpdatedOn;
+    data['created_on'] = createdOn.toString();
+    data['last_updated_on'] = lastUpdatedOn.toString();
     return data;
   }
 }
