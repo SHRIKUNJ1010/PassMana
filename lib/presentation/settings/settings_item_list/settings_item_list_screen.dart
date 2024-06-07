@@ -55,7 +55,8 @@ class SettingsItemListScreen extends StatelessWidget {
             body: ListView(
               children: [
                 const SizedBox(height: 20),
-                Container(
+                //TODO: add when autofill is available
+                /*Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
                     color: AppColors.mWhite,
@@ -78,7 +79,7 @@ class SettingsItemListScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                ),
+                ),*/
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),

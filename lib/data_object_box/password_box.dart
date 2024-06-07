@@ -54,6 +54,13 @@ class PasswordBox {
     return _passwordBox.getAll();
   }
 
+  List<Password> getAllPasswordsWithRecentlyCreatedFirst() {
+    //build query password based on created date in descending order
+    final Query<Password> query = (_passwordBox.query()..order(Password_.createdOn, flags: Order.descending)).build();
+    List<Password> tempList = query.find();
+    return tempList;
+  }
+
   addAllPasswords(List<Password> tempPasswords) {
     _passwordBox.putMany(tempPasswords);
   }
@@ -72,6 +79,20 @@ class PasswordBox {
     //limit query for the count of 10
     query.limit = 10;
     //use query to get 10 recently added passwords
+    List<Password> tempList = query.find();
+    return tempList;
+  }
+
+  List<Password> getPasswordBasedOnKeyword(String keyword) {
+    final Query<Password> query = (_passwordBox.query(Password_.title
+            .contains(keyword)
+            .or(Password_.subTitle.contains(keyword))
+            .or(Password_.userName.contains(keyword))
+            .or(Password_.websiteUrl.contains(keyword))
+            .or(Password_.note.contains(keyword)))
+          ..order(Password_.createdOn, flags: Order.descending))
+        .build();
+
     List<Password> tempList = query.find();
     return tempList;
   }

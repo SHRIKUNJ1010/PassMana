@@ -3,6 +3,7 @@
 */
 
 import 'package:passmana/model/group_model.dart';
+import 'package:passmana/model/password_model.dart';
 
 class InitializeFilter {}
 
@@ -28,6 +29,10 @@ class SelectedGroupForFilterListChanged {
 
 class SearchKeywordChanged {
   final String searchKeyword;
+  final List<Password> searchedPasswordList;
 
-  SearchKeywordChanged({required this.searchKeyword});
+  SearchKeywordChanged({
+    required this.searchKeyword,
+    required this.searchedPasswordList,
+  });
 }

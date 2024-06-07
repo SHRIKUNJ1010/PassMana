@@ -16,5 +16,8 @@ AppState _onSelectedGroupForFilterListChanged(AppState state, SelectedGroupForFi
 }
 
 AppState _onSearchKeywordChanged(AppState state, SearchKeywordChanged action) {
-  return state.copyWith(searchKeyword: action.searchKeyword);
+  return state.copyWith(
+    searchKeyword: action.searchKeyword,
+    searchedPasswordList: action.searchedPasswordList,
+  );
 }

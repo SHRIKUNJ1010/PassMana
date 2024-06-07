@@ -18,6 +18,7 @@ class AppState {
   final List<SecretNote>? secretNoteList;
   final List<Map<Group, bool>>? selectedGroupsForFilterList;
   final String searchKeyword;
+  final List<Password>? searchedPasswordList;
 
   AppState({
     this.user,
@@ -29,6 +30,7 @@ class AppState {
     this.secretNoteList,
     this.selectedGroupsForFilterList,
     this.searchKeyword = '',
+    this.searchedPasswordList,
   });
 
   AppState copyWith({
@@ -41,6 +43,7 @@ class AppState {
     List<SecretNote>? secretNoteList,
     List<Map<Group, bool>>? selectedGroupsForFilterList,
     String? searchKeyword,
+    List<Password>? searchedPasswordList,
   }) {
     return AppState(
       user: user ?? this.user,
@@ -52,6 +55,7 @@ class AppState {
       secretNoteList: secretNoteList ?? this.secretNoteList,
       selectedGroupsForFilterList: selectedGroupsForFilterList ?? this.selectedGroupsForFilterList,
       searchKeyword: searchKeyword ?? this.searchKeyword,
+      searchedPasswordList: searchedPasswordList ?? this.searchedPasswordList,
     );
   }
 
@@ -65,6 +69,7 @@ class AppState {
       cardList.hashCode ^
       secretNoteList.hashCode ^
       searchKeyword.hashCode ^
+      searchedPasswordList.hashCode ^
       selectedGroupsForFilterList.hashCode;
 
   @override
@@ -80,6 +85,7 @@ class AppState {
             cardList == other.cardList &&
             secretNoteList == other.secretNoteList &&
             searchKeyword == other.searchKeyword &&
+            searchedPasswordList == other.searchedPasswordList &&
             selectedGroupsForFilterList == other.selectedGroupsForFilterList;
   }
 }

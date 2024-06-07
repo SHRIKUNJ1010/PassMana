@@ -4,7 +4,9 @@
 
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/domain_redux/filter_search/filter_search_actions.dart';
+import 'package:passmana/main.dart';
 import 'package:passmana/model/group_model.dart';
+import 'package:passmana/model/password_model.dart';
 import 'package:redux/redux.dart';
 
 List<Middleware<AppState>> createFilterSearchMiddleware() {
@@ -25,10 +27,17 @@ void Function(Store<AppState> store, InitializeFilter action, NextDispatcher nex
         tempList.add({element: true});
       });
     }
+
+    List<Password> tempPasswordList = objectBox.passwordBox.getAllPasswordsWithRecentlyCreatedFirst();
     //change state for filter group list
     store.dispatch(SelectedGroupForFilterListChanged(selectedGroupsForFilterList: tempList));
     //change search keyword as blank
-    store.dispatch(SearchKeywordChanged(searchKeyword: ''));
+    store.dispatch(
+      SearchKeywordChanged(
+        searchKeyword: '',
+        searchedPasswordList: tempPasswordList,
+      ),
+    );
   };
 }
 
@@ -73,7 +82,14 @@ void Function(Store<AppState> store, ChangeSelectionOfGroup action, NextDispatch
 void Function(Store<AppState> store, ChangeKeyword action, NextDispatcher next) _changeKeyword() {
   return (store, action, next) {
     next(action);
+    List<Password> tempList = objectBox.passwordBox.getPasswordBasedOnKeyword(action.searchKeyword);
+
     //change search keyword in state
-    store.dispatch(SearchKeywordChanged(searchKeyword: action.searchKeyword));
+    store.dispatch(
+      SearchKeywordChanged(
+        searchKeyword: action.searchKeyword,
+        searchedPasswordList: tempList,
+      ),
+    );
   };
 }

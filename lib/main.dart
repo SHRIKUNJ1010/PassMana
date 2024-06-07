@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
     return flutter_redux.StoreProvider<AppState>(
       store: store,
       child: flutter_redux.StoreConnector<AppState, String>(
-        onInit: (store) {
+        onInit: (redux.Store<AppState> store) {
           store.dispatch(LoadUser());
         },
         converter: (redux.Store<AppState> store) {
