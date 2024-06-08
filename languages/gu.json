@@ -84,5 +84,22 @@
   "regenerate_password": "પાસવર્ડ ફરીથી બનાવો",
   "use_password": "પાસવર્ડ વાપરો",
   "cancel": "રદ કરો",
-  "confirm": "કન્ફર્મ કરો"
+  "confirm": "કન્ફર્મ કરો",
+  "bank_and_card_name": "Bank And Card Name",
+  "card_number": "Card Number",
+  "card_holder_name": "Card Holder Name",
+  "cvv": "CVV",
+  "expiry_date": "Expiry Date",
+  "card_pin": "Card Pin",
+  "no_secret_note_found": "No Secret Note Found",
+  "no_card_found": "No Card Found",
+  "exp_date": "Exp. Date",
+  "write_your_note_here": "Write Your Note Here...",
+  "filter_search": "Filter Search",
+  "export_data": "Export Data",
+  "import_data": "Import Data",
+  "export_your_data": "Export Your Data",
+  "import_your_data": "Import Your Data",
+  "db_file_location": "DB File Location",
+  "your_db_file_location_is": "Your DB File Location is"
 }
