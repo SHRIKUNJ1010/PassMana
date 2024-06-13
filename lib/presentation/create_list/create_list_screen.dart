@@ -80,6 +80,7 @@ class CreateListScreen extends StatelessWidget {
   }
 
   Container getGridList(double height, CreateListViewModel vm, BuildContext context) {
+    //TODO: adjust ui for tablet create options does not suit screen
     return Container(
       height: 0.5 * height,
       margin: const EdgeInsets.symmetric(horizontal: 10),

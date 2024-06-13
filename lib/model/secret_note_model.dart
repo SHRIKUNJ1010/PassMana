@@ -6,6 +6,7 @@ import 'package:objectbox/objectbox.dart';
 
 @Entity()
 class SecretNote {
+  //TODO: add title parameter for secret note and adjust secret note screens accordingly
   @Id(assignable: true)
   int id;
   String note;

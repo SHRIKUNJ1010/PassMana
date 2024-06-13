@@ -68,6 +68,7 @@ class CardListScreen extends StatelessWidget {
                       shrinkWrap: true,
                       itemCount: vm.cardList.length,
                       itemBuilder: (BuildContext context, int index) {
+                        //TODO: adjust ui for tablet, card tile does not look good in tablet
                         return Padding(
                           padding: const EdgeInsets.fromLTRB(0, 7, 0, 7),
                           child: CardCommonListTile(

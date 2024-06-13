@@ -48,6 +48,7 @@ class ChangeLanguage {
 
 class VerifyUserPin {
   final String pin;
+  //TODO: remove this on verified and onNotVerified Functions creates dependencies of layers
   final Function onVerified;
   final Function onNotVerified;
 
@@ -59,6 +60,7 @@ class VerifyUserPin {
 }
 
 class VerifyUserBiometric {
+  //TODO: remove this on verified and onNotVerified Functions creates dependencies of layers
   final Function onVerified;
   final Function onNotVerified;
 

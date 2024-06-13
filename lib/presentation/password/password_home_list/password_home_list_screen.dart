@@ -254,6 +254,7 @@ class PasswordHomeListScreen extends StatelessWidget {
               width: width - 40,
               height: vm.popularGroups.length > 2 ? width - 40 : (width - 40) / 2,
               child: GridView.count(
+                //TODO: adjust ui for tablet for grid view
                 crossAxisCount: 2,
                 mainAxisSpacing: 15,
                 crossAxisSpacing: 15,
