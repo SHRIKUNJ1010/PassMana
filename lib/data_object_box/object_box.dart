@@ -8,14 +8,15 @@ import 'package:passmana/data_object_box/password_box.dart';
 import 'package:passmana/data_object_box/secret_note_box.dart';
 import 'package:passmana/data_object_box/user_box.dart';
 import 'package:passmana/objectbox.g.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
+import 'package:path_provider/path_provider.dart';
 
 //provides the access to the object box store throughout the app
 //TODO: "flutter pub run build_runner build" run this command if object box schema
 // changed for any of the object box
 class ObjectBox {
   late final Store _store;
+  late final Admin _admin;
   late final UserBox userBox;
   late final PasswordBox passwordBox;
   late final GroupBox groupBox;
@@ -28,6 +29,9 @@ class ObjectBox {
     groupBox = GroupBox(_store);
     cardBox = CardBox(_store);
     secretNoteBox = SecretNoteBox(_store);
+    if (Admin.isAvailable()) {
+      _admin = Admin(_store);
+    }
   }
 
   //create an instance of ObjectBox to use throughout the app

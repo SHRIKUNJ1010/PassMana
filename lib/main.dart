@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_redux/flutter_redux.dart' as flutter_redux;
 import 'package:passmana/data_object_box/object_box.dart';
 import 'package:passmana/domain_redux/app_middleware.dart';
-import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/domain_redux/app_reducer.dart';
+import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/domain_redux/card/card_middleware.dart';
 import 'package:passmana/domain_redux/filter_search/filter_search_middleware.dart';
 import 'package:passmana/domain_redux/group/group_middleware.dart';
@@ -17,7 +18,6 @@ import 'package:passmana/router/router.dart';
 import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/constants.dart';
 import 'package:redux/redux.dart' as redux;
-import 'package:flutter_redux/flutter_redux.dart' as flutter_redux;
 
 //provide access to the objectbox store throughout the app
 late ObjectBox objectBox;
