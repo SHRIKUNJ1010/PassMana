@@ -171,7 +171,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                                         dynamicFieldList.add(PasswordDynamicField());
                                         setState(() {});
                                       },
-                                      splashColor: AppColors.primaryColor.withOpacity(0.3),
+                                      splashColor: AppColors.primaryColor.withValues(alpha: 0.3),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment: MainAxisAlignment.center,
@@ -243,7 +243,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
               containerBuilder: (context, child) {
                 return Container(
                   decoration: BoxDecoration(
-                    color: AppColors.primaryColor.withOpacity(0.2),
+                    color: AppColors.primaryColor.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: child,
@@ -285,7 +285,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                     onTap: () {
                       onTap.call();
                     },
-                    splashColor: AppColors.primaryColor.withOpacity(0.2),
+                    splashColor: AppColors.primaryColor.withValues(alpha: 0.2),
                     child: Container(
                       padding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
                       decoration: BoxDecoration(
@@ -358,7 +358,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
           top: Radius.circular(30),
         ),
         child: InkWell(
-          splashColor: AppColors.mWhite.withOpacity(0.2),
+          splashColor: AppColors.mWhite.withValues(alpha: 0.2),
           onTap: () {
             if (_formKey.currentState!.validate()) {
               if (widget.argument.id != null) {
@@ -387,7 +387,8 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
             }
           },
           child: Container(
-            height: 65,
+            height: 65 + MediaQuery.paddingOf(context).bottom,
+            padding: EdgeInsets.only(bottom: MediaQuery.paddingOf(context).bottom),
             color: Colors.transparent,
             alignment: Alignment.center,
             child: Text(
@@ -498,7 +499,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                               showPassword = !showPassword;
                               setState(() {});
                             },
-                            splashColor: AppColors.secondaryColor.withOpacity(0.2),
+                            splashColor: AppColors.secondaryColor.withValues(alpha: 0.2),
                             child: Padding(
                               padding: const EdgeInsets.all(10),
                               child: showPassword
@@ -531,7 +532,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                 child: Material(
                   color: AppColors.mWhite,
                   child: InkWell(
-                    splashColor: AppColors.mBlack.withOpacity(0.2),
+                    splashColor: AppColors.mBlack.withValues(alpha: 0.2),
                     onTap: () async {
                       String tempPassword = await Utility.generatePasswordDialog();
                       if (tempPassword.isNotEmpty) {
@@ -753,7 +754,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                 child: Material(
                   color: AppColors.mWhite,
                   child: InkWell(
-                    splashColor: AppColors.mBlack.withOpacity(0.2),
+                    splashColor: AppColors.mBlack.withValues(alpha: 0.2),
                     onTap: () {
                       vm.onBackPress.call();
                     },
@@ -786,7 +787,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                       child: Material(
                         color: AppColors.secondaryMaterialColor[700],
                         child: InkWell(
-                          splashColor: AppColors.mWhite.withOpacity(0.2),
+                          splashColor: AppColors.mWhite.withValues(alpha: 0.2),
                           onTap: () {
                             vm.deletePassword.call();
                           },

@@ -7,8 +7,8 @@ import 'package:passmana/domain_redux/filter_search/filter_search_actions.dart';
 import 'package:redux/redux.dart';
 
 final filterSearchReducers = <AppState Function(AppState, dynamic)>[
-  TypedReducer<AppState, SelectedGroupForFilterListChanged>(_onSelectedGroupForFilterListChanged),
-  TypedReducer<AppState, SearchKeywordChanged>(_onSearchKeywordChanged),
+  TypedReducer<AppState, SelectedGroupForFilterListChanged>(_onSelectedGroupForFilterListChanged).call,
+  TypedReducer<AppState, SearchKeywordChanged>(_onSearchKeywordChanged).call,
 ];
 
 AppState _onSelectedGroupForFilterListChanged(AppState state, SelectedGroupForFilterListChanged action) {

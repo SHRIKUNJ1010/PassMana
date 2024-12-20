@@ -13,14 +13,16 @@ class SecretNoteListViewModel {
   final List<SecretNote> secretNoteList;
   final Function(int) onSecretNoteTileTap;
 
-  SecretNoteListViewModel({required this.secretNoteList,required this.onSecretNoteTileTap,});
+  SecretNoteListViewModel({
+    required this.secretNoteList,
+    required this.onSecretNoteTileTap,
+  });
 
   static SecretNoteListViewModel fromStore(Store<AppState> store) {
     return SecretNoteListViewModel(
-      secretNoteList: getSecretNoteList(store.state),
+        secretNoteList: getSecretNoteList(store.state),
         onSecretNoteTileTap: (id) {
           router.push(AppRoutes.secretNoteDetails, extra: id);
-      }
-    );
+        });
   }
 }

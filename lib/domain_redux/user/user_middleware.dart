@@ -18,16 +18,16 @@ import 'package:redux/redux.dart';
 
 List<Middleware<AppState>> createUserMiddleware() {
   return [
-    TypedMiddleware<AppState, CreateUser>(_createUser()),
-    TypedMiddleware<AppState, UpdatePin>(_updatePin()),
-    TypedMiddleware<AppState, VerifyUserPin>(_verifyUserPin()),
-    TypedMiddleware<AppState, VerifyUserBiometric>(_verifyUserBiometric()),
-    TypedMiddleware<AppState, SwitchBiometricOption>(_switchBiometricOption()),
-    TypedMiddleware<AppState, SwitchAutoFillOption>(_switchAutoFillOption()),
-    TypedMiddleware<AppState, ChangeLanguage>(_changeLanguage()),
-    TypedMiddleware<AppState, LoadUser>(_loadUser()),
-    TypedMiddleware<AppState, ImportDataToDatabase>(_importDataToDatabase()),
-    TypedMiddleware<AppState, ExportDataFromDatabase>(_exportDataFromDatabase()),
+    TypedMiddleware<AppState, CreateUser>(_createUser()).call,
+    TypedMiddleware<AppState, UpdatePin>(_updatePin()).call,
+    TypedMiddleware<AppState, VerifyUserPin>(_verifyUserPin()).call,
+    TypedMiddleware<AppState, VerifyUserBiometric>(_verifyUserBiometric()).call,
+    TypedMiddleware<AppState, SwitchBiometricOption>(_switchBiometricOption()).call,
+    TypedMiddleware<AppState, SwitchAutoFillOption>(_switchAutoFillOption()).call,
+    TypedMiddleware<AppState, ChangeLanguage>(_changeLanguage()).call,
+    TypedMiddleware<AppState, LoadUser>(_loadUser()).call,
+    TypedMiddleware<AppState, ImportDataToDatabase>(_importDataToDatabase()).call,
+    TypedMiddleware<AppState, ExportDataFromDatabase>(_exportDataFromDatabase()).call,
   ];
 }
 

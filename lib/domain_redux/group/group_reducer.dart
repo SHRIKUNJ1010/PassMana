@@ -7,7 +7,7 @@ import 'package:passmana/domain_redux/group/group_actions.dart';
 import 'package:redux/redux.dart';
 
 final groupReducers = <AppState Function(AppState, dynamic)>[
-  TypedReducer<AppState, GroupListChanged>(_onGroupListChanged),
+  TypedReducer<AppState, GroupListChanged>(_onGroupListChanged).call,
 ];
 
 AppState _onGroupListChanged(AppState state, GroupListChanged action) {

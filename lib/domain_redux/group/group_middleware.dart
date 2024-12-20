@@ -12,10 +12,10 @@ import 'package:redux/redux.dart';
 
 List<Middleware<AppState>> createGroupMiddleware() {
   return [
-    TypedMiddleware<AppState, CreateGroup>(_createGroup()),
-    TypedMiddleware<AppState, UpdateGroup>(_updateGroup()),
-    TypedMiddleware<AppState, DeleteGroup>(_deleteGroup()),
-    TypedMiddleware<AppState, GetAllGroups>(_getAllGroups()),
+    TypedMiddleware<AppState, CreateGroup>(_createGroup()).call,
+    TypedMiddleware<AppState, UpdateGroup>(_updateGroup()).call,
+    TypedMiddleware<AppState, DeleteGroup>(_deleteGroup()).call,
+    TypedMiddleware<AppState, GetAllGroups>(_getAllGroups()).call,
   ];
 }
 

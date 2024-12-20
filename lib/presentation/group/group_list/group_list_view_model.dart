@@ -27,7 +27,7 @@ class GroupListViewModel {
         router.pop();
       },
       onGroupTileTap: (id) {
-        router.push(AppRoutes.groupDetails,extra: id);
+        router.push(AppRoutes.groupDetails, extra: id);
       },
     );
   }

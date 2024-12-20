@@ -11,14 +11,14 @@ class CheckBoxWidget extends StatefulWidget {
   final bool interceptCallBacks;
 
   const CheckBoxWidget({
-    Key? key,
+    super.key,
     this.isChecked = false,
     this.isDisabled = false,
     this.layout,
     this.checkBox,
     this.interceptCallBacks = false,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   State<CheckBoxWidget> createState() => _CheckBoxWidgetState();

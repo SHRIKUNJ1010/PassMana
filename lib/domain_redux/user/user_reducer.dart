@@ -7,7 +7,7 @@ import 'package:passmana/domain_redux/user/user_actions.dart';
 import 'package:redux/redux.dart';
 
 final userReducers = <AppState Function(AppState, dynamic)>[
-  TypedReducer<AppState, UserChanged>(_onUserChanged),
+  TypedReducer<AppState, UserChanged>(_onUserChanged).call,
 ];
 
 AppState _onUserChanged(AppState state, UserChanged action) {

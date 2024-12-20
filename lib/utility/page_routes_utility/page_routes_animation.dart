@@ -8,10 +8,9 @@ import 'package:go_router/go_router.dart';
 class FadeTransitionPage extends CustomTransitionPage<void> {
   FadeTransitionPage({
     required LocalKey key,
-    required Widget child,
+    required super.child,
   }) : super(
           key: key,
-          child: child,
           transitionsBuilder: (
             BuildContext context,
             Animation<double> animation,
@@ -25,10 +24,9 @@ class FadeTransitionPage extends CustomTransitionPage<void> {
 class SlideTransitionPage extends CustomTransitionPage<void> {
   SlideTransitionPage({
     required LocalKey key,
-    required Widget child,
+    required super.child,
   }) : super(
           key: key,
-          child: child,
           transitionsBuilder: (
             BuildContext context,
             Animation<double> animation,
@@ -42,10 +40,9 @@ class SlideTransitionPage extends CustomTransitionPage<void> {
 class SlideRightTransitionPage extends CustomTransitionPage<void> {
   SlideRightTransitionPage({
     required LocalKey key,
-    required Widget child,
+    required super.child,
   }) : super(
           key: key,
-          child: child,
           transitionsBuilder: (
             BuildContext context,
             Animation<double> animation,
@@ -59,10 +56,9 @@ class SlideRightTransitionPage extends CustomTransitionPage<void> {
 class SlideLeftTransitionPage extends CustomTransitionPage<void> {
   SlideLeftTransitionPage({
     required LocalKey key,
-    required Widget child,
+    required super.child,
   }) : super(
           key: key,
-          child: child,
           transitionsBuilder: (
             BuildContext context,
             Animation<double> animation,
@@ -76,10 +72,9 @@ class SlideLeftTransitionPage extends CustomTransitionPage<void> {
 class SizeTransitionPage extends CustomTransitionPage<void> {
   SizeTransitionPage({
     required LocalKey key,
-    required Widget child,
+    required super.child,
   }) : super(
           key: key,
-          child: child,
           transitionsBuilder: (
             BuildContext context,
             Animation<double> animation,
@@ -93,10 +88,9 @@ class SizeTransitionPage extends CustomTransitionPage<void> {
 class ScaleTransitionPage extends CustomTransitionPage<void> {
   ScaleTransitionPage({
     required LocalKey key,
-    required Widget child,
+    required super.child,
   }) : super(
           key: key,
-          child: child,
           transitionsBuilder: (
             BuildContext context,
             Animation<double> animation,

@@ -23,76 +23,28 @@ import 'model/user_model.dart';
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 
 final _entities = <ModelEntity>[
-  ModelEntity(
-      id: const IdUid(1, 2379576262382179893),
-      name: 'User',
-      lastPropertyId: const IdUid(6, 618954020366196552),
-      flags: 0,
-      properties: <ModelProperty>[
-        ModelProperty(
-            id: const IdUid(1, 5352280719198626775),
-            name: 'id',
-            type: 6,
-            flags: 1),
-        ModelProperty(
-            id: const IdUid(2, 986270443974672897),
-            name: 'pin',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(4, 1167460715826724220),
-            name: 'isBiometricEnabled',
-            type: 1,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(5, 1658336171682286313),
-            name: 'isAutofillEnabled',
-            type: 1,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(6, 618954020366196552),
-            name: 'localeString',
-            type: 9,
-            flags: 0)
-      ],
-      relations: <ModelRelation>[],
-      backlinks: <ModelBacklink>[]),
+  ModelEntity(id: const IdUid(1, 2379576262382179893), name: 'User', lastPropertyId: const IdUid(6, 618954020366196552), flags: 0, properties: <ModelProperty>[
+    ModelProperty(id: const IdUid(1, 5352280719198626775), name: 'id', type: 6, flags: 1),
+    ModelProperty(id: const IdUid(2, 986270443974672897), name: 'pin', type: 9, flags: 0),
+    ModelProperty(id: const IdUid(4, 1167460715826724220), name: 'isBiometricEnabled', type: 1, flags: 0),
+    ModelProperty(id: const IdUid(5, 1658336171682286313), name: 'isAutofillEnabled', type: 1, flags: 0),
+    ModelProperty(id: const IdUid(6, 618954020366196552), name: 'localeString', type: 9, flags: 0)
+  ], relations: <ModelRelation>[], backlinks: <ModelBacklink>[]),
   ModelEntity(
       id: const IdUid(2, 7022352903906742617),
       name: 'Group',
       lastPropertyId: const IdUid(5, 2488162487370813123),
       flags: 0,
       properties: <ModelProperty>[
-        ModelProperty(
-            id: const IdUid(1, 4065844036565779166),
-            name: 'id',
-            type: 6,
-            flags: 129),
-        ModelProperty(
-            id: const IdUid(2, 1664889290613067532),
-            name: 'groupName',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(3, 3294534142306290642),
-            name: 'description',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(4, 7786535575115060581),
-            name: 'createdOn',
-            type: 10,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(5, 2488162487370813123),
-            name: 'lastUpdatedOn',
-            type: 10,
-            flags: 0)
+        ModelProperty(id: const IdUid(1, 4065844036565779166), name: 'id', type: 6, flags: 129),
+        ModelProperty(id: const IdUid(2, 1664889290613067532), name: 'groupName', type: 9, flags: 0),
+        ModelProperty(id: const IdUid(3, 3294534142306290642), name: 'description', type: 9, flags: 0),
+        ModelProperty(id: const IdUid(4, 7786535575115060581), name: 'createdOn', type: 10, flags: 0),
+        ModelProperty(id: const IdUid(5, 2488162487370813123), name: 'lastUpdatedOn', type: 10, flags: 0)
       ],
       relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[
-        ModelBacklink(
-            name: 'passwords', srcEntity: 'Password', srcField: 'group')
+        ModelBacklink(name: 'passwords', srcEntity: 'Password', srcField: 'group')
       ]),
   ModelEntity(
       id: const IdUid(3, 6243334753350276209),
@@ -100,36 +52,12 @@ final _entities = <ModelEntity>[
       lastPropertyId: const IdUid(12, 2236766573529191337),
       flags: 0,
       properties: <ModelProperty>[
-        ModelProperty(
-            id: const IdUid(1, 5428819418602381393),
-            name: 'id',
-            type: 6,
-            flags: 129),
-        ModelProperty(
-            id: const IdUid(2, 3932673885070513494),
-            name: 'title',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(3, 4755622282995748104),
-            name: 'subTitle',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(4, 4686609453007835310),
-            name: 'userName',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(5, 7205940068219850615),
-            name: 'password',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(6, 2104709478361974975),
-            name: 'note',
-            type: 9,
-            flags: 0),
+        ModelProperty(id: const IdUid(1, 5428819418602381393), name: 'id', type: 6, flags: 129),
+        ModelProperty(id: const IdUid(2, 3932673885070513494), name: 'title', type: 9, flags: 0),
+        ModelProperty(id: const IdUid(3, 4755622282995748104), name: 'subTitle', type: 9, flags: 0),
+        ModelProperty(id: const IdUid(4, 4686609453007835310), name: 'userName', type: 9, flags: 0),
+        ModelProperty(id: const IdUid(5, 7205940068219850615), name: 'password', type: 9, flags: 0),
+        ModelProperty(id: const IdUid(6, 2104709478361974975), name: 'note', type: 9, flags: 0),
         ModelProperty(
             id: const IdUid(7, 6132687139176641847),
             name: 'groupId',
@@ -137,26 +65,10 @@ final _entities = <ModelEntity>[
             flags: 520,
             indexId: const IdUid(1, 2431947868288706786),
             relationTarget: 'Group'),
-        ModelProperty(
-            id: const IdUid(9, 6634348962119217579),
-            name: 'createdOn',
-            type: 10,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(10, 75545063630210098),
-            name: 'lastUpdatedOn',
-            type: 10,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(11, 1662591505840291357),
-            name: 'websiteUrl',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(12, 2236766573529191337),
-            name: 'dynamicDataField',
-            type: 9,
-            flags: 0)
+        ModelProperty(id: const IdUid(9, 6634348962119217579), name: 'createdOn', type: 10, flags: 0),
+        ModelProperty(id: const IdUid(10, 75545063630210098), name: 'lastUpdatedOn', type: 10, flags: 0),
+        ModelProperty(id: const IdUid(11, 1662591505840291357), name: 'websiteUrl', type: 9, flags: 0),
+        ModelProperty(id: const IdUid(12, 2236766573529191337), name: 'dynamicDataField', type: 9, flags: 0)
       ],
       relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[]),
@@ -166,56 +78,16 @@ final _entities = <ModelEntity>[
       lastPropertyId: const IdUid(10, 1738504638277915009),
       flags: 0,
       properties: <ModelProperty>[
-        ModelProperty(
-            id: const IdUid(1, 3923624425905033178),
-            name: 'id',
-            type: 6,
-            flags: 129),
-        ModelProperty(
-            id: const IdUid(2, 1976595611956823025),
-            name: 'bankAndCardName',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(3, 5172812700472783797),
-            name: 'cardNumber',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(4, 9098147579021319787),
-            name: 'cardHolderName',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(5, 7283837161105017108),
-            name: 'cvv',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(6, 934914539446613746),
-            name: 'cardPin',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(7, 892688795755671774),
-            name: 'createdOn',
-            type: 10,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(8, 4301313653865467201),
-            name: 'lastUpdatedOn',
-            type: 10,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(9, 687379100988768860),
-            name: 'hasSecurityGrid',
-            type: 1,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(10, 1738504638277915009),
-            name: 'expiryDate',
-            type: 9,
-            flags: 0)
+        ModelProperty(id: const IdUid(1, 3923624425905033178), name: 'id', type: 6, flags: 129),
+        ModelProperty(id: const IdUid(2, 1976595611956823025), name: 'bankAndCardName', type: 9, flags: 0),
+        ModelProperty(id: const IdUid(3, 5172812700472783797), name: 'cardNumber', type: 9, flags: 0),
+        ModelProperty(id: const IdUid(4, 9098147579021319787), name: 'cardHolderName', type: 9, flags: 0),
+        ModelProperty(id: const IdUid(5, 7283837161105017108), name: 'cvv', type: 9, flags: 0),
+        ModelProperty(id: const IdUid(6, 934914539446613746), name: 'cardPin', type: 9, flags: 0),
+        ModelProperty(id: const IdUid(7, 892688795755671774), name: 'createdOn', type: 10, flags: 0),
+        ModelProperty(id: const IdUid(8, 4301313653865467201), name: 'lastUpdatedOn', type: 10, flags: 0),
+        ModelProperty(id: const IdUid(9, 687379100988768860), name: 'hasSecurityGrid', type: 1, flags: 0),
+        ModelProperty(id: const IdUid(10, 1738504638277915009), name: 'expiryDate', type: 9, flags: 0)
       ],
       relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[]),
@@ -225,26 +97,10 @@ final _entities = <ModelEntity>[
       lastPropertyId: const IdUid(4, 4783214407881965047),
       flags: 0,
       properties: <ModelProperty>[
-        ModelProperty(
-            id: const IdUid(1, 3886065542503847877),
-            name: 'id',
-            type: 6,
-            flags: 129),
-        ModelProperty(
-            id: const IdUid(2, 888198510703763420),
-            name: 'note',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(3, 7489765409637473024),
-            name: 'createdOn',
-            type: 10,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(4, 4783214407881965047),
-            name: 'lastUpdatedOn',
-            type: 10,
-            flags: 0)
+        ModelProperty(id: const IdUid(1, 3886065542503847877), name: 'id', type: 6, flags: 129),
+        ModelProperty(id: const IdUid(2, 888198510703763420), name: 'note', type: 9, flags: 0),
+        ModelProperty(id: const IdUid(3, 7489765409637473024), name: 'createdOn', type: 10, flags: 0),
+        ModelProperty(id: const IdUid(4, 4783214407881965047), name: 'lastUpdatedOn', type: 10, flags: 0)
       ],
       relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[])
@@ -313,17 +169,11 @@ ModelDefinition getObjectBoxModel() {
         objectFromFB: (Store store, ByteData fbData) {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
-          final idParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
-          final pinParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 6, '');
-          final isBiometricEnabledParam =
-              const fb.BoolReader().vTableGet(buffer, rootOffset, 10, false);
-          final isAutofillEnabledParam =
-              const fb.BoolReader().vTableGet(buffer, rootOffset, 12, false);
-          final localeStringParam =
-              const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 14, '');
+          final idParam = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+          final pinParam = const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 6, '');
+          final isBiometricEnabledParam = const fb.BoolReader().vTableGet(buffer, rootOffset, 10, false);
+          final isAutofillEnabledParam = const fb.BoolReader().vTableGet(buffer, rootOffset, 12, false);
+          final localeStringParam = const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 14, '');
           final object = User(
               id: idParam,
               pin: pinParam,
@@ -336,11 +186,7 @@ ModelDefinition getObjectBoxModel() {
     Group: EntityDefinition<Group>(
         model: _entities[1],
         toOneRelations: (Group object) => [],
-        toManyRelations: (Group object) => {
-              RelInfo<Password>.toOneBacklink(
-                      7, object.id, (Password srcObject) => srcObject.group):
-                  object.passwords
-            },
+        toManyRelations: (Group object) => {RelInfo<Password>.toOneBacklink(7, object.id, (Password srcObject) => srcObject.group): object.passwords},
         getId: (Group object) => object.id,
         setId: (Group object, int id) {
           object.id = id;
@@ -360,28 +206,15 @@ ModelDefinition getObjectBoxModel() {
         objectFromFB: (Store store, ByteData fbData) {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
-          final idParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
-          final groupNameParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 6, '');
-          final descriptionParam =
-              const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 8, '');
-          final createdOnParam = DateTime.fromMillisecondsSinceEpoch(
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0));
-          final lastUpdatedOnParam = DateTime.fromMillisecondsSinceEpoch(
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 12, 0));
-          final object = Group(
-              id: idParam,
-              groupName: groupNameParam,
-              description: descriptionParam,
-              createdOn: createdOnParam,
-              lastUpdatedOn: lastUpdatedOnParam);
+          final idParam = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+          final groupNameParam = const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 6, '');
+          final descriptionParam = const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 8, '');
+          final createdOnParam = DateTime.fromMillisecondsSinceEpoch(const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0));
+          final lastUpdatedOnParam = DateTime.fromMillisecondsSinceEpoch(const fb.Int64Reader().vTableGet(buffer, rootOffset, 12, 0));
+          final object =
+              Group(id: idParam, groupName: groupNameParam, description: descriptionParam, createdOn: createdOnParam, lastUpdatedOn: lastUpdatedOnParam);
           InternalToManyAccess.setRelInfo<Group>(
-              object.passwords,
-              store,
-              RelInfo<Password>.toOneBacklink(
-                  7, object.id, (Password srcObject) => srcObject.group));
+              object.passwords, store, RelInfo<Password>.toOneBacklink(7, object.id, (Password srcObject) => srcObject.group));
           return object;
         }),
     Password: EntityDefinition<Password>(
@@ -399,8 +232,7 @@ ModelDefinition getObjectBoxModel() {
           final passwordOffset = fbb.writeString(object.password);
           final noteOffset = fbb.writeString(object.note);
           final websiteUrlOffset = fbb.writeString(object.websiteUrl);
-          final dynamicDataFieldOffset =
-              fbb.writeString(object.dynamicDataField);
+          final dynamicDataFieldOffset = fbb.writeString(object.dynamicDataField);
           fbb.startTable(13);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, titleOffset);
@@ -419,27 +251,16 @@ ModelDefinition getObjectBoxModel() {
         objectFromFB: (Store store, ByteData fbData) {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
-          final idParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
-          final titleParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 6, '');
-          final subTitleParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 8, '');
-          final websiteUrlParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 24, '');
-          final userNameParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 10, '');
-          final passwordParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 12, '');
-          final noteParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 14, '');
-          final dynamicDataFieldParam =
-              const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 26, '');
-          final createdOnParam = DateTime.fromMillisecondsSinceEpoch(
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 20, 0));
-          final lastUpdatedOnParam = DateTime.fromMillisecondsSinceEpoch(
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 22, 0));
+          final idParam = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+          final titleParam = const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 6, '');
+          final subTitleParam = const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 8, '');
+          final websiteUrlParam = const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 24, '');
+          final userNameParam = const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 10, '');
+          final passwordParam = const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 12, '');
+          final noteParam = const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 14, '');
+          final dynamicDataFieldParam = const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 26, '');
+          final createdOnParam = DateTime.fromMillisecondsSinceEpoch(const fb.Int64Reader().vTableGet(buffer, rootOffset, 20, 0));
+          final lastUpdatedOnParam = DateTime.fromMillisecondsSinceEpoch(const fb.Int64Reader().vTableGet(buffer, rootOffset, 22, 0));
           final object = Password(
               id: idParam,
               title: titleParam,
@@ -451,8 +272,7 @@ ModelDefinition getObjectBoxModel() {
               dynamicDataField: dynamicDataFieldParam,
               createdOn: createdOnParam,
               lastUpdatedOn: lastUpdatedOnParam);
-          object.group.targetId =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 16, 0);
+          object.group.targetId = const fb.Int64Reader().vTableGet(buffer, rootOffset, 16, 0);
           object.group.attach(store);
           return object;
         }),
@@ -488,28 +308,16 @@ ModelDefinition getObjectBoxModel() {
         objectFromFB: (Store store, ByteData fbData) {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
-          final idParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
-          final bankAndCardNameParam =
-              const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 6, '');
-          final cardNumberParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 8, '');
-          final cardHolderNameParam =
-              const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 10, '');
-          final cardPinParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 14, '');
-          final cvvParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 12, '');
-          final expiryDateParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 22, '');
-          final hasSecurityGridParam =
-              const fb.BoolReader().vTableGet(buffer, rootOffset, 20, false);
-          final createdOnParam = DateTime.fromMillisecondsSinceEpoch(
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 16, 0));
-          final lastUpdatedOnParam = DateTime.fromMillisecondsSinceEpoch(
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 18, 0));
+          final idParam = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+          final bankAndCardNameParam = const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 6, '');
+          final cardNumberParam = const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 8, '');
+          final cardHolderNameParam = const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 10, '');
+          final cardPinParam = const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 14, '');
+          final cvvParam = const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 12, '');
+          final expiryDateParam = const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 22, '');
+          final hasSecurityGridParam = const fb.BoolReader().vTableGet(buffer, rootOffset, 20, false);
+          final createdOnParam = DateTime.fromMillisecondsSinceEpoch(const fb.Int64Reader().vTableGet(buffer, rootOffset, 16, 0));
+          final lastUpdatedOnParam = DateTime.fromMillisecondsSinceEpoch(const fb.Int64Reader().vTableGet(buffer, rootOffset, 18, 0));
           final object = Card(
               id: idParam,
               bankAndCardName: bankAndCardNameParam,
@@ -545,19 +353,11 @@ ModelDefinition getObjectBoxModel() {
         objectFromFB: (Store store, ByteData fbData) {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
-          final idParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
-          final noteParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 6, '');
-          final createdOnParam = DateTime.fromMillisecondsSinceEpoch(
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 8, 0));
-          final lastUpdatedOnParam = DateTime.fromMillisecondsSinceEpoch(
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0));
-          final object = SecretNote(
-              id: idParam,
-              note: noteParam,
-              createdOn: createdOnParam,
-              lastUpdatedOn: lastUpdatedOnParam);
+          final idParam = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+          final noteParam = const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 6, '');
+          final createdOnParam = DateTime.fromMillisecondsSinceEpoch(const fb.Int64Reader().vTableGet(buffer, rootOffset, 8, 0));
+          final lastUpdatedOnParam = DateTime.fromMillisecondsSinceEpoch(const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0));
+          final object = SecretNote(id: idParam, note: noteParam, createdOn: createdOnParam, lastUpdatedOn: lastUpdatedOnParam);
 
           return object;
         })
@@ -575,16 +375,13 @@ class User_ {
   static final pin = QueryStringProperty<User>(_entities[0].properties[1]);
 
   /// see [User.isBiometricEnabled]
-  static final isBiometricEnabled =
-      QueryBooleanProperty<User>(_entities[0].properties[2]);
+  static final isBiometricEnabled = QueryBooleanProperty<User>(_entities[0].properties[2]);
 
   /// see [User.isAutofillEnabled]
-  static final isAutofillEnabled =
-      QueryBooleanProperty<User>(_entities[0].properties[3]);
+  static final isAutofillEnabled = QueryBooleanProperty<User>(_entities[0].properties[3]);
 
   /// see [User.localeString]
-  static final localeString =
-      QueryStringProperty<User>(_entities[0].properties[4]);
+  static final localeString = QueryStringProperty<User>(_entities[0].properties[4]);
 }
 
 /// [Group] entity fields to define ObjectBox queries.
@@ -593,20 +390,16 @@ class Group_ {
   static final id = QueryIntegerProperty<Group>(_entities[1].properties[0]);
 
   /// see [Group.groupName]
-  static final groupName =
-      QueryStringProperty<Group>(_entities[1].properties[1]);
+  static final groupName = QueryStringProperty<Group>(_entities[1].properties[1]);
 
   /// see [Group.description]
-  static final description =
-      QueryStringProperty<Group>(_entities[1].properties[2]);
+  static final description = QueryStringProperty<Group>(_entities[1].properties[2]);
 
   /// see [Group.createdOn]
-  static final createdOn =
-      QueryIntegerProperty<Group>(_entities[1].properties[3]);
+  static final createdOn = QueryIntegerProperty<Group>(_entities[1].properties[3]);
 
   /// see [Group.lastUpdatedOn]
-  static final lastUpdatedOn =
-      QueryIntegerProperty<Group>(_entities[1].properties[4]);
+  static final lastUpdatedOn = QueryIntegerProperty<Group>(_entities[1].properties[4]);
 }
 
 /// [Password] entity fields to define ObjectBox queries.
@@ -615,43 +408,34 @@ class Password_ {
   static final id = QueryIntegerProperty<Password>(_entities[2].properties[0]);
 
   /// see [Password.title]
-  static final title =
-      QueryStringProperty<Password>(_entities[2].properties[1]);
+  static final title = QueryStringProperty<Password>(_entities[2].properties[1]);
 
   /// see [Password.subTitle]
-  static final subTitle =
-      QueryStringProperty<Password>(_entities[2].properties[2]);
+  static final subTitle = QueryStringProperty<Password>(_entities[2].properties[2]);
 
   /// see [Password.userName]
-  static final userName =
-      QueryStringProperty<Password>(_entities[2].properties[3]);
+  static final userName = QueryStringProperty<Password>(_entities[2].properties[3]);
 
   /// see [Password.password]
-  static final password =
-      QueryStringProperty<Password>(_entities[2].properties[4]);
+  static final password = QueryStringProperty<Password>(_entities[2].properties[4]);
 
   /// see [Password.note]
   static final note = QueryStringProperty<Password>(_entities[2].properties[5]);
 
   /// see [Password.group]
-  static final group =
-      QueryRelationToOne<Password, Group>(_entities[2].properties[6]);
+  static final group = QueryRelationToOne<Password, Group>(_entities[2].properties[6]);
 
   /// see [Password.createdOn]
-  static final createdOn =
-      QueryIntegerProperty<Password>(_entities[2].properties[7]);
+  static final createdOn = QueryIntegerProperty<Password>(_entities[2].properties[7]);
 
   /// see [Password.lastUpdatedOn]
-  static final lastUpdatedOn =
-      QueryIntegerProperty<Password>(_entities[2].properties[8]);
+  static final lastUpdatedOn = QueryIntegerProperty<Password>(_entities[2].properties[8]);
 
   /// see [Password.websiteUrl]
-  static final websiteUrl =
-      QueryStringProperty<Password>(_entities[2].properties[9]);
+  static final websiteUrl = QueryStringProperty<Password>(_entities[2].properties[9]);
 
   /// see [Password.dynamicDataField]
-  static final dynamicDataField =
-      QueryStringProperty<Password>(_entities[2].properties[10]);
+  static final dynamicDataField = QueryStringProperty<Password>(_entities[2].properties[10]);
 }
 
 /// [Card] entity fields to define ObjectBox queries.
@@ -660,16 +444,13 @@ class Card_ {
   static final id = QueryIntegerProperty<Card>(_entities[3].properties[0]);
 
   /// see [Card.bankAndCardName]
-  static final bankAndCardName =
-      QueryStringProperty<Card>(_entities[3].properties[1]);
+  static final bankAndCardName = QueryStringProperty<Card>(_entities[3].properties[1]);
 
   /// see [Card.cardNumber]
-  static final cardNumber =
-      QueryStringProperty<Card>(_entities[3].properties[2]);
+  static final cardNumber = QueryStringProperty<Card>(_entities[3].properties[2]);
 
   /// see [Card.cardHolderName]
-  static final cardHolderName =
-      QueryStringProperty<Card>(_entities[3].properties[3]);
+  static final cardHolderName = QueryStringProperty<Card>(_entities[3].properties[3]);
 
   /// see [Card.cvv]
   static final cvv = QueryStringProperty<Card>(_entities[3].properties[4]);
@@ -678,37 +459,29 @@ class Card_ {
   static final cardPin = QueryStringProperty<Card>(_entities[3].properties[5]);
 
   /// see [Card.createdOn]
-  static final createdOn =
-      QueryIntegerProperty<Card>(_entities[3].properties[6]);
+  static final createdOn = QueryIntegerProperty<Card>(_entities[3].properties[6]);
 
   /// see [Card.lastUpdatedOn]
-  static final lastUpdatedOn =
-      QueryIntegerProperty<Card>(_entities[3].properties[7]);
+  static final lastUpdatedOn = QueryIntegerProperty<Card>(_entities[3].properties[7]);
 
   /// see [Card.hasSecurityGrid]
-  static final hasSecurityGrid =
-      QueryBooleanProperty<Card>(_entities[3].properties[8]);
+  static final hasSecurityGrid = QueryBooleanProperty<Card>(_entities[3].properties[8]);
 
   /// see [Card.expiryDate]
-  static final expiryDate =
-      QueryStringProperty<Card>(_entities[3].properties[9]);
+  static final expiryDate = QueryStringProperty<Card>(_entities[3].properties[9]);
 }
 
 /// [SecretNote] entity fields to define ObjectBox queries.
 class SecretNote_ {
   /// see [SecretNote.id]
-  static final id =
-      QueryIntegerProperty<SecretNote>(_entities[4].properties[0]);
+  static final id = QueryIntegerProperty<SecretNote>(_entities[4].properties[0]);
 
   /// see [SecretNote.note]
-  static final note =
-      QueryStringProperty<SecretNote>(_entities[4].properties[1]);
+  static final note = QueryStringProperty<SecretNote>(_entities[4].properties[1]);
 
   /// see [SecretNote.createdOn]
-  static final createdOn =
-      QueryIntegerProperty<SecretNote>(_entities[4].properties[2]);
+  static final createdOn = QueryIntegerProperty<SecretNote>(_entities[4].properties[2]);
 
   /// see [SecretNote.lastUpdatedOn]
-  static final lastUpdatedOn =
-      QueryIntegerProperty<SecretNote>(_entities[4].properties[3]);
+  static final lastUpdatedOn = QueryIntegerProperty<SecretNote>(_entities[4].properties[3]);
 }

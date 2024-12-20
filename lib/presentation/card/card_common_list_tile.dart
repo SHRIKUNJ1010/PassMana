@@ -1,9 +1,10 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:passmana/localization/app_localization.dart';
-import 'package:passmana/utility/color.dart';
 import 'package:passmana/model/card_model.dart' as c;
+import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/text_utility/text_styles.dart';
-import 'dart:math' as math;
 
 class CardCommonListTile extends StatelessWidget {
   final c.Card card;
@@ -20,16 +21,16 @@ class CardCommonListTile extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(12),
       child: Material(
-        color: AppColors.mWhite.withOpacity(0.2),
+        color: AppColors.mWhite.withValues(alpha: 0.3), //withOpacity(0.2),
         child: InkWell(
-          splashColor: AppColors.primaryColor.withOpacity(0.2),
+          splashColor: AppColors.primaryColor.withValues(alpha: 0.2),
           onTap: () {
             onTap.call();
           },
           child: Container(
             height: 220,
             decoration: BoxDecoration(
-              color: AppColors.primaryColor.withOpacity(0.6),
+              color: AppColors.primaryColor.withValues(alpha: 0.6),
               borderRadius: BorderRadius.circular(12),
             ),
             padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),

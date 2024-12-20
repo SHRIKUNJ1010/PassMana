@@ -24,67 +24,69 @@ class GetStartedScreen extends StatelessWidget {
         return Scaffold(
           body: Container(
             color: AppColors.primaryColor,
-            child: Column(
-              children: [
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
-                        alignment: Alignment.center,
-                        child: Hero(
-                          tag: AppConstants.appLogo,
-                          child: Image.asset(AppAssets.appLogoWithText),
+            child: SafeArea(
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                          alignment: Alignment.center,
+                          child: Hero(
+                            tag: AppConstants.appLogo,
+                            child: Image.asset(AppAssets.appLogoWithText),
+                          ),
                         ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 30),
-                              child: Text(
-                                getTranslated('empowering_privacy_offline',context).toUpperCase(),
-                                softWrap: true,
-                                style: TextStyles.getTitleRedText(36),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 30),
+                                child: Text(
+                                  getTranslated('empowering_privacy_offline', context).toUpperCase(),
+                                  softWrap: true,
+                                  style: TextStyles.getTitleRedText(36),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 8),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 30),
-                              child: Text(
-                                getTranslated('where_your_passwords_find_sanctuary',context),
-                                softWrap: true,
-                                style: TextStyles.getTitleWhiteText(30),
+                          ],
+                        ),
+                        const SizedBox(height: 8),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 30),
+                                child: Text(
+                                  getTranslated('where_your_passwords_find_sanctuary', context),
+                                  softWrap: true,
+                                  style: TextStyles.getTitleWhiteText(30),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 30),
-                    ],
+                          ],
+                        ),
+                        const SizedBox(height: 30),
+                      ],
+                    ),
                   ),
-                ),
-                CommonWidgets.getCommonButtonWithSplash(
-                  title: getTranslated('get_started',context),
-                  height: 55,
-                  context: context,
-                  onTap: () {
-                    vm.onGetStartedPressed.call();
-                  },
-                ),
-                const SizedBox(height: 20),
-              ],
+                  CommonWidgets.getCommonButtonWithSplash(
+                    title: getTranslated('get_started', context),
+                    height: 55,
+                    context: context,
+                    onTap: () {
+                      vm.onGetStartedPressed.call();
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                ],
+              ),
             ),
           ),
         );

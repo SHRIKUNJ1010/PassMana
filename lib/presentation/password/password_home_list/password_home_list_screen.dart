@@ -104,7 +104,7 @@ class PasswordHomeListScreen extends StatelessWidget {
           child: Material(
             color: AppColors.mWhite,
             child: InkWell(
-              splashColor: AppColors.mBlack.withOpacity(0.2),
+              splashColor: AppColors.mBlack.withValues(alpha: 0.2),
               onTap: () {
                 vm.onGeneratePasswordTap.call();
               },
@@ -144,7 +144,7 @@ class PasswordHomeListScreen extends StatelessWidget {
                       onTap: () {
                         vm.onSeeAllGroupsTap.call();
                       },
-                      splashColor: AppColors.mWhite.withOpacity(0.5),
+                      splashColor: AppColors.mWhite.withValues(alpha: 0.5),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 7),
                         child: Text(
@@ -182,7 +182,7 @@ class PasswordHomeListScreen extends StatelessWidget {
                       onTap: () {
                         vm.onSeeAllPasswordsTap.call();
                       },
-                      splashColor: AppColors.mWhite.withOpacity(0.5),
+                      splashColor: AppColors.mWhite.withValues(alpha: 0.5),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 7),
                         child: Text(

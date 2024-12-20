@@ -10,10 +10,10 @@ import 'package:redux/redux.dart';
 
 List<Middleware<AppState>> createSecretNoteMiddleware() {
   return [
-    TypedMiddleware<AppState, CreateSecretNote>(_createSecretNote()),
-    TypedMiddleware<AppState, UpdateSecretNote>(_updateSecretNote()),
-    TypedMiddleware<AppState, DeleteSecretNote>(_deleteSecretNote()),
-    TypedMiddleware<AppState, GetAllSecretNotes>(_getAllSecretNotes()),
+    TypedMiddleware<AppState, CreateSecretNote>(_createSecretNote()).call,
+    TypedMiddleware<AppState, UpdateSecretNote>(_updateSecretNote()).call,
+    TypedMiddleware<AppState, DeleteSecretNote>(_deleteSecretNote()).call,
+    TypedMiddleware<AppState, GetAllSecretNotes>(_getAllSecretNotes()).call,
   ];
 }
 

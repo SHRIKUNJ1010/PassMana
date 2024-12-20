@@ -97,7 +97,7 @@ class CreateListScreen extends StatelessWidget {
                     title: getTranslated("password", context),
                     icon: Icon(
                       Icons.lock,
-                      color: AppColors.mBlack.withOpacity(0.6),
+                      color: AppColors.mBlack.withValues(alpha: 0.6),
                       size: 50,
                     ),
                   ),
@@ -110,7 +110,7 @@ class CreateListScreen extends StatelessWidget {
                     title: getTranslated("group", context),
                     icon: Icon(
                       Icons.people,
-                      color: AppColors.mBlack.withOpacity(0.6),
+                      color: AppColors.mBlack.withValues(alpha: 0.6),
                       size: 50,
                     ),
                   ),
@@ -129,7 +129,7 @@ class CreateListScreen extends StatelessWidget {
                     title: getTranslated("card", context),
                     icon: Icon(
                       Icons.credit_card,
-                      color: AppColors.mBlack.withOpacity(0.6),
+                      color: AppColors.mBlack.withValues(alpha: 0.6),
                       size: 50,
                     ),
                   ),
@@ -142,7 +142,7 @@ class CreateListScreen extends StatelessWidget {
                     title: getTranslated("secret_note", context),
                     icon: Icon(
                       Icons.note_alt,
-                      color: AppColors.mBlack.withOpacity(0.6),
+                      color: AppColors.mBlack.withValues(alpha: 0.6),
                       size: 50,
                     ),
                   ),

@@ -127,7 +127,7 @@ class SettingsItemListScreen extends StatelessWidget {
                           containerBuilder: (context, child) {
                             return Container(
                               decoration: BoxDecoration(
-                                color: AppColors.primaryColor.withOpacity(0.2),
+                                color: AppColors.primaryColor.withValues(alpha: 0.2),
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: child,
@@ -166,7 +166,7 @@ class SettingsItemListScreen extends StatelessWidget {
                                 onTap: () {
                                   onTap.call();
                                 },
-                                splashColor: AppColors.secondaryColor.withOpacity(0.2),
+                                splashColor: AppColors.secondaryColor.withValues(alpha: 0.2),
                                 child: Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(5),
@@ -208,7 +208,7 @@ class SettingsItemListScreen extends StatelessWidget {
                         onTap: () {
                           vm.onChangeMobilePinTap.call();
                         },
-                        splashColor: AppColors.primaryColor.withOpacity(0.2),
+                        splashColor: AppColors.primaryColor.withValues(alpha: 0.2),
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
@@ -234,7 +234,7 @@ class SettingsItemListScreen extends StatelessWidget {
                         onTap: () {
                           vm.onImportMobileDataTap.call();
                         },
-                        splashColor: AppColors.primaryColor.withOpacity(0.2),
+                        splashColor: AppColors.primaryColor.withValues(alpha: 0.2),
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
@@ -260,7 +260,7 @@ class SettingsItemListScreen extends StatelessWidget {
                         onTap: () {
                           vm.onExportMobileDataTap.call();
                         },
-                        splashColor: AppColors.primaryColor.withOpacity(0.2),
+                        splashColor: AppColors.primaryColor.withValues(alpha: 0.2),
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),

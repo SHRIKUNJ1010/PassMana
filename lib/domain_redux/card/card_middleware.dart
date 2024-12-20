@@ -10,10 +10,10 @@ import 'package:redux/redux.dart';
 
 List<Middleware<AppState>> createCardMiddleware() {
   return [
-    TypedMiddleware<AppState, CreateCard>(_createCard()),
-    TypedMiddleware<AppState, UpdateCard>(_updateCard()),
-    TypedMiddleware<AppState, DeleteCard>(_deleteCard()),
-    TypedMiddleware<AppState, GetAllCards>(_getAllCards()),
+    TypedMiddleware<AppState, CreateCard>(_createCard()).call,
+    TypedMiddleware<AppState, UpdateCard>(_updateCard()).call,
+    TypedMiddleware<AppState, DeleteCard>(_deleteCard()).call,
+    TypedMiddleware<AppState, GetAllCards>(_getAllCards()).call,
   ];
 }
 

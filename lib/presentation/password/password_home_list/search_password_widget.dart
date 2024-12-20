@@ -25,7 +25,7 @@ class SearchPasswordWidget extends StatelessWidget {
         elevation: 2,
         borderRadius: BorderRadius.circular(10),
         child: InkWell(
-          splashColor: AppColors.primaryColor.withOpacity(0.3),
+          splashColor: AppColors.primaryColor.withValues(alpha: 0.3),
           onTap: () {
             onTap.call();
           },
@@ -47,7 +47,7 @@ class SearchPasswordWidget extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Text(
-                                getTranslated("search_password",context),
+                                getTranslated("search_password", context),
                                 style: TextStyles.getTitleTransparentBlackText(fontSize: 20, opacity: 0.8),
                               ),
                             ],
@@ -60,7 +60,7 @@ class SearchPasswordWidget extends StatelessWidget {
                 Material(
                   color: AppColors.secondaryColor,
                   child: InkWell(
-                    splashColor: AppColors.primaryColor.withOpacity(0.3),
+                    splashColor: AppColors.primaryColor.withValues(alpha: 0.3),
                     onTap: () {
                       onTap.call();
                     },

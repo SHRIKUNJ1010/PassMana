@@ -27,9 +27,9 @@ class GroupListScreen extends StatelessWidget {
           child: Scaffold(
             resizeToAvoidBottomInset: false,
             backgroundColor: Colors.transparent,
-            appBar: getAppBar(vm,context),
+            appBar: getAppBar(vm, context),
             body: SafeArea(
-              child: getGroupListView(width, vm,context),
+              child: getGroupListView(width, vm, context),
             ),
           ),
         );
@@ -37,7 +37,7 @@ class GroupListScreen extends StatelessWidget {
     );
   }
 
-  CustomAppBar getAppBar(GroupListViewModel vm,BuildContext context) {
+  CustomAppBar getAppBar(GroupListViewModel vm, BuildContext context) {
     return CustomAppBar(
       centerWidgetsList: [
         Expanded(
@@ -51,7 +51,7 @@ class GroupListScreen extends StatelessWidget {
                 child: Material(
                   color: AppColors.mWhite,
                   child: InkWell(
-                    splashColor: AppColors.mBlack.withOpacity(0.2),
+                    splashColor: AppColors.mBlack.withValues(alpha: 0.2),
                     onTap: () {
                       vm.onBackPress.call();
                     },
@@ -70,7 +70,7 @@ class GroupListScreen extends StatelessWidget {
           ),
         ),
         Text(
-          getTranslated("groups",context),
+          getTranslated("groups", context),
           style: TextStyles.getTitleWhiteText(25),
         ),
         const Spacer(),
@@ -78,7 +78,7 @@ class GroupListScreen extends StatelessWidget {
     );
   }
 
-  Widget getGroupListView(double width, GroupListViewModel vm,BuildContext context) {
+  Widget getGroupListView(double width, GroupListViewModel vm, BuildContext context) {
     return vm.groupList.isEmpty
         ? Padding(
             padding: const EdgeInsets.fromLTRB(20, 20, 20, 100),
@@ -86,7 +86,7 @@ class GroupListScreen extends StatelessWidget {
               width: width - 40,
               child: Center(
                 child: Text(
-                  getTranslated('no_passwords_found',context),
+                  getTranslated('no_passwords_found', context),
                   style: TextStyles.getTitleWhiteText(20),
                 ),
               ),

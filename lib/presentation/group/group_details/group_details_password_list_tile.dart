@@ -34,7 +34,7 @@ class GroupPasswordListTile extends StatelessWidget {
             onTap: () {
               onItemTap.call();
             },
-            splashColor: AppColors.accentSecondaryColor.withOpacity(0.2),
+            splashColor: AppColors.accentSecondaryColor.withValues(alpha: 0.2),
             child: Container(
               width: width - 40,
               height: 70,
@@ -75,7 +75,7 @@ class GroupPasswordListTile extends StatelessWidget {
                       child: Material(
                         color: Colors.transparent,
                         child: InkWell(
-                          splashColor: AppColors.mWhite.withOpacity(0.2),
+                          splashColor: AppColors.mWhite.withValues(alpha: 0.2),
                           onTap: () {
                             onClipboardTap.call();
                           },

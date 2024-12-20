@@ -35,64 +35,66 @@ class PasswordDetailsScreen extends StatelessWidget {
             resizeToAvoidBottomInset: false,
             backgroundColor: Colors.transparent,
             appBar: getAppBar(vm, context),
-            body: vm.password.id == 0
-                ? const SizedBox()
-                : ListView(
-                    padding: const EdgeInsets.fromLTRB(20, 10, 20, 80),
-                    shrinkWrap: true,
-                    children: [
-                      const SizedBox(height: 10),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 80,
-                              height: 80,
-                              decoration: BoxDecoration(
-                                color: AppColors.mWhite,
-                                borderRadius: BorderRadius.circular(40),
+            body: SafeArea(
+              child: vm.password.id == 0
+                  ? const SizedBox()
+                  : ListView(
+                      padding: const EdgeInsets.fromLTRB(20, 10, 20, 80),
+                      shrinkWrap: true,
+                      children: [
+                        const SizedBox(height: 10),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                width: 80,
+                                height: 80,
+                                decoration: BoxDecoration(
+                                  color: AppColors.mWhite,
+                                  borderRadius: BorderRadius.circular(40),
+                                ),
+                                margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                                alignment: Alignment.center,
+                                child: Text(
+                                  vm.password.title.trim()[0].toUpperCase(),
+                                  style: TextStyles.getBoldRedText(34),
+                                ),
                               ),
-                              margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                              alignment: Alignment.center,
-                              child: Text(
-                                vm.password.title.trim()[0].toUpperCase(),
-                                style: TextStyles.getBoldRedText(34),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      getTitleContainer(vm, context),
-                      if (vm.password.subTitle.isNotEmpty) const SizedBox(height: 7),
-                      if (vm.password.subTitle.isNotEmpty) getSubTitleContainer(vm, context),
-                      const SizedBox(height: 20),
-                      if (vm.password.websiteUrl.isNotEmpty) getWebsiteUrlContainer(vm, context),
-                      if (vm.password.websiteUrl.isNotEmpty) const SizedBox(height: 7),
-                      getUsernameContainer(vm, context),
-                      const SizedBox(height: 7),
-                      getPasswordContainer(vm, context),
-                      if (vm.password.note.isNotEmpty) const SizedBox(height: 20),
-                      if (vm.password.note.isNotEmpty) getNoteContainer(vm, context),
-                      if (vm.dynamicFields.call().isNotEmpty) const SizedBox(height: 20),
-                      if (vm.dynamicFields.call().isNotEmpty) ...[
-                        for (int i = 0; i < vm.dynamicFields.call().length; i++) ...[
-                          getCustomFieldItemContainer(
-                            vm.dynamicFields.call()[i].title ?? "",
-                            vm.dynamicFields.call()[i].value ?? "",
-                            context,
+                            ],
                           ),
-                          if (i != (vm.dynamicFields.call().length - 1)) const SizedBox(height: 7),
+                        ),
+                        const SizedBox(height: 20),
+                        getTitleContainer(vm, context),
+                        if (vm.password.subTitle.isNotEmpty) const SizedBox(height: 7),
+                        if (vm.password.subTitle.isNotEmpty) getSubTitleContainer(vm, context),
+                        const SizedBox(height: 20),
+                        if (vm.password.websiteUrl.isNotEmpty) getWebsiteUrlContainer(vm, context),
+                        if (vm.password.websiteUrl.isNotEmpty) const SizedBox(height: 7),
+                        getUsernameContainer(vm, context),
+                        const SizedBox(height: 7),
+                        getPasswordContainer(vm, context),
+                        if (vm.password.note.isNotEmpty) const SizedBox(height: 20),
+                        if (vm.password.note.isNotEmpty) getNoteContainer(vm, context),
+                        if (vm.dynamicFields.call().isNotEmpty) const SizedBox(height: 20),
+                        if (vm.dynamicFields.call().isNotEmpty) ...[
+                          for (int i = 0; i < vm.dynamicFields.call().length; i++) ...[
+                            getCustomFieldItemContainer(
+                              vm.dynamicFields.call()[i].title ?? "",
+                              vm.dynamicFields.call()[i].value ?? "",
+                              context,
+                            ),
+                            if (i != (vm.dynamicFields.call().length - 1)) const SizedBox(height: 7),
+                          ],
                         ],
+                        const SizedBox(height: 20),
+                        getAssignedToGroupContainer(vm, context),
+                        const SizedBox(height: 80),
                       ],
-                      const SizedBox(height: 20),
-                      getAssignedToGroupContainer(vm, context),
-                      const SizedBox(height: 80),
-                    ],
-                  ),
+                    ),
+            ),
           ),
         );
       },
@@ -238,7 +240,7 @@ class PasswordDetailsScreen extends StatelessWidget {
               child: Material(
                 color: Colors.transparent,
                 child: InkWell(
-                  splashColor: AppColors.primaryColor.withOpacity(0.2),
+                  splashColor: AppColors.primaryColor.withValues(alpha: 0.2),
                   onTap: () {
                     vm.onPasswordCopyTap.call(vm.password.password);
                   },
@@ -292,7 +294,7 @@ class PasswordDetailsScreen extends StatelessWidget {
               child: Material(
                 color: Colors.transparent,
                 child: InkWell(
-                  splashColor: AppColors.primaryColor.withOpacity(0.2),
+                  splashColor: AppColors.primaryColor.withValues(alpha: 0.2),
                   onTap: () {
                     vm.onWebsiteUrlTap.call(vm.password.websiteUrl);
                   },
@@ -349,7 +351,7 @@ class PasswordDetailsScreen extends StatelessWidget {
               child: Material(
                 color: Colors.transparent,
                 child: InkWell(
-                  splashColor: AppColors.primaryColor.withOpacity(0.2),
+                  splashColor: AppColors.primaryColor.withValues(alpha: 0.2),
                   onTap: () {
                     vm.onUsernameCopyTap.call(vm.password.userName);
                   },
@@ -446,7 +448,7 @@ class PasswordDetailsScreen extends StatelessWidget {
                 child: Material(
                   color: AppColors.mWhite,
                   child: InkWell(
-                    splashColor: AppColors.mBlack.withOpacity(0.2),
+                    splashColor: AppColors.mBlack.withValues(alpha: 0.2),
                     onTap: () {
                       vm.onBackPress.call();
                     },
@@ -478,7 +480,7 @@ class PasswordDetailsScreen extends StatelessWidget {
                 child: Material(
                   color: AppColors.mWhite,
                   child: InkWell(
-                    splashColor: AppColors.mBlack.withOpacity(0.2),
+                    splashColor: AppColors.mBlack.withValues(alpha: 0.2),
                     onTap: () {
                       vm.onEditTap.call();
                     },

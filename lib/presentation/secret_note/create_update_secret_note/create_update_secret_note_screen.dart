@@ -137,7 +137,7 @@ class _CreateUpdateSecretNoteScreenState extends State<CreateUpdateSecretNoteScr
           top: Radius.circular(30),
         ),
         child: InkWell(
-          splashColor: AppColors.mWhite.withOpacity(0.2),
+          splashColor: AppColors.mWhite.withValues(alpha: 0.2),
           onTap: () {
             if (_formKey.currentState!.validate()) {
               if (widget.id != null) {
@@ -152,7 +152,8 @@ class _CreateUpdateSecretNoteScreenState extends State<CreateUpdateSecretNoteScr
             }
           },
           child: Container(
-            height: 65,
+            height: 65 + MediaQuery.paddingOf(context).bottom,
+            padding: EdgeInsets.only(bottom: MediaQuery.paddingOf(context).bottom),
             color: Colors.transparent,
             alignment: Alignment.center,
             child: Text(
@@ -179,7 +180,7 @@ class _CreateUpdateSecretNoteScreenState extends State<CreateUpdateSecretNoteScr
                 child: Material(
                   color: AppColors.mWhite,
                   child: InkWell(
-                    splashColor: AppColors.mBlack.withOpacity(0.2),
+                    splashColor: AppColors.mBlack.withValues(alpha: 0.2),
                     onTap: () {
                       vm.onBackPress.call();
                     },
@@ -212,7 +213,7 @@ class _CreateUpdateSecretNoteScreenState extends State<CreateUpdateSecretNoteScr
                       child: Material(
                         color: AppColors.secondaryMaterialColor[700],
                         child: InkWell(
-                          splashColor: AppColors.mWhite.withOpacity(0.2),
+                          splashColor: AppColors.mWhite.withValues(alpha: 0.2),
                           onTap: () {
                             vm.deleteSecretNote.call();
                           },

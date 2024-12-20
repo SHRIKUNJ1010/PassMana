@@ -62,7 +62,7 @@ class _CreateUpdateGroupScreenState extends State<CreateUpdateGroupScreen> {
                 Scaffold(
                   resizeToAvoidBottomInset: true,
                   backgroundColor: Colors.transparent,
-                  appBar: getAppBar(vm,context),
+                  appBar: getAppBar(vm, context),
                   body: Column(
                     children: [
                       Expanded(
@@ -82,7 +82,7 @@ class _CreateUpdateGroupScreenState extends State<CreateUpdateGroupScreen> {
                   left: 0,
                   right: 0,
                   bottom: 0,
-                  child: getCreateUpdateButton(vm,context),
+                  child: getCreateUpdateButton(vm, context),
                 ),
               ],
             ),
@@ -184,7 +184,7 @@ class _CreateUpdateGroupScreenState extends State<CreateUpdateGroupScreen> {
     );
   }
 
-  ClipRRect getCreateUpdateButton(CreateUpdateGroupViewModel vm,BuildContext context) {
+  ClipRRect getCreateUpdateButton(CreateUpdateGroupViewModel vm, BuildContext context) {
     return ClipRRect(
       borderRadius: const BorderRadius.vertical(
         top: Radius.circular(30),
@@ -195,7 +195,7 @@ class _CreateUpdateGroupScreenState extends State<CreateUpdateGroupScreen> {
           top: Radius.circular(30),
         ),
         child: InkWell(
-          splashColor: AppColors.mWhite.withOpacity(0.2),
+          splashColor: AppColors.mWhite.withValues(alpha: 0.2),
           onTap: () {
             if (_formKey.currentState!.validate()) {
               if (widget.id != null) {
@@ -212,7 +212,8 @@ class _CreateUpdateGroupScreenState extends State<CreateUpdateGroupScreen> {
             }
           },
           child: Container(
-            height: 65,
+            height: 65 + MediaQuery.paddingOf(context).bottom,
+            padding: EdgeInsets.only(bottom: MediaQuery.paddingOf(context).bottom),
             color: Colors.transparent,
             alignment: Alignment.center,
             child: Text(
@@ -225,7 +226,7 @@ class _CreateUpdateGroupScreenState extends State<CreateUpdateGroupScreen> {
     );
   }
 
-  CustomAppBar getAppBar(CreateUpdateGroupViewModel vm,BuildContext context) {
+  CustomAppBar getAppBar(CreateUpdateGroupViewModel vm, BuildContext context) {
     return CustomAppBar(
       centerWidgetsList: [
         Expanded(
@@ -239,7 +240,7 @@ class _CreateUpdateGroupScreenState extends State<CreateUpdateGroupScreen> {
                 child: Material(
                   color: AppColors.mWhite,
                   child: InkWell(
-                    splashColor: AppColors.mBlack.withOpacity(0.2),
+                    splashColor: AppColors.mBlack.withValues(alpha: 0.2),
                     onTap: () {
                       vm.onBackPress.call();
                     },
@@ -272,7 +273,7 @@ class _CreateUpdateGroupScreenState extends State<CreateUpdateGroupScreen> {
                       child: Material(
                         color: AppColors.secondaryMaterialColor[700],
                         child: InkWell(
-                          splashColor: AppColors.mWhite.withOpacity(0.2),
+                          splashColor: AppColors.mWhite.withValues(alpha: 0.2),
                           onTap: () {
                             vm.deleteGroup.call();
                           },

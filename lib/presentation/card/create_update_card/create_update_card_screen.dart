@@ -62,7 +62,8 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
       onInit: (Store<AppState> store) {
         if (widget.id != null) {
           bankAndCardNameController.text = getCardById(store.state, widget.id)?.bankAndCardName ?? "";
-          cardNumberController.text = (getCardById(store.state, widget.id)?.cardNumber ?? "").replaceAllMapped(RegExp(r'.{4}'), (match) => '${match.group(0)} ');
+          cardNumberController.text =
+              (getCardById(store.state, widget.id)?.cardNumber ?? "").replaceAllMapped(RegExp(r'.{4}'), (match) => '${match.group(0)} ');
           cardHolderNameController.text = getCardById(store.state, widget.id)?.cardHolderName ?? "";
           cvvController.text = getCardById(store.state, widget.id)?.cvv ?? "";
           expiryDateController.text = getCardById(store.state, widget.id)?.expiryDate ?? "";
@@ -416,7 +417,7 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
                         showCardPin = !showCardPin;
                         setState(() {});
                       },
-                      splashColor: AppColors.secondaryColor.withOpacity(0.2),
+                      splashColor: AppColors.secondaryColor.withValues(alpha: 0.2),
                       child: Padding(
                         padding: const EdgeInsets.all(10),
                         child: showCardPin
@@ -462,7 +463,7 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
           top: Radius.circular(30),
         ),
         child: InkWell(
-          splashColor: AppColors.mWhite.withOpacity(0.2),
+          splashColor: AppColors.mWhite.withValues(alpha: 0.2),
           onTap: () {
             if (_formKey.currentState!.validate()) {
               if (widget.id != null) {
@@ -491,7 +492,8 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
             }
           },
           child: Container(
-            height: 65,
+            height: 65 + MediaQuery.paddingOf(context).bottom,
+            padding: EdgeInsets.only(bottom: MediaQuery.paddingOf(context).bottom),
             color: Colors.transparent,
             alignment: Alignment.center,
             child: Text(
@@ -518,7 +520,7 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
                 child: Material(
                   color: AppColors.mWhite,
                   child: InkWell(
-                    splashColor: AppColors.mBlack.withOpacity(0.2),
+                    splashColor: AppColors.mBlack.withValues(alpha: 0.2),
                     onTap: () {
                       vm.onBackPress.call();
                     },
@@ -551,7 +553,7 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
                       child: Material(
                         color: AppColors.secondaryMaterialColor[700],
                         child: InkWell(
-                          splashColor: AppColors.mWhite.withOpacity(0.2),
+                          splashColor: AppColors.mWhite.withValues(alpha: 0.2),
                           onTap: () {
                             vm.deleteCard.call();
                           },

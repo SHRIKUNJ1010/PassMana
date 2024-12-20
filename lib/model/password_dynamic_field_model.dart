@@ -18,8 +18,8 @@ class PasswordDynamicFieldList {
     }
   }
 
-  Map<String,dynamic> toJson() {
-    final Map<String,dynamic> data = <String,dynamic>{};
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['dynamic_fields'] = dynamicField;
     return data;
   }

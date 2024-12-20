@@ -11,9 +11,9 @@ import 'package:redux/redux.dart';
 
 List<Middleware<AppState>> createFilterSearchMiddleware() {
   return [
-    TypedMiddleware<AppState, InitializeFilter>(_initializeFilter()),
-    TypedMiddleware<AppState, ChangeSelectionOfGroup>(_changeSelectionGroup()),
-    TypedMiddleware<AppState, ChangeKeyword>(_changeKeyword()),
+    TypedMiddleware<AppState, InitializeFilter>(_initializeFilter()).call,
+    TypedMiddleware<AppState, ChangeSelectionOfGroup>(_changeSelectionGroup()).call,
+    TypedMiddleware<AppState, ChangeKeyword>(_changeKeyword()).call,
   ];
 }
 

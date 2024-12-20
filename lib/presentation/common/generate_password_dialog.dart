@@ -104,7 +104,7 @@ class _GeneratePasswordDialogState extends State<GeneratePasswordDialog> {
                     child: Material(
                       color: Colors.transparent,
                       child: InkWell(
-                        splashColor: AppColors.primaryColor.withOpacity(0.2),
+                        splashColor: AppColors.primaryColor.withValues(alpha: 0.2),
                         onTap: () {
                           Utility.copyToClipboard(generatedPassword);
                         },
@@ -201,7 +201,7 @@ class _GeneratePasswordDialogState extends State<GeneratePasswordDialog> {
               max: 50,
               activeColor: AppColors.mWhite,
               thumbColor: AppColors.mWhite,
-              inactiveColor: AppColors.mWhite.withOpacity(0.7),
+              inactiveColor: AppColors.mWhite.withValues(alpha: 0.7),
               value: passwordLength.toDouble(),
               onChanged: (value) {
                 if (passwordLength != value.toInt()) {
@@ -238,7 +238,7 @@ class _GeneratePasswordDialogState extends State<GeneratePasswordDialog> {
             child: Material(
               color: Colors.transparent,
               child: InkWell(
-                splashColor: AppColors.mWhite.withOpacity(0.2),
+                splashColor: AppColors.mWhite.withValues(alpha: 0.2),
                 onTap: () {
                   if (!hasUppercase && hasLowercase) {
                   } else {
@@ -294,7 +294,7 @@ class _GeneratePasswordDialogState extends State<GeneratePasswordDialog> {
             child: Material(
               color: Colors.transparent,
               child: InkWell(
-                splashColor: AppColors.mWhite.withOpacity(0.2),
+                splashColor: AppColors.mWhite.withValues(alpha: 0.2),
                 onTap: () {
                   if (!hasLowercase && hasUppercase) {
                   } else {
@@ -350,7 +350,7 @@ class _GeneratePasswordDialogState extends State<GeneratePasswordDialog> {
             child: Material(
               color: Colors.transparent,
               child: InkWell(
-                splashColor: AppColors.mWhite.withOpacity(0.2),
+                splashColor: AppColors.mWhite.withValues(alpha: 0.2),
                 onTap: () {
                   hasNumeric = !hasNumeric;
                   setState(() {});
@@ -403,7 +403,7 @@ class _GeneratePasswordDialogState extends State<GeneratePasswordDialog> {
             child: Material(
               color: Colors.transparent,
               child: InkWell(
-                splashColor: AppColors.mWhite.withOpacity(0.2),
+                splashColor: AppColors.mWhite.withValues(alpha: 0.2),
                 onTap: () {
                   hasSpecialCharacter = !hasSpecialCharacter;
                   setState(() {});
@@ -456,7 +456,7 @@ class _GeneratePasswordDialogState extends State<GeneratePasswordDialog> {
             child: Material(
               color: Colors.transparent,
               child: InkWell(
-                splashColor: AppColors.mWhite.withOpacity(0.2),
+                splashColor: AppColors.mWhite.withValues(alpha: 0.2),
                 onTap: () {
                   isReadable = !isReadable;
                   setState(() {});

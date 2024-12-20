@@ -114,7 +114,7 @@ class DropdownSearch<T> extends StatefulWidget {
   final PopupPropsMultiSelection<T> popupProps;
 
   DropdownSearch({
-    Key? key,
+    super.key,
     this.onSaved,
     this.validator,
     this.autoValidateMode = AutovalidateMode.disabled,
@@ -135,8 +135,7 @@ class DropdownSearch<T> extends StatefulWidget {
   })  : assert(
           !popupProps.showSelectedItems || T == String || compareFn != null,
         ),
-        popupProps = PopupPropsMultiSelection.from(popupProps),
-        super(key: key);
+        popupProps = PopupPropsMultiSelection.from(popupProps);
 
   @override
   DropdownSearchState<T> createState() => DropdownSearchState<T>();

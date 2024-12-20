@@ -35,7 +35,7 @@ class CreateListItemTile extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
-                color: AppColors.mWhite.withOpacity(0.7),
+                color: AppColors.mWhite.withValues(alpha: 0.7),
               ),
               child: Center(
                 child: Column(

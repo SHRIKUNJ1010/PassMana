@@ -98,7 +98,7 @@ class _PasswordDynamicFieldListItemWidgetState extends State<PasswordDynamicFiel
                 onTap: () {
                   widget.onCancelTap.call();
                 },
-                splashColor: AppColors.primaryColor.withOpacity(0.3),
+                splashColor: AppColors.primaryColor.withValues(alpha: 0.3),
                 child: const Padding(
                   padding: EdgeInsets.all(5),
                   child: Icon(

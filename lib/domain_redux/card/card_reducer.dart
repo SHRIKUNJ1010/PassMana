@@ -7,7 +7,7 @@ import 'package:passmana/domain_redux/card/card_actions.dart';
 import 'package:redux/redux.dart';
 
 final cardReducers = <AppState Function(AppState, dynamic)>[
-  TypedReducer<AppState, CardListChanged>(_onCardListChanged),
+  TypedReducer<AppState, CardListChanged>(_onCardListChanged).call,
 ];
 
 AppState _onCardListChanged(AppState state, CardListChanged action) {

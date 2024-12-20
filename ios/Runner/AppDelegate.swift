@@ -2,7 +2,7 @@ import UIKit
 import Flutter
 import LocalAuthentication
 
-@UIApplicationMain
+@main
 @objc class AppDelegate: FlutterAppDelegate {
 
   //method channel name
@@ -28,7 +28,7 @@ import LocalAuthentication
     biometricsChannel?.setMethodCallHandler({
         (call: FlutterMethodCall, result: @escaping FlutterResult) -> Void in
         //This method is invoked on the UI thread , Handle calls to biometrics channel
-        guard call.method == verifyBiometricMethodName else {
+        guard call.method == self.verifyBiometricMethodName else {
             result(false)
             return
         }

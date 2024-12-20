@@ -12,11 +12,11 @@ import 'package:redux/redux.dart';
 
 List<Middleware<AppState>> createPasswordMiddleware() {
   return [
-    TypedMiddleware<AppState, CreatePassword>(_createPassword()),
-    TypedMiddleware<AppState, UpdatePassword>(_updatePassword()),
-    TypedMiddleware<AppState, DeletePassword>(_deletePassword()),
-    TypedMiddleware<AppState, GetAllPasswords>(_getAllPasswords()),
-    TypedMiddleware<AppState, AssignPasswordToGroup>(_assignPasswordToGroup()),
+    TypedMiddleware<AppState, CreatePassword>(_createPassword()).call,
+    TypedMiddleware<AppState, UpdatePassword>(_updatePassword()).call,
+    TypedMiddleware<AppState, DeletePassword>(_deletePassword()).call,
+    TypedMiddleware<AppState, GetAllPasswords>(_getAllPasswords()).call,
+    TypedMiddleware<AppState, AssignPasswordToGroup>(_assignPasswordToGroup()).call,
   ];
 }
 

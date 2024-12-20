@@ -11,7 +11,7 @@ import 'package:redux/redux.dart';
 
 List<Middleware<AppState>> createStoreMiddleware() {
   return [
-    TypedMiddleware<AppState, CheckAndManageNewUser>(_checkAndManageNewUser()),
+    TypedMiddleware<AppState, CheckAndManageNewUser>(_checkAndManageNewUser()).call,
   ];
 }
 

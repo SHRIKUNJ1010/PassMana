@@ -20,7 +20,7 @@ class SelectionWidget<T> extends StatefulWidget {
   final bool isMultiSelectionMode;
 
   const SelectionWidget({
-    Key? key,
+    super.key,
     required this.popupProps,
     this.defaultSelectedItems = const [],
     this.isMultiSelectionMode = false,
@@ -30,7 +30,7 @@ class SelectionWidget<T> extends StatefulWidget {
     this.itemAsString,
     this.filterFn,
     this.compareFn,
-  }) : super(key: key);
+  });
 
   @override
   SelectionWidgetState<T> createState() => SelectionWidgetState<T>();

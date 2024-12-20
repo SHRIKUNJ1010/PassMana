@@ -7,7 +7,7 @@ import 'package:passmana/domain_redux/password/password_actions.dart';
 import 'package:redux/redux.dart';
 
 final passwordReducers = <AppState Function(AppState, dynamic)>[
-  TypedReducer<AppState, PasswordListChanged>(_onPasswordListChanged),
+  TypedReducer<AppState, PasswordListChanged>(_onPasswordListChanged).call,
 ];
 
 AppState _onPasswordListChanged(AppState state, PasswordListChanged action) {

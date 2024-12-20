@@ -7,7 +7,7 @@ import 'package:passmana/domain_redux/secret_note/secret_note_actions.dart';
 import 'package:redux/redux.dart';
 
 final secretNoteReducers = <AppState Function(AppState, dynamic)>[
-  TypedReducer<AppState, SecretNoteListChanged>(_onSecretNoteListChanged),
+  TypedReducer<AppState, SecretNoteListChanged>(_onSecretNoteListChanged).call,
 ];
 
 AppState _onSecretNoteListChanged(AppState state, SecretNoteListChanged action) {

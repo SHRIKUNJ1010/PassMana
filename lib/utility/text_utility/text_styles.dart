@@ -2,8 +2,8 @@
 * Created by Shrikunj Patel on 11/24/2023.
 */
 
-import 'package:passmana/utility/color.dart';
 import 'package:flutter/material.dart';
+import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/text_utility/fonts_list.dart';
 
 class TextStyles {
@@ -92,7 +92,7 @@ class TextStyles {
     required double opacity,
   }) =>
       TextStyle(
-        color: AppColors.mBlack.withOpacity(opacity),
+        color: AppColors.mBlack.withValues(alpha: opacity),
         fontSize: fontSize,
         fontWeight: FontWeight.w400,
         fontFamily: FontsList.muli,
@@ -105,7 +105,7 @@ class TextStyles {
     required FontWeight fontWeight,
   }) =>
       TextStyle(
-        color: AppColors.mBlack.withOpacity(opacity),
+        color: AppColors.mBlack.withValues(alpha: opacity),
         fontSize: fontSize,
         fontWeight: fontWeight,
         fontFamily: FontsList.muli,

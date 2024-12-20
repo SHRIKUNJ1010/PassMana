@@ -27,7 +27,7 @@ class HomeGroupGridTile extends StatelessWidget {
           onTap: () {
             onTap.call();
           },
-          splashColor: AppColors.secondaryColor.withOpacity(0.2),
+          splashColor: AppColors.secondaryColor.withValues(alpha: 0.2),
           child: Container(
             decoration: BoxDecoration(
               color: Colors.transparent,

@@ -24,7 +24,7 @@ class GroupListTile extends StatelessWidget {
       child: Material(
         color: AppColors.mWhite,
         child: InkWell(
-          splashColor: AppColors.primaryColor.withOpacity(0.2),
+          splashColor: AppColors.primaryColor.withValues(alpha: 0.2),
           onTap: () {
             onTap.call();
           },

@@ -14,7 +14,7 @@ class CreateCard {
   final String cardPin;
   final String expiryDate;
   final bool hasSecurityGrid;
-  final Map<String,String> securityGridNumber;
+  final Map<String, String> securityGridNumber;
 
   CreateCard({
     required this.bankAndCardName,

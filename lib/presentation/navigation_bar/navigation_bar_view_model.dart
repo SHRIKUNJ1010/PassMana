@@ -35,7 +35,7 @@ class NavigationBarViewModel {
     required this.selectedIconWidgets,
   });
 
-  static NavigationBarViewModel fromStore(Store<AppState> store,BuildContext context) {
+  static NavigationBarViewModel fromStore(Store<AppState> store, BuildContext context) {
     return NavigationBarViewModel(
       routeList: [
         AppRoutes.passwordHomeList,
@@ -100,45 +100,45 @@ class NavigationBarViewModel {
       ],
       notSelectedTextWidgets: <Widget>[
         Text(
-          getTranslated('password',context),
+          getTranslated('password', context),
           style: TextStyles.getTitleWhiteText(10),
         ),
         Text(
-          getTranslated('card',context),
+          getTranslated('card', context),
           style: TextStyles.getTitleWhiteText(10),
         ),
         Text(
-          getTranslated('create',context),
+          getTranslated('create', context),
           style: TextStyles.getTitleWhiteText(10),
         ),
         Text(
-          getTranslated('secret_note',context),
+          getTranslated('secret_note', context),
           style: TextStyles.getTitleWhiteText(10),
         ),
         Text(
-          getTranslated('settings',context),
+          getTranslated('settings', context),
           style: TextStyles.getTitleWhiteText(10),
         ),
       ],
       selectedTextWidgets: <Widget>[
         Text(
-          getTranslated('password',context),
+          getTranslated('password', context),
           style: TextStyles.getTitleDarkRedText(10),
         ),
         Text(
-          getTranslated('card',context),
+          getTranslated('card', context),
           style: TextStyles.getTitleDarkRedText(10),
         ),
         Text(
-          getTranslated('create',context),
+          getTranslated('create', context),
           style: TextStyles.getTitleDarkRedText(10),
         ),
         Text(
-          getTranslated('secret_note',context),
+          getTranslated('secret_note', context),
           style: TextStyles.getTitleDarkRedText(10),
         ),
         Text(
-          getTranslated('settings',context),
+          getTranslated('settings', context),
           style: TextStyles.getTitleDarkRedText(10),
         ),
       ],

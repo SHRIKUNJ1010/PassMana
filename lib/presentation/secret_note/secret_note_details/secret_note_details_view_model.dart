@@ -22,17 +22,16 @@ class SecretNoteDetailsViewModel {
 
   static SecretNoteDetailsViewModel fromStore(Store<AppState> store, int id) {
     return SecretNoteDetailsViewModel(
-      secretNote: getSecretNoteById(store.state, id) ??
-          SecretNote(
-            createdOn: DateTime.now(),
-            lastUpdatedOn: DateTime.now(),
-          ),
-      onBackPress: () {
-        router.pop();
-      },
-      onEditTap: () {
-        router.push(AppRoutes.createUpdateSecretNote,extra: id);
-      }
-    );
+        secretNote: getSecretNoteById(store.state, id) ??
+            SecretNote(
+              createdOn: DateTime.now(),
+              lastUpdatedOn: DateTime.now(),
+            ),
+        onBackPress: () {
+          router.pop();
+        },
+        onEditTap: () {
+          router.push(AppRoutes.createUpdateSecretNote, extra: id);
+        });
   }
 }

@@ -137,12 +137,13 @@ class _GeneratePasswordStatefulContainerState extends State<GeneratePasswordStat
           top: Radius.circular(30),
         ),
         child: InkWell(
-          splashColor: AppColors.mWhite.withOpacity(0.2),
+          splashColor: AppColors.mWhite.withValues(alpha: 0.2),
           onTap: () {
             widget.vm.onUsePasswordTap.call(generatedPassword);
           },
           child: Container(
-            height: 65,
+            height: 65 + MediaQuery.paddingOf(context).bottom,
+            padding: EdgeInsets.only(bottom: MediaQuery.paddingOf(context).bottom),
             color: Colors.transparent,
             alignment: Alignment.center,
             child: Text(
@@ -192,7 +193,7 @@ class _GeneratePasswordStatefulContainerState extends State<GeneratePasswordStat
               child: Material(
                 color: Colors.transparent,
                 child: InkWell(
-                  splashColor: AppColors.primaryColor.withOpacity(0.2),
+                  splashColor: AppColors.primaryColor.withValues(alpha: 0.2),
                   onTap: () {
                     widget.vm.onCopyPasswordTap.call(generatedPassword);
                   },
@@ -232,7 +233,7 @@ class _GeneratePasswordStatefulContainerState extends State<GeneratePasswordStat
               max: 50,
               activeColor: AppColors.primaryColor,
               thumbColor: AppColors.primaryColor,
-              inactiveColor: AppColors.primaryMaterialColor[400]?.withOpacity(0.7),
+              inactiveColor: AppColors.primaryMaterialColor[400]?.withValues(alpha: 0.7),
               value: passwordLength.toDouble(),
               onChanged: (value) {
                 if (passwordLength != value.toInt()) {
@@ -269,7 +270,7 @@ class _GeneratePasswordStatefulContainerState extends State<GeneratePasswordStat
             child: Material(
               color: Colors.transparent,
               child: InkWell(
-                splashColor: AppColors.primaryColor.withOpacity(0.2),
+                splashColor: AppColors.primaryColor.withValues(alpha: 0.2),
                 onTap: () {
                   if (!hasUppercase && hasLowercase) {
                   } else {
@@ -325,7 +326,7 @@ class _GeneratePasswordStatefulContainerState extends State<GeneratePasswordStat
             child: Material(
               color: Colors.transparent,
               child: InkWell(
-                splashColor: AppColors.primaryColor.withOpacity(0.2),
+                splashColor: AppColors.primaryColor.withValues(alpha: 0.2),
                 onTap: () {
                   if (!hasLowercase && hasUppercase) {
                   } else {
@@ -381,7 +382,7 @@ class _GeneratePasswordStatefulContainerState extends State<GeneratePasswordStat
             child: Material(
               color: Colors.transparent,
               child: InkWell(
-                splashColor: AppColors.primaryColor.withOpacity(0.2),
+                splashColor: AppColors.primaryColor.withValues(alpha: 0.2),
                 onTap: () {
                   hasNumeric = !hasNumeric;
                   setState(() {});
@@ -434,7 +435,7 @@ class _GeneratePasswordStatefulContainerState extends State<GeneratePasswordStat
             child: Material(
               color: Colors.transparent,
               child: InkWell(
-                splashColor: AppColors.primaryColor.withOpacity(0.2),
+                splashColor: AppColors.primaryColor.withValues(alpha: 0.2),
                 onTap: () {
                   hasSpecialCharacter = !hasSpecialCharacter;
                   setState(() {});
@@ -487,7 +488,7 @@ class _GeneratePasswordStatefulContainerState extends State<GeneratePasswordStat
             child: Material(
               color: Colors.transparent,
               child: InkWell(
-                splashColor: AppColors.primaryColor.withOpacity(0.2),
+                splashColor: AppColors.primaryColor.withValues(alpha: 0.2),
                 onTap: () {
                   isReadable = !isReadable;
                   setState(() {});
@@ -528,7 +529,7 @@ class _GeneratePasswordStatefulContainerState extends State<GeneratePasswordStat
                 child: Material(
                   color: AppColors.mWhite,
                   child: InkWell(
-                    splashColor: AppColors.mBlack.withOpacity(0.2),
+                    splashColor: AppColors.mBlack.withValues(alpha: 0.2),
                     onTap: () {
                       vm.onBackPress.call();
                     },
@@ -560,7 +561,7 @@ class _GeneratePasswordStatefulContainerState extends State<GeneratePasswordStat
                 child: Material(
                   color: AppColors.mWhite,
                   child: InkWell(
-                    splashColor: AppColors.mBlack.withOpacity(0.2),
+                    splashColor: AppColors.mBlack.withValues(alpha: 0.2),
                     onTap: () {
                       generatePassword();
                     },

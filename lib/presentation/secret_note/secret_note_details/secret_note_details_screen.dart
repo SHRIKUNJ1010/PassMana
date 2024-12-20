@@ -35,23 +35,25 @@ class SecretNoteDetailsScreen extends StatelessWidget {
             resizeToAvoidBottomInset: false,
             backgroundColor: Colors.transparent,
             appBar: getAppBar(vm, context),
-            body: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: AppColors.mWhite,
-              ),
-              margin: const EdgeInsets.fromLTRB(20, 20, 20, 30),
-              padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
-              child: ListView(
-                padding: const EdgeInsets.fromLTRB(0, 0, 0, 60),
-                shrinkWrap: true,
-                children: [
-                  SizedBox(width: width),
-                  Text(
-                    vm.secretNote.note,
-                    style: TextStyles.getTitleBlueText(18),
-                  ),
-                ],
+            body: SafeArea(
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: AppColors.mWhite,
+                ),
+                margin: const EdgeInsets.fromLTRB(20, 20, 20, 30),
+                padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+                child: ListView(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 60),
+                  shrinkWrap: true,
+                  children: [
+                    SizedBox(width: width),
+                    Text(
+                      vm.secretNote.note,
+                      style: TextStyles.getTitleBlueText(18),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -74,7 +76,7 @@ class SecretNoteDetailsScreen extends StatelessWidget {
                 child: Material(
                   color: AppColors.mWhite,
                   child: InkWell(
-                    splashColor: AppColors.mBlack.withOpacity(0.2),
+                    splashColor: AppColors.mBlack.withValues(alpha: 0.2),
                     onTap: () {
                       vm.onBackPress.call();
                     },
@@ -106,7 +108,7 @@ class SecretNoteDetailsScreen extends StatelessWidget {
                 child: Material(
                   color: AppColors.mWhite,
                   child: InkWell(
-                    splashColor: AppColors.mBlack.withOpacity(0.2),
+                    splashColor: AppColors.mBlack.withValues(alpha: 0.2),
                     onTap: () {
                       vm.onEditTap.call();
                     },

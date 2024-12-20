@@ -238,7 +238,7 @@ class _CardDetailsScreenState extends State<CardDetailsScreen> {
               child: Material(
                 color: Colors.transparent,
                 child: InkWell(
-                  splashColor: AppColors.primaryColor.withOpacity(0.2),
+                  splashColor: AppColors.primaryColor.withValues(alpha: 0.2),
                   onTap: () {
                     showCardPin = !showCardPin;
                     setState(() {});
@@ -293,7 +293,7 @@ class _CardDetailsScreenState extends State<CardDetailsScreen> {
                 child: Material(
                   color: AppColors.mWhite,
                   child: InkWell(
-                    splashColor: AppColors.mBlack.withOpacity(0.2),
+                    splashColor: AppColors.mBlack.withValues(alpha: 0.2),
                     onTap: () {
                       vm.onBackPress.call();
                     },
@@ -325,7 +325,7 @@ class _CardDetailsScreenState extends State<CardDetailsScreen> {
                 child: Material(
                   color: AppColors.mWhite,
                   child: InkWell(
-                    splashColor: AppColors.mBlack.withOpacity(0.2),
+                    splashColor: AppColors.mBlack.withValues(alpha: 0.2),
                     onTap: () {
                       vm.onEditTap.call();
                     },

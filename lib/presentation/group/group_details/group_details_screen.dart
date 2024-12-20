@@ -36,7 +36,7 @@ class GroupDetailsScreen extends StatelessWidget {
           child: Scaffold(
             resizeToAvoidBottomInset: false,
             backgroundColor: Colors.transparent,
-            appBar: getAppBar(vm,context),
+            appBar: getAppBar(vm, context),
             body: vm.group.id == 0
                 ? const SizedBox()
                 : ListView(
@@ -117,7 +117,7 @@ class GroupDetailsScreen extends StatelessWidget {
                           children: [
                             const SizedBox(height: 15),
                             Text(
-                              getTranslated("passwords",context),
+                              getTranslated("passwords", context),
                               style: TextStyles.getTitleDarkRedText(26),
                             ),
                             const SizedBox(height: 15),
@@ -127,7 +127,7 @@ class GroupDetailsScreen extends StatelessWidget {
                                 height: height * 0.5,
                                 child: Center(
                                   child: Text(
-                                    getTranslated('no_password_assigned',context),
+                                    getTranslated('no_password_assigned', context),
                                     style: TextStyles.getTitleBlueText(26),
                                   ),
                                 ),
@@ -146,7 +146,7 @@ class GroupDetailsScreen extends StatelessWidget {
                                 ),
                               ],
                             ],
-                            SizedBox(height: vm.group.passwords.length < 5 ? 420 : 80),
+                            SizedBox(height: vm.group.passwords.length < 5 ? 700 : 80),
                           ],
                         ),
                       ),
@@ -158,7 +158,7 @@ class GroupDetailsScreen extends StatelessWidget {
     );
   }
 
-  CustomAppBar getAppBar(GroupDetailsViewModel vm,BuildContext context) {
+  CustomAppBar getAppBar(GroupDetailsViewModel vm, BuildContext context) {
     return CustomAppBar(
       centerWidgetsList: [
         Expanded(
@@ -172,7 +172,7 @@ class GroupDetailsScreen extends StatelessWidget {
                 child: Material(
                   color: AppColors.mWhite,
                   child: InkWell(
-                    splashColor: AppColors.mBlack.withOpacity(0.2),
+                    splashColor: AppColors.mBlack.withValues(alpha: 0.2),
                     onTap: () {
                       vm.onBackPress.call();
                     },
@@ -191,7 +191,7 @@ class GroupDetailsScreen extends StatelessWidget {
           ),
         ),
         Text(
-          getTranslated("group_details",context),
+          getTranslated("group_details", context),
           style: TextStyles.getTitleWhiteText(25),
         ),
         Expanded(
@@ -204,7 +204,7 @@ class GroupDetailsScreen extends StatelessWidget {
                 child: Material(
                   color: AppColors.mWhite,
                   child: InkWell(
-                    splashColor: AppColors.mBlack.withOpacity(0.2),
+                    splashColor: AppColors.mBlack.withValues(alpha: 0.2),
                     onTap: () {
                       vm.onEditTap.call();
                     },
