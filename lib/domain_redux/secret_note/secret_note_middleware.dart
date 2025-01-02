@@ -18,48 +18,51 @@ List<Middleware<AppState>> createSecretNoteMiddleware() {
 }
 
 void Function(Store<AppState> store, CreateSecretNote action, NextDispatcher next) _createSecretNote() {
-  return (store, action, next) {
+  return (store, action, next) async {
     next(action);
     //add secretNote in object box database
-    objectBox.secretNoteBox.addSecretNote(
+    await objectBox.secretNoteBox.addSecretNote(
       note: action.note,
     );
     //get all latest secretNotes
-    List<SecretNote> secretNotes = objectBox.secretNoteBox.getAllSecretNote();
+    List<SecretNote> secretNotes = await objectBox.secretNoteBox.getAllSecretNote();
     //change the list of secretNotes in state
     store.dispatch(SecretNoteListChanged(secretNoteList: secretNotes));
   };
 }
 
 void Function(Store<AppState> store, UpdateSecretNote action, NextDispatcher next) _updateSecretNote() {
-  return (store, action, next) {
+  return (store, action, next) async {
     next(action);
     //update secretNote in object box database
-    objectBox.secretNoteBox.updateSecretNote(secretNote: action.secretNote);
+    await objectBox.secretNoteBox.updateSecretNote(
+      id: action.id,
+      note: action.note,
+    );
     //get all latest secretNotes
-    List<SecretNote> secretNotes = objectBox.secretNoteBox.getAllSecretNote();
+    List<SecretNote> secretNotes = await objectBox.secretNoteBox.getAllSecretNote();
     //change the list of secretNotes in state
     store.dispatch(SecretNoteListChanged(secretNoteList: secretNotes));
   };
 }
 
 void Function(Store<AppState> store, DeleteSecretNote action, NextDispatcher next) _deleteSecretNote() {
-  return (store, action, next) {
+  return (store, action, next) async {
     next(action);
     //delete secretNote from object box database
-    objectBox.secretNoteBox.deleteSecretNote(action.secretNoteId);
+    await objectBox.secretNoteBox.deleteSecretNote(action.secretNoteId);
     //get all latest secretNotes
-    List<SecretNote> secretNotes = objectBox.secretNoteBox.getAllSecretNote();
+    List<SecretNote> secretNotes = await objectBox.secretNoteBox.getAllSecretNote();
     //change the list of secretNotes in state
     store.dispatch(SecretNoteListChanged(secretNoteList: secretNotes));
   };
 }
 
 void Function(Store<AppState> store, GetAllSecretNotes action, NextDispatcher next) _getAllSecretNotes() {
-  return (store, action, next) {
+  return (store, action, next) async {
     next(action);
     //get all latest secretNotes
-    List<SecretNote> secretNotes = objectBox.secretNoteBox.getAllSecretNote();
+    List<SecretNote> secretNotes = await objectBox.secretNoteBox.getAllSecretNote();
     //change the list of secretNotes in state
     store.dispatch(SecretNoteListChanged(secretNoteList: secretNotes));
   };

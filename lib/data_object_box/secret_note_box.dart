@@ -4,6 +4,7 @@
 
 import 'package:objectbox/objectbox.dart';
 import 'package:passmana/model/secret_note_model.dart';
+import 'package:passmana/utility/cryptography_utility/crypto_utility/crypto_utility.dart';
 
 class SecretNoteBox {
   late final Box<SecretNote> _secretNoteBox;
@@ -14,39 +15,75 @@ class SecretNoteBox {
 
   addSecretNote({
     String note = '',
-  }) {
-    _secretNoteBox.put(
-      SecretNote(
-        note: note,
-        createdOn: DateTime.now(),
-        lastUpdatedOn: DateTime.now(),
-      ),
+  }) async {
+    String tempNote = await CryptoUtility.encryptText(note);
+    final tempSecretNoteModel = SecretNote(
+      note: tempNote,
+      createdOn: DateTime.now(),
+      lastUpdatedOn: DateTime.now(),
+    );
+    await _secretNoteBox.putAsync(
+      tempSecretNoteModel,
       mode: PutMode.insert,
     );
   }
 
   updateSecretNote({
-    required SecretNote secretNote,
-  }) {
-    _secretNoteBox.put(
-      secretNote,
+    required int id,
+    String note = '',
+  }) async {
+    String tempNote = await CryptoUtility.encryptText(note);
+    final tempSecretNoteModel = (await getOneSecretNote(id) ??
+            SecretNote(
+              id: id,
+              createdOn: DateTime.now(),
+              lastUpdatedOn: DateTime.now(),
+            ))
+        .updateSecretNote(
+      note: tempNote,
+      lastUpdatedOn: DateTime.now(),
+    );
+    await _secretNoteBox.putAsync(
+      tempSecretNoteModel,
       mode: PutMode.update,
     );
   }
 
-  List<SecretNote> getAllSecretNote() {
-    return _secretNoteBox.getAll();
+  Future<List<SecretNote>> getAllSecretNote() async {
+    List<SecretNote> tempSecretNotes = [];
+
+    for (SecretNote element in _secretNoteBox.getAll()) {
+      String tempNote = await CryptoUtility.decryptText(element.note);
+      tempSecretNotes.add(
+        element.updateSecretNote(
+          note: tempNote,
+          lastUpdatedOn: element.lastUpdatedOn,
+        ),
+      );
+    }
+    return tempSecretNotes;
   }
 
   addAllSecretNote(List<SecretNote> tempSecretNotes) {
+    //todo: check this for import/export data option
     _secretNoteBox.putMany(tempSecretNotes);
   }
 
-  SecretNote? getOneSecretNote(int secretNoteId) {
-    return _secretNoteBox.get(secretNoteId);
+  Future<SecretNote?> getOneSecretNote(int secretNoteId) async {
+    SecretNote tempSecretNoteValue = _secretNoteBox.get(secretNoteId) ??
+        SecretNote(
+          id: secretNoteId,
+          createdOn: DateTime.now(),
+          lastUpdatedOn: DateTime.now(),
+        );
+    String tempNote = await CryptoUtility.decryptText(tempSecretNoteValue.note);
+    return tempSecretNoteValue.updateSecretNote(
+      note: tempNote,
+      lastUpdatedOn: tempSecretNoteValue.lastUpdatedOn,
+    );
   }
 
-  deleteSecretNote(int secretNoteId) {
-    _secretNoteBox.remove(secretNoteId);
+  deleteSecretNote(int secretNoteId) async {
+    await _secretNoteBox.removeAsync(secretNoteId);
   }
 }

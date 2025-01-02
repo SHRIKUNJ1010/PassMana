@@ -18,10 +18,10 @@ List<Middleware<AppState>> createCardMiddleware() {
 }
 
 void Function(Store<AppState> store, CreateCard action, NextDispatcher next) _createCard() {
-  return (store, action, next) {
+  return (store, action, next) async {
     next(action);
     //add Card in object box database
-    objectBox.cardBox.addCard(
+    await objectBox.cardBox.addCard(
       bankAndCardName: action.bankAndCardName,
       cardNumber: action.cardNumber,
       cvv: action.cvv,
@@ -32,41 +32,51 @@ void Function(Store<AppState> store, CreateCard action, NextDispatcher next) _cr
       securityGridNumber: action.securityGridNumber,
     );
     //get all latest cards
-    List<Card> cards = objectBox.cardBox.getAllCards();
+    List<Card> cards = await objectBox.cardBox.getAllCards();
     //change the list of cards in state
     store.dispatch(CardListChanged(cardList: cards));
   };
 }
 
 void Function(Store<AppState> store, UpdateCard action, NextDispatcher next) _updateCard() {
-  return (store, action, next) {
+  return (store, action, next) async {
     next(action);
     //update card in object box database
-    objectBox.cardBox.updateCard(card: action.card);
+    await objectBox.cardBox.updateCard(
+      id: action.id,
+      bankAndCardName: action.bankAndCardName,
+      cardNumber: action.cardNumber,
+      cvv: action.cvv,
+      expiryDate: action.expiryDate,
+      cardHolderName: action.cardHolderName,
+      cardPin: action.cardPin,
+      hasSecurityGrid: action.hasSecurityGrid,
+      securityGridNumber: action.securityGridNumber,
+    );
     //get all latest cards
-    List<Card> cards = objectBox.cardBox.getAllCards();
+    List<Card> cards = await objectBox.cardBox.getAllCards();
     //change the list of cards in state
     store.dispatch(CardListChanged(cardList: cards));
   };
 }
 
 void Function(Store<AppState> store, DeleteCard action, NextDispatcher next) _deleteCard() {
-  return (store, action, next) {
+  return (store, action, next) async {
     next(action);
     //delete card from object box database
-    objectBox.cardBox.deleteCard(action.cardId);
+    await objectBox.cardBox.deleteCard(action.cardId);
     //get all latest cards
-    List<Card> cards = objectBox.cardBox.getAllCards();
+    List<Card> cards = await objectBox.cardBox.getAllCards();
     //change the list of cards in state
     store.dispatch(CardListChanged(cardList: cards));
   };
 }
 
 void Function(Store<AppState> store, GetAllCards action, NextDispatcher next) _getAllCards() {
-  return (store, action, next) {
+  return (store, action, next) async {
     next(action);
     //get all latest cards
-    List<Card> cards = objectBox.cardBox.getAllCards();
+    List<Card> cards = await objectBox.cardBox.getAllCards();
     //change the list of cards in state
     store.dispatch(CardListChanged(cardList: cards));
   };

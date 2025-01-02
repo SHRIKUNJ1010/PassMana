@@ -49,14 +49,8 @@ class CreateUpdateSecretNoteViewModel {
       }) {
         store.dispatch(
           UpdateSecretNote(
-            secretNote: getSecretNoteById(store.state, id)?.updateSecretNote(
-                  note: note,
-                  lastUpdatedOn: DateTime.now(),
-                ) ??
-                SecretNote(
-                  createdOn: DateTime.now(),
-                  lastUpdatedOn: DateTime.now(),
-                ),
+            id: id ?? 0,
+            note: note,
           ),
         );
         router.pop();

@@ -56,10 +56,10 @@ Future<void> Function(Store<AppState> store, ExportDataFromDatabase action, Next
 }
 
 void Function(Store<AppState> store, LoadUser action, NextDispatcher next) _loadUser() {
-  return (store, action, next) {
+  return (store, action, next) async {
     next(action);
     //get user from database
-    User user = objectBox.userBox.getUser() ?? User();
+    User user = (await objectBox.userBox.getUser()) ?? User();
     //change the user in state
     store.dispatch(
       UserChanged(
@@ -93,9 +93,9 @@ void Function(Store<AppState> store, UpdatePin action, NextDispatcher next) _upd
 }
 
 void Function(Store<AppState> store, VerifyUserPin action, NextDispatcher next) _verifyUserPin() {
-  return (store, action, next) {
+  return (store, action, next) async {
     next(action);
-    if (objectBox.userBox.getUser()?.pin == action.pin) {
+    if ((await objectBox.userBox.getUser())?.pin == action.pin) {
       action.onVerified.call();
     } else {
       action.onNotVerified.call();
@@ -104,17 +104,14 @@ void Function(Store<AppState> store, VerifyUserPin action, NextDispatcher next) 
 }
 
 void Function(Store<AppState> store, VerifyUserBiometric action, NextDispatcher next) _verifyUserBiometric() {
-  return (store, action, next) {
+  return (store, action, next) async {
     next(action);
-    BiometricsChannel.verifyBiometric().then(
-      (value) {
-        if (value) {
-          action.onVerified.call();
-        } else {
-          action.onNotVerified.call();
-        }
-      },
-    );
+    bool tempVal = await BiometricsChannel.verifyBiometric();
+    if (tempVal) {
+      action.onVerified.call();
+    } else {
+      action.onNotVerified.call();
+    }
   };
 }
 

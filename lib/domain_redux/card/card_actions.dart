@@ -29,10 +29,26 @@ class CreateCard {
 }
 
 class UpdateCard {
-  final Card card;
+  final int id;
+  final String bankAndCardName;
+  final String cardNumber;
+  final String cvv;
+  final String cardHolderName;
+  final String cardPin;
+  final String expiryDate;
+  final bool hasSecurityGrid;
+  final Map<String, String> securityGridNumber;
 
   UpdateCard({
-    required this.card,
+    required this.id,
+    required this.bankAndCardName,
+    required this.cardNumber,
+    required this.cardHolderName,
+    required this.cardPin,
+    required this.cvv,
+    required this.expiryDate,
+    required this.hasSecurityGrid,
+    required this.securityGridNumber,
   });
 }
 

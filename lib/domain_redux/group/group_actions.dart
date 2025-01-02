@@ -17,10 +17,14 @@ class CreateGroup {
 }
 
 class UpdateGroup {
-  final Group group;
+  final int id;
+  final String groupName;
+  final String description;
 
   UpdateGroup({
-    required this.group,
+    required this.id,
+    required this.groupName,
+    required this.description,
   });
 }
 

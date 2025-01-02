@@ -3,7 +3,6 @@ Created By Shrikunj on 20/12/24
 */
 
 import 'package:encrypt/encrypt.dart' as encrypt;
-import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class CryptoUtility {
@@ -37,12 +36,12 @@ class CryptoUtility {
   }
 
   static Future<String> encryptText(String plainText) async {
-    final encryptor = encrypt.Encrypter(encrypt.AES(await _getAlgoKey()));
+    final encryptor = encrypt.Encrypter(encrypt.AES(await _getAlgoKey(), mode: encrypt.AESMode.cbc, padding: 'PKCS7'));
     return encryptor.encrypt(plainText, iv: await _getAlgoIV()).base64;
   }
 
   static Future<String> decryptText(String cipherText) async {
-    final encryptor = encrypt.Encrypter(encrypt.AES(await _getAlgoKey()));
-    return encryptor.decrypt(encrypt.Encrypted(Uint8List.fromList(cipherText.codeUnits)), iv: await _getAlgoIV());
+    final encryptor = encrypt.Encrypter(encrypt.AES(await _getAlgoKey(), mode: encrypt.AESMode.cbc, padding: 'PKCS7'));
+    return encryptor.decrypt(encrypt.Encrypted.fromBase64(cipherText), iv: await _getAlgoIV());
   }
 }

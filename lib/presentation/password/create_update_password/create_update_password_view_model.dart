@@ -86,29 +86,17 @@ class CreateUpdatePasswordViewModel {
         required String dynamicDataField,
         Group? targetGroup,
       }) {
-        final Password tempPassword = getPasswordById(
-              store.state,
-              id,
-            )?.updatePassword(
-              title: title,
-              subTitle: subTitle,
-              websiteUrl: websiteUrl,
-              userName: userName,
-              password: password,
-              note: note,
-              dynamicDataField: dynamicDataField,
-              lastUpdatedOn: DateTime.now(),
-            ) ??
-            Password(
-              id: id ?? 0,
-              createdOn: DateTime.now(),
-              lastUpdatedOn: DateTime.now(),
-            );
-
-        tempPassword.group.target = targetGroup;
         store.dispatch(
           UpdatePassword(
-            password: tempPassword,
+            id: id ?? 0,
+            title: title,
+            subTitle: subTitle,
+            websiteUrl: websiteUrl,
+            userName: userName,
+            password: password,
+            note: note,
+            dynamicDataField: dynamicDataField,
+            targetGroup: targetGroup,
           ),
         );
         router.pop();

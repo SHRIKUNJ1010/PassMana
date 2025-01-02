@@ -18,7 +18,7 @@ List<Middleware<AppState>> createFilterSearchMiddleware() {
 }
 
 void Function(Store<AppState> store, InitializeFilter action, NextDispatcher next) _initializeFilter() {
-  return (store, action, next) {
+  return (store, action, next) async {
     next(action);
     //set every available group as selected in filter
     List<Map<Group, bool>> tempList = [];
@@ -28,7 +28,7 @@ void Function(Store<AppState> store, InitializeFilter action, NextDispatcher nex
       });
     }
 
-    List<Password> tempPasswordList = objectBox.passwordBox.getAllPasswordsWithRecentlyCreatedFirst();
+    List<Password> tempPasswordList = await objectBox.passwordBox.getAllPasswordsWithRecentlyCreatedFirst();
     //change state for filter group list
     store.dispatch(SelectedGroupForFilterListChanged(selectedGroupsForFilterList: tempList));
     //change search keyword as blank

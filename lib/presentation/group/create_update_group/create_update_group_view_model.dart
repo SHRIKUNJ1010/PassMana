@@ -53,15 +53,9 @@ class CreateUpdateGroupViewModel {
       }) {
         store.dispatch(
           UpdateGroup(
-            group: getGroupById(store.state, id)?.updateGroupInfo(
-                  groupName: groupName,
-                  description: description,
-                  lastUpdatedOn: DateTime.now(),
-                ) ??
-                Group(
-                  createdOn: DateTime.now(),
-                  lastUpdatedOn: DateTime.now(),
-                ),
+            id: id ?? 0,
+            groupName: groupName,
+            description: description,
           ),
         );
         router.pop();

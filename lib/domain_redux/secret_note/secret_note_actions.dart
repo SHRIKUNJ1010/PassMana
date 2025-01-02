@@ -15,10 +15,12 @@ class CreateSecretNote {
 }
 
 class UpdateSecretNote {
-  final SecretNote secretNote;
+  final int id;
+  final String note;
 
   UpdateSecretNote({
-    required this.secretNote,
+    required this.id,
+    required this.note,
   });
 }
 

@@ -4,6 +4,7 @@
 
 import 'package:objectbox/objectbox.dart';
 import 'package:passmana/model/user_model.dart';
+import 'package:passmana/utility/cryptography_utility/crypto_utility/crypto_utility.dart';
 
 class UserBox {
   late final Box<User> _userBox;
@@ -17,43 +18,54 @@ class UserBox {
     return users.isNotEmpty && users.first.pin != '';
   }
 
-  User? getUser() {
-    return _userBox.getAll().isEmpty ? null : _userBox.getAll().first;
+  Future<User?> getUser() async {
+    if (_userBox.getAll().isEmpty) return null;
+    User tempUser = _userBox.getAll().first;
+    String tempUserPin = "";
+    if (tempUser.pin != "") {
+      tempUserPin = await CryptoUtility.decryptText(tempUser.pin);
+    }
+    tempUser.setPin(tempUserPin);
+    return tempUser;
   }
 
-  void changeCreatePin(String pin) {
-    User? user = getUser();
+  void changeCreatePin(String pin) async {
+    User? user = await getUser();
     if (user != null && pin == "") return;
-    _userBox.put(
-      user != null ? user.setPin(pin) : User(pin: pin),
+    String tempPin = "";
+    if (pin != "") {
+      tempPin = await CryptoUtility.encryptText(pin);
+    }
+    await _userBox.putAsync(
+      user != null ? user.setPin(tempPin) : User(pin: tempPin),
       mode: user != null ? PutMode.update : PutMode.insert,
     );
   }
 
-  void changeBiometricOption(bool isBiometricEnabled) {
-    User? user = getUser();
+  void changeBiometricOption(bool isBiometricEnabled) async {
+    User? user = await getUser();
     if (user != null) {
-      _userBox.put(
+      await _userBox.putAsync(
         user.changeBiometricOption(isBiometricEnabled),
         mode: PutMode.update,
       );
     }
   }
 
-  void changeAutofillOption(bool isAutofillOption) {
-    User? user = getUser();
+  void changeAutofillOption(bool isAutofillOption) async {
+    User? user = await getUser();
     if (user != null) {
-      _userBox.put(
+      await _userBox.putAsync(
         user.changeAutofillOption(isAutofillOption),
         mode: PutMode.update,
       );
     }
   }
 
-  void changeLanguage(String localeString) {
-    User? user = getUser();
+  void changeLanguage(String localeString) async {
+    User? user = await getUser();
     if (user != null) {
-      _userBox.put(
+      await _userBox.putAsync(
         user.changeLanguage(localeString),
         mode: PutMode.update,
       );

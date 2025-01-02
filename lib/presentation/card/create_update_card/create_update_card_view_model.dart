@@ -84,21 +84,15 @@ class CreateUpdateCardViewModel {
       }) {
         store.dispatch(
           UpdateCard(
-            card: getCardById(store.state, id)?.updateCard(
-                  bankAndCardName: bankAndCardName,
-                  cardNumber: cardNumber,
-                  cardHolderName: cardHolderName,
-                  cardPin: cardPin,
-                  cvv: cvv,
-                  expiryDate: expiryDate,
-                  hasSecurityGrid: hasSecurityGrid,
-                  securityGridNumber: securityGridNumber,
-                  lastUpdatedOn: DateTime.now(),
-                ) ??
-                Card(
-                  createdOn: DateTime.now(),
-                  lastUpdatedOn: DateTime.now(),
-                ),
+            id: id ?? 0,
+            bankAndCardName: bankAndCardName,
+            cardNumber: cardNumber,
+            cardHolderName: cardHolderName,
+            cardPin: cardPin,
+            cvv: cvv,
+            expiryDate: expiryDate,
+            hasSecurityGrid: hasSecurityGrid,
+            securityGridNumber: securityGridNumber,
           ),
         );
         router.pop();

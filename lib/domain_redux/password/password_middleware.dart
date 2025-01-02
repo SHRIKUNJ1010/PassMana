@@ -21,10 +21,10 @@ List<Middleware<AppState>> createPasswordMiddleware() {
 }
 
 void Function(Store<AppState> store, CreatePassword action, NextDispatcher next) _createPassword() {
-  return (store, action, next) {
+  return (store, action, next) async {
     next(action);
     //add password in object box database
-    objectBox.passwordBox.addPassword(
+    await objectBox.passwordBox.addPassword(
       title: action.title,
       subTitle: action.subTitle,
       websiteUrl: action.websiteUrl,
@@ -35,9 +35,9 @@ void Function(Store<AppState> store, CreatePassword action, NextDispatcher next)
       targetGroup: action.targetGroup,
     );
     //get all latest passwords
-    List<Password> passwords = objectBox.passwordBox.getAllPasswords();
+    List<Password> passwords = await objectBox.passwordBox.getAllPasswords();
     //get recently added passwords
-    List<Password> recentlyAddedPasswords = objectBox.passwordBox.getRecentlyAddedPasswords();
+    List<Password> recentlyAddedPasswords = await objectBox.passwordBox.getRecentlyAddedPasswords();
     //change the list of passwords in state
     store.dispatch(
       PasswordListChanged(
@@ -46,9 +46,9 @@ void Function(Store<AppState> store, CreatePassword action, NextDispatcher next)
       ),
     );
     //get all latest groups
-    List<Group> groups = objectBox.groupBox.getAllGroups();
+    List<Group> groups = await objectBox.groupBox.getAllGroups();
     //get popular groups
-    List<Group> popularGroups = objectBox.groupBox.getPopularGroups();
+    List<Group> popularGroups = await objectBox.groupBox.getPopularGroups();
     //change the list of groups in state
     store.dispatch(
       GroupListChanged(
@@ -60,14 +60,24 @@ void Function(Store<AppState> store, CreatePassword action, NextDispatcher next)
 }
 
 void Function(Store<AppState> store, UpdatePassword action, NextDispatcher next) _updatePassword() {
-  return (store, action, next) {
+  return (store, action, next) async {
     next(action);
     //update password in object box database
-    objectBox.passwordBox.updatePassword(password: action.password);
+    await objectBox.passwordBox.updatePassword(
+      id: action.id,
+      title: action.title,
+      subTitle: action.subTitle,
+      websiteUrl: action.websiteUrl,
+      userName: action.userName,
+      password: action.password,
+      note: action.note,
+      dynamicDataField: action.dynamicDataField,
+      targetGroup: action.targetGroup,
+    );
     //get all latest passwords
-    List<Password> passwords = objectBox.passwordBox.getAllPasswords();
+    List<Password> passwords = await objectBox.passwordBox.getAllPasswords();
     //get recently added passwords
-    List<Password> recentlyAddedPasswords = objectBox.passwordBox.getRecentlyAddedPasswords();
+    List<Password> recentlyAddedPasswords = await objectBox.passwordBox.getRecentlyAddedPasswords();
     //change the list of passwords in state
     store.dispatch(
       PasswordListChanged(
@@ -76,9 +86,9 @@ void Function(Store<AppState> store, UpdatePassword action, NextDispatcher next)
       ),
     );
     //get all latest groups
-    List<Group> groups = objectBox.groupBox.getAllGroups();
+    List<Group> groups = await objectBox.groupBox.getAllGroups();
     //get popular groups
-    List<Group> popularGroups = objectBox.groupBox.getPopularGroups();
+    List<Group> popularGroups = await objectBox.groupBox.getPopularGroups();
     //change the list of groups in state
     store.dispatch(
       GroupListChanged(
@@ -90,14 +100,14 @@ void Function(Store<AppState> store, UpdatePassword action, NextDispatcher next)
 }
 
 void Function(Store<AppState> store, DeletePassword action, NextDispatcher next) _deletePassword() {
-  return (store, action, next) {
+  return (store, action, next) async {
     next(action);
     //delete password from object box database
-    objectBox.passwordBox.deletePassword(action.passwordId);
+    await objectBox.passwordBox.deletePassword(action.passwordId);
     //get all latest passwords
-    List<Password> passwords = objectBox.passwordBox.getAllPasswords();
+    List<Password> passwords = await objectBox.passwordBox.getAllPasswords();
     //get recently added passwords
-    List<Password> recentlyAddedPasswords = objectBox.passwordBox.getRecentlyAddedPasswords();
+    List<Password> recentlyAddedPasswords = await objectBox.passwordBox.getRecentlyAddedPasswords();
     //change the list of passwords in state
     store.dispatch(
       PasswordListChanged(
@@ -106,9 +116,9 @@ void Function(Store<AppState> store, DeletePassword action, NextDispatcher next)
       ),
     );
     //get all latest groups
-    List<Group> groups = objectBox.groupBox.getAllGroups();
+    List<Group> groups = await objectBox.groupBox.getAllGroups();
     //get popular groups
-    List<Group> popularGroups = objectBox.groupBox.getPopularGroups();
+    List<Group> popularGroups = await objectBox.groupBox.getPopularGroups();
     //change the list of groups in state
     store.dispatch(
       GroupListChanged(
@@ -120,12 +130,12 @@ void Function(Store<AppState> store, DeletePassword action, NextDispatcher next)
 }
 
 void Function(Store<AppState> store, GetAllPasswords action, NextDispatcher next) _getAllPasswords() {
-  return (store, action, next) {
+  return (store, action, next) async {
     next(action);
     //get all latest passwords
-    List<Password> passwords = objectBox.passwordBox.getAllPasswords();
+    List<Password> passwords = await objectBox.passwordBox.getAllPasswords();
     //get recently added passwords
-    List<Password> recentlyAddedPasswords = objectBox.passwordBox.getRecentlyAddedPasswords();
+    List<Password> recentlyAddedPasswords = await objectBox.passwordBox.getRecentlyAddedPasswords();
     //change the list of passwords in state
     store.dispatch(
       PasswordListChanged(
@@ -134,9 +144,9 @@ void Function(Store<AppState> store, GetAllPasswords action, NextDispatcher next
       ),
     );
     //get all latest groups
-    List<Group> groups = objectBox.groupBox.getAllGroups();
+    List<Group> groups = await objectBox.groupBox.getAllGroups();
     //get popular groups
-    List<Group> popularGroups = objectBox.groupBox.getPopularGroups();
+    List<Group> popularGroups = await objectBox.groupBox.getPopularGroups();
     //change the list of groups in state
     store.dispatch(
       GroupListChanged(
@@ -148,14 +158,14 @@ void Function(Store<AppState> store, GetAllPasswords action, NextDispatcher next
 }
 
 void Function(Store<AppState> store, AssignPasswordToGroup action, NextDispatcher next) _assignPasswordToGroup() {
-  return (store, action, next) {
+  return (store, action, next) async {
     next(action);
     //assign password to group
     objectBox.passwordBox.assignPasswordToGroup(action.password, action.group);
     //get all latest passwords
-    List<Password> passwords = objectBox.passwordBox.getAllPasswords();
+    List<Password> passwords = await objectBox.passwordBox.getAllPasswords();
     //get recently added passwords
-    List<Password> recentlyAddedPasswords = objectBox.passwordBox.getRecentlyAddedPasswords();
+    List<Password> recentlyAddedPasswords = await objectBox.passwordBox.getRecentlyAddedPasswords();
     //change the list of passwords in state
     store.dispatch(
       PasswordListChanged(
@@ -164,9 +174,9 @@ void Function(Store<AppState> store, AssignPasswordToGroup action, NextDispatche
       ),
     );
     //get all latest groups
-    List<Group> groups = objectBox.groupBox.getAllGroups();
+    List<Group> groups = await objectBox.groupBox.getAllGroups();
     //get popular groups
-    List<Group> popularGroups = objectBox.groupBox.getPopularGroups();
+    List<Group> popularGroups = await objectBox.groupBox.getPopularGroups();
     //change the list of groups in state
     store.dispatch(
       GroupListChanged(

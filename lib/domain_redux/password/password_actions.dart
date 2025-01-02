@@ -30,10 +30,26 @@ class CreatePassword {
 }
 
 class UpdatePassword {
-  final Password password;
+  final int id;
+  final String title;
+  final String subTitle;
+  final String websiteUrl;
+  final String userName;
+  final String password;
+  final String note;
+  final String dynamicDataField;
+  final Group? targetGroup;
 
   UpdatePassword({
+    required this.id,
+    required this.title,
+    required this.subTitle,
+    required this.websiteUrl,
+    required this.userName,
     required this.password,
+    required this.note,
+    required this.dynamicDataField,
+    this.targetGroup,
   });
 }
 

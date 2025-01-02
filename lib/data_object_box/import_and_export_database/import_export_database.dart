@@ -19,10 +19,10 @@ class ImportExportDatabase {
       'group': null,
       'card': null,
     };
-    exportingData['password'] = objectBox.passwordBox.getAllPasswords().map((e) => e.toJson()).toList();
-    exportingData['secret_note'] = objectBox.secretNoteBox.getAllSecretNote().map((e) => e.toJson()).toList();
-    exportingData['group'] = objectBox.groupBox.getAllGroups().map((e) => e.toJson()).toList();
-    exportingData['card'] = objectBox.cardBox.getAllCards().map((e) => e.toJson()).toList();
+    exportingData['password'] = (await objectBox.passwordBox.getAllPasswords()).map((e) => e.toJson()).toList();
+    exportingData['secret_note'] = (await objectBox.secretNoteBox.getAllSecretNote()).map((e) => e.toJson()).toList();
+    exportingData['group'] = (await objectBox.groupBox.getAllGroups()).map((e) => e.toJson()).toList();
+    exportingData['card'] = (await objectBox.cardBox.getAllCards()).map((e) => e.toJson()).toList();
 
     String jsonEncoded = jsonEncode(exportingData);
     List<int> utf8encoded = utf8.encode(jsonEncoded);
