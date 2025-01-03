@@ -36,11 +36,13 @@ class CryptoUtility {
   }
 
   static Future<String> encryptText(String plainText) async {
+    if (plainText.isEmpty) return "";
     final encryptor = encrypt.Encrypter(encrypt.AES(await _getAlgoKey(), mode: encrypt.AESMode.cbc, padding: 'PKCS7'));
     return encryptor.encrypt(plainText, iv: await _getAlgoIV()).base64;
   }
 
   static Future<String> decryptText(String cipherText) async {
+    if (cipherText.isEmpty) return "";
     final encryptor = encrypt.Encrypter(encrypt.AES(await _getAlgoKey(), mode: encrypt.AESMode.cbc, padding: 'PKCS7'));
     return encryptor.decrypt(encrypt.Encrypted.fromBase64(cipherText), iv: await _getAlgoIV());
   }

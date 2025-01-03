@@ -63,8 +63,8 @@ class GroupBox {
     List<Group> tempGroups = [];
 
     for (Group element in _groupBox.getAll()) {
-      String tempGroupName = await CryptoUtility.encryptText(element.groupName);
-      String tempDescription = await CryptoUtility.encryptText(element.description);
+      String tempGroupName = await CryptoUtility.decryptText(element.groupName);
+      String tempDescription = await CryptoUtility.decryptText(element.description);
       tempGroups.add(
         element.updateGroupInfo(
           groupName: tempGroupName,
@@ -91,8 +91,8 @@ class GroupBox {
     List<Group> tempGroups = [];
 
     for (Group element in tempList) {
-      String tempGroupName = await CryptoUtility.encryptText(element.groupName);
-      String tempDescription = await CryptoUtility.encryptText(element.description);
+      String tempGroupName = await CryptoUtility.decryptText(element.groupName);
+      String tempDescription = await CryptoUtility.decryptText(element.description);
       tempGroups.add(
         element.updateGroupInfo(
           groupName: tempGroupName,
@@ -111,8 +111,8 @@ class GroupBox {
           createdOn: DateTime.now(),
           lastUpdatedOn: DateTime.now(),
         );
-    String tempGroupName = await CryptoUtility.encryptText(tempGroupValue.groupName);
-    String tempDescription = await CryptoUtility.encryptText(tempGroupValue.description);
+    String tempGroupName = await CryptoUtility.decryptText(tempGroupValue.groupName);
+    String tempDescription = await CryptoUtility.decryptText(tempGroupValue.description);
 
     return tempGroupValue.updateGroupInfo(
       groupName: tempGroupName,

@@ -72,12 +72,14 @@ class GroupDetailsScreen extends StatelessWidget {
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              vm.group.groupName,
-                              maxLines: 3,
-                              softWrap: true,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyles.getTitleWhiteText(32),
+                            Expanded(
+                              child: Text(
+                                vm.group.groupName,
+                                maxLines: 3,
+                                softWrap: true,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyles.getTitleWhiteText(32),
+                              ),
                             ),
                           ],
                         ),

@@ -25,8 +25,7 @@ class UserBox {
     if (tempUser.pin != "") {
       tempUserPin = await CryptoUtility.decryptText(tempUser.pin);
     }
-    tempUser.setPin(tempUserPin);
-    return tempUser;
+    return tempUser.setPin(tempUserPin);
   }
 
   void changeCreatePin(String pin) async {

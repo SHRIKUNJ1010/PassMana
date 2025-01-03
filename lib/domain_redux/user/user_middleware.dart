@@ -95,7 +95,8 @@ void Function(Store<AppState> store, UpdatePin action, NextDispatcher next) _upd
 void Function(Store<AppState> store, VerifyUserPin action, NextDispatcher next) _verifyUserPin() {
   return (store, action, next) async {
     next(action);
-    if ((await objectBox.userBox.getUser())?.pin == action.pin) {
+    String? tempPin = (await objectBox.userBox.getUser())?.pin;
+    if (tempPin == action.pin) {
       action.onVerified.call();
     } else {
       action.onNotVerified.call();
