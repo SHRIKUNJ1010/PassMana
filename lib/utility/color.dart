@@ -4,6 +4,50 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
+  //background gradient color 1
+  static const Color tem1 = Color(0xffD6E0FF);
+  static const Color rem1 = Color(0xff1A1A2E);
+
+  //background gradient color 2
+  static const Color tem2 = Color(0xffFDB7FF);
+  static const Color rem2 = Color(0xff3C1053);
+
+  //home screen hello user text color
+  static const Color tem3 = Color(0xffFF4A4A);
+  static const Color rem3 = Color(0xffFF8585);
+
+  //white text on home screen
+  static const Color tem4 = Color(0xffFFFFFF);
+  static const Color rem4 = Color(0xffE0E0E0);
+
+  //white background in group card also for password card
+  static const Color tem5 = Color(0xffFFFFFF);
+  static const Color rem5 = Color(0xff2B2B2B);
+
+  //popular group icon background color
+  static const Color tem6 = Color(0xffC70039);
+  static const Color rem6 = Color(0xffFF4A4A);
+
+  //search bar background color
+  static const Color tem7 = Color(0xffFFFFFF);
+  static const Color rem7 = Color(0xff2E2E2E);
+
+  //search bar text color
+  static const Color tem8 = Color(0xff000000);
+  static const Color rem8 = Color(0xffE0E0E0);
+
+  //search icon background color
+  static const Color tem9 = Color(0xffC70039);
+  static const Color rem9 = Color(0xff4CC9F0);
+
+  //bottom navigation bar background color
+  static const Color tem10 = Color(0xff003F5C);
+  static const Color rem10 = Color(0xff1A1A2E);
+
+  //bottom navigation bar icon color (active/inactive need to figure out)
+  static const Color tem11 = Color(0xffFFFFFF);
+  static const Color rem11 = Color(0xff4CC9F0);
+
   //==============================primary color======================//
   static const MaterialColor primaryMaterialColor = MaterialColor(
     primaryColorValue,
