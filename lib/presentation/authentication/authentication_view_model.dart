@@ -6,13 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/domain_redux/user/user_actions.dart';
 import 'package:passmana/domain_redux/user/user_selector.dart';
-import 'package:passmana/router/router.dart';
-import 'package:passmana/utility/page_routes_utility/page_routes.dart';
 import 'package:redux/redux.dart';
 
 class AuthenticationViewModel {
   final bool isBiometricEnabled;
-  final Function(TextEditingController) verifyPin;
+  final Function({required TextEditingController pinController, required Function(String) errorCallBack}) verifyPin;
   final Function verifyBiometric;
   final Function(TextEditingController) onBackTap;
 
@@ -27,30 +25,14 @@ class AuthenticationViewModel {
     return AuthenticationViewModel(
       isBiometricEnabled: getIsBiometricEnabled(store.state),
       verifyBiometric: () {
-        store.dispatch(
-          VerifyUserBiometric(
-            onVerified: () {
-              router.go(AppRoutes.passwordHomeList);
-            },
-            onNotVerified: () {
-              //do nothing
-            },
-          ),
-        );
+        store.dispatch(VerifyUserBiometric());
       },
-      verifyPin: (pinController) {
-        store.dispatch(
-          VerifyUserPin(
-            pin: pinController.text,
-            onVerified: () {
-              pinController.clear();
-              router.go(AppRoutes.passwordHomeList);
-            },
-            onNotVerified: () {
-              pinController.clear();
-            },
-          ),
-        );
+      verifyPin: ({required TextEditingController pinController, required Function(String) errorCallBack}) {
+        store.dispatch(VerifyUserPin(
+          pin: pinController.text,
+          errorCallBack: errorCallBack,
+        ));
+        pinController.clear();
       },
       onBackTap: (TextEditingController pinController) {
         if (pinController.text.isNotEmpty) {

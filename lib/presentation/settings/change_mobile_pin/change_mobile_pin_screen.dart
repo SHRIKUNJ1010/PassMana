@@ -23,6 +23,7 @@ class ChangeMobilePinScreen extends StatefulWidget {
 class _ChangeMobilePinScreenState extends State<ChangeMobilePinScreen> {
   bool isValidated = false;
   String pin = "";
+  String pinErrorMessage = "";
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +64,7 @@ class _ChangeMobilePinScreenState extends State<ChangeMobilePinScreen> {
                     child: CustomPinField(
                       disableBottomLeft: true,
                       disableBottomRight: false,
+                      errorText: pinErrorMessage,
                       bottomRightButtonChild: const Icon(
                         Icons.backspace,
                         color: AppColors.mWhite,
@@ -77,6 +79,7 @@ class _ChangeMobilePinScreenState extends State<ChangeMobilePinScreen> {
                             //validate whether new pin is entered or not
                             if (pin.isNotEmpty) {
                               pin = "";
+                              pinErrorMessage = "";
                               setState(() {});
                             }
                             //validated old pin but new pin entry pending
@@ -98,10 +101,14 @@ class _ChangeMobilePinScreenState extends State<ChangeMobilePinScreen> {
                           if (pin.isNotEmpty) {
                             //new pin and confirm pin are same
                             if (pin == controller.text) {
+                              pinErrorMessage = "";
+                              setState(() {});
                               vm.changePin.call(controller.text);
                               controller.clear();
                             } else {
+                              pinErrorMessage = getTranslated("confirm_pin_invalid", context);
                               controller.clear();
+                              setState(() {});
                               //todo: generate error confirm pin is invalid
                             }
                           }
@@ -110,12 +117,15 @@ class _ChangeMobilePinScreenState extends State<ChangeMobilePinScreen> {
                             //validate entered new pin with old pin value
                             if (controller.text != vm.oldPin) {
                               pin = controller.text;
+                              pinErrorMessage = "";
                               setState(() {});
                               controller.clear();
                             }
                             //entered new pin is same as old pin value
                             else {
+                              pinErrorMessage = getTranslated("old_and_new_pin_can't_be_same", context);
                               controller.clear();
+                              setState(() {});
                               //todo: generate error old pin and new pin can't be same
                             }
                           }
@@ -124,10 +134,13 @@ class _ChangeMobilePinScreenState extends State<ChangeMobilePinScreen> {
                           if (controller.text == vm.oldPin) {
                             isValidated = true;
                             controller.clear();
+                            pinErrorMessage = "";
                             setState(() {});
                           } else {
                             //todo: generate error wrong pin entered
+                            pinErrorMessage = getTranslated("wrong_pin_entered", context);
                             controller.clear();
+                            setState(() {});
                           }
                         }
                       },

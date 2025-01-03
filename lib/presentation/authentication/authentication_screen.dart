@@ -9,16 +9,21 @@ import 'package:passmana/domain_redux/user/user_selector.dart';
 import 'package:passmana/localization/app_localization.dart';
 import 'package:passmana/presentation/authentication/authentication_view_model.dart';
 import 'package:passmana/presentation/common/custom_pin_field.dart';
-import 'package:passmana/router/router.dart';
 import 'package:passmana/utility/assets_utility/assets_paths.dart';
 import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/constants.dart';
-import 'package:passmana/utility/page_routes_utility/page_routes.dart';
 import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:redux/redux.dart';
 
-class AuthenticationScreen extends StatelessWidget {
+class AuthenticationScreen extends StatefulWidget {
   const AuthenticationScreen({super.key});
+
+  @override
+  State<AuthenticationScreen> createState() => _AuthenticationScreenState();
+}
+
+class _AuthenticationScreenState extends State<AuthenticationScreen> {
+  String pinErrorMessage = "";
 
   @override
   Widget build(BuildContext context) {
@@ -26,16 +31,7 @@ class AuthenticationScreen extends StatelessWidget {
       converter: AuthenticationViewModel.fromStore,
       onInit: (Store<AppState> store) {
         if (getIsBiometricEnabled(store.state)) {
-          store.dispatch(
-            VerifyUserBiometric(
-              onVerified: () {
-                router.go(AppRoutes.passwordHomeList);
-              },
-              onNotVerified: () {
-                //do nothing
-              },
-            ),
-          );
+          store.dispatch(VerifyUserBiometric());
         }
       },
       builder: (BuildContext context, AuthenticationViewModel vm) {
@@ -68,6 +64,7 @@ class AuthenticationScreen extends StatelessWidget {
                   ),
                   Expanded(
                     child: CustomPinField(
+                      errorText: pinErrorMessage,
                       disableBottomLeft: !vm.isBiometricEnabled,
                       disableBottomRight: false,
                       bottomRightButtonChild: const Icon(
@@ -77,7 +74,13 @@ class AuthenticationScreen extends StatelessWidget {
                       ),
                       onBottomRightButtonTap: vm.onBackTap,
                       onPinCompleted: (controller) {
-                        vm.verifyPin.call(controller);
+                        vm.verifyPin.call(
+                          pinController: controller,
+                          errorCallBack: (val) {
+                            pinErrorMessage = val;
+                            setState(() {});
+                          },
+                        );
                       },
                       bottomLeftButtonChild: vm.isBiometricEnabled
                           ? const Icon(

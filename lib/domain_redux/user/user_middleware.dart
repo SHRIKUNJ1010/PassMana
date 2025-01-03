@@ -9,10 +9,13 @@ import 'package:passmana/domain_redux/group/group_actions.dart';
 import 'package:passmana/domain_redux/password/password_actions.dart';
 import 'package:passmana/domain_redux/secret_note/secret_note_actions.dart';
 import 'package:passmana/domain_redux/user/user_actions.dart';
+import 'package:passmana/localization/app_localization.dart';
 import 'package:passmana/main.dart';
 import 'package:passmana/model/user_model.dart';
+import 'package:passmana/router/router.dart';
 import 'package:passmana/utility/file_utility/file_utility.dart';
 import 'package:passmana/utility/method_channel_utility/biometric_verification_channel.dart';
+import 'package:passmana/utility/page_routes_utility/page_routes.dart';
 import 'package:passmana/utility/utility.dart';
 import 'package:redux/redux.dart';
 
@@ -82,11 +85,11 @@ void Function(Store<AppState> store, CreateUser action, NextDispatcher next) _cr
 }
 
 void Function(Store<AppState> store, UpdatePin action, NextDispatcher next) _updatePin() {
-  return (store, action, next) {
+  return (store, action, next) async {
     next(action);
     //change pin of user in object box database and if user does not exist then
     // it will create new user and update pin value
-    objectBox.userBox.changeCreatePin(action.pin);
+    await objectBox.userBox.changeCreatePin(action.pin);
     //change latest value for user in state
     store.dispatch(LoadUser());
   };
@@ -97,9 +100,9 @@ void Function(Store<AppState> store, VerifyUserPin action, NextDispatcher next) 
     next(action);
     String? tempPin = (await objectBox.userBox.getUser())?.pin;
     if (tempPin == action.pin) {
-      action.onVerified.call();
+      router.go(AppRoutes.passwordHomeList);
     } else {
-      action.onNotVerified.call();
+      action.errorCallBack.call(getTranslated("wrong_pin_entered", rootNavigatorKey.currentContext!));
     }
   };
 }
@@ -109,9 +112,7 @@ void Function(Store<AppState> store, VerifyUserBiometric action, NextDispatcher 
     next(action);
     bool tempVal = await BiometricsChannel.verifyBiometric();
     if (tempVal) {
-      action.onVerified.call();
-    } else {
-      action.onNotVerified.call();
+      router.go(AppRoutes.passwordHomeList);
     }
   };
 }

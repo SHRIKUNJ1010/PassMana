@@ -28,7 +28,7 @@ class UserBox {
     return tempUser.setPin(tempUserPin);
   }
 
-  void changeCreatePin(String pin) async {
+  Future<void> changeCreatePin(String pin) async {
     User? user = await getUser();
     if (user != null && pin == "") return;
     String tempPin = "";

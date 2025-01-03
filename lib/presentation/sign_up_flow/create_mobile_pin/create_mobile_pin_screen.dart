@@ -22,6 +22,7 @@ class CreateMobilePinScreen extends StatefulWidget {
 
 class _CreateMobilePinScreenState extends State<CreateMobilePinScreen> {
   String pin = "";
+  String pinErrorMessage = "";
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +57,7 @@ class _CreateMobilePinScreenState extends State<CreateMobilePinScreen> {
                   ),
                   Expanded(
                     child: CustomPinField(
+                      errorText: null,
                       disableBottomLeft: true,
                       disableBottomRight: false,
                       bottomRightButtonChild: const Icon(
@@ -81,8 +83,9 @@ class _CreateMobilePinScreenState extends State<CreateMobilePinScreen> {
                             vm.onPinSave.call(controller.text);
                             controller.clear();
                           } else {
-                            //todo: generate wrong confirm password error
+                            pinErrorMessage = getTranslated("confirm_pin_invalid", context);
                             controller.clear();
+                            setState(() {});
                           }
                         } else {
                           pin = controller.text;

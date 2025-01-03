@@ -48,24 +48,12 @@ class ChangeLanguage {
 
 class VerifyUserPin {
   final String pin;
-  //TODO: remove this on verified and onNotVerified Functions creates dependencies of layers
-  final Function onVerified;
-  final Function onNotVerified;
+  final Function(String) errorCallBack;
 
   VerifyUserPin({
     required this.pin,
-    required this.onVerified,
-    required this.onNotVerified,
+    required this.errorCallBack,
   });
 }
 
-class VerifyUserBiometric {
-  //TODO: remove this on verified and onNotVerified Functions creates dependencies of layers
-  final Function onVerified;
-  final Function onNotVerified;
-
-  VerifyUserBiometric({
-    required this.onVerified,
-    required this.onNotVerified,
-  });
-}
+class VerifyUserBiometric {}

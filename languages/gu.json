@@ -101,5 +101,8 @@
   "export_your_data": "Export Your Data",
   "import_your_data": "Import Your Data",
   "db_file_location": "DB File Location",
-  "your_db_file_location_is": "Your DB File Location is"
+  "your_db_file_location_is": "Your DB File Location is",
+  "old_and_new_pin_can't_be_same": "Old And New Pin Can't Be Same",
+  "wrong_pin_entered": "Entered Pin Is Incorrect",
+  "confirm_pin_invalid": "Confirm Pin Is Incorrect"
 }

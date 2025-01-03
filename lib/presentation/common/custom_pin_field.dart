@@ -3,6 +3,7 @@
 */
 import 'package:flutter/material.dart';
 import 'package:passmana/utility/common_widgets_utility/common_widgets.dart';
+import 'package:passmana/utility/text_utility/text_styles.dart';
 
 class CustomPinField extends StatefulWidget {
   final Widget bottomLeftButtonChild;
@@ -12,9 +13,11 @@ class CustomPinField extends StatefulWidget {
   final Function(TextEditingController) onPinCompleted;
   final bool disableBottomLeft;
   final bool disableBottomRight;
+  final String? errorText;
 
   const CustomPinField({
     super.key,
+    required this.errorText,
     required this.disableBottomLeft,
     required this.disableBottomRight,
     required this.bottomLeftButtonChild,
@@ -56,6 +59,14 @@ class _CustomPinFieldState extends State<CustomPinField> {
           const Row(mainAxisSize: MainAxisSize.max),
           const Spacer(),
           CommonWidgets.getCommonHiddenPinField(controller: _pinController),
+          if (widget.errorText != null && widget.errorText!.isNotEmpty)
+            Padding(
+              padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+              child: Text(
+                widget.errorText!,
+                style: TextStyles.getTitleOrangeText(20),
+              ),
+            ),
           const Spacer(),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
