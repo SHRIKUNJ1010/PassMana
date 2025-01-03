@@ -2,6 +2,8 @@
 * Created by Shrikunj Patel on 12/13/2023.
 */
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -9,7 +11,9 @@ import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/domain_redux/card/card_selector.dart';
 import 'package:passmana/localization/app_localization.dart';
+import 'package:passmana/model/card_security_grid_number_list.dart';
 import 'package:passmana/presentation/card/create_update_card/create_update_card_view_model.dart';
+import 'package:passmana/presentation/card/create_update_card/security_grid_number_list_item_widget.dart';
 import 'package:passmana/presentation/common/custom_app_bar.dart';
 import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/text_utility/card_text_field_formatter.dart';
@@ -37,9 +41,7 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
   final TextEditingController cvvController = TextEditingController();
   final TextEditingController expiryDateController = TextEditingController();
   final TextEditingController cardPinController = TextEditingController();
-  bool hasSecurityGrid = false;
-
-  //TODO: use dynamic form field to get security grid number and create its variable
+  List<SecurityGridNumber> securityGridNumberList = [];
   bool showCardPin = false;
 
   @override
@@ -61,6 +63,13 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
       },
       onInit: (Store<AppState> store) {
         if (widget.id != null) {
+          List<SecurityGridNumber> tempSecurityGridNumberList = [];
+          try {
+            tempSecurityGridNumberList =
+                CardSecurityGridNumberList.fromJson(jsonDecode(getCardById(store.state, widget.id)?.securityGridNumber ?? "{}")).securityGridNumerList ?? [];
+          } catch (e) {
+            tempSecurityGridNumberList = [];
+          }
           bankAndCardNameController.text = getCardById(store.state, widget.id)?.bankAndCardName ?? "";
           cardNumberController.text =
               (getCardById(store.state, widget.id)?.cardNumber ?? "").replaceAllMapped(RegExp(r'.{4}'), (match) => '${match.group(0)} ');
@@ -68,7 +77,7 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
           cvvController.text = getCardById(store.state, widget.id)?.cvv ?? "";
           expiryDateController.text = getCardById(store.state, widget.id)?.expiryDate ?? "";
           cardPinController.text = getCardById(store.state, widget.id)?.cardPin ?? "";
-          hasSecurityGrid = getCardById(store.state, widget.id)?.hasSecurityGrid ?? false;
+          securityGridNumberList = tempSecurityGridNumberList;
         }
       },
       builder: (BuildContext context, CreateUpdateCardViewModel vm) {
@@ -96,6 +105,77 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
                             getCvv(context, cvvController),
                             getExpiryDate(context, expiryDateController),
                             getCardPinField(context, cardPinController),
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(20, 5, 0, 10),
+                                  child: Text(
+                                    "${getTranslated('grid_numbers', context)}: (${getTranslated('optional', context)})",
+                                    style: TextStyles.getTitleWhiteText(20),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            ListView.builder(
+                              itemCount: securityGridNumberList.length,
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+                                  child: SecurityGridNumberListItemWidget(
+                                    key: ValueKey(securityGridNumberList[index].hashCode),
+                                    item: securityGridNumberList[index],
+                                    onCancelTap: () {
+                                      if (securityGridNumberList.length != 1) {
+                                        securityGridNumberList.removeAt(index);
+                                        setState(() {});
+                                      } else {
+                                        //do nothing
+                                      }
+                                    },
+                                  ),
+                                );
+                              },
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Material(
+                                  color: AppColors.mWhite,
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Container(
+                                    height: 45,
+                                    color: Colors.transparent,
+                                    child: InkWell(
+                                      onTap: () {
+                                        securityGridNumberList.add(SecurityGridNumber());
+                                        setState(() {});
+                                      },
+                                      splashColor: AppColors.primaryColor.withValues(alpha: 0.3),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          const Icon(
+                                            Icons.add,
+                                            color: AppColors.primaryColor,
+                                            size: 24,
+                                          ),
+                                          const SizedBox(width: 5),
+                                          Text(
+                                            getTranslated('add_field', context),
+                                            style: TextStyles.getTitleBlueText(18),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
                             const SizedBox(height: 180),
                           ],
                         ),
@@ -382,7 +462,7 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
           ],
         ),
         Padding(
-          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
           child: TextFormField(
             controller: controller,
             validator: (text) {
@@ -474,8 +554,7 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
                   cvv: cvvController.text,
                   expiryDate: expiryDateController.text,
                   cardPin: cardPinController.text,
-                  hasSecurityGrid: hasSecurityGrid,
-                  securityGridNumber: <String, String>{},
+                  securityGridNumber: jsonEncode(CardSecurityGridNumberList(securityGridNumerList: securityGridNumberList).toJson()),
                 );
               } else {
                 vm.createCard.call(
@@ -485,8 +564,7 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
                   cvv: cvvController.text,
                   expiryDate: expiryDateController.text,
                   cardPin: cardPinController.text,
-                  hasSecurityGrid: hasSecurityGrid,
-                  securityGridNumber: <String, String>{},
+                  securityGridNumber: jsonEncode(CardSecurityGridNumberList(securityGridNumerList: securityGridNumberList).toJson()),
                 );
               }
             }

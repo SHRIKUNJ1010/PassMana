@@ -109,7 +109,6 @@ class _ChangeMobilePinScreenState extends State<ChangeMobilePinScreen> {
                               pinErrorMessage = getTranslated("confirm_pin_invalid", context);
                               controller.clear();
                               setState(() {});
-                              //todo: generate error confirm pin is invalid
                             }
                           }
                           //validated old pin but new pin entry pending
@@ -126,7 +125,6 @@ class _ChangeMobilePinScreenState extends State<ChangeMobilePinScreen> {
                               pinErrorMessage = getTranslated("old_and_new_pin_can't_be_same", context);
                               controller.clear();
                               setState(() {});
-                              //todo: generate error old pin and new pin can't be same
                             }
                           }
                           // pin validation is pending
@@ -137,7 +135,6 @@ class _ChangeMobilePinScreenState extends State<ChangeMobilePinScreen> {
                             pinErrorMessage = "";
                             setState(() {});
                           } else {
-                            //todo: generate error wrong pin entered
                             pinErrorMessage = getTranslated("wrong_pin_entered", context);
                             controller.clear();
                             setState(() {});

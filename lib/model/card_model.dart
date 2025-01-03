@@ -2,8 +2,6 @@
 * Created by Shrikunj Patel on 12/12/2023.
 */
 
-import 'dart:convert';
-
 import 'package:objectbox/objectbox.dart';
 
 @Entity()
@@ -13,10 +11,7 @@ class Card {
   String bankAndCardName;
   String cardNumber;
   String cardHolderName;
-
-  //TODO: pending security grid implementation
-  bool hasSecurityGrid;
-  Map<String, String> securityGridNumber;
+  String securityGridNumber;
   String cvv;
   String cardPin;
   String expiryDate;
@@ -33,8 +28,7 @@ class Card {
     this.cardPin = '',
     this.cvv = '',
     this.expiryDate = '',
-    this.hasSecurityGrid = false,
-    this.securityGridNumber = const <String, String>{},
+    this.securityGridNumber = '{}',
     required this.createdOn,
     required this.lastUpdatedOn,
   });
@@ -46,8 +40,7 @@ class Card {
     String? cardPin,
     String? cvv,
     String? expiryDate,
-    bool? hasSecurityGrid,
-    Map<String, String>? securityGridNumber,
+    String? securityGridNumber,
     required DateTime lastUpdatedOn,
   }) {
     return Card(
@@ -58,7 +51,6 @@ class Card {
       cardPin: cardPin ?? this.cardPin,
       cvv: cvv ?? this.cvv,
       expiryDate: expiryDate ?? this.expiryDate,
-      hasSecurityGrid: hasSecurityGrid ?? this.hasSecurityGrid,
       securityGridNumber: securityGridNumber ?? this.securityGridNumber,
       createdOn: createdOn,
       lastUpdatedOn: lastUpdatedOn,
@@ -73,8 +65,7 @@ class Card {
         cardPin: json['card_pin'],
         cvv: json['cvv'],
         expiryDate: json['expiry_date'],
-        hasSecurityGrid: json['has_security'],
-        //securityGridNumber: jsonDecode(json['security_grid_number']),
+        securityGridNumber: json['security_grid_number'],
         createdOn: DateTime.tryParse(json['created_on']) ?? DateTime.now(),
         lastUpdatedOn: DateTime.tryParse(json['last_updated_on']) ?? DateTime.now(),
       );
@@ -88,8 +79,7 @@ class Card {
     data['card_pin'] = cardPin;
     data['cvv'] = cvv;
     data['expiry_date'] = expiryDate;
-    data['has_security'] = hasSecurityGrid;
-    data['security_grid_number'] = jsonEncode(securityGridNumber);
+    data['security_grid_number'] = securityGridNumber;
     data['created_on'] = createdOn.toString();
     data['last_updated_on'] = lastUpdatedOn.toString();
     return data;

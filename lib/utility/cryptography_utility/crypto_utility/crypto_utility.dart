@@ -46,4 +46,24 @@ class CryptoUtility {
     final encryptor = encrypt.Encrypter(encrypt.AES(await _getAlgoKey(), mode: encrypt.AESMode.cbc, padding: 'PKCS7'));
     return encryptor.decrypt(encrypt.Encrypted.fromBase64(cipherText), iv: await _getAlgoIV());
   }
+
+  static Future<List<String>> encryptWithExternalIvAndAlgoKey(String plainText) async {
+    encrypt.IV tempIv = await _getAlgoIV();
+    encrypt.Key tempKey = await _getAlgoKey();
+    if (plainText.isEmpty) return ["", tempIv.base64, tempKey.base64];
+    final encryptor = encrypt.Encrypter(encrypt.AES(tempKey, mode: encrypt.AESMode.cbc, padding: 'PKCS7'));
+    return [encryptor.encrypt(plainText, iv: tempIv).base64, tempIv.base64, tempKey.base64];
+  }
+
+  static Future<String> externalIvDecryptText({
+    required String cipherText,
+    required String iv,
+    required String key,
+  }) async {
+    encrypt.IV tempIv = encrypt.IV.fromBase64(iv);
+    encrypt.Key tempKey = encrypt.Key.fromBase64(key);
+    if (cipherText.isEmpty) return "";
+    final encryptor = encrypt.Encrypter(encrypt.AES(tempKey, mode: encrypt.AESMode.cbc, padding: 'PKCS7'));
+    return encryptor.decrypt(encrypt.Encrypted.fromBase64(cipherText), iv: tempIv);
+  }
 }

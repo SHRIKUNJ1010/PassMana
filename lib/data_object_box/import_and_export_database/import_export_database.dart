@@ -8,6 +8,7 @@ import 'package:passmana/model/card_model.dart';
 import 'package:passmana/model/group_model.dart';
 import 'package:passmana/model/password_model.dart';
 import 'package:passmana/model/secret_note_model.dart';
+import 'package:passmana/utility/cryptography_utility/crypto_utility/crypto_utility.dart';
 import 'package:passmana/utility/utility.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -24,9 +25,9 @@ class ImportExportDatabase {
     exportingData['group'] = (await objectBox.groupBox.getAllGroups()).map((e) => e.toJson()).toList();
     exportingData['card'] = (await objectBox.cardBox.getAllCards()).map((e) => e.toJson()).toList();
 
-    String jsonEncoded = jsonEncode(exportingData);
-    List<int> utf8encoded = utf8.encode(jsonEncoded);
-    final archiveFile = ArchiveFile('db_file.json', utf8encoded.length, utf8encoded);
+    List<String> jsonEncoded = await CryptoUtility.encryptWithExternalIvAndAlgoKey(jsonEncode(exportingData));
+    List<int> utf8encoded = utf8.encode(jsonEncoded.join("!!!!!!!!!!"));
+    final archiveFile = ArchiveFile('db_file.text', utf8encoded.length, utf8encoded);
     final archive = Archive()..addFile(archiveFile);
     final encodedArchive = ZipEncoder().encode(archive);
     Directory? appDir = (Platform.isAndroid ? await getExternalStorageDirectory() : await getDownloadsDirectory());
@@ -45,13 +46,18 @@ class ImportExportDatabase {
     final decodedFile = ZipDecoder().decodeBytes(tempData).first;
 
     if (decodedFile.isFile) {
-      String utf8Decoded = utf8.decode(decodedFile.content as List<int>);
+      List<String> encryptedUtf8 = utf8.decode(decodedFile.readBytes() ?? []).trim().split("!!!!!!!!!!");
+      String utf8Decoded = await CryptoUtility.externalIvDecryptText(
+        cipherText: encryptedUtf8[0],
+        iv: encryptedUtf8[1],
+        key: encryptedUtf8[2],
+      );
       Map<String, dynamic> jsonData = jsonDecode(utf8Decoded);
       if (jsonData['group'] != null) {
         jsonData['group'].forEach((v) {
           tempGroups.add(Group.fromJson(v));
         });
-        objectBox.groupBox.addAllGroups(tempGroups);
+        await objectBox.groupBox.addAllGroups(tempGroups);
       }
       if (jsonData['password'] != null) {
         jsonData['password'].forEach((v) {
@@ -66,19 +72,19 @@ class ImportExportDatabase {
           }
           tempPasswords.add(tempPass);
         });
-        objectBox.passwordBox.addAllPasswords(tempPasswords);
+        await objectBox.passwordBox.addAllPasswords(tempPasswords);
       }
       if (jsonData['card'] != null) {
         jsonData['card'].forEach((v) {
           tempCards.add(Card.fromJson(v));
         });
-        objectBox.cardBox.addAllCards(tempCards);
+        await objectBox.cardBox.addAllCards(tempCards);
       }
       if (jsonData['secret_note'] != null) {
         jsonData['secret_note'].forEach((v) {
           tempSecretNotes.add(SecretNote.fromJson(v));
         });
-        objectBox.secretNoteBox.addAllSecretNote(tempSecretNotes);
+        await objectBox.secretNoteBox.addAllSecretNote(tempSecretNotes);
       }
     }
     return;

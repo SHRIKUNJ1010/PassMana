@@ -64,9 +64,19 @@ class SecretNoteBox {
     return tempSecretNotes;
   }
 
-  addAllSecretNote(List<SecretNote> tempSecretNotes) {
-    //todo: check this for import/export data option
-    _secretNoteBox.putMany(tempSecretNotes);
+  addAllSecretNote(List<SecretNote> tempSecretNotes) async {
+    List<SecretNote> temp = [];
+
+    for (SecretNote element in tempSecretNotes) {
+      String tempNote = await CryptoUtility.encryptText(element.note);
+      temp.add(
+        element.updateSecretNote(
+          note: tempNote,
+          lastUpdatedOn: element.lastUpdatedOn,
+        ),
+      );
+    }
+    await _secretNoteBox.putManyAsync(temp);
   }
 
   Future<SecretNote?> getOneSecretNote(int secretNoteId) async {

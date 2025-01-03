@@ -161,7 +161,7 @@ void Function(Store<AppState> store, AssignPasswordToGroup action, NextDispatche
   return (store, action, next) async {
     next(action);
     //assign password to group
-    objectBox.passwordBox.assignPasswordToGroup(action.password, action.group);
+    await objectBox.passwordBox.assignPasswordToGroup(action.password, action.group);
     //get all latest passwords
     List<Password> passwords = await objectBox.passwordBox.getAllPasswords();
     //get recently added passwords

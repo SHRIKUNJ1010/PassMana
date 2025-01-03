@@ -67,11 +67,91 @@ class _CardDetailsScreenState extends State<CardDetailsScreen> {
                       getExpiryDateAndCvvContainer(vm, context),
                       const SizedBox(height: 10),
                       getCardPinContainer(vm, context),
+                      if (vm.getSecurityGridNumbers.call().isNotEmpty) const SizedBox(height: 10),
+                      if (vm.getSecurityGridNumbers.call().isNotEmpty)
+                        getCommonContainer(
+                          externalContainer: true,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "${getTranslated("grid_numbers", context)}:",
+                                style: TextStyles.getTitleDarkRedText(17),
+                              ),
+                              const SizedBox(height: 7),
+                              for (int i = 0; i < vm.getSecurityGridNumbers.call().length + 4; i += 4) ...[
+                                i >= vm.getSecurityGridNumbers.call().length
+                                    ? SizedBox()
+                                    : Row(
+                                        children: [
+                                          Expanded(
+                                            child: getCardGridItemContainer(
+                                              vm.getSecurityGridNumbers.call()[i].title ?? "",
+                                              vm.getSecurityGridNumbers.call()[i].value ?? "",
+                                              context,
+                                            ),
+                                          ),
+                                          const SizedBox(width: 10),
+                                          i + 1 >= vm.getSecurityGridNumbers.call().length
+                                              ? Spacer()
+                                              : Expanded(
+                                                  child: getCardGridItemContainer(
+                                                    vm.getSecurityGridNumbers.call()[i + 1].title ?? "",
+                                                    vm.getSecurityGridNumbers.call()[i + 1].value ?? "",
+                                                    context,
+                                                  ),
+                                                ),
+                                          const SizedBox(width: 10),
+                                          i + 2 >= vm.getSecurityGridNumbers.call().length
+                                              ? Spacer()
+                                              : Expanded(
+                                                  child: getCardGridItemContainer(
+                                                    vm.getSecurityGridNumbers.call()[i + 2].title ?? "",
+                                                    vm.getSecurityGridNumbers.call()[i + 2].value ?? "",
+                                                    context,
+                                                  ),
+                                                ),
+                                          const SizedBox(width: 10),
+                                          i + 3 >= vm.getSecurityGridNumbers.call().length
+                                              ? Spacer()
+                                              : Expanded(
+                                                  child: getCardGridItemContainer(
+                                                    vm.getSecurityGridNumbers.call()[i + 3].title ?? "",
+                                                    vm.getSecurityGridNumbers.call()[i + 3].value ?? "",
+                                                    context,
+                                                  ),
+                                                ),
+                                        ],
+                                      ),
+                                i >= vm.getSecurityGridNumbers.call().length ? SizedBox() : SizedBox(height: 7),
+                              ],
+                            ],
+                          ),
+                        ),
                     ],
                   ),
           ),
         );
       },
+    );
+  }
+
+  Container getCardGridItemContainer(String title, String value, BuildContext context) {
+    return getCommonContainer(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title.toUpperCase(),
+            style: TextStyles.getTitleDarkRedText(17),
+          ),
+          Text(
+            value,
+            style: TextStyles.getTitleTransparentBlackText(fontSize: 16, opacity: 1),
+          ),
+        ],
+      ),
     );
   }
 
@@ -268,11 +348,12 @@ class _CardDetailsScreenState extends State<CardDetailsScreen> {
 
   Container getCommonContainer({
     required Widget child,
+    bool externalContainer = false,
   }) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
-        color: AppColors.mWhite,
+        color: externalContainer ? AppColors.mWhite.withValues(alpha: 0.7) : AppColors.mWhite,
       ),
       padding: const EdgeInsets.fromLTRB(10, 7, 10, 7),
       child: child,

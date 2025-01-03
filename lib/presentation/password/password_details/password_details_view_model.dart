@@ -43,11 +43,7 @@ class PasswordDetailsViewModel {
       dynamicFields: () {
         List<PasswordDynamicField> tempList = [];
         try {
-          tempList = PasswordDynamicFieldList.fromJson(
-                jsonDecode(
-                  getPasswordById(store.state, id)?.dynamicDataField ?? "{}",
-                ),
-              ).dynamicField ??
+          tempList = PasswordDynamicFieldList.fromJson(jsonDecode(getPasswordById(store.state, id)?.dynamicDataField ?? "{}")).dynamicField ??
               [PasswordDynamicField()];
         } catch (e) {
           tempList = [PasswordDynamicField()];

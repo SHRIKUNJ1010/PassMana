@@ -20,8 +20,7 @@ class CardBox {
     String cvv = '',
     String expiryDate = '',
     String cardPin = '',
-    bool hasSecurityGrid = false,
-    Map<String, String> securityGridNumber = const <String, String>{},
+    String securityGridNumber = '{}',
   }) async {
     String tempBankAndCardName = await CryptoUtility.encryptText(bankAndCardName);
     String tempCardNumber = await CryptoUtility.encryptText(cardNumber);
@@ -29,6 +28,8 @@ class CardBox {
     String tempCvv = await CryptoUtility.encryptText(cvv);
     String tempExpiryDate = await CryptoUtility.encryptText(expiryDate);
     String tempCardPin = await CryptoUtility.encryptText(cardPin);
+    String tempSecurityGridNumber = await CryptoUtility.encryptText(securityGridNumber);
+
     await _cardBox.putAsync(
       Card(
         bankAndCardName: tempBankAndCardName,
@@ -37,8 +38,7 @@ class CardBox {
         cvv: tempCvv,
         expiryDate: tempExpiryDate,
         cardPin: tempCardPin,
-        hasSecurityGrid: hasSecurityGrid,
-        securityGridNumber: securityGridNumber,
+        securityGridNumber: tempSecurityGridNumber,
         createdOn: DateTime.now(),
         lastUpdatedOn: DateTime.now(),
       ),
@@ -54,8 +54,7 @@ class CardBox {
     String cvv = '',
     String expiryDate = '',
     String cardPin = '',
-    bool hasSecurityGrid = false,
-    Map<String, String> securityGridNumber = const <String, String>{},
+    String securityGridNumber = '{}',
   }) async {
     String tempBankAndCardName = await CryptoUtility.encryptText(bankAndCardName);
     String tempCardNumber = await CryptoUtility.encryptText(cardNumber);
@@ -63,6 +62,7 @@ class CardBox {
     String tempCvv = await CryptoUtility.encryptText(cvv);
     String tempExpiryDate = await CryptoUtility.encryptText(expiryDate);
     String tempCardPin = await CryptoUtility.encryptText(cardPin);
+    String tempSecurityGridNumber = await CryptoUtility.encryptText(securityGridNumber);
 
     final Card tempCardModel = (await getOneCard(id))?.updateCard(
           bankAndCardName: tempBankAndCardName,
@@ -71,8 +71,7 @@ class CardBox {
           cvv: tempCvv,
           expiryDate: tempExpiryDate,
           cardPin: tempCardPin,
-          hasSecurityGrid: hasSecurityGrid,
-          securityGridNumber: securityGridNumber,
+          securityGridNumber: tempSecurityGridNumber,
           lastUpdatedOn: DateTime.now(),
         ) ??
         Card(
@@ -96,6 +95,7 @@ class CardBox {
       String tempCvv = await CryptoUtility.decryptText(element.cvv);
       String tempExpiryDate = await CryptoUtility.decryptText(element.expiryDate);
       String tempCardPin = await CryptoUtility.decryptText(element.cardPin);
+      String tempSecurityGridNumber = await CryptoUtility.decryptText(element.securityGridNumber);
       tempCards.add(
         element.updateCard(
           bankAndCardName: tempBankAndCardName,
@@ -104,6 +104,7 @@ class CardBox {
           cvv: tempCvv,
           expiryDate: tempExpiryDate,
           cardPin: tempCardPin,
+          securityGridNumber: tempSecurityGridNumber,
           lastUpdatedOn: element.lastUpdatedOn,
         ),
       );
@@ -111,9 +112,31 @@ class CardBox {
     return tempCards;
   }
 
-  addAllCards(List<Card> tempCards) {
-    //todo: check this for import/export data option
-    _cardBox.putMany(tempCards);
+  addAllCards(List<Card> tempCards) async {
+    List<Card> temp = [];
+
+    for (Card element in tempCards) {
+      String tempBankAndCardName = await CryptoUtility.encryptText(element.bankAndCardName);
+      String tempCardNumber = await CryptoUtility.encryptText(element.cardNumber);
+      String tempCardHolderName = await CryptoUtility.encryptText(element.cardHolderName);
+      String tempCvv = await CryptoUtility.encryptText(element.cvv);
+      String tempExpiryDate = await CryptoUtility.encryptText(element.expiryDate);
+      String tempCardPin = await CryptoUtility.encryptText(element.cardPin);
+      String tempSecurityGridNumber = await CryptoUtility.encryptText(element.securityGridNumber);
+      temp.add(
+        element.updateCard(
+          bankAndCardName: tempBankAndCardName,
+          cardNumber: tempCardNumber,
+          cardHolderName: tempCardHolderName,
+          cvv: tempCvv,
+          expiryDate: tempExpiryDate,
+          cardPin: tempCardPin,
+          securityGridNumber: tempSecurityGridNumber,
+          lastUpdatedOn: element.lastUpdatedOn,
+        ),
+      );
+    }
+    await _cardBox.putManyAsync(temp);
   }
 
   Future<Card?> getOneCard(int cardId) async {
@@ -129,6 +152,7 @@ class CardBox {
     String tempCvv = await CryptoUtility.decryptText(tempCardValue.cvv);
     String tempExpiryDate = await CryptoUtility.decryptText(tempCardValue.expiryDate);
     String tempCardPin = await CryptoUtility.decryptText(tempCardValue.cardPin);
+    String tempSecurityGridNumber = await CryptoUtility.decryptText(tempCardValue.securityGridNumber);
 
     return tempCardValue.updateCard(
       bankAndCardName: tempBankAndCardName,
@@ -137,6 +161,7 @@ class CardBox {
       cvv: tempCvv,
       expiryDate: tempExpiryDate,
       cardPin: tempCardPin,
+      securityGridNumber: tempSecurityGridNumber,
       lastUpdatedOn: tempCardValue.lastUpdatedOn,
     );
   }

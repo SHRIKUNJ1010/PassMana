@@ -20,8 +20,7 @@ class CreateUpdateCardViewModel {
     required String cvv,
     required String expiryDate,
     required String cardPin,
-    required bool hasSecurityGrid,
-    required Map<String, String> securityGridNumber,
+    required String securityGridNumber,
   }) createCard;
 
   final Function({
@@ -31,8 +30,7 @@ class CreateUpdateCardViewModel {
     required String cvv,
     required String expiryDate,
     required String cardPin,
-    required bool hasSecurityGrid,
-    required Map<String, String> securityGridNumber,
+    required String securityGridNumber,
   }) updateCard;
   final Function deleteCard;
   final Function onBackPress;
@@ -55,8 +53,7 @@ class CreateUpdateCardViewModel {
         required String cvv,
         required String expiryDate,
         required String cardPin,
-        required bool hasSecurityGrid,
-        required Map<String, String> securityGridNumber,
+        required String securityGridNumber,
       }) {
         store.dispatch(
           CreateCard(
@@ -66,7 +63,6 @@ class CreateUpdateCardViewModel {
             cardPin: cardPin,
             cvv: cvv,
             expiryDate: expiryDate,
-            hasSecurityGrid: hasSecurityGrid,
             securityGridNumber: securityGridNumber,
           ),
         );
@@ -79,8 +75,7 @@ class CreateUpdateCardViewModel {
         required String cvv,
         required String expiryDate,
         required String cardPin,
-        required bool hasSecurityGrid,
-        required Map<String, String> securityGridNumber,
+        required String securityGridNumber,
       }) {
         store.dispatch(
           UpdateCard(
@@ -91,7 +86,6 @@ class CreateUpdateCardViewModel {
             cardPin: cardPin,
             cvv: cvv,
             expiryDate: expiryDate,
-            hasSecurityGrid: hasSecurityGrid,
             securityGridNumber: securityGridNumber,
           ),
         );

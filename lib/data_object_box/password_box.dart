@@ -96,7 +96,7 @@ class PasswordBox {
   Future<List<Password>> getAllPasswords() async {
     List<Password> tempPasswords = [];
 
-    for (Password element in _passwordBox.getAll()) {
+    for (Password element in await _passwordBox.getAllAsync()) {
       String tempTitle = await CryptoUtility.decryptText(element.title);
       String tempSubTitle = await CryptoUtility.decryptText(element.subTitle);
       String tempWebsiteUrl = await CryptoUtility.decryptText(element.websiteUrl);
@@ -104,18 +104,25 @@ class PasswordBox {
       String tempPassword = await CryptoUtility.decryptText(element.password);
       String tempNote = await CryptoUtility.decryptText(element.note);
       String tempDynamicDataField = await CryptoUtility.decryptText(element.dynamicDataField);
-      tempPasswords.add(
-        element.updatePassword(
-          title: tempTitle,
-          subTitle: tempSubTitle,
-          websiteUrl: tempWebsiteUrl,
-          userName: tempUserName,
-          password: tempPassword,
-          note: tempNote,
-          dynamicDataField: tempDynamicDataField,
-          lastUpdatedOn: element.lastUpdatedOn,
-        ),
+      Password tem = element.updatePassword(
+        title: tempTitle,
+        subTitle: tempSubTitle,
+        websiteUrl: tempWebsiteUrl,
+        userName: tempUserName,
+        password: tempPassword,
+        note: tempNote,
+        dynamicDataField: tempDynamicDataField,
+        lastUpdatedOn: element.lastUpdatedOn,
       );
+
+      String tempGroupName = await CryptoUtility.decryptText(element.group.target?.groupName ?? "");
+      String tempGroupInformation = await CryptoUtility.decryptText(element.group.target?.description ?? "");
+      tem.group.target = element.group.target?.updateGroupInfo(
+        groupName: tempGroupName,
+        description: tempGroupInformation,
+        lastUpdatedOn: element.group.target!.lastUpdatedOn,
+      );
+      tempPasswords.add(tem);
     }
     return tempPasswords;
   }
@@ -150,9 +157,31 @@ class PasswordBox {
     return tempPasswords;
   }
 
-  addAllPasswords(List<Password> tempPasswords) {
-    //todo: check this for import/export data option
-    _passwordBox.putMany(tempPasswords);
+  addAllPasswords(List<Password> tempPasswords) async {
+    List<Password> temp = [];
+
+    for (Password element in tempPasswords) {
+      String tempTitle = await CryptoUtility.encryptText(element.title);
+      String tempSubTitle = await CryptoUtility.encryptText(element.subTitle);
+      String tempWebsiteUrl = await CryptoUtility.encryptText(element.websiteUrl);
+      String tempUserName = await CryptoUtility.encryptText(element.userName);
+      String tempPassword = await CryptoUtility.encryptText(element.password);
+      String tempNote = await CryptoUtility.encryptText(element.note);
+      String tempDynamicDataField = await CryptoUtility.encryptText(element.dynamicDataField);
+      temp.add(
+        element.updatePassword(
+          title: tempTitle,
+          subTitle: tempSubTitle,
+          websiteUrl: tempWebsiteUrl,
+          userName: tempUserName,
+          password: tempPassword,
+          note: tempNote,
+          dynamicDataField: tempDynamicDataField,
+          lastUpdatedOn: element.lastUpdatedOn,
+        )..group.target = element.group.target,
+      );
+    }
+    await _passwordBox.putManyAsync(temp);
   }
 
   Future<Password?> getOnePassword(int passwordId) async {
@@ -213,7 +242,7 @@ class PasswordBox {
           note: tempNote,
           dynamicDataField: tempDynamicDataField,
           lastUpdatedOn: element.lastUpdatedOn,
-        ),
+        )..group.target = element.group.target,
       );
     }
     return tempPasswords;
@@ -234,9 +263,9 @@ class PasswordBox {
     return tempList;
   }
 
-  assignPasswordToGroup(Password password, Group group) {
+  assignPasswordToGroup(Password password, Group group) async {
     password.group.target = group;
-    _passwordBox.put(
+    await _passwordBox.putAsync(
       password,
       mode: PutMode.update,
     );

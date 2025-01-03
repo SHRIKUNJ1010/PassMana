@@ -140,7 +140,7 @@
     },
     {
       "id": "4:7319612359426061167",
-      "lastPropertyId": "10:1738504638277915009",
+      "lastPropertyId": "11:4609532295148843109",
       "name": "Card",
       "properties": [
         {
@@ -185,13 +185,13 @@
           "type": 10
         },
         {
-          "id": "9:687379100988768860",
-          "name": "hasSecurityGrid",
-          "type": 1
-        },
-        {
           "id": "10:1738504638277915009",
           "name": "expiryDate",
+          "type": 9
+        },
+        {
+          "id": "11:4609532295148843109",
+          "name": "securityGridNumber",
           "type": 9
         }
       ],
@@ -237,7 +237,8 @@
   "retiredIndexUids": [],
   "retiredPropertyUids": [
     3417414018983795265,
-    2322565834328061491
+    2322565834328061491,
+    687379100988768860
   ],
   "retiredRelationUids": [],
   "version": 1

@@ -16,6 +16,7 @@ import 'package:path_provider/path_provider.dart';
 // changed for any of the object box
 class ObjectBox {
   late final Store _store;
+  //todo: remove admin while releasing your app
   late final Admin _admin;
   late final UserBox userBox;
   late final PasswordBox passwordBox;
@@ -29,6 +30,7 @@ class ObjectBox {
     groupBox = GroupBox(_store);
     cardBox = CardBox(_store);
     secretNoteBox = SecretNoteBox(_store);
+    //todo: remove admin while releasing your app
     if (Admin.isAvailable()) {
       _admin = Admin(_store);
     }

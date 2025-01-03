@@ -4,6 +4,7 @@
 
 import 'package:objectbox/objectbox.dart';
 import 'package:passmana/model/group_model.dart';
+import 'package:passmana/model/password_model.dart';
 import 'package:passmana/objectbox.g.dart';
 import 'package:passmana/utility/cryptography_utility/crypto_utility/crypto_utility.dart';
 
@@ -65,7 +66,45 @@ class GroupBox {
     for (Group element in _groupBox.getAll()) {
       String tempGroupName = await CryptoUtility.decryptText(element.groupName);
       String tempDescription = await CryptoUtility.decryptText(element.description);
-      tempGroups.add(
+      Group tem = element.updateGroupInfo(
+        groupName: tempGroupName,
+        description: tempDescription,
+        lastUpdatedOn: element.lastUpdatedOn,
+      );
+      List<Password> ter = [];
+      for (Password ele in element.passwords) {
+        String tempTitle = await CryptoUtility.decryptText(ele.title);
+        String tempSubTitle = await CryptoUtility.decryptText(ele.subTitle);
+        String tempWebsiteUrl = await CryptoUtility.decryptText(ele.websiteUrl);
+        String tempUserName = await CryptoUtility.decryptText(ele.userName);
+        String tempPassword = await CryptoUtility.decryptText(ele.password);
+        String tempNote = await CryptoUtility.decryptText(ele.note);
+        String tempDynamicDataField = await CryptoUtility.decryptText(ele.dynamicDataField);
+        Password tet = ele.updatePassword(
+          title: tempTitle,
+          subTitle: tempSubTitle,
+          websiteUrl: tempWebsiteUrl,
+          userName: tempUserName,
+          password: tempPassword,
+          note: tempNote,
+          dynamicDataField: tempDynamicDataField,
+          lastUpdatedOn: ele.lastUpdatedOn,
+        );
+        ter.add(tet);
+      }
+      tem.passwords.addAll(ter);
+      tempGroups.add(tem);
+    }
+    return tempGroups;
+  }
+
+  addAllGroups(List<Group> tempGroups) async {
+    List<Group> temp = [];
+
+    for (Group element in tempGroups) {
+      String tempGroupName = await CryptoUtility.encryptText(element.groupName);
+      String tempDescription = await CryptoUtility.encryptText(element.description);
+      temp.add(
         element.updateGroupInfo(
           groupName: tempGroupName,
           description: tempDescription,
@@ -73,12 +112,7 @@ class GroupBox {
         ),
       );
     }
-    return tempGroups;
-  }
-
-  addAllGroups(List<Group> tempGroups) {
-    //todo: check this for import/export data option
-    _groupBox.putMany(tempGroups);
+    await _groupBox.putManyAsync(temp);
   }
 
   Future<List<Group>> getPopularGroups() async {
@@ -93,13 +127,35 @@ class GroupBox {
     for (Group element in tempList) {
       String tempGroupName = await CryptoUtility.decryptText(element.groupName);
       String tempDescription = await CryptoUtility.decryptText(element.description);
-      tempGroups.add(
-        element.updateGroupInfo(
-          groupName: tempGroupName,
-          description: tempDescription,
-          lastUpdatedOn: element.lastUpdatedOn,
-        ),
+      Group tem = element.updateGroupInfo(
+        groupName: tempGroupName,
+        description: tempDescription,
+        lastUpdatedOn: element.lastUpdatedOn,
       );
+      List<Password> ter = [];
+
+      for (Password ele in element.passwords) {
+        String tempTitle = await CryptoUtility.decryptText(ele.title);
+        String tempSubTitle = await CryptoUtility.decryptText(ele.subTitle);
+        String tempWebsiteUrl = await CryptoUtility.decryptText(ele.websiteUrl);
+        String tempUserName = await CryptoUtility.decryptText(ele.userName);
+        String tempPassword = await CryptoUtility.decryptText(ele.password);
+        String tempNote = await CryptoUtility.decryptText(ele.note);
+        String tempDynamicDataField = await CryptoUtility.decryptText(ele.dynamicDataField);
+        Password tet = ele.updatePassword(
+          title: tempTitle,
+          subTitle: tempSubTitle,
+          websiteUrl: tempWebsiteUrl,
+          userName: tempUserName,
+          password: tempPassword,
+          note: tempNote,
+          dynamicDataField: tempDynamicDataField,
+          lastUpdatedOn: ele.lastUpdatedOn,
+        );
+        ter.add(tet);
+      }
+      tem.passwords.addAll(ter);
+      tempGroups.add(tem);
     }
     return tempGroups;
   }
@@ -114,11 +170,37 @@ class GroupBox {
     String tempGroupName = await CryptoUtility.decryptText(tempGroupValue.groupName);
     String tempDescription = await CryptoUtility.decryptText(tempGroupValue.description);
 
-    return tempGroupValue.updateGroupInfo(
+    Group tem = tempGroupValue.updateGroupInfo(
       groupName: tempGroupName,
       description: tempDescription,
       lastUpdatedOn: tempGroupValue.lastUpdatedOn,
     );
+
+    List<Password> ter = [];
+
+    for (Password ele in tempGroupValue.passwords) {
+      String tempTitle = await CryptoUtility.decryptText(ele.title);
+      String tempSubTitle = await CryptoUtility.decryptText(ele.subTitle);
+      String tempWebsiteUrl = await CryptoUtility.decryptText(ele.websiteUrl);
+      String tempUserName = await CryptoUtility.decryptText(ele.userName);
+      String tempPassword = await CryptoUtility.decryptText(ele.password);
+      String tempNote = await CryptoUtility.decryptText(ele.note);
+      String tempDynamicDataField = await CryptoUtility.decryptText(ele.dynamicDataField);
+      Password tet = ele.updatePassword(
+        title: tempTitle,
+        subTitle: tempSubTitle,
+        websiteUrl: tempWebsiteUrl,
+        userName: tempUserName,
+        password: tempPassword,
+        note: tempNote,
+        dynamicDataField: tempDynamicDataField,
+        lastUpdatedOn: ele.lastUpdatedOn,
+      );
+      ter.add(tet);
+    }
+    tem.passwords.addAll(ter);
+
+    return tem;
   }
 
   deleteGroup(int groupId) async {
