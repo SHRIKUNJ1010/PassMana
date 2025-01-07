@@ -4,8 +4,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:passmana/localization/app_localization.dart';
+import 'package:passmana/presentation/common/common_app_bar_action_icon_button.dart';
+import 'package:passmana/presentation/common/common_bottom_button.dart';
 import 'package:passmana/presentation/common/custom_app_bar.dart';
 import 'package:passmana/presentation/generate_password/generate_password_view_model.dart';
+import 'package:passmana/presentation/generate_password/widgets/check_box_item_tile.dart';
+import 'package:passmana/presentation/password/password_details/widgets/details_action_tappable_item_widget.dart';
+import 'package:passmana/presentation/password/password_details/widgets/details_item_tile.dart';
 import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:passmana/utility/utility.dart';
@@ -68,7 +73,21 @@ class _GeneratePasswordStatefulContainerState extends State<GeneratePasswordStat
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 30),
-                getGeneratedPasswordContainer(context),
+                DetailsItemTile(
+                  title: "${getTranslated("password", context)}:",
+                  description: generatedPassword,
+                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  actionItem: DetailsActionTappableItemWidget(
+                    onItemTap: () {
+                      widget.vm.onCopyPasswordTap.call(generatedPassword);
+                    },
+                    item: Icon(
+                      Icons.copy,
+                      color: AppColors.mBlack,
+                      size: 25,
+                    ),
+                  ),
+                ),
                 const SizedBox(height: 25),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -80,11 +99,35 @@ class _GeneratePasswordStatefulContainerState extends State<GeneratePasswordStat
                   child: Row(
                     children: [
                       Expanded(
-                        child: getLowerCaseContainer(context),
+                        child: CheckBoxItemTile(
+                          isChecked: hasLowercase,
+                          onCheckBoxTapped: () {
+                            if (!hasUppercase && hasLowercase) {
+                            } else {
+                              hasLowercase = !hasLowercase;
+                              setState(() {});
+                              generatePassword();
+                            }
+                          },
+                          primaryTextTitle: getTranslated('lowercase', context),
+                          secondaryTextTitle: '(a-z)',
+                        ),
                       ),
                       const SizedBox(width: 10),
                       Expanded(
-                        child: getUpperCaseContainer(context),
+                        child: CheckBoxItemTile(
+                          isChecked: hasUppercase,
+                          onCheckBoxTapped: () {
+                            if (!hasLowercase && hasUppercase) {
+                            } else {
+                              hasUppercase = !hasUppercase;
+                              setState(() {});
+                              generatePassword();
+                            }
+                          },
+                          primaryTextTitle: getTranslated('uppercase', context),
+                          secondaryTextTitle: '(A-Z)',
+                        ),
                       ),
                     ],
                   ),
@@ -95,11 +138,29 @@ class _GeneratePasswordStatefulContainerState extends State<GeneratePasswordStat
                   child: Row(
                     children: [
                       Expanded(
-                        child: getNumericContainer(context),
+                        child: CheckBoxItemTile(
+                          isChecked: hasNumeric,
+                          onCheckBoxTapped: () {
+                            hasNumeric = !hasNumeric;
+                            setState(() {});
+                            generatePassword();
+                          },
+                          primaryTextTitle: getTranslated('numeric', context),
+                          secondaryTextTitle: '(0-9)',
+                        ),
                       ),
                       const SizedBox(width: 10),
                       Expanded(
-                        child: getSpecialCharacterContainer(context),
+                        child: CheckBoxItemTile(
+                          isChecked: hasSpecialCharacter,
+                          onCheckBoxTapped: () {
+                            hasSpecialCharacter = !hasSpecialCharacter;
+                            setState(() {});
+                            generatePassword();
+                          },
+                          primaryTextTitle: getTranslated('special', context),
+                          secondaryTextTitle: '(@%+)',
+                        ),
                       ),
                     ],
                   ),
@@ -109,7 +170,15 @@ class _GeneratePasswordStatefulContainerState extends State<GeneratePasswordStat
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    getReadableContainer(context),
+                    CheckBoxItemTile(
+                      isChecked: isReadable,
+                      onCheckBoxTapped: () {
+                        isReadable = !isReadable;
+                        setState(() {});
+                        generatePassword();
+                      },
+                      primaryTextTitle: getTranslated('pronounceable', context),
+                    ),
                   ],
                 ),
               ],
@@ -119,94 +188,11 @@ class _GeneratePasswordStatefulContainerState extends State<GeneratePasswordStat
             left: 0,
             right: 0,
             bottom: 0,
-            child: getUsePasswordButton(),
-          ),
-        ],
-      ),
-    );
-  }
-
-  ClipRRect getUsePasswordButton() {
-    return ClipRRect(
-      borderRadius: const BorderRadius.vertical(
-        top: Radius.circular(30),
-      ),
-      child: Material(
-        color: AppColors.primaryColor,
-        borderRadius: const BorderRadius.vertical(
-          top: Radius.circular(30),
-        ),
-        child: InkWell(
-          splashColor: AppColors.mWhite.withValues(alpha: 0.2),
-          onTap: () {
-            widget.vm.onUsePasswordTap.call(generatedPassword);
-          },
-          child: Container(
-            height: 65 + MediaQuery.paddingOf(context).bottom,
-            padding: EdgeInsets.only(bottom: MediaQuery.paddingOf(context).bottom),
-            color: Colors.transparent,
-            alignment: Alignment.center,
-            child: Text(
-              getTranslated('use_password', context),
-              style: TextStyles.getTitleWhiteText(24),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Container getGeneratedPasswordContainer(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20),
-      padding: const EdgeInsets.fromLTRB(10, 12, 10, 12),
-      decoration: BoxDecoration(
-        color: AppColors.mWhite,
-        borderRadius: BorderRadius.circular(5),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "${getTranslated("password", context)}:",
-                  style: TextStyles.getTitleDarkRedText(17),
-                ),
-                Text(
-                  generatedPassword,
-                  maxLines: 5,
-                  softWrap: true,
-                  style: TextStyles.getTitleBlueText(17),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  splashColor: AppColors.primaryColor.withValues(alpha: 0.2),
-                  onTap: () {
-                    widget.vm.onCopyPasswordTap.call(generatedPassword);
-                  },
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Icon(
-                      Icons.copy,
-                      color: AppColors.primaryColor,
-                      size: 26,
-                    ),
-                  ),
-                ),
-              ),
+            child: CommonBottomButton(
+              title: getTranslated('use_password', context),
+              onItemTap: () {
+                widget.vm.onUsePasswordTap.call(generatedPassword);
+              },
             ),
           ),
         ],
@@ -219,7 +205,7 @@ class _GeneratePasswordStatefulContainerState extends State<GeneratePasswordStat
       padding: const EdgeInsets.fromLTRB(10, 7, 10, 7),
       decoration: BoxDecoration(
         color: AppColors.mWhite,
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: BorderRadius.circular(3),
       ),
       child: Row(
         children: [
@@ -254,267 +240,6 @@ class _GeneratePasswordStatefulContainerState extends State<GeneratePasswordStat
     );
   }
 
-  Container getLowerCaseContainer(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(10, 7, 10, 7),
-      decoration: BoxDecoration(
-        color: AppColors.mWhite,
-        borderRadius: BorderRadius.circular(5),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Material(
-              color: Colors.transparent,
-              child: InkWell(
-                splashColor: AppColors.primaryColor.withValues(alpha: 0.2),
-                onTap: () {
-                  if (!hasUppercase && hasLowercase) {
-                  } else {
-                    hasLowercase = !hasLowercase;
-                    setState(() {});
-                    generatePassword();
-                  }
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Icon(
-                    hasLowercase ? Icons.check_box : Icons.check_box_outline_blank,
-                    color: AppColors.primaryColor,
-                    size: 30,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(width: 5),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                getTranslated('lowercase', context),
-                style: TextStyles.getTitleBlueText(17),
-              ),
-              Text(
-                '(a-z)',
-                style: TextStyles.getTitleBlueText(17),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Container getUpperCaseContainer(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(10, 7, 10, 7),
-      decoration: BoxDecoration(
-        color: AppColors.mWhite,
-        borderRadius: BorderRadius.circular(5),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Material(
-              color: Colors.transparent,
-              child: InkWell(
-                splashColor: AppColors.primaryColor.withValues(alpha: 0.2),
-                onTap: () {
-                  if (!hasLowercase && hasUppercase) {
-                  } else {
-                    hasUppercase = !hasUppercase;
-                    setState(() {});
-                    generatePassword();
-                  }
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Icon(
-                    hasUppercase ? Icons.check_box : Icons.check_box_outline_blank,
-                    color: AppColors.primaryColor,
-                    size: 30,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(width: 5),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                getTranslated('uppercase', context),
-                style: TextStyles.getTitleBlueText(17),
-              ),
-              Text(
-                '(A-Z)',
-                style: TextStyles.getTitleBlueText(17),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Container getNumericContainer(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(10, 7, 10, 7),
-      decoration: BoxDecoration(
-        color: AppColors.mWhite,
-        borderRadius: BorderRadius.circular(5),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Material(
-              color: Colors.transparent,
-              child: InkWell(
-                splashColor: AppColors.primaryColor.withValues(alpha: 0.2),
-                onTap: () {
-                  hasNumeric = !hasNumeric;
-                  setState(() {});
-                  generatePassword();
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Icon(
-                    hasNumeric ? Icons.check_box : Icons.check_box_outline_blank,
-                    color: AppColors.primaryColor,
-                    size: 30,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(width: 5),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                getTranslated('numeric', context),
-                style: TextStyles.getTitleBlueText(17),
-              ),
-              Text(
-                '(0-9)',
-                style: TextStyles.getTitleBlueText(17),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Container getSpecialCharacterContainer(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(10, 7, 10, 7),
-      decoration: BoxDecoration(
-        color: AppColors.mWhite,
-        borderRadius: BorderRadius.circular(5),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Material(
-              color: Colors.transparent,
-              child: InkWell(
-                splashColor: AppColors.primaryColor.withValues(alpha: 0.2),
-                onTap: () {
-                  hasSpecialCharacter = !hasSpecialCharacter;
-                  setState(() {});
-                  generatePassword();
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Icon(
-                    hasSpecialCharacter ? Icons.check_box : Icons.check_box_outline_blank,
-                    color: AppColors.primaryColor,
-                    size: 30,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(width: 5),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                getTranslated('special', context),
-                style: TextStyles.getTitleBlueText(17),
-              ),
-              Text(
-                '(@%+)',
-                style: TextStyles.getTitleBlueText(17),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Container getReadableContainer(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(10, 12, 10, 12),
-      decoration: BoxDecoration(
-        color: AppColors.mWhite,
-        borderRadius: BorderRadius.circular(5),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Material(
-              color: Colors.transparent,
-              child: InkWell(
-                splashColor: AppColors.primaryColor.withValues(alpha: 0.2),
-                onTap: () {
-                  isReadable = !isReadable;
-                  setState(() {});
-                  generatePassword();
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Icon(
-                    isReadable ? Icons.check_box : Icons.check_box_outline_blank,
-                    color: AppColors.primaryColor,
-                    size: 30,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(width: 5),
-          Text(
-            getTranslated('pronounceable', context),
-            style: TextStyles.getTitleBlueText(17),
-          ),
-        ],
-      ),
-    );
-  }
-
   CustomAppBar getAppBar(GeneratePasswordViewModel vm, BuildContext context) {
     return CustomAppBar(
       centerWidgetsList: [
@@ -524,24 +249,14 @@ class _GeneratePasswordStatefulContainerState extends State<GeneratePasswordStat
             mainAxisSize: MainAxisSize.min,
             children: [
               const SizedBox(width: 20),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Material(
-                  color: AppColors.mWhite,
-                  child: InkWell(
-                    splashColor: AppColors.mBlack.withValues(alpha: 0.2),
-                    onTap: () {
-                      vm.onBackPress.call();
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
-                      child: Icon(
-                        Icons.arrow_back,
-                        color: AppColors.primaryColor,
-                        size: 25,
-                      ),
-                    ),
-                  ),
+              CommonAppBarActionIconButton(
+                onItemTap: () {
+                  vm.onBackPress.call();
+                },
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: AppColors.primaryColor,
+                  size: 25,
                 ),
               ),
             ],
@@ -556,24 +271,14 @@ class _GeneratePasswordStatefulContainerState extends State<GeneratePasswordStat
             mainAxisAlignment: MainAxisAlignment.end,
             mainAxisSize: MainAxisSize.min,
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Material(
-                  color: AppColors.mWhite,
-                  child: InkWell(
-                    splashColor: AppColors.mBlack.withValues(alpha: 0.2),
-                    onTap: () {
-                      generatePassword();
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
-                      child: Icon(
-                        Icons.repeat,
-                        color: AppColors.primaryColor,
-                        size: 25,
-                      ),
-                    ),
-                  ),
+              CommonAppBarActionIconButton(
+                onItemTap: () {
+                  generatePassword();
+                },
+                icon: Icon(
+                  Icons.repeat,
+                  color: AppColors.primaryColor,
+                  size: 25,
                 ),
               ),
               const SizedBox(width: 20),

@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:passmana/model/group_model.dart';
 import 'package:passmana/utility/color.dart';
+import 'package:passmana/utility/constants.dart';
 import 'package:passmana/utility/text_utility/text_styles.dart';
 
 class GroupListTile extends StatelessWidget {
@@ -46,9 +47,12 @@ class GroupListTile extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15),
                   ),
                   alignment: Alignment.center,
-                  child: Text(
-                    group.groupName.trim()[0].toUpperCase(),
-                    style: TextStyles.getBoldWhiteText(27),
+                  child: Hero(
+                    tag: "${AppConstants.groupHero}${group.id}",
+                    child: Text(
+                      group.groupName.trim()[0].toUpperCase(),
+                      style: TextStyles.getBoldWhiteText(27),
+                    ),
                   ),
                 ),
                 Expanded(

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/localization/app_localization.dart';
+import 'package:passmana/presentation/common/common_app_bar_action_icon_button.dart';
 import 'package:passmana/presentation/common/custom_app_bar.dart';
 import 'package:passmana/presentation/password/all_password_list/all_password_list_view_model.dart';
 import 'package:passmana/presentation/password/password_common_list_tile.dart';
@@ -46,24 +47,14 @@ class AllPasswordListScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               const SizedBox(width: 20),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Material(
-                  color: AppColors.mWhite,
-                  child: InkWell(
-                    splashColor: AppColors.mBlack.withValues(alpha: 0.2),
-                    onTap: () {
-                      vm.onBackPress.call();
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
-                      child: Icon(
-                        Icons.arrow_back,
-                        color: AppColors.primaryColor,
-                        size: 25,
-                      ),
-                    ),
-                  ),
+              CommonAppBarActionIconButton(
+                onItemTap: () {
+                  vm.onBackPress.call();
+                },
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: AppColors.primaryColor,
+                  size: 25,
                 ),
               ),
             ],

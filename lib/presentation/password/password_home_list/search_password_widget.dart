@@ -19,11 +19,11 @@ class SearchPasswordWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(15),
+      borderRadius: BorderRadius.circular(6),
       child: Material(
         color: AppColors.mWhite,
         elevation: 2,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(6),
         child: InkWell(
           splashColor: AppColors.primaryColor.withValues(alpha: 0.3),
           onTap: () {

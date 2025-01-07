@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:passmana/model/group_model.dart';
 import 'package:passmana/utility/color.dart';
+import 'package:passmana/utility/constants.dart';
 import 'package:passmana/utility/text_utility/text_styles.dart';
 
 class HomeGroupGridTile extends StatelessWidget {
@@ -20,7 +21,7 @@ class HomeGroupGridTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(15),
+      borderRadius: BorderRadius.circular(6),
       child: Material(
         color: AppColors.mWhite,
         child: InkWell(
@@ -31,7 +32,7 @@ class HomeGroupGridTile extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
               color: Colors.transparent,
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(6),
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -45,9 +46,12 @@ class HomeGroupGridTile extends StatelessWidget {
                     borderRadius: BorderRadius.circular(30),
                   ),
                   alignment: Alignment.center,
-                  child: Text(
-                    group.groupName.trim()[0].toUpperCase(),
-                    style: TextStyles.getBoldWhiteText(34),
+                  child: Hero(
+                    tag: "${AppConstants.groupHero}${group.id}",
+                    child: Text(
+                      group.groupName.trim()[0].toUpperCase(),
+                      style: TextStyles.getBoldWhiteText(34),
+                    ),
                   ),
                 ),
                 Text(

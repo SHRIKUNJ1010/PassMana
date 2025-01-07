@@ -18,13 +18,13 @@ class SearchPasswordField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(15),
+      borderRadius: BorderRadius.circular(6),
       child: Material(
         color: AppColors.mWhite,
         elevation: 2,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(6),
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(16, 4, 8, 4),
+          padding: const EdgeInsets.fromLTRB(16, 6, 8, 6),
           child: TextField(
             onChanged: (val) {
               onTextChanged.call(val);

@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:passmana/model/password_model.dart';
 import 'package:passmana/utility/color.dart';
+import 'package:passmana/utility/constants.dart';
 import 'package:passmana/utility/text_utility/text_styles.dart';
 
 class PasswordCommonListTile extends StatelessWidget {
@@ -22,7 +23,7 @@ class PasswordCommonListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: BorderRadius.circular(8),
       child: Material(
         color: AppColors.mWhite,
         child: InkWell(
@@ -34,7 +35,7 @@ class PasswordCommonListTile extends StatelessWidget {
             height: 75,
             decoration: BoxDecoration(
               color: Colors.transparent,
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(6),
             ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -45,12 +46,15 @@ class PasswordCommonListTile extends StatelessWidget {
                   margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                   decoration: BoxDecoration(
                     color: AppColors.primaryColor,
-                    borderRadius: BorderRadius.circular(15),
+                    borderRadius: BorderRadius.circular(6),
                   ),
                   alignment: Alignment.center,
-                  child: Text(
-                    password.title.trim()[0].toUpperCase(),
-                    style: TextStyles.getBoldWhiteText(27),
+                  child: Hero(
+                    tag: "${AppConstants.passwordHero}${password.id}",
+                    child: Text(
+                      password.title.trim()[0].toUpperCase(),
+                      style: TextStyles.getBoldWhiteText(27),
+                    ),
                   ),
                 ),
                 Expanded(

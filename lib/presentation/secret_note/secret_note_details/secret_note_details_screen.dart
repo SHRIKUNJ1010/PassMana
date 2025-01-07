@@ -6,9 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/localization/app_localization.dart';
+import 'package:passmana/presentation/common/common_app_bar_action_icon_button.dart';
 import 'package:passmana/presentation/common/custom_app_bar.dart';
 import 'package:passmana/presentation/secret_note/secret_note_details/secret_note_details_view_model.dart';
 import 'package:passmana/utility/color.dart';
+import 'package:passmana/utility/constants.dart';
 import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:passmana/utility/utility.dart';
 import 'package:redux/redux.dart';
@@ -38,7 +40,7 @@ class SecretNoteDetailsScreen extends StatelessWidget {
             body: SafeArea(
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(3),
                   color: AppColors.mWhite,
                 ),
                 margin: const EdgeInsets.fromLTRB(20, 20, 20, 30),
@@ -48,9 +50,12 @@ class SecretNoteDetailsScreen extends StatelessWidget {
                   shrinkWrap: true,
                   children: [
                     SizedBox(width: width),
-                    Text(
-                      vm.secretNote.note,
-                      style: TextStyles.getTitleBlueText(18),
+                    Hero(
+                      tag: "${AppConstants.secretNoteHero}${vm.secretNote.id}",
+                      child: Text(
+                        vm.secretNote.note,
+                        style: TextStyles.getTitleBlueText(18),
+                      ),
                     ),
                   ],
                 ),
@@ -71,24 +76,14 @@ class SecretNoteDetailsScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               const SizedBox(width: 20),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Material(
-                  color: AppColors.mWhite,
-                  child: InkWell(
-                    splashColor: AppColors.mBlack.withValues(alpha: 0.2),
-                    onTap: () {
-                      vm.onBackPress.call();
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
-                      child: Icon(
-                        Icons.arrow_back,
-                        color: AppColors.primaryColor,
-                        size: 25,
-                      ),
-                    ),
-                  ),
+              CommonAppBarActionIconButton(
+                onItemTap: () {
+                  vm.onBackPress.call();
+                },
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: AppColors.primaryColor,
+                  size: 25,
                 ),
               ),
             ],
@@ -103,24 +98,14 @@ class SecretNoteDetailsScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             mainAxisSize: MainAxisSize.min,
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Material(
-                  color: AppColors.mWhite,
-                  child: InkWell(
-                    splashColor: AppColors.mBlack.withValues(alpha: 0.2),
-                    onTap: () {
-                      vm.onEditTap.call();
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
-                      child: Icon(
-                        Icons.edit,
-                        color: AppColors.primaryColor,
-                        size: 25,
-                      ),
-                    ),
-                  ),
+              CommonAppBarActionIconButton(
+                onItemTap: () {
+                  vm.onEditTap.call();
+                },
+                icon: Icon(
+                  Icons.edit,
+                  color: AppColors.primaryColor,
+                  size: 25,
                 ),
               ),
               const SizedBox(width: 20),

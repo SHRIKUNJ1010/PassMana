@@ -7,9 +7,13 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/domain_redux/secret_note/secret_note_selector.dart';
 import 'package:passmana/localization/app_localization.dart';
+import 'package:passmana/presentation/common/common_app_bar_action_icon_button.dart';
+import 'package:passmana/presentation/common/common_bottom_button.dart';
+import 'package:passmana/presentation/common/common_text_field.dart';
 import 'package:passmana/presentation/common/custom_app_bar.dart';
 import 'package:passmana/presentation/secret_note/create_update_secret_note/create_update_secret_note_view_model.dart';
 import 'package:passmana/utility/color.dart';
+import 'package:passmana/utility/constants.dart';
 import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:passmana/utility/utility.dart';
 import 'package:redux/redux.dart';
@@ -60,7 +64,7 @@ class _CreateUpdateSecretNoteScreenState extends State<CreateUpdateSecretNoteScr
                   resizeToAvoidBottomInset: true,
                   backgroundColor: Colors.transparent,
                   appBar: getAppBar(vm, context),
-                  body: getNoteField(context, noteController),
+                  body: getNoteField(context, noteController, vm.secretNote?.id),
                 ),
                 Positioned(
                   left: 0,
@@ -76,17 +80,25 @@ class _CreateUpdateSecretNoteScreenState extends State<CreateUpdateSecretNoteScr
     );
   }
 
-  Widget getNoteField(BuildContext context, TextEditingController controller) {
+  Widget getNoteField(BuildContext context, TextEditingController controller, int? secretNoteId) {
     return Column(
       children: [
         Row(
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
-              child: Text(
-                "${getTranslated('secret_note', context)}:",
-                style: TextStyles.getTitleWhiteText(20),
-              ),
+              child: secretNoteId != null
+                  ? Hero(
+                      tag: "${AppConstants.secretNoteHero}$secretNoteId",
+                      child: Text(
+                        "${getTranslated('secret_note', context)}:",
+                        style: TextStyles.getTitleWhiteText(20),
+                      ),
+                    )
+                  : Text(
+                      "${getTranslated('secret_note', context)}:",
+                      style: TextStyles.getTitleWhiteText(20),
+                    ),
             ),
           ],
         ),
@@ -97,28 +109,11 @@ class _CreateUpdateSecretNoteScreenState extends State<CreateUpdateSecretNoteScr
               borderRadius: BorderRadius.circular(20),
               color: AppColors.mWhite,
             ),
-            child: TextFormField(
+            child: CommonTextField(
               controller: controller,
-              validator: (text) {
-                if (text == null || text.isEmpty) {
-                  return getTranslated("field_can't_be_empty", context);
-                }
-                return null;
-              },
-              style: TextStyles.getTitleBlueText(18),
-              decoration: InputDecoration(
-                hintText: getTranslated("write_your_note_here", context),
-                hintStyle: TextStyles.getTitleBlueText(18),
-                contentPadding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
-                border: const OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                ),
-              ),
+              hintText: getTranslated("write_your_note_here", context),
               maxLines: 1000,
               textInputAction: TextInputAction.done,
-              onTapOutside: (pointerDown) {
-                FocusScope.of(context).unfocus();
-              },
             ),
           ),
         ),
@@ -126,43 +121,22 @@ class _CreateUpdateSecretNoteScreenState extends State<CreateUpdateSecretNoteScr
     );
   }
 
-  ClipRRect getCreateUpdateButton(CreateUpdateSecretNoteViewModel vm, BuildContext context) {
-    return ClipRRect(
-      borderRadius: const BorderRadius.vertical(
-        top: Radius.circular(30),
-      ),
-      child: Material(
-        color: AppColors.primaryColor,
-        borderRadius: const BorderRadius.vertical(
-          top: Radius.circular(30),
-        ),
-        child: InkWell(
-          splashColor: AppColors.mWhite.withValues(alpha: 0.2),
-          onTap: () {
-            if (_formKey.currentState!.validate()) {
-              if (widget.id != null) {
-                vm.updateSecretNote.call(
-                  note: noteController.text,
-                );
-              } else {
-                vm.createSecretNote.call(
-                  note: noteController.text,
-                );
-              }
-            }
-          },
-          child: Container(
-            height: 65 + MediaQuery.paddingOf(context).bottom,
-            padding: EdgeInsets.only(bottom: MediaQuery.paddingOf(context).bottom),
-            color: Colors.transparent,
-            alignment: Alignment.center,
-            child: Text(
-              vm.secretNote != null ? getTranslated('update', context) : getTranslated('create', context),
-              style: TextStyles.getTitleWhiteText(24),
-            ),
-          ),
-        ),
-      ),
+  Widget getCreateUpdateButton(CreateUpdateSecretNoteViewModel vm, BuildContext context) {
+    return CommonBottomButton(
+      title: vm.secretNote != null ? getTranslated('update', context) : getTranslated('create', context),
+      onItemTap: () {
+        if (_formKey.currentState!.validate()) {
+          if (widget.id != null) {
+            vm.updateSecretNote.call(
+              note: noteController.text,
+            );
+          } else {
+            vm.createSecretNote.call(
+              note: noteController.text,
+            );
+          }
+        }
+      },
     );
   }
 
@@ -175,57 +149,47 @@ class _CreateUpdateSecretNoteScreenState extends State<CreateUpdateSecretNoteScr
             mainAxisSize: MainAxisSize.min,
             children: [
               const SizedBox(width: 20),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Material(
-                  color: AppColors.mWhite,
-                  child: InkWell(
-                    splashColor: AppColors.mBlack.withValues(alpha: 0.2),
-                    onTap: () {
-                      vm.onBackPress.call();
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
-                      child: Icon(
-                        Icons.arrow_back,
-                        color: AppColors.primaryColor,
-                        size: 25,
-                      ),
-                    ),
-                  ),
+              CommonAppBarActionIconButton(
+                onItemTap: () {
+                  vm.onBackPress.call();
+                },
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: AppColors.primaryColor,
+                  size: 25,
                 ),
               ),
             ],
           ),
         ),
-        Text(
-          vm.secretNote != null ? getTranslated("update_secret_note", context) : getTranslated("create_secret_note", context),
-          style: TextStyles.getTitleWhiteText(24),
-        ),
+        vm.secretNote == null
+            ? Hero(
+                tag: AppConstants.secretNoteHero,
+                child: Text(
+                  getTranslated("create_secret_note", context),
+                  style: TextStyles.getTitleWhiteText(24),
+                ),
+              )
+            : Text(
+                getTranslated("update_secret_note", context),
+                style: TextStyles.getTitleWhiteText(24),
+              ),
         vm.secretNote != null
             ? Expanded(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Material(
-                        color: AppColors.secondaryMaterialColor[700],
-                        child: InkWell(
-                          splashColor: AppColors.mWhite.withValues(alpha: 0.2),
-                          onTap: () {
-                            vm.deleteSecretNote.call();
-                          },
-                          child: const Padding(
-                            padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
-                            child: Icon(
-                              Icons.delete,
-                              color: AppColors.mWhite,
-                              size: 25,
-                            ),
-                          ),
-                        ),
+                    CommonAppBarActionIconButton(
+                      onItemTap: () {
+                        vm.deleteSecretNote.call();
+                      },
+                      buttonColor: AppColors.secondaryMaterialColor[700],
+                      buttonSplashColor: AppColors.mWhite.withValues(alpha: 0.2),
+                      icon: Icon(
+                        Icons.delete,
+                        color: AppColors.mWhite,
+                        size: 25,
                       ),
                     ),
                     const SizedBox(width: 20),

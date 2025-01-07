@@ -94,6 +94,7 @@ class SelectionWidgetState<T> extends State<SelectionWidget<T>> {
   Widget build(BuildContext context) {
     return Container(
       constraints: const BoxConstraints(maxHeight: 330, minHeight: 0),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(3)),
       child: widget.popupProps.containerBuilder == null ? _defaultWidget() : widget.popupProps.containerBuilder!(context, _defaultWidget()),
     );
   }

@@ -2,6 +2,7 @@
 * Created by Shrikunj Patel on 11/28/2023.
 */
 import 'package:flutter/material.dart';
+import 'package:passmana/presentation/common/common_numeric_keyboard/common_numeric_keyboard_widget.dart';
 import 'package:passmana/utility/common_widgets_utility/common_widgets.dart';
 import 'package:passmana/utility/text_utility/text_styles.dart';
 
@@ -70,7 +71,7 @@ class _CustomPinFieldState extends State<CustomPinField> {
           const Spacer(),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: CommonWidgets.getCommonNumericKeyboard(
+            child: CommonNumericKeyboardWidget(
               context: context,
               controller: _pinController,
               disableBottomLeft: widget.disableBottomLeft,

@@ -13,4 +13,8 @@ class AppConstants {
 
   //hero animation tags
   static const String appLogo = "appLogo";
+  static const String passwordHero = "passwordHero";
+  static const String groupHero = "groupHero";
+  static const String cardHero = "cardHero";
+  static const String secretNoteHero = "secretNoteHero";
 }

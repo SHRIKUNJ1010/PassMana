@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:passmana/localization/app_localization.dart';
 import 'package:passmana/model/card_model.dart' as c;
 import 'package:passmana/utility/color.dart';
+import 'package:passmana/utility/constants.dart';
 import 'package:passmana/utility/text_utility/text_styles.dart';
 
 class CardCommonListTile extends StatelessWidget {
@@ -19,7 +20,7 @@ class CardCommonListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: BorderRadius.circular(3),
       child: Material(
         color: AppColors.mWhite.withValues(alpha: 0.3), //withOpacity(0.2),
         child: InkWell(
@@ -31,7 +32,7 @@ class CardCommonListTile extends StatelessWidget {
             height: 220,
             decoration: BoxDecoration(
               color: AppColors.primaryColor.withValues(alpha: 0.6),
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(3),
             ),
             padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
             child: Column(
@@ -41,9 +42,12 @@ class CardCommonListTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      card.bankAndCardName,
-                      style: TextStyles.getBoldWhiteText(17),
+                    Hero(
+                      tag: "${AppConstants.cardHero}${card.id}",
+                      child: Text(
+                        card.bankAndCardName,
+                        style: TextStyles.getBoldWhiteText(17),
+                      ),
                     ),
                     Transform.rotate(
                       angle: math.pi / 2,

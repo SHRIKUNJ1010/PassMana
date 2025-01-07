@@ -13,6 +13,9 @@ import 'package:passmana/localization/app_localization.dart';
 import 'package:passmana/model/group_model.dart';
 import 'package:passmana/model/password_dynamic_field_model.dart';
 import 'package:passmana/model/screen_argument_models/create_update_password_screen_arguments.dart';
+import 'package:passmana/presentation/common/common_app_bar_action_icon_button.dart';
+import 'package:passmana/presentation/common/common_bottom_button.dart';
+import 'package:passmana/presentation/common/common_text_field.dart';
 import 'package:passmana/presentation/common/custom_app_bar.dart';
 import 'package:passmana/presentation/common/drop_down_search_custom/dropdown_search.dart';
 import 'package:passmana/presentation/common/drop_down_search_custom/src/properties/list_view_props.dart';
@@ -21,6 +24,7 @@ import 'package:passmana/presentation/common/drop_down_search_custom/src/propert
 import 'package:passmana/presentation/password/create_update_password/create_update_password_view_model.dart';
 import 'package:passmana/presentation/password/create_update_password/password_dynamic_field_list_item_widget.dart';
 import 'package:passmana/utility/color.dart';
+import 'package:passmana/utility/constants.dart';
 import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:passmana/utility/utility.dart';
 import 'package:redux/redux.dart';
@@ -116,7 +120,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                         child: ListView(
                           shrinkWrap: true,
                           children: [
-                            getTitleField(context, titleController),
+                            getTitleField(context, titleController, vm.password?.id),
                             getSubTitleField(context, subTitleController),
                             getWebsiteUrlField(context, websiteUrlController),
                             getUserNameField(context, userNameController),
@@ -159,10 +163,10 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                             Padding(
                               padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                               child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
+                                borderRadius: BorderRadius.circular(3),
                                 child: Material(
                                   color: AppColors.mWhite,
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(3),
                                   child: Container(
                                     height: 45,
                                     color: Colors.transparent,
@@ -244,7 +248,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                 return Container(
                   decoration: BoxDecoration(
                     color: AppColors.primaryColor.withValues(alpha: 0.2),
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(3),
                   ),
                   child: child,
                 );
@@ -263,7 +267,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                 }
               },
               menuProps: MenuProps(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(3),
                 barrierLabel: getTranslated("groups", context),
               ),
             ),
@@ -277,10 +281,10 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
             },
             selectedItemBuilder: (item, onTap) {
               return ClipRRect(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(3),
                 child: Material(
                   color: AppColors.mWhite,
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(3),
                   child: InkWell(
                     onTap: () {
                       onTap.call();
@@ -290,7 +294,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                       padding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
                       decoration: BoxDecoration(
                         color: Colors.transparent,
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(3),
                       ),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -323,7 +327,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
     return Container(
       decoration: BoxDecoration(
         color: AppColors.mWhite,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(3),
       ),
       padding: const EdgeInsets.fromLTRB(15, 15, 15, 15),
       child: Text(
@@ -337,7 +341,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
     return Container(
       decoration: BoxDecoration(
         color: AppColors.primaryColor,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(3),
       ),
       padding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
       child: Text(
@@ -347,57 +351,36 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
     );
   }
 
-  ClipRRect getCreateUpdateButton(CreateUpdatePasswordViewModel vm) {
-    return ClipRRect(
-      borderRadius: const BorderRadius.vertical(
-        top: Radius.circular(30),
-      ),
-      child: Material(
-        color: AppColors.primaryColor,
-        borderRadius: const BorderRadius.vertical(
-          top: Radius.circular(30),
-        ),
-        child: InkWell(
-          splashColor: AppColors.mWhite.withValues(alpha: 0.2),
-          onTap: () {
-            if (_formKey.currentState!.validate()) {
-              if (widget.argument.id != null) {
-                vm.updatePassword.call(
-                  title: titleController.text,
-                  subTitle: subTitleController.text,
-                  websiteUrl: websiteUrlController.text,
-                  userName: userNameController.text,
-                  password: passwordController.text,
-                  note: noteController.text,
-                  targetGroup: selectedGroup,
-                  dynamicDataField: jsonEncode(PasswordDynamicFieldList(dynamicField: dynamicFieldList).toJson()),
-                );
-              } else {
-                vm.createPassword.call(
-                  title: titleController.text,
-                  subTitle: subTitleController.text,
-                  websiteUrl: websiteUrlController.text,
-                  userName: userNameController.text,
-                  password: passwordController.text,
-                  note: noteController.text,
-                  targetGroup: selectedGroup,
-                  dynamicDataField: jsonEncode(PasswordDynamicFieldList(dynamicField: dynamicFieldList).toJson()),
-                );
-              }
-            }
-          },
-          child: Container(
-            height: 65 + MediaQuery.paddingOf(context).bottom,
-            padding: EdgeInsets.only(bottom: MediaQuery.paddingOf(context).bottom),
-            color: Colors.transparent,
-            alignment: Alignment.center,
-            child: Text(
-              vm.password != null ? getTranslated('update', context) : getTranslated('create', context),
-              style: TextStyles.getTitleWhiteText(24),
-            ),
-          ),
-        ),
-      ),
+  Widget getCreateUpdateButton(CreateUpdatePasswordViewModel vm) {
+    return CommonBottomButton(
+      title: vm.password != null ? getTranslated('update', context) : getTranslated('create', context),
+      onItemTap: () {
+        if (_formKey.currentState!.validate()) {
+          if (widget.argument.id != null) {
+            vm.updatePassword.call(
+              title: titleController.text,
+              subTitle: subTitleController.text,
+              websiteUrl: websiteUrlController.text,
+              userName: userNameController.text,
+              password: passwordController.text,
+              note: noteController.text,
+              targetGroup: selectedGroup,
+              dynamicDataField: jsonEncode(PasswordDynamicFieldList(dynamicField: dynamicFieldList).toJson()),
+            );
+          } else {
+            vm.createPassword.call(
+              title: titleController.text,
+              subTitle: subTitleController.text,
+              websiteUrl: websiteUrlController.text,
+              userName: userNameController.text,
+              password: passwordController.text,
+              note: noteController.text,
+              targetGroup: selectedGroup,
+              dynamicDataField: jsonEncode(PasswordDynamicFieldList(dynamicField: dynamicFieldList).toJson()),
+            );
+          }
+        }
+      },
     );
   }
 
@@ -418,27 +401,12 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
-          child: TextFormField(
+          child: CommonTextField(
             controller: controller,
-            validator: (text) => null,
-            style: TextStyles.getTitleBlueText(18),
-            decoration: InputDecoration(
-              fillColor: AppColors.mWhite,
-              filled: true,
-              hintText: getTranslated("note", context),
-              hintStyle: TextStyles.getTitleBlueText(18),
-              contentPadding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
-              errorStyle: TextStyles.getTitleOrangeText(20),
-              border: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
+            hintText: getTranslated("note", context),
             maxLines: 5,
             textInputAction: TextInputAction.done,
-            onTapOutside: (pointerDown) {
-              FocusScope.of(context).unfocus();
-            },
+            isMandatory: false,
           ),
         ),
       ],
@@ -465,90 +433,61 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
           child: Row(
             children: [
               Expanded(
-                child: TextFormField(
+                child: CommonTextField(
                   controller: controller,
-                  validator: (text) {
-                    if (text == null || text.isEmpty) {
-                      return getTranslated("field_can't_be_empty", context);
-                    }
-                    return null;
-                  },
-                  style: TextStyles.getTitleBlueText(18),
-                  decoration: InputDecoration(
-                    fillColor: AppColors.mWhite,
-                    filled: true,
-                    hintText: getTranslated("password", context),
-                    hintStyle: TextStyles.getTitleBlueText(18),
-                    contentPadding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
-                    errorStyle: TextStyles.getTitleOrangeText(20),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    suffixIcon: Container(
-                      alignment: Alignment.center,
-                      height: 25,
-                      width: 25,
-                      margin: const EdgeInsets.only(right: 5),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(6),
-                        child: Material(
-                          color: AppColors.mWhite,
-                          child: InkWell(
-                            onTap: () {
-                              showPassword = !showPassword;
-                              setState(() {});
-                            },
-                            splashColor: AppColors.secondaryColor.withValues(alpha: 0.2),
-                            child: Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: showPassword
-                                  ? const Icon(
-                                      FontAwesome5.eye,
-                                      color: AppColors.primaryColor,
-                                      size: 17,
-                                    )
-                                  : const Icon(
-                                      FontAwesome5.eye_slash,
-                                      color: AppColors.primaryColor,
-                                      size: 17,
-                                    ),
-                            ),
+                  hintText: getTranslated("password", context),
+                  suffixIcon: Container(
+                    alignment: Alignment.center,
+                    height: 25,
+                    width: 25,
+                    margin: const EdgeInsets.only(right: 5),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(6),
+                      child: Material(
+                        color: AppColors.mWhite,
+                        child: InkWell(
+                          onTap: () {
+                            showPassword = !showPassword;
+                            setState(() {});
+                          },
+                          splashColor: AppColors.secondaryColor.withValues(alpha: 0.2),
+                          child: Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: showPassword
+                                ? const Icon(
+                                    FontAwesome5.eye,
+                                    color: AppColors.primaryColor,
+                                    size: 17,
+                                  )
+                                : const Icon(
+                                    FontAwesome5.eye_slash,
+                                    color: AppColors.primaryColor,
+                                    size: 17,
+                                  ),
                           ),
                         ),
                       ),
                     ),
                   ),
                   obscureText: !showPassword,
+                  maxLines: 1,
                   textInputAction: TextInputAction.next,
-                  onTapOutside: (pointerDown) {
-                    FocusScope.of(context).unfocus();
-                  },
                 ),
               ),
               const SizedBox(width: 10),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Material(
-                  color: AppColors.mWhite,
-                  child: InkWell(
-                    splashColor: AppColors.mBlack.withValues(alpha: 0.2),
-                    onTap: () async {
-                      String tempPassword = await Utility.generatePasswordDialog();
-                      if (tempPassword.isNotEmpty) {
-                        passwordController.text = tempPassword;
-                        setState(() {});
-                      }
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
-                      child: Icon(
-                        Icons.alt_route,
-                        color: AppColors.primaryColor,
-                        size: 25,
-                      ),
-                    ),
-                  ),
+              CommonAppBarActionIconButton(
+                onItemTap: () async {
+                  String tempPassword = await Utility.generatePasswordDialog();
+                  if (tempPassword.isNotEmpty) {
+                    passwordController.text = tempPassword;
+                    setState(() {});
+                  }
+                },
+                iconPadding: EdgeInsets.fromLTRB(14, 14, 14, 14),
+                icon: Icon(
+                  Icons.alt_route,
+                  color: AppColors.primaryColor,
+                  size: 25,
                 ),
               ),
             ],
@@ -575,31 +514,10 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
-          child: TextFormField(
+          child: CommonTextField(
             controller: controller,
-            validator: (text) {
-              if (text == null || text.isEmpty) {
-                return getTranslated("field_can't_be_empty", context);
-              }
-              return null;
-            },
-            style: TextStyles.getTitleBlueText(18),
-            decoration: InputDecoration(
-              fillColor: AppColors.mWhite,
-              filled: true,
-              hintText: getTranslated("email_or_username", context),
-              hintStyle: TextStyles.getTitleBlueText(18),
-              contentPadding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
-              errorStyle: TextStyles.getTitleOrangeText(20),
-              border: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
+            hintText: getTranslated("email_or_username", context),
             textInputAction: TextInputAction.next,
-            onTapOutside: (pointerDown) {
-              FocusScope.of(context).unfocus();
-            },
           ),
         ),
       ],
@@ -623,26 +541,11 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
-          child: TextFormField(
+          child: CommonTextField(
             controller: controller,
-            validator: (text) => null,
-            style: TextStyles.getTitleBlueText(18),
-            decoration: InputDecoration(
-              fillColor: AppColors.mWhite,
-              filled: true,
-              hintText: getTranslated("subtitle", context),
-              hintStyle: TextStyles.getTitleBlueText(18),
-              contentPadding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
-              errorStyle: TextStyles.getTitleOrangeText(20),
-              border: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
+            hintText: getTranslated("subtitle", context),
+            isMandatory: false,
             textInputAction: TextInputAction.next,
-            onTapOutside: (pointerDown) {
-              FocusScope.of(context).unfocus();
-            },
           ),
         ),
       ],
@@ -666,33 +569,18 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
-          child: TextFormField(
+          child: CommonTextField(
             controller: controller,
-            validator: (text) => null,
-            style: TextStyles.getTitleBlueText(18),
-            decoration: InputDecoration(
-              fillColor: AppColors.mWhite,
-              filled: true,
-              hintText: getTranslated("website_url", context),
-              hintStyle: TextStyles.getTitleBlueText(18),
-              contentPadding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
-              errorStyle: TextStyles.getTitleOrangeText(20),
-              border: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
+            hintText: getTranslated("website_url", context),
             textInputAction: TextInputAction.next,
-            onTapOutside: (pointerDown) {
-              FocusScope.of(context).unfocus();
-            },
+            isMandatory: false,
           ),
         ),
       ],
     );
   }
 
-  Column getTitleField(BuildContext context, TextEditingController controller) {
+  Column getTitleField(BuildContext context, TextEditingController controller, int? passwordId) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -700,40 +588,27 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 20, 0, 10),
-              child: Text(
-                "${getTranslated('title', context)}:",
-                style: TextStyles.getTitleWhiteText(20),
-              ),
+              child: passwordId != null
+                  ? Hero(
+                      tag: "${AppConstants.passwordHero}$passwordId",
+                      child: Text(
+                        "${getTranslated('title', context)}:",
+                        style: TextStyles.getTitleWhiteText(20),
+                      ),
+                    )
+                  : Text(
+                      "${getTranslated('title', context)}:",
+                      style: TextStyles.getTitleWhiteText(20),
+                    ),
             ),
           ],
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
-          child: TextFormField(
+          child: CommonTextField(
             controller: controller,
-            validator: (text) {
-              if (text == null || text.isEmpty) {
-                return getTranslated("field_can't_be_empty", context);
-              }
-              return null;
-            },
-            style: TextStyles.getTitleBlueText(18),
-            decoration: InputDecoration(
-              fillColor: AppColors.mWhite,
-              filled: true,
-              hintText: getTranslated("title", context),
-              hintStyle: TextStyles.getTitleBlueText(18),
-              contentPadding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
-              errorStyle: TextStyles.getTitleOrangeText(20),
-              border: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
+            hintText: getTranslated("title", context),
             textInputAction: TextInputAction.next,
-            onTapOutside: (pointerDown) {
-              FocusScope.of(context).unfocus();
-            },
           ),
         ),
       ],
@@ -749,57 +624,47 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
             mainAxisSize: MainAxisSize.min,
             children: [
               const SizedBox(width: 20),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Material(
-                  color: AppColors.mWhite,
-                  child: InkWell(
-                    splashColor: AppColors.mBlack.withValues(alpha: 0.2),
-                    onTap: () {
-                      vm.onBackPress.call();
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
-                      child: Icon(
-                        Icons.arrow_back,
-                        color: AppColors.primaryColor,
-                        size: 25,
-                      ),
-                    ),
-                  ),
+              CommonAppBarActionIconButton(
+                onItemTap: () {
+                  vm.onBackPress.call();
+                },
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: AppColors.primaryColor,
+                  size: 25,
                 ),
               ),
             ],
           ),
         ),
-        Text(
-          vm.password != null ? getTranslated("update_password", context) : getTranslated("create_password", context),
-          style: TextStyles.getTitleWhiteText(25),
-        ),
+        vm.password == null
+            ? Hero(
+                tag: AppConstants.passwordHero,
+                child: Text(
+                  getTranslated("create_password", context),
+                  style: TextStyles.getTitleWhiteText(25),
+                ),
+              )
+            : Text(
+                getTranslated("update_password", context),
+                style: TextStyles.getTitleWhiteText(25),
+              ),
         vm.password != null
             ? Expanded(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Material(
-                        color: AppColors.secondaryMaterialColor[700],
-                        child: InkWell(
-                          splashColor: AppColors.mWhite.withValues(alpha: 0.2),
-                          onTap: () {
-                            vm.deletePassword.call();
-                          },
-                          child: const Padding(
-                            padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
-                            child: Icon(
-                              Icons.delete,
-                              color: AppColors.mWhite,
-                              size: 25,
-                            ),
-                          ),
-                        ),
+                    CommonAppBarActionIconButton(
+                      onItemTap: () {
+                        vm.deletePassword.call();
+                      },
+                      buttonColor: AppColors.secondaryMaterialColor[700],
+                      buttonSplashColor: AppColors.mWhite.withValues(alpha: 0.2),
+                      icon: Icon(
+                        Icons.delete,
+                        color: AppColors.mWhite,
+                        size: 25,
                       ),
                     ),
                     const SizedBox(width: 20),

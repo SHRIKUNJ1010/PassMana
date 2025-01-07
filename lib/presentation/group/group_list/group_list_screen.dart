@@ -86,7 +86,7 @@ class GroupListScreen extends StatelessWidget {
               width: width - 40,
               child: Center(
                 child: Text(
-                  getTranslated('no_passwords_found', context),
+                  getTranslated('no_groups_found', context),
                   style: TextStyles.getTitleWhiteText(20),
                 ),
               ),

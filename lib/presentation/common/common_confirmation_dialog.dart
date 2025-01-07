@@ -17,7 +17,7 @@ class CommonConfirmationDialog extends StatelessWidget {
     super.key,
     this.title = '',
     this.message = '',
-    this.circularBorderRadius = 10,
+    this.circularBorderRadius = 3,
     this.bgColor = Colors.white,
     this.positiveBtnText = 'Yes',
     this.negativeBtnText = 'No',

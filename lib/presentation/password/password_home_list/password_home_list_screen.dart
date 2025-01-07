@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/localization/app_localization.dart';
+import 'package:passmana/presentation/common/common_app_bar_action_icon_button.dart';
 import 'package:passmana/presentation/common/custom_app_bar.dart';
 import 'package:passmana/presentation/password/password_common_list_tile.dart';
 import 'package:passmana/presentation/password/password_home_list/home_group_grid_tile.dart';
@@ -99,24 +100,14 @@ class PasswordHomeListScreen extends StatelessWidget {
           style: TextStyles.getTitleWhiteText(28),
         ),
         const Spacer(),
-        ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: Material(
-            color: AppColors.mWhite,
-            child: InkWell(
-              splashColor: AppColors.mBlack.withValues(alpha: 0.2),
-              onTap: () {
-                vm.onGeneratePasswordTap.call();
-              },
-              child: const Padding(
-                padding: EdgeInsets.fromLTRB(12, 10, 12, 10),
-                child: Icon(
-                  Icons.alt_route,
-                  color: AppColors.primaryColor,
-                  size: 25,
-                ),
-              ),
-            ),
+        CommonAppBarActionIconButton(
+          onItemTap: () {
+            vm.onGeneratePasswordTap.call();
+          },
+          icon: Icon(
+            Icons.alt_route,
+            color: AppColors.primaryColor,
+            size: 25,
           ),
         ),
         const SizedBox(width: 20),

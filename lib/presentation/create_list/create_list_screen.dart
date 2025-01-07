@@ -95,6 +95,7 @@ class CreateListScreen extends StatelessWidget {
                       vm.onPasswordItemTap.call();
                     },
                     title: getTranslated("password", context),
+                    heroTag: AppConstants.passwordHero,
                     icon: Icon(
                       Icons.lock,
                       color: AppColors.mBlack.withValues(alpha: 0.6),
@@ -108,6 +109,7 @@ class CreateListScreen extends StatelessWidget {
                       vm.onGroupItemTap.call();
                     },
                     title: getTranslated("group", context),
+                    heroTag: AppConstants.groupHero,
                     icon: Icon(
                       Icons.people,
                       color: AppColors.mBlack.withValues(alpha: 0.6),
@@ -127,6 +129,7 @@ class CreateListScreen extends StatelessWidget {
                       vm.onCardItemTap.call();
                     },
                     title: getTranslated("card", context),
+                    heroTag: AppConstants.cardHero,
                     icon: Icon(
                       Icons.credit_card,
                       color: AppColors.mBlack.withValues(alpha: 0.6),
@@ -140,6 +143,7 @@ class CreateListScreen extends StatelessWidget {
                       vm.onSecretNoteItemTap.call();
                     },
                     title: getTranslated("secret_note", context),
+                    heroTag: AppConstants.secretNoteHero,
                     icon: Icon(
                       Icons.note_alt,
                       color: AppColors.mBlack.withValues(alpha: 0.6),

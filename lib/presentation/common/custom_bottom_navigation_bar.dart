@@ -36,15 +36,15 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
     return Stack(
       children: [
         Container(
-          height: 90 + MediaQuery.paddingOf(context).bottom,
+          height: 95 + MediaQuery.paddingOf(context).bottom,
           alignment: Alignment.bottomCenter,
           child: Container(
-            height: 60 + MediaQuery.paddingOf(context).bottom,
+            height: 65 + MediaQuery.paddingOf(context).bottom,
             padding: EdgeInsets.only(bottom: MediaQuery.paddingOf(context).bottom),
             decoration: const BoxDecoration(
               color: AppColors.primaryColor,
               borderRadius: BorderRadius.vertical(
-                top: Radius.circular(30),
+                top: Radius.circular(12),
               ),
             ),
           ),

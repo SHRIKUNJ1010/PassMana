@@ -14,8 +14,12 @@ import 'package:passmana/localization/app_localization.dart';
 import 'package:passmana/model/card_security_grid_number_list.dart';
 import 'package:passmana/presentation/card/create_update_card/create_update_card_view_model.dart';
 import 'package:passmana/presentation/card/create_update_card/security_grid_number_list_item_widget.dart';
+import 'package:passmana/presentation/common/common_app_bar_action_icon_button.dart';
+import 'package:passmana/presentation/common/common_bottom_button.dart';
+import 'package:passmana/presentation/common/common_text_field.dart';
 import 'package:passmana/presentation/common/custom_app_bar.dart';
 import 'package:passmana/utility/color.dart';
+import 'package:passmana/utility/constants.dart';
 import 'package:passmana/utility/text_utility/card_text_field_formatter.dart';
 import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:passmana/utility/utility.dart';
@@ -99,7 +103,7 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
                         child: ListView(
                           shrinkWrap: true,
                           children: [
-                            getBankAndCardName(context, bankAndCardNameController),
+                            getBankAndCardName(context, bankAndCardNameController, vm.card?.id),
                             getCardNumber(context, cardNumberController),
                             getCardHolderName(context, cardHolderNameController),
                             getCvv(context, cvvController),
@@ -141,10 +145,10 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
                             Padding(
                               padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                               child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
+                                borderRadius: BorderRadius.circular(3),
                                 child: Material(
                                   color: AppColors.mWhite,
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(3),
                                   child: Container(
                                     height: 45,
                                     color: Colors.transparent,
@@ -197,7 +201,7 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
     );
   }
 
-  Column getBankAndCardName(BuildContext context, TextEditingController controller) {
+  Column getBankAndCardName(BuildContext context, TextEditingController controller, int? cardId) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -205,40 +209,27 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 20, 0, 10),
-              child: Text(
-                "${getTranslated('bank_and_card_name', context)}:",
-                style: TextStyles.getTitleWhiteText(20),
-              ),
+              child: cardId != null
+                  ? Hero(
+                      tag: "${AppConstants.cardHero}$cardId",
+                      child: Text(
+                        "${getTranslated('bank_and_card_name', context)}:",
+                        style: TextStyles.getTitleWhiteText(20),
+                      ),
+                    )
+                  : Text(
+                      "${getTranslated('bank_and_card_name', context)}:",
+                      style: TextStyles.getTitleWhiteText(20),
+                    ),
             ),
           ],
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-          child: TextFormField(
+          child: CommonTextField(
             controller: controller,
-            validator: (text) {
-              if (text == null || text.isEmpty) {
-                return getTranslated("field_can't_be_empty", context);
-              }
-              return null;
-            },
-            style: TextStyles.getTitleBlueText(18),
-            decoration: InputDecoration(
-              fillColor: AppColors.mWhite,
-              filled: true,
-              hintText: getTranslated("bank_and_card_name", context),
-              hintStyle: TextStyles.getTitleBlueText(18),
-              contentPadding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
-              errorStyle: TextStyles.getTitleOrangeText(20),
-              border: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
+            hintText: getTranslated("bank_and_card_name", context),
             textInputAction: TextInputAction.next,
-            onTapOutside: (pointerDown) {
-              FocusScope.of(context).unfocus();
-            },
           ),
         ),
       ],
@@ -262,36 +253,15 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-          child: TextFormField(
+          child: CommonTextField(
             controller: controller,
-            validator: (text) {
-              if (text == null || text.isEmpty) {
-                return getTranslated("field_can't_be_empty", context);
-              }
-              return null;
-            },
-            style: TextStyles.getTitleBlueText(18),
-            decoration: InputDecoration(
-              fillColor: AppColors.mWhite,
-              filled: true,
-              hintText: getTranslated("card_number", context),
-              hintStyle: TextStyles.getTitleBlueText(18),
-              contentPadding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
-              errorStyle: TextStyles.getTitleOrangeText(20),
-              border: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
+            hintText: getTranslated("card_number", context),
+            keyboardType: TextInputType.number,
+            textInputAction: TextInputAction.next,
             inputFormatters: [
               FilteringTextInputFormatter.digitsOnly,
               CardNumberFormatter(),
             ],
-            keyboardType: TextInputType.number,
-            textInputAction: TextInputAction.next,
-            onTapOutside: (pointerDown) {
-              FocusScope.of(context).unfocus();
-            },
           ),
         ),
       ],
@@ -315,31 +285,10 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-          child: TextFormField(
+          child: CommonTextField(
             controller: controller,
-            validator: (text) {
-              if (text == null || text.isEmpty) {
-                return getTranslated("field_can't_be_empty", context);
-              }
-              return null;
-            },
-            style: TextStyles.getTitleBlueText(18),
-            decoration: InputDecoration(
-              fillColor: AppColors.mWhite,
-              filled: true,
-              hintText: getTranslated("card_holder_name", context),
-              hintStyle: TextStyles.getTitleBlueText(18),
-              contentPadding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
-              errorStyle: TextStyles.getTitleOrangeText(20),
-              border: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
+            hintText: getTranslated("card_holder_name", context),
             textInputAction: TextInputAction.next,
-            onTapOutside: (pointerDown) {
-              FocusScope.of(context).unfocus();
-            },
           ),
         ),
       ],
@@ -363,35 +312,14 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-          child: TextFormField(
+          child: CommonTextField(
             controller: controller,
-            validator: (text) {
-              if (text == null || text.isEmpty) {
-                return getTranslated("field_can't_be_empty", context);
-              }
-              return null;
-            },
-            style: TextStyles.getTitleBlueText(18),
-            decoration: InputDecoration(
-              fillColor: AppColors.mWhite,
-              filled: true,
-              hintText: getTranslated("cvv", context),
-              hintStyle: TextStyles.getTitleBlueText(18),
-              contentPadding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
-              errorStyle: TextStyles.getTitleOrangeText(20),
-              border: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
+            hintText: getTranslated("cvv", context),
             inputFormatters: [
               FilteringTextInputFormatter.digitsOnly,
             ],
             keyboardType: TextInputType.number,
             textInputAction: TextInputAction.next,
-            onTapOutside: (pointerDown) {
-              FocusScope.of(context).unfocus();
-            },
           ),
         ),
       ],
@@ -415,31 +343,10 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-          child: TextFormField(
+          child: CommonTextField(
             controller: controller,
-            validator: (text) {
-              if (text == null || text.isEmpty) {
-                return getTranslated("field_can't_be_empty", context);
-              }
-              return null;
-            },
-            style: TextStyles.getTitleBlueText(18),
-            decoration: InputDecoration(
-              fillColor: AppColors.mWhite,
-              filled: true,
-              hintText: getTranslated("expiry_date", context),
-              hintStyle: TextStyles.getTitleBlueText(18),
-              contentPadding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
-              errorStyle: TextStyles.getTitleOrangeText(20),
-              border: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
+            hintText: getTranslated("expiry_date", context),
             textInputAction: TextInputAction.next,
-            onTapOutside: (pointerDown) {
-              FocusScope.of(context).unfocus();
-            },
           ),
         ),
       ],
@@ -463,55 +370,37 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
-          child: TextFormField(
+          child: CommonTextField(
             controller: controller,
-            validator: (text) {
-              if (text == null || text.isEmpty) {
-                return getTranslated("field_can't_be_empty", context);
-              }
-              return null;
-            },
-            style: TextStyles.getTitleBlueText(18),
-            decoration: InputDecoration(
-              fillColor: AppColors.mWhite,
-              filled: true,
-              hintText: getTranslated("card_pin", context),
-              hintStyle: TextStyles.getTitleBlueText(18),
-              contentPadding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
-              errorStyle: TextStyles.getTitleOrangeText(20),
-              border: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              suffixIcon: Container(
-                alignment: Alignment.center,
-                height: 25,
-                width: 25,
-                margin: const EdgeInsets.only(right: 5),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(6),
-                  child: Material(
-                    color: AppColors.mWhite,
-                    child: InkWell(
-                      onTap: () {
-                        showCardPin = !showCardPin;
-                        setState(() {});
-                      },
-                      splashColor: AppColors.secondaryColor.withValues(alpha: 0.2),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: showCardPin
-                            ? const Icon(
-                                FontAwesome5.eye,
-                                color: AppColors.primaryColor,
-                                size: 17,
-                              )
-                            : const Icon(
-                                FontAwesome5.eye_slash,
-                                color: AppColors.primaryColor,
-                                size: 17,
-                              ),
-                      ),
+            hintText: getTranslated("card_pin", context),
+            suffixIcon: Container(
+              alignment: Alignment.center,
+              height: 25,
+              width: 25,
+              margin: const EdgeInsets.only(right: 5),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(6),
+                child: Material(
+                  color: AppColors.mWhite,
+                  child: InkWell(
+                    onTap: () {
+                      showCardPin = !showCardPin;
+                      setState(() {});
+                    },
+                    splashColor: AppColors.secondaryColor.withValues(alpha: 0.2),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: showCardPin
+                          ? const Icon(
+                              FontAwesome5.eye,
+                              color: AppColors.primaryColor,
+                              size: 17,
+                            )
+                          : const Icon(
+                              FontAwesome5.eye_slash,
+                              color: AppColors.primaryColor,
+                              size: 17,
+                            ),
                     ),
                   ),
                 ),
@@ -522,65 +411,42 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
             ],
             keyboardType: TextInputType.number,
             obscureText: !showCardPin,
+            maxLines: 1,
             textInputAction: TextInputAction.next,
-            onTapOutside: (pointerDown) {
-              FocusScope.of(context).unfocus();
-            },
           ),
         ),
       ],
     );
   }
 
-  ClipRRect getCreateUpdateButton(CreateUpdateCardViewModel vm, BuildContext context) {
-    return ClipRRect(
-      borderRadius: const BorderRadius.vertical(
-        top: Radius.circular(30),
-      ),
-      child: Material(
-        color: AppColors.primaryColor,
-        borderRadius: const BorderRadius.vertical(
-          top: Radius.circular(30),
-        ),
-        child: InkWell(
-          splashColor: AppColors.mWhite.withValues(alpha: 0.2),
-          onTap: () {
-            if (_formKey.currentState!.validate()) {
-              if (widget.id != null) {
-                vm.updateCard.call(
-                  bankAndCardName: bankAndCardNameController.text,
-                  cardNumber: cardNumberController.text.replaceAll(' ', ''),
-                  cardHolderName: cardHolderNameController.text,
-                  cvv: cvvController.text,
-                  expiryDate: expiryDateController.text,
-                  cardPin: cardPinController.text,
-                  securityGridNumber: jsonEncode(CardSecurityGridNumberList(securityGridNumerList: securityGridNumberList).toJson()),
-                );
-              } else {
-                vm.createCard.call(
-                  bankAndCardName: bankAndCardNameController.text,
-                  cardNumber: cardNumberController.text.replaceAll(' ', ''),
-                  cardHolderName: cardHolderNameController.text,
-                  cvv: cvvController.text,
-                  expiryDate: expiryDateController.text,
-                  cardPin: cardPinController.text,
-                  securityGridNumber: jsonEncode(CardSecurityGridNumberList(securityGridNumerList: securityGridNumberList).toJson()),
-                );
-              }
-            }
-          },
-          child: Container(
-            height: 65 + MediaQuery.paddingOf(context).bottom,
-            padding: EdgeInsets.only(bottom: MediaQuery.paddingOf(context).bottom),
-            color: Colors.transparent,
-            alignment: Alignment.center,
-            child: Text(
-              vm.card != null ? getTranslated('update', context) : getTranslated('create', context),
-              style: TextStyles.getTitleWhiteText(24),
-            ),
-          ),
-        ),
-      ),
+  Widget getCreateUpdateButton(CreateUpdateCardViewModel vm, BuildContext context) {
+    return CommonBottomButton(
+      title: vm.card != null ? getTranslated('update', context) : getTranslated('create', context),
+      onItemTap: () {
+        if (_formKey.currentState!.validate()) {
+          if (widget.id != null) {
+            vm.updateCard.call(
+              bankAndCardName: bankAndCardNameController.text,
+              cardNumber: cardNumberController.text.replaceAll(' ', ''),
+              cardHolderName: cardHolderNameController.text,
+              cvv: cvvController.text,
+              expiryDate: expiryDateController.text,
+              cardPin: cardPinController.text,
+              securityGridNumber: jsonEncode(CardSecurityGridNumberList(securityGridNumerList: securityGridNumberList).toJson()),
+            );
+          } else {
+            vm.createCard.call(
+              bankAndCardName: bankAndCardNameController.text,
+              cardNumber: cardNumberController.text.replaceAll(' ', ''),
+              cardHolderName: cardHolderNameController.text,
+              cvv: cvvController.text,
+              expiryDate: expiryDateController.text,
+              cardPin: cardPinController.text,
+              securityGridNumber: jsonEncode(CardSecurityGridNumberList(securityGridNumerList: securityGridNumberList).toJson()),
+            );
+          }
+        }
+      },
     );
   }
 
@@ -593,57 +459,47 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               const SizedBox(width: 20),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Material(
-                  color: AppColors.mWhite,
-                  child: InkWell(
-                    splashColor: AppColors.mBlack.withValues(alpha: 0.2),
-                    onTap: () {
-                      vm.onBackPress.call();
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
-                      child: Icon(
-                        Icons.arrow_back,
-                        color: AppColors.primaryColor,
-                        size: 25,
-                      ),
-                    ),
-                  ),
+              CommonAppBarActionIconButton(
+                onItemTap: () {
+                  vm.onBackPress.call();
+                },
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: AppColors.primaryColor,
+                  size: 25,
                 ),
               ),
             ],
           ),
         ),
-        Text(
-          vm.card != null ? getTranslated("update_card", context) : getTranslated("create_card", context),
-          style: TextStyles.getTitleWhiteText(25),
-        ),
+        vm.card == null
+            ? Hero(
+                tag: AppConstants.cardHero,
+                child: Text(
+                  getTranslated("create_card", context),
+                  style: TextStyles.getTitleWhiteText(25),
+                ),
+              )
+            : Text(
+                getTranslated("update_card", context),
+                style: TextStyles.getTitleWhiteText(25),
+              ),
         vm.card != null
             ? Expanded(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Material(
-                        color: AppColors.secondaryMaterialColor[700],
-                        child: InkWell(
-                          splashColor: AppColors.mWhite.withValues(alpha: 0.2),
-                          onTap: () {
-                            vm.deleteCard.call();
-                          },
-                          child: const Padding(
-                            padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
-                            child: Icon(
-                              Icons.delete,
-                              color: AppColors.mWhite,
-                              size: 25,
-                            ),
-                          ),
-                        ),
+                    CommonAppBarActionIconButton(
+                      onItemTap: () {
+                        vm.deleteCard.call();
+                      },
+                      buttonColor: AppColors.secondaryMaterialColor[700],
+                      buttonSplashColor: AppColors.mWhite.withValues(alpha: 0.2),
+                      icon: Icon(
+                        Icons.delete,
+                        color: AppColors.mWhite,
+                        size: 25,
                       ),
                     ),
                     const SizedBox(width: 20),

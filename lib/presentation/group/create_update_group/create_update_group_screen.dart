@@ -7,9 +7,13 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/domain_redux/group/group_selector.dart';
 import 'package:passmana/localization/app_localization.dart';
+import 'package:passmana/presentation/common/common_app_bar_action_icon_button.dart';
+import 'package:passmana/presentation/common/common_bottom_button.dart';
+import 'package:passmana/presentation/common/common_text_field.dart';
 import 'package:passmana/presentation/common/custom_app_bar.dart';
 import 'package:passmana/presentation/group/create_update_group/create_update_group_view_model.dart';
 import 'package:passmana/utility/color.dart';
+import 'package:passmana/utility/constants.dart';
 import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:passmana/utility/utility.dart';
 import 'package:redux/redux.dart';
@@ -69,7 +73,7 @@ class _CreateUpdateGroupScreenState extends State<CreateUpdateGroupScreen> {
                         child: ListView(
                           shrinkWrap: true,
                           children: [
-                            getGroupNameField(context, groupNameController),
+                            getGroupNameField(context, groupNameController, vm.group?.id),
                             getDescriptionField(context, descriptionController),
                             const SizedBox(height: 80),
                           ],
@@ -92,7 +96,7 @@ class _CreateUpdateGroupScreenState extends State<CreateUpdateGroupScreen> {
     );
   }
 
-  Column getGroupNameField(BuildContext context, TextEditingController controller) {
+  Column getGroupNameField(BuildContext context, TextEditingController controller, int? groupId) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -100,40 +104,27 @@ class _CreateUpdateGroupScreenState extends State<CreateUpdateGroupScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 20, 0, 10),
-              child: Text(
-                "${getTranslated('group_name', context)}:",
-                style: TextStyles.getTitleWhiteText(20),
-              ),
+              child: groupId != null
+                  ? Hero(
+                      tag: "${AppConstants.groupHero}$groupId",
+                      child: Text(
+                        "${getTranslated('group_name', context)}:",
+                        style: TextStyles.getTitleWhiteText(20),
+                      ),
+                    )
+                  : Text(
+                      "${getTranslated('group_name', context)}:",
+                      style: TextStyles.getTitleWhiteText(20),
+                    ),
             ),
           ],
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
-          child: TextFormField(
+          child: CommonTextField(
             controller: controller,
-            validator: (text) {
-              if (text == null || text.isEmpty) {
-                return getTranslated("field_can't_be_empty", context);
-              }
-              return null;
-            },
-            style: TextStyles.getTitleBlueText(18),
-            decoration: InputDecoration(
-              fillColor: AppColors.mWhite,
-              filled: true,
-              hintText: getTranslated("group_name", context),
-              hintStyle: TextStyles.getTitleBlueText(18),
-              contentPadding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
-              errorStyle: TextStyles.getTitleOrangeText(20),
-              border: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
+            hintText: getTranslated("group_name", context),
             textInputAction: TextInputAction.next,
-            onTapOutside: (pointerDown) {
-              FocusScope.of(context).unfocus();
-            },
           ),
         ),
       ],
@@ -157,72 +148,36 @@ class _CreateUpdateGroupScreenState extends State<CreateUpdateGroupScreen> {
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
-          child: TextFormField(
+          child: CommonTextField(
             controller: controller,
-            validator: (text) => null,
-            style: TextStyles.getTitleBlueText(18),
-            decoration: InputDecoration(
-              fillColor: AppColors.mWhite,
-              filled: true,
-              hintText: getTranslated("description", context),
-              hintStyle: TextStyles.getTitleBlueText(18),
-              contentPadding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
-              errorStyle: TextStyles.getTitleOrangeText(20),
-              border: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-            maxLines: 5,
+            hintText: getTranslated("description", context),
             textInputAction: TextInputAction.done,
-            onTapOutside: (pointerDown) {
-              FocusScope.of(context).unfocus();
-            },
+            isMandatory: false,
+            maxLines: 5,
           ),
         ),
       ],
     );
   }
 
-  ClipRRect getCreateUpdateButton(CreateUpdateGroupViewModel vm, BuildContext context) {
-    return ClipRRect(
-      borderRadius: const BorderRadius.vertical(
-        top: Radius.circular(30),
-      ),
-      child: Material(
-        color: AppColors.primaryColor,
-        borderRadius: const BorderRadius.vertical(
-          top: Radius.circular(30),
-        ),
-        child: InkWell(
-          splashColor: AppColors.mWhite.withValues(alpha: 0.2),
-          onTap: () {
-            if (_formKey.currentState!.validate()) {
-              if (widget.id != null) {
-                vm.updateGroup.call(
-                  groupName: groupNameController.text,
-                  description: descriptionController.text,
-                );
-              } else {
-                vm.createGroup.call(
-                  groupName: groupNameController.text,
-                  description: descriptionController.text,
-                );
-              }
-            }
-          },
-          child: Container(
-            height: 65 + MediaQuery.paddingOf(context).bottom,
-            padding: EdgeInsets.only(bottom: MediaQuery.paddingOf(context).bottom),
-            color: Colors.transparent,
-            alignment: Alignment.center,
-            child: Text(
-              vm.group != null ? getTranslated('update', context) : getTranslated('create', context),
-              style: TextStyles.getTitleWhiteText(24),
-            ),
-          ),
-        ),
-      ),
+  Widget getCreateUpdateButton(CreateUpdateGroupViewModel vm, BuildContext context) {
+    return CommonBottomButton(
+      title: vm.group != null ? getTranslated('update', context) : getTranslated('create', context),
+      onItemTap: () {
+        if (_formKey.currentState!.validate()) {
+          if (widget.id != null) {
+            vm.updateGroup.call(
+              groupName: groupNameController.text,
+              description: descriptionController.text,
+            );
+          } else {
+            vm.createGroup.call(
+              groupName: groupNameController.text,
+              description: descriptionController.text,
+            );
+          }
+        }
+      },
     );
   }
 
@@ -235,57 +190,47 @@ class _CreateUpdateGroupScreenState extends State<CreateUpdateGroupScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               const SizedBox(width: 20),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Material(
-                  color: AppColors.mWhite,
-                  child: InkWell(
-                    splashColor: AppColors.mBlack.withValues(alpha: 0.2),
-                    onTap: () {
-                      vm.onBackPress.call();
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
-                      child: Icon(
-                        Icons.arrow_back,
-                        color: AppColors.primaryColor,
-                        size: 25,
-                      ),
-                    ),
-                  ),
+              CommonAppBarActionIconButton(
+                onItemTap: () {
+                  vm.onBackPress.call();
+                },
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: AppColors.primaryColor,
+                  size: 25,
                 ),
               ),
             ],
           ),
         ),
-        Text(
-          vm.group != null ? getTranslated("update_group", context) : getTranslated("create_group", context),
-          style: TextStyles.getTitleWhiteText(25),
-        ),
+        vm.group == null
+            ? Hero(
+                tag: AppConstants.groupHero,
+                child: Text(
+                  getTranslated("create_group", context),
+                  style: TextStyles.getTitleWhiteText(25),
+                ),
+              )
+            : Text(
+                getTranslated("update_group", context),
+                style: TextStyles.getTitleWhiteText(25),
+              ),
         vm.group != null
             ? Expanded(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Material(
-                        color: AppColors.secondaryMaterialColor[700],
-                        child: InkWell(
-                          splashColor: AppColors.mWhite.withValues(alpha: 0.2),
-                          onTap: () {
-                            vm.deleteGroup.call();
-                          },
-                          child: const Padding(
-                            padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
-                            child: Icon(
-                              Icons.delete,
-                              color: AppColors.mWhite,
-                              size: 25,
-                            ),
-                          ),
-                        ),
+                    CommonAppBarActionIconButton(
+                      onItemTap: () {
+                        vm.deleteGroup.call();
+                      },
+                      buttonColor: AppColors.secondaryMaterialColor[700],
+                      buttonSplashColor: AppColors.mWhite.withValues(alpha: 0.2),
+                      icon: Icon(
+                        Icons.delete,
+                        color: AppColors.mWhite,
+                        size: 25,
                       ),
                     ),
                     const SizedBox(width: 20),

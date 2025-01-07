@@ -8,12 +8,14 @@ import 'package:passmana/utility/text_utility/text_styles.dart';
 
 class CreateListItemTile extends StatelessWidget {
   final String title;
+  final String heroTag;
   final Widget icon;
   final Function onTap;
 
   const CreateListItemTile({
     super.key,
     required this.title,
+    required this.heroTag,
     required this.icon,
     required this.onTap,
   });
@@ -23,7 +25,7 @@ class CreateListItemTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(10),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(10.0),
+        borderRadius: BorderRadius.circular(3),
         child: Material(
           elevation: 5,
           color: AppColors.mWhite,
@@ -34,7 +36,7 @@ class CreateListItemTile extends StatelessWidget {
             splashColor: AppColors.accentSecondaryColor,
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
+                borderRadius: BorderRadius.circular(3),
                 color: AppColors.mWhite.withValues(alpha: 0.7),
               ),
               child: Center(
@@ -43,11 +45,14 @@ class CreateListItemTile extends StatelessWidget {
                   children: [
                     icon,
                     const SizedBox(height: 5),
-                    Text(
-                      title,
-                      style: TextStyles.getTitleTransparentBlackText(
-                        fontSize: 25,
-                        opacity: 0.6,
+                    Hero(
+                      tag: heroTag,
+                      child: Text(
+                        title,
+                        style: TextStyles.getTitleTransparentBlackText(
+                          fontSize: 25,
+                          opacity: 0.6,
+                        ),
                       ),
                     ),
                   ],

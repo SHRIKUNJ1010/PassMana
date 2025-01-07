@@ -6,10 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/localization/app_localization.dart';
+import 'package:passmana/presentation/common/common_app_bar_action_icon_button.dart';
 import 'package:passmana/presentation/common/custom_app_bar.dart';
 import 'package:passmana/presentation/group/group_details/group_details_password_list_tile.dart';
 import 'package:passmana/presentation/group/group_details/group_details_view_model.dart';
 import 'package:passmana/utility/color.dart';
+import 'package:passmana/utility/constants.dart';
 import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:passmana/utility/utility.dart';
 import 'package:redux/redux.dart';
@@ -58,9 +60,12 @@ class GroupDetailsScreen extends StatelessWidget {
                               ),
                               margin: const EdgeInsets.fromLTRB(0, 20, 0, 5),
                               alignment: Alignment.center,
-                              child: Text(
-                                vm.group.groupName.trim()[0].toUpperCase(),
-                                style: TextStyles.getBoldRedText(34),
+                              child: Hero(
+                                tag: "${AppConstants.groupHero}${vm.group.id}",
+                                child: Text(
+                                  vm.group.groupName.trim()[0].toUpperCase(),
+                                  style: TextStyles.getBoldRedText(34),
+                                ),
                               ),
                             ),
                           ],
@@ -114,7 +119,7 @@ class GroupDetailsScreen extends StatelessWidget {
                         width: width,
                         decoration: const BoxDecoration(
                           color: AppColors.mWhite,
-                          borderRadius: BorderRadius.vertical(top: Radius.circular(35)),
+                          borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -171,24 +176,14 @@ class GroupDetailsScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               const SizedBox(width: 20),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Material(
-                  color: AppColors.mWhite,
-                  child: InkWell(
-                    splashColor: AppColors.mBlack.withValues(alpha: 0.2),
-                    onTap: () {
-                      vm.onBackPress.call();
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
-                      child: Icon(
-                        Icons.arrow_back,
-                        color: AppColors.primaryColor,
-                        size: 25,
-                      ),
-                    ),
-                  ),
+              CommonAppBarActionIconButton(
+                onItemTap: () {
+                  vm.onBackPress.call();
+                },
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: AppColors.primaryColor,
+                  size: 25,
                 ),
               ),
             ],
@@ -203,24 +198,14 @@ class GroupDetailsScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             mainAxisSize: MainAxisSize.min,
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Material(
-                  color: AppColors.mWhite,
-                  child: InkWell(
-                    splashColor: AppColors.mBlack.withValues(alpha: 0.2),
-                    onTap: () {
-                      vm.onEditTap.call();
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
-                      child: Icon(
-                        Icons.edit,
-                        color: AppColors.primaryColor,
-                        size: 25,
-                      ),
-                    ),
-                  ),
+              CommonAppBarActionIconButton(
+                onItemTap: () {
+                  vm.onEditTap.call();
+                },
+                icon: Icon(
+                  Icons.edit,
+                  color: AppColors.primaryColor,
+                  size: 25,
                 ),
               ),
               const SizedBox(width: 20),

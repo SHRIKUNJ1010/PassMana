@@ -101,45 +101,45 @@ class NavigationBarViewModel {
       notSelectedTextWidgets: <Widget>[
         Text(
           getTranslated('password', context),
-          style: TextStyles.getTitleWhiteText(10),
+          style: TextStyles.getTitleWhiteText(11),
         ),
         Text(
           getTranslated('card', context),
-          style: TextStyles.getTitleWhiteText(10),
+          style: TextStyles.getTitleWhiteText(11),
         ),
         Text(
           getTranslated('create', context),
-          style: TextStyles.getTitleWhiteText(10),
+          style: TextStyles.getTitleWhiteText(11),
         ),
         Text(
           getTranslated('secret_note', context),
-          style: TextStyles.getTitleWhiteText(10),
+          style: TextStyles.getTitleWhiteText(11),
         ),
         Text(
           getTranslated('settings', context),
-          style: TextStyles.getTitleWhiteText(10),
+          style: TextStyles.getTitleWhiteText(11),
         ),
       ],
       selectedTextWidgets: <Widget>[
         Text(
           getTranslated('password', context),
-          style: TextStyles.getTitleDarkRedText(10),
+          style: TextStyles.getTitleDarkRedText(12),
         ),
         Text(
           getTranslated('card', context),
-          style: TextStyles.getTitleDarkRedText(10),
+          style: TextStyles.getTitleDarkRedText(12),
         ),
         Text(
           getTranslated('create', context),
-          style: TextStyles.getTitleDarkRedText(10),
+          style: TextStyles.getTitleDarkRedText(12),
         ),
         Text(
           getTranslated('secret_note', context),
-          style: TextStyles.getTitleDarkRedText(10),
+          style: TextStyles.getTitleDarkRedText(12),
         ),
         Text(
           getTranslated('settings', context),
-          style: TextStyles.getTitleDarkRedText(10),
+          style: TextStyles.getTitleDarkRedText(12),
         ),
       ],
       onItemTap: (index) {

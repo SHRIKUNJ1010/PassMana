@@ -12,6 +12,7 @@ import 'package:passmana/presentation/common/drop_down_search_custom/src/propert
 import 'package:passmana/presentation/common/drop_down_search_custom/src/properties/menu_props.dart';
 import 'package:passmana/presentation/common/drop_down_search_custom/src/properties/popup_props.dart';
 import 'package:passmana/presentation/settings/settings_item_list/settings_item_list_view_model.dart';
+import 'package:passmana/presentation/settings/settings_item_list/settings_item_text_button_tile.dart';
 import 'package:passmana/utility/assets_utility/assets_paths.dart';
 import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/constants.dart';
@@ -80,12 +81,7 @@ class SettingsItemListScreen extends StatelessWidget {
                     ],
                   ),
                 ),*/
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: AppColors.mWhite,
-                  ),
-                  margin: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                getCommonContainer(
                   padding: const EdgeInsets.fromLTRB(15, 10, 10, 10),
                   child: Row(
                     children: [
@@ -200,80 +196,29 @@ class SettingsItemListScreen extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(5),
-                    child: Material(
-                      color: AppColors.mWhite,
-                      child: InkWell(
-                        onTap: () {
-                          vm.onChangeMobilePinTap.call();
-                        },
-                        splashColor: AppColors.primaryColor.withValues(alpha: 0.2),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: Colors.transparent,
-                          ),
-                          padding: const EdgeInsets.fromLTRB(15, 15, 10, 15),
-                          child: Text(
-                            getTranslated("change_mobile_pin", context),
-                            style: TextStyles.getTitleBlueText(20),
-                          ),
-                        ),
-                      ),
-                    ),
+                  child: SettingsItemTextButtonTile(
+                    title: getTranslated("change_mobile_pin", context),
+                    onTap: () {
+                      vm.onChangeMobilePinTap.call();
+                    },
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(5),
-                    child: Material(
-                      color: AppColors.mWhite,
-                      child: InkWell(
-                        onTap: () {
-                          vm.onImportMobileDataTap.call();
-                        },
-                        splashColor: AppColors.primaryColor.withValues(alpha: 0.2),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: Colors.transparent,
-                          ),
-                          padding: const EdgeInsets.fromLTRB(15, 15, 10, 15),
-                          child: Text(
-                            getTranslated("import_your_data", context),
-                            style: TextStyles.getTitleBlueText(20),
-                          ),
-                        ),
-                      ),
-                    ),
+                  child: SettingsItemTextButtonTile(
+                    title: getTranslated("import_your_data", context),
+                    onTap: () {
+                      vm.onImportMobileDataTap.call();
+                    },
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(5),
-                    child: Material(
-                      color: AppColors.mWhite,
-                      child: InkWell(
-                        onTap: () {
-                          vm.onExportMobileDataTap.call();
-                        },
-                        splashColor: AppColors.primaryColor.withValues(alpha: 0.2),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: Colors.transparent,
-                          ),
-                          padding: const EdgeInsets.fromLTRB(15, 15, 10, 15),
-                          child: Text(
-                            getTranslated("export_your_data", context),
-                            style: TextStyles.getTitleBlueText(20),
-                          ),
-                        ),
-                      ),
-                    ),
+                  child: SettingsItemTextButtonTile(
+                    title: getTranslated("export_your_data", context),
+                    onTap: () {
+                      vm.onExportMobileDataTap.call();
+                    },
                   ),
                 ),
               ],
@@ -288,7 +233,7 @@ class SettingsItemListScreen extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: AppColors.mWhite,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(3),
       ),
       padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
       child: Text(
@@ -302,7 +247,7 @@ class SettingsItemListScreen extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: AppColors.primaryColor,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(3),
       ),
       padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
       child: Text(
@@ -314,14 +259,15 @@ class SettingsItemListScreen extends StatelessWidget {
 
   Container getCommonContainer({
     required Widget child,
+    EdgeInsetsGeometry? padding,
   }) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: BorderRadius.circular(3),
         color: AppColors.mWhite,
       ),
       margin: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-      padding: const EdgeInsets.fromLTRB(15, 15, 10, 15),
+      padding: padding ?? const EdgeInsets.fromLTRB(15, 15, 15, 15),
       child: child,
     );
   }

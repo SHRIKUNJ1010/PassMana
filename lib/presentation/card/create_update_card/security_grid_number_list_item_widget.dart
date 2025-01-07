@@ -38,6 +38,7 @@ class _SecurityGridNumberListItemWidgetState extends State<SecurityGridNumberLis
               onChanged: (val) {
                 widget.item.title = val;
               },
+              textCapitalization: TextCapitalization.characters,
               decoration: InputDecoration(
                 fillColor: AppColors.mWhite,
                 filled: true,
@@ -45,7 +46,7 @@ class _SecurityGridNumberListItemWidgetState extends State<SecurityGridNumberLis
                 errorStyle: TextStyles.getTitleOrangeText(20),
                 border: OutlineInputBorder(
                   borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(3),
                 ),
                 hintText: getTranslated('title', context),
                 hintStyle: TextStyles.getTitleBlueText(17),
@@ -75,7 +76,7 @@ class _SecurityGridNumberListItemWidgetState extends State<SecurityGridNumberLis
                 errorStyle: TextStyles.getTitleOrangeText(20),
                 border: OutlineInputBorder(
                   borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(3),
                 ),
                 hintText: getTranslated('value', context),
                 hintStyle: TextStyles.getTitleBlueText(17),
@@ -90,7 +91,7 @@ class _SecurityGridNumberListItemWidgetState extends State<SecurityGridNumberLis
         Padding(
           padding: const EdgeInsets.fromLTRB(5, 0, 20, 0),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(3),
             child: Material(
               color: Colors.transparent,
               child: InkWell(

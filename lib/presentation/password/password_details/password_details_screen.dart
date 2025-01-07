@@ -7,12 +7,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/localization/app_localization.dart';
+import 'package:passmana/presentation/common/common_app_bar_action_icon_button.dart';
 import 'package:passmana/presentation/common/custom_app_bar.dart';
 import 'package:passmana/presentation/password/password_details/password_details_view_model.dart';
+import 'package:passmana/presentation/password/password_details/widgets/details_item_tile.dart';
 import 'package:passmana/utility/color.dart';
+import 'package:passmana/utility/constants.dart';
 import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:passmana/utility/utility.dart';
 import 'package:redux/redux.dart';
+
+import 'widgets/details_action_tappable_item_widget.dart';
 
 class PasswordDetailsScreen extends StatelessWidget {
   final int id;
@@ -58,39 +63,98 @@ class PasswordDetailsScreen extends StatelessWidget {
                                 ),
                                 margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                                 alignment: Alignment.center,
-                                child: Text(
-                                  vm.password.title.trim()[0].toUpperCase(),
-                                  style: TextStyles.getBoldRedText(34),
+                                child: Hero(
+                                  tag: "${AppConstants.passwordHero}${vm.password.id}",
+                                  child: Text(
+                                    vm.password.title.trim()[0].toUpperCase(),
+                                    style: TextStyles.getBoldRedText(34),
+                                  ),
                                 ),
                               ),
                             ],
                           ),
                         ),
                         const SizedBox(height: 20),
-                        getTitleContainer(vm, context),
+                        DetailsItemTile(
+                          title: "${getTranslated("title", context)}:",
+                          description: vm.password.title,
+                        ),
                         if (vm.password.subTitle.isNotEmpty) const SizedBox(height: 7),
-                        if (vm.password.subTitle.isNotEmpty) getSubTitleContainer(vm, context),
+                        if (vm.password.subTitle.isNotEmpty)
+                          DetailsItemTile(
+                            title: "${getTranslated("subtitle", context)}:",
+                            description: vm.password.subTitle,
+                          ),
                         const SizedBox(height: 20),
-                        if (vm.password.websiteUrl.isNotEmpty) getWebsiteUrlContainer(vm, context),
+                        if (vm.password.websiteUrl.isNotEmpty)
+                          DetailsItemTile(
+                            title: "${getTranslated("website_url", context)}:",
+                            description: vm.password.websiteUrl,
+                            actionItem: DetailsActionTappableItemWidget(
+                              onItemTap: () {
+                                vm.onWebsiteUrlTap.call(vm.password.websiteUrl);
+                              },
+                              item: Transform.rotate(
+                                angle: -math.pi / 4,
+                                child: const Icon(
+                                  Icons.arrow_right_alt,
+                                  color: AppColors.mBlack,
+                                  size: 30,
+                                ),
+                              ),
+                            ),
+                          ),
                         if (vm.password.websiteUrl.isNotEmpty) const SizedBox(height: 7),
-                        getUsernameContainer(vm, context),
+                        DetailsItemTile(
+                          title: "${getTranslated("email_or_username", context)}:",
+                          description: vm.password.userName,
+                          actionItem: DetailsActionTappableItemWidget(
+                            onItemTap: () {
+                              vm.onUsernameCopyTap.call(vm.password.userName);
+                            },
+                            item: Icon(
+                              Icons.copy,
+                              color: AppColors.mBlack,
+                              size: 25,
+                            ),
+                          ),
+                        ),
                         const SizedBox(height: 7),
-                        getPasswordContainer(vm, context),
+                        DetailsItemTile(
+                          title: "${getTranslated("password", context)}:",
+                          description: vm.password.password,
+                          actionItem: DetailsActionTappableItemWidget(
+                            onItemTap: () {
+                              vm.onPasswordCopyTap.call(vm.password.password);
+                            },
+                            item: Icon(
+                              Icons.copy,
+                              color: AppColors.mBlack,
+                              size: 25,
+                            ),
+                          ),
+                        ),
                         if (vm.password.note.isNotEmpty) const SizedBox(height: 20),
-                        if (vm.password.note.isNotEmpty) getNoteContainer(vm, context),
+                        if (vm.password.note.isNotEmpty)
+                          DetailsItemTile(
+                            title: "${getTranslated("note", context)}:",
+                            description: vm.password.note,
+                          ),
                         if (vm.dynamicFields.call().isNotEmpty) const SizedBox(height: 20),
                         if (vm.dynamicFields.call().isNotEmpty) ...[
                           for (int i = 0; i < vm.dynamicFields.call().length; i++) ...[
-                            getCustomFieldItemContainer(
-                              vm.dynamicFields.call()[i].title ?? "",
-                              vm.dynamicFields.call()[i].value ?? "",
-                              context,
+                            DetailsItemTile(
+                              title: vm.dynamicFields.call()[i].title ?? "",
+                              description: vm.dynamicFields.call()[i].value ?? "",
                             ),
                             if (i != (vm.dynamicFields.call().length - 1)) const SizedBox(height: 7),
                           ],
                         ],
                         const SizedBox(height: 20),
-                        getAssignedToGroupContainer(vm, context),
+                        DetailsItemTile(
+                          title: "${getTranslated("category_group", context)}:",
+                          description: vm.password.group.target?.groupName ?? getTranslated('none', context),
+                        ),
                         const SizedBox(height: 80),
                       ],
                     ),
@@ -98,339 +162,6 @@ class PasswordDetailsScreen extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-
-  Container getCommonContainer({
-    required Widget child,
-  }) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        color: AppColors.mWhite,
-      ),
-      padding: const EdgeInsets.fromLTRB(10, 7, 10, 7),
-      child: child,
-    );
-  }
-
-  Widget getAssignedToGroupContainer(PasswordDetailsViewModel vm, BuildContext context) {
-    return getCommonContainer(
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "${getTranslated("category_group", context)}:",
-                  style: TextStyles.getTitleDarkRedText(17),
-                ),
-                Text(
-                  vm.password.group.target?.groupName ?? getTranslated('none', context),
-                  maxLines: 5,
-                  softWrap: true,
-                  style: TextStyles.getTitleTransparentBlackText(
-                    fontSize: 17,
-                    opacity: 1,
-                  ),
-                )
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget getCustomFieldItemContainer(String title, String value, BuildContext context) {
-    return getCommonContainer(
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "$title:",
-                  style: TextStyles.getTitleDarkRedText(17),
-                ),
-                Text(
-                  value,
-                  maxLines: 5,
-                  softWrap: true,
-                  style: TextStyles.getTitleTransparentBlackText(
-                    fontSize: 17,
-                    opacity: 1,
-                  ),
-                )
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Container getNoteContainer(PasswordDetailsViewModel vm, BuildContext context) {
-    return getCommonContainer(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "${getTranslated("note", context)}:",
-            style: TextStyles.getTitleDarkRedText(17),
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Text(
-                  vm.password.note,
-                  maxLines: 5,
-                  softWrap: true,
-                  style: TextStyles.getTitleTransparentBlackText(
-                    fontSize: 17,
-                    opacity: 1,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Container getPasswordContainer(PasswordDetailsViewModel vm, BuildContext context) {
-    return getCommonContainer(
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "${getTranslated("password", context)}:",
-                  style: TextStyles.getTitleDarkRedText(17),
-                ),
-                Text(
-                  vm.password.password,
-                  maxLines: 5,
-                  softWrap: true,
-                  style: TextStyles.getTitleTransparentBlackText(
-                    fontSize: 17,
-                    opacity: 1,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  splashColor: AppColors.primaryColor.withValues(alpha: 0.2),
-                  onTap: () {
-                    vm.onPasswordCopyTap.call(vm.password.password);
-                  },
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Icon(
-                      Icons.copy,
-                      color: AppColors.mBlack,
-                      size: 25,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Container getWebsiteUrlContainer(PasswordDetailsViewModel vm, BuildContext context) {
-    return getCommonContainer(
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "${getTranslated("website_url", context)}:",
-                  style: TextStyles.getTitleDarkRedText(17),
-                ),
-                Text(
-                  vm.password.websiteUrl,
-                  maxLines: 5,
-                  softWrap: true,
-                  style: TextStyles.getTitleTransparentBlackText(
-                    fontSize: 17,
-                    opacity: 1,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  splashColor: AppColors.primaryColor.withValues(alpha: 0.2),
-                  onTap: () {
-                    vm.onWebsiteUrlTap.call(vm.password.websiteUrl);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Transform.rotate(
-                      angle: -math.pi / 4,
-                      child: const Icon(
-                        Icons.arrow_right_alt,
-                        color: AppColors.mBlack,
-                        size: 30,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Container getUsernameContainer(PasswordDetailsViewModel vm, BuildContext context) {
-    return getCommonContainer(
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "${getTranslated("email_or_username", context)}:",
-                  style: TextStyles.getTitleDarkRedText(17),
-                ),
-                Text(
-                  vm.password.userName,
-                  maxLines: 5,
-                  softWrap: true,
-                  style: TextStyles.getTitleTransparentBlackText(
-                    fontSize: 17,
-                    opacity: 1,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  splashColor: AppColors.primaryColor.withValues(alpha: 0.2),
-                  onTap: () {
-                    vm.onUsernameCopyTap.call(vm.password.userName);
-                  },
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Icon(
-                      Icons.copy,
-                      color: AppColors.mBlack,
-                      size: 25,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Container getSubTitleContainer(PasswordDetailsViewModel vm, BuildContext context) {
-    return getCommonContainer(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "${getTranslated("subtitle", context)}:",
-            style: TextStyles.getTitleDarkRedText(17),
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Text(
-                  vm.password.subTitle,
-                  maxLines: 5,
-                  softWrap: true,
-                  style: TextStyles.getTitleTransparentBlackText(
-                    fontSize: 17,
-                    opacity: 1,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Container getTitleContainer(PasswordDetailsViewModel vm, BuildContext context) {
-    return getCommonContainer(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "${getTranslated("title", context)}:",
-            style: TextStyles.getTitleDarkRedText(17),
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Text(
-                  vm.password.title,
-                  maxLines: 5,
-                  softWrap: true,
-                  style: TextStyles.getTitleTransparentBlackText(
-                    fontSize: 17,
-                    opacity: 1,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
     );
   }
 
@@ -443,24 +174,14 @@ class PasswordDetailsScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               const SizedBox(width: 20),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Material(
-                  color: AppColors.mWhite,
-                  child: InkWell(
-                    splashColor: AppColors.mBlack.withValues(alpha: 0.2),
-                    onTap: () {
-                      vm.onBackPress.call();
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
-                      child: Icon(
-                        Icons.arrow_back,
-                        color: AppColors.primaryColor,
-                        size: 25,
-                      ),
-                    ),
-                  ),
+              CommonAppBarActionIconButton(
+                onItemTap: () {
+                  vm.onBackPress.call();
+                },
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: AppColors.primaryColor,
+                  size: 25,
                 ),
               ),
             ],
@@ -475,24 +196,14 @@ class PasswordDetailsScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             mainAxisSize: MainAxisSize.min,
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Material(
-                  color: AppColors.mWhite,
-                  child: InkWell(
-                    splashColor: AppColors.mBlack.withValues(alpha: 0.2),
-                    onTap: () {
-                      vm.onEditTap.call();
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
-                      child: Icon(
-                        Icons.edit,
-                        color: AppColors.primaryColor,
-                        size: 25,
-                      ),
-                    ),
-                  ),
+              CommonAppBarActionIconButton(
+                onItemTap: () {
+                  vm.onEditTap.call();
+                },
+                icon: Icon(
+                  Icons.edit,
+                  color: AppColors.primaryColor,
+                  size: 25,
                 ),
               ),
               const SizedBox(width: 20),
