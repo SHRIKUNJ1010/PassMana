@@ -216,7 +216,7 @@ class _CardDetailsScreenState extends State<CardDetailsScreen> {
                 },
                 icon: Icon(
                   Icons.arrow_back,
-                  color: AppColors.primaryColor,
+                  color: Theme.of(context).appBarTheme.iconTheme?.color,
                   size: 25,
                 ),
               ),
@@ -238,7 +238,7 @@ class _CardDetailsScreenState extends State<CardDetailsScreen> {
                 },
                 icon: Icon(
                   Icons.edit,
-                  color: AppColors.primaryColor,
+                  color: Theme.of(context).appBarTheme.iconTheme?.color,
                   size: 25,
                 ),
               ),

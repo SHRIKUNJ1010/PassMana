@@ -172,6 +172,7 @@ class CommonWidgets {
   static Widget getBottomBarCenterSelectedTile({
     required Widget iconWidget,
     required Widget textWidget,
+    required BuildContext context,
   }) {
     return Expanded(
       child: Column(
@@ -181,7 +182,7 @@ class CommonWidgets {
             height: 60,
             width: 60,
             decoration: BoxDecoration(
-              color: AppColors.secondaryMaterialColor[400],
+              color: Theme.of(context).textTheme.displayLarge!.color,
               borderRadius: BorderRadius.circular(30),
             ),
             child: iconWidget,
@@ -198,6 +199,7 @@ class CommonWidgets {
     required Widget iconWidget,
     required Widget textWidget,
     required Function onTap,
+    required BuildContext context,
   }) {
     return Expanded(
       child: ClipRRect(
@@ -216,7 +218,7 @@ class CommonWidgets {
                   height: 60,
                   width: 60,
                   decoration: BoxDecoration(
-                    color: AppColors.secondaryMaterialColor[400],
+                    color: Theme.of(context).textTheme.displayLarge?.color,
                     borderRadius: BorderRadius.circular(30),
                   ),
                   child: iconWidget,

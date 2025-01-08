@@ -5,7 +5,6 @@ import 'package:passmana/localization/app_localization.dart';
 import 'package:passmana/model/card_model.dart' as c;
 import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/constants.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 
 class CardCommonListTile extends StatelessWidget {
   final c.Card card;
@@ -31,7 +30,7 @@ class CardCommonListTile extends StatelessWidget {
           child: Container(
             height: 220,
             decoration: BoxDecoration(
-              color: AppColors.primaryColor.withValues(alpha: 0.6),
+              color: Theme.of(context).primaryColor.withValues(alpha: 0.6),
               borderRadius: BorderRadius.circular(3),
             ),
             padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
@@ -46,15 +45,15 @@ class CardCommonListTile extends StatelessWidget {
                       tag: "${AppConstants.cardHero}${card.id}",
                       child: Text(
                         card.bankAndCardName,
-                        style: TextStyles.getBoldWhiteText(17),
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 17),
                       ),
                     ),
                     Transform.rotate(
                       angle: math.pi / 2,
-                      child: const Icon(
+                      child: Icon(
                         Icons.wifi_outlined,
                         size: 27,
-                        color: AppColors.mWhite,
+                        color: Theme.of(context).textTheme.displaySmall?.color,
                       ),
                     ),
                   ],
@@ -62,7 +61,7 @@ class CardCommonListTile extends StatelessWidget {
                 const Spacer(flex: 4),
                 Text(
                   card.cardNumber.replaceAllMapped(RegExp(r'.{4}'), (match) => '${match.group(0)} '),
-                  style: TextStyles.getBoldWhiteText(25),
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 25),
                 ),
                 const Spacer(flex: 1),
                 Row(
@@ -71,17 +70,29 @@ class CardCommonListTile extends StatelessWidget {
                     Expanded(
                       child: RichText(
                         text: TextSpan(
-                            text: "${getTranslated("exp_date", context)}: ",
-                            style: TextStyles.getTitleWhiteText(15),
-                            children: <TextSpan>[TextSpan(text: card.expiryDate, style: TextStyles.getBoldWhiteText(15))]),
+                          text: "${getTranslated("exp_date", context)}: ",
+                          style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 15),
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: card.expiryDate,
+                              style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 15),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     Expanded(
                       child: RichText(
                         text: TextSpan(
-                            text: "${getTranslated("cvv", context)}: ",
-                            style: TextStyles.getTitleWhiteText(15),
-                            children: <TextSpan>[TextSpan(text: card.cvv, style: TextStyles.getBoldWhiteText(15))]),
+                          text: "${getTranslated("cvv", context)}: ",
+                          style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 15),
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: card.cvv,
+                              style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 15),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -93,12 +104,12 @@ class CardCommonListTile extends StatelessWidget {
                   children: [
                     Text(
                       card.cardHolderName,
-                      style: TextStyles.getBoldWhiteText(20),
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 20),
                     ),
-                    const Icon(
+                    Icon(
                       Icons.nfc,
                       size: 27,
-                      color: AppColors.mWhite,
+                      color: Theme.of(context).textTheme.displaySmall?.color,
                     ),
                   ],
                 ),

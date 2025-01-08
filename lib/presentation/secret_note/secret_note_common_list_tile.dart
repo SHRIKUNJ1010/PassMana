@@ -3,7 +3,6 @@ import 'package:intl/intl.dart';
 import 'package:passmana/model/secret_note_model.dart';
 import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/constants.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 
 class SecretNoteCommonListTile extends StatelessWidget {
   final SecretNote secretNote;
@@ -20,7 +19,7 @@ class SecretNoteCommonListTile extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(3),
       child: Material(
-        color: AppColors.mWhite,
+        color: Theme.of(context).cardColor,
         child: InkWell(
           splashColor: AppColors.primaryColor.withValues(alpha: 0.2),
           onTap: () {
@@ -44,7 +43,7 @@ class SecretNoteCommonListTile extends StatelessWidget {
                   tag: "${AppConstants.secretNoteHero}${secretNote.id}",
                   child: Text(
                     secretNote.note,
-                    style: TextStyles.getTitleBlueText(17),
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 17),
                     maxLines: 8,
                     overflow: TextOverflow.ellipsis,
                     softWrap: true,
@@ -55,7 +54,7 @@ class SecretNoteCommonListTile extends StatelessWidget {
                   alignment: Alignment.bottomRight,
                   child: Text(
                     DateFormat('dd/MM/yyyy HH:mm a').format(secretNote.lastUpdatedOn),
-                    style: TextStyles.getTitleBlueText(13),
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 13),
                   ),
                 ),
               ],

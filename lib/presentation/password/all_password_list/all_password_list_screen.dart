@@ -10,7 +10,6 @@ import 'package:passmana/presentation/common/common_app_bar_action_icon_button.d
 import 'package:passmana/presentation/common/custom_app_bar.dart';
 import 'package:passmana/presentation/password/all_password_list/all_password_list_view_model.dart';
 import 'package:passmana/presentation/password/password_common_list_tile.dart';
-import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:passmana/utility/utility.dart';
 
@@ -53,7 +52,7 @@ class AllPasswordListScreen extends StatelessWidget {
                 },
                 icon: Icon(
                   Icons.arrow_back,
-                  color: AppColors.primaryColor,
+                  color: Theme.of(context).appBarTheme.iconTheme?.color,
                   size: 25,
                 ),
               ),

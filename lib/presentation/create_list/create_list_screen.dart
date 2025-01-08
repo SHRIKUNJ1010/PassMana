@@ -10,7 +10,6 @@ import 'package:passmana/presentation/common/custom_app_bar.dart';
 import 'package:passmana/presentation/create_list/create_list_item_widget.dart';
 import 'package:passmana/presentation/create_list/create_list_view_model.dart';
 import 'package:passmana/utility/assets_utility/assets_paths.dart';
-import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/constants.dart';
 import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:passmana/utility/utility.dart';
@@ -58,7 +57,7 @@ class CreateListScreen extends StatelessWidget {
                     child: Text(
                       getTranslated("what_do_you_want_to", context),
                       softWrap: true,
-                      style: TextStyles.getTitleWhiteText(18),
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 18),
                     ),
                   ),
                   Padding(
@@ -66,7 +65,7 @@ class CreateListScreen extends StatelessWidget {
                     child: Text(
                       getTranslated("store_today?", context),
                       softWrap: true,
-                      style: TextStyles.getTitleDarkRedText(42),
+                      style: Theme.of(context).textTheme.displayLarge?.copyWith(fontSize: 42),
                     ),
                   ),
                   getGridList(height, vm, context),
@@ -98,7 +97,7 @@ class CreateListScreen extends StatelessWidget {
                     heroTag: AppConstants.passwordHero,
                     icon: Icon(
                       Icons.lock,
-                      color: AppColors.mBlack.withValues(alpha: 0.6),
+                      color: Theme.of(context).textTheme.bodySmall?.color,
                       size: 50,
                     ),
                   ),
@@ -112,7 +111,7 @@ class CreateListScreen extends StatelessWidget {
                     heroTag: AppConstants.groupHero,
                     icon: Icon(
                       Icons.people,
-                      color: AppColors.mBlack.withValues(alpha: 0.6),
+                      color: Theme.of(context).textTheme.bodySmall?.color,
                       size: 50,
                     ),
                   ),
@@ -132,7 +131,7 @@ class CreateListScreen extends StatelessWidget {
                     heroTag: AppConstants.cardHero,
                     icon: Icon(
                       Icons.credit_card,
-                      color: AppColors.mBlack.withValues(alpha: 0.6),
+                      color: Theme.of(context).textTheme.bodySmall?.color,
                       size: 50,
                     ),
                   ),
@@ -146,7 +145,7 @@ class CreateListScreen extends StatelessWidget {
                     heroTag: AppConstants.secretNoteHero,
                     icon: Icon(
                       Icons.note_alt,
-                      color: AppColors.mBlack.withValues(alpha: 0.6),
+                      color: Theme.of(context).textTheme.bodySmall?.color,
                       size: 50,
                     ),
                   ),

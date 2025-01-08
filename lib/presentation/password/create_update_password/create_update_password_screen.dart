@@ -486,7 +486,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                 iconPadding: EdgeInsets.fromLTRB(14, 14, 14, 14),
                 icon: Icon(
                   Icons.alt_route,
-                  color: AppColors.primaryColor,
+                  color: Theme.of(context).appBarTheme.iconTheme?.color,
                   size: 25,
                 ),
               ),
@@ -630,7 +630,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                 },
                 icon: Icon(
                   Icons.arrow_back,
-                  color: AppColors.primaryColor,
+                  color: Theme.of(context).appBarTheme.iconTheme?.color,
                   size: 25,
                 ),
               ),

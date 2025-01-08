@@ -26,7 +26,7 @@ class CommonAppBarActionIconButton extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(3),
       child: Material(
-        color: buttonColor ?? AppColors.mWhite,
+        color: buttonColor ?? Theme.of(context).cardColor,
         child: InkWell(
           splashColor: buttonSplashColor ?? AppColors.mBlack.withValues(alpha: 0.2),
           onTap: onItemTap,

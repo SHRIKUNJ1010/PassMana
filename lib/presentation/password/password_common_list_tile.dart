@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:passmana/model/password_model.dart';
 import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/constants.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 
 class PasswordCommonListTile extends StatelessWidget {
   final Password password;
@@ -25,7 +24,7 @@ class PasswordCommonListTile extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(8),
       child: Material(
-        color: AppColors.mWhite,
+        color: Theme.of(context).cardColor,
         child: InkWell(
           splashColor: AppColors.primaryColor.withValues(alpha: 0.2),
           onTap: () {
@@ -45,7 +44,7 @@ class PasswordCommonListTile extends StatelessWidget {
                   height: 60,
                   margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                   decoration: BoxDecoration(
-                    color: AppColors.primaryColor,
+                    color: Theme.of(context).cardTheme.color,
                     borderRadius: BorderRadius.circular(6),
                   ),
                   alignment: Alignment.center,
@@ -53,7 +52,7 @@ class PasswordCommonListTile extends StatelessWidget {
                     tag: "${AppConstants.passwordHero}${password.id}",
                     child: Text(
                       password.title.trim()[0].toUpperCase(),
-                      style: TextStyles.getBoldWhiteText(27),
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 27),
                     ),
                   ),
                 ),
@@ -63,7 +62,10 @@ class PasswordCommonListTile extends StatelessWidget {
                     maxLines: 1,
                     softWrap: true,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyles.getTitleBlueText(20),
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                          fontSize: 20,
+                          color: Theme.of(context).cardTheme.color,
+                        ),
                   ),
                 ),
                 Padding(
@@ -77,11 +79,11 @@ class PasswordCommonListTile extends StatelessWidget {
                         onTap: () {
                           onClipboardTap.call();
                         },
-                        child: const Padding(
+                        child: Padding(
                           padding: EdgeInsets.all(8.0),
                           child: Icon(
                             Icons.copy,
-                            color: AppColors.primaryColor,
+                            color: Theme.of(context).cardTheme.color,
                             size: 25,
                           ),
                         ),

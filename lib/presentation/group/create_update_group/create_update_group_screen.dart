@@ -196,7 +196,7 @@ class _CreateUpdateGroupScreenState extends State<CreateUpdateGroupScreen> {
                 },
                 icon: Icon(
                   Icons.arrow_back,
-                  color: AppColors.primaryColor,
+                  color: Theme.of(context).appBarTheme.iconTheme?.color,
                   size: 25,
                 ),
               ),

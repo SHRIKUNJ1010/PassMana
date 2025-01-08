@@ -15,7 +15,7 @@ import 'package:passmana/domain_redux/user/user_actions.dart';
 import 'package:passmana/domain_redux/user/user_middleware.dart';
 import 'package:passmana/localization/app_localization.dart';
 import 'package:passmana/router/router.dart';
-import 'package:passmana/utility/color.dart';
+import 'package:passmana/utility/app_theme.dart';
 import 'package:passmana/utility/constants.dart';
 import 'package:redux/redux.dart' as redux;
 
@@ -65,11 +65,9 @@ class MyApp extends StatelessWidget {
         builder: (context, localeString) {
           return MaterialApp.router(
             debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              //primarySwatch: AppColors.primaryMaterialColor,
-              useMaterial3: true,
-              colorSchemeSeed: AppColors.primaryMaterialColor,
-            ),
+            theme: AppTheme.light,
+            darkTheme: AppTheme.dark,
+            themeMode: ThemeMode.system,
             locale: Locale(localeString),
             supportedLocales: const [
               Locale(AppConstants.english),

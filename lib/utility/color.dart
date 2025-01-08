@@ -48,6 +48,9 @@ class AppColors {
   static const Color tem11 = Color(0xffFFFFFF);
   static const Color rem11 = Color(0xff4CC9F0);
 
+  static const Color tem12 = Color(0xff20486C);
+  static const Color rem12 = Color(0xff2F4A65);
+
   //==============================primary color======================//
   static const MaterialColor primaryMaterialColor = MaterialColor(
     primaryColorValue,
@@ -76,9 +79,12 @@ class AppColors {
   );
   static const int accentPrimaryValue = 0xFF438CFF;
   static const Color accentPrimaryColor = Color(0xFF438CFF);
+  static const Color accentPrimaryDarkColor = Color(0xff202038);
 
   static const int primaryColorValue = 0xFF20486C;
   static const Color primaryColor = Color(0xFF20486C);
+  static const Color primaryDarkColor = Color(0xFF102238);
+  static const Color primaryLightColor = Color(0xFF5D89A3);
 
 //==============================secondary color======================//
   static const MaterialColor secondaryMaterialColor = MaterialColor(secondaryColorValue, <int, Color>{
@@ -103,15 +109,19 @@ class AppColors {
 
   static const int accentSecondaryValue = 0xFFFF8094;
   static const Color accentSecondaryColor = Color(0xFFFF8094);
+  static const Color accentSecondaryAlternateColor = Color(0xFFFF8585);
+  static const Color accentSecondaryDarkColor = Color(0xFF44125D);
 
   static const int secondaryColorValue = 0xFFAC244B;
   static const Color secondaryColor = Color(0xFFAC244B);
+  static const Color secondaryDarkColor = Color(0xFF75001F);
 
 //======================================================================//
   ///normal color codes
   static const m8F9394 = Color(0xFF8F9394);
   static const m6B6D6C = Color(0xFF6B6D6C);
   static const mD0D0D0 = Color(0xFFD0D0D0);
+  static const mE0E0E0 = Color(0xFFE0E0E0);
   static const m272727 = Color(0xDC272727);
   static const m222222 = Color(0xFF222222);
   static const m111111 = Color(0xFF111111);
@@ -122,6 +132,7 @@ class AppColors {
   static const m04B700 = Color(0xFF04B700);
   static const m3D3D3D = Color(0xFF3D3D3D);
   static const mWhite = Color(0xFFFFFFFF);
+  static const mGrey = Color(0xFF2B2B2B);
   static const kYankeesBlue = Color(0xFF14213D);
   static const mBlack = Color(0xFF000000);
   static const m101010 = Color(0xFF101010);

@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttericon/web_symbols_icons.dart';
 import 'package:passmana/localization/app_localization.dart';
 import 'package:passmana/utility/color.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 
 class SearchPasswordWidget extends StatelessWidget {
   final Function onTap;
@@ -21,7 +20,7 @@ class SearchPasswordWidget extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(6),
       child: Material(
-        color: AppColors.mWhite,
+        color: Theme.of(context).cardColor,
         elevation: 2,
         borderRadius: BorderRadius.circular(6),
         child: InkWell(
@@ -48,7 +47,7 @@ class SearchPasswordWidget extends StatelessWidget {
                             children: [
                               Text(
                                 getTranslated("search_password", context),
-                                style: TextStyles.getTitleTransparentBlackText(fontSize: 20, opacity: 0.8),
+                                style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 20),
                               ),
                             ],
                           ),
@@ -58,7 +57,7 @@ class SearchPasswordWidget extends StatelessWidget {
                   ),
                 ),
                 Material(
-                  color: AppColors.secondaryColor,
+                  color: Theme.of(context).textTheme.displayLarge?.color,
                   child: InkWell(
                     splashColor: AppColors.primaryColor.withValues(alpha: 0.3),
                     onTap: () {
@@ -72,10 +71,10 @@ class SearchPasswordWidget extends StatelessWidget {
                         borderRadius: BorderRadius.horizontal(right: Radius.circular(10)),
                       ),
                       alignment: Alignment.center,
-                      child: const Icon(
+                      child: Icon(
                         WebSymbols.search,
                         size: 25,
-                        color: AppColors.mWhite,
+                        color: Theme.of(context).textTheme.displaySmall?.color,
                       ),
                     ),
                   ),

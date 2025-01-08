@@ -12,7 +12,6 @@ import 'package:passmana/presentation/common/custom_app_bar.dart';
 import 'package:passmana/presentation/password/filter_search/filter_search_view_model.dart';
 import 'package:passmana/presentation/password/filter_search/search_password_field.dart';
 import 'package:passmana/presentation/password/password_common_list_tile.dart';
-import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:passmana/utility/utility.dart';
 import 'package:redux/redux.dart';
@@ -72,7 +71,7 @@ class FilterSearchScreen extends StatelessWidget {
                 },
                 icon: Icon(
                   Icons.arrow_back,
-                  color: AppColors.primaryColor,
+                  color: Theme.of(context).appBarTheme.iconTheme?.color,
                   size: 25,
                 ),
               ),

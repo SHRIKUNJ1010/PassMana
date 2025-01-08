@@ -3,7 +3,6 @@
 */
 
 import 'package:flutter/material.dart';
-import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/common_widgets_utility/common_widgets.dart';
 
 class CustomBottomNavigationBar extends StatefulWidget {
@@ -41,8 +40,8 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
           child: Container(
             height: 65 + MediaQuery.paddingOf(context).bottom,
             padding: EdgeInsets.only(bottom: MediaQuery.paddingOf(context).bottom),
-            decoration: const BoxDecoration(
-              color: AppColors.primaryColor,
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
               borderRadius: BorderRadius.vertical(
                 top: Radius.circular(12),
               ),
@@ -62,6 +61,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                         ? CommonWidgets.getBottomBarCenterSelectedTile(
                             iconWidget: widget.selectedIconWidgets[i],
                             textWidget: widget.selectedTextWidgets[i],
+                            context: context,
                           )
                         : CommonWidgets.getBottomBarSelectedTile(
                             iconWidget: widget.selectedIconWidgets[i],
@@ -71,6 +71,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                         ? CommonWidgets.getBottomBarCenterNotSelectedTile(
                             iconWidget: widget.notSelectedIconWidgets[i],
                             textWidget: widget.notSelectedTextWidgets[i],
+                            context: context,
                             onTap: () {
                               widget.onItemTap.call(i);
                             },

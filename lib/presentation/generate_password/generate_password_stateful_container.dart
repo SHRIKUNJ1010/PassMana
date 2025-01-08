@@ -255,7 +255,7 @@ class _GeneratePasswordStatefulContainerState extends State<GeneratePasswordStat
                 },
                 icon: Icon(
                   Icons.arrow_back,
-                  color: AppColors.primaryColor,
+                  color: Theme.of(context).appBarTheme.iconTheme?.color,
                   size: 25,
                 ),
               ),
@@ -277,7 +277,7 @@ class _GeneratePasswordStatefulContainerState extends State<GeneratePasswordStat
                 },
                 icon: Icon(
                   Icons.repeat,
-                  color: AppColors.primaryColor,
+                  color: Theme.of(context).appBarTheme.iconTheme?.color,
                   size: 25,
                 ),
               ),

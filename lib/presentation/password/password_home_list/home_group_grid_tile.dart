@@ -4,9 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:passmana/model/group_model.dart';
-import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/constants.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 
 class HomeGroupGridTile extends StatelessWidget {
   final Group group;
@@ -23,12 +21,12 @@ class HomeGroupGridTile extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(6),
       child: Material(
-        color: AppColors.mWhite,
+        color: Theme.of(context).cardColor,
         child: InkWell(
           onTap: () {
             onTap.call();
           },
-          splashColor: AppColors.secondaryColor.withValues(alpha: 0.2),
+          splashColor: Theme.of(context).textTheme.displayLarge?.color?.withValues(alpha: 0.2),
           child: Container(
             decoration: BoxDecoration(
               color: Colors.transparent,
@@ -40,9 +38,9 @@ class HomeGroupGridTile extends StatelessWidget {
                 Container(
                   width: 60,
                   height: 60,
-                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 5),
+                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 8),
                   decoration: BoxDecoration(
-                    color: AppColors.secondaryColor,
+                    color: Theme.of(context).textTheme.displayLarge?.color,
                     borderRadius: BorderRadius.circular(30),
                   ),
                   alignment: Alignment.center,
@@ -50,7 +48,7 @@ class HomeGroupGridTile extends StatelessWidget {
                     tag: "${AppConstants.groupHero}${group.id}",
                     child: Text(
                       group.groupName.trim()[0].toUpperCase(),
-                      style: TextStyles.getBoldWhiteText(34),
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 34),
                     ),
                   ),
                 ),
@@ -59,15 +57,15 @@ class HomeGroupGridTile extends StatelessWidget {
                   maxLines: 1,
                   softWrap: true,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyles.getBoldRedText(18),
+                  style: Theme.of(context).textTheme.displayLarge?.copyWith(fontSize: 18),
                 ),
-                const SizedBox(height: 5),
+                const SizedBox(height: 8),
                 Text(
                   "Passwords: ${group.passwords.length}",
                   maxLines: 2,
                   softWrap: true,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyles.getBoldRedText(16),
+                  style: Theme.of(context).textTheme.displayLarge?.copyWith(fontSize: 16),
                 ),
               ],
             ),

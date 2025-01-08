@@ -8,7 +8,6 @@ import 'package:fluttericon/font_awesome_icons.dart';
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/localization/app_localization.dart';
 import 'package:passmana/router/router.dart';
-import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/page_routes_utility/page_routes.dart';
 import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:redux/redux.dart';
@@ -44,72 +43,72 @@ class NavigationBarViewModel {
         AppRoutes.secretNoteList,
         AppRoutes.settings,
       ],
-      notSelectedIconWidgets: const <Widget>[
+      notSelectedIconWidgets: <Widget>[
         Icon(
           Icons.lock_outline_rounded,
-          color: AppColors.mWhite,
+          color: Theme.of(context).textTheme.displaySmall?.color,
           size: 24,
         ),
         Icon(
           FontAwesome.credit_card,
-          color: AppColors.mWhite,
+          color: Theme.of(context).textTheme.displaySmall?.color,
           size: 23,
         ),
         Icon(
           Icons.add,
-          color: AppColors.mWhite,
+          color: Theme.of(context).textTheme.displaySmall?.color,
           size: 30,
         ),
         Icon(
           Icons.note_alt_outlined,
-          color: AppColors.mWhite,
+          color: Theme.of(context).textTheme.displaySmall?.color,
           size: 28,
         ),
         Icon(
           Icons.settings_outlined,
-          color: AppColors.mWhite,
+          color: Theme.of(context).textTheme.displaySmall?.color,
           size: 25,
         ),
       ],
       selectedIconWidgets: <Widget>[
         Icon(
           Icons.lock,
-          color: AppColors.secondaryMaterialColor[400],
+          color: Theme.of(context).textTheme.displayLarge?.color,
           size: 24,
         ),
         Icon(
           FontAwesome5.credit_card,
-          color: AppColors.secondaryMaterialColor[400],
+          color: Theme.of(context).textTheme.displayLarge?.color,
           size: 22,
         ),
-        const Icon(
+        Icon(
           Icons.add,
-          color: AppColors.mWhite,
+          color: Theme.of(context).textTheme.displaySmall?.color,
           size: 30,
         ),
         Icon(
           Icons.note_alt_rounded,
-          color: AppColors.secondaryMaterialColor[400],
+          color: Theme.of(context).textTheme.displayLarge?.color,
           size: 28,
         ),
         Icon(
           Icons.settings,
-          color: AppColors.secondaryMaterialColor[400],
+          color: Theme.of(context).textTheme.displayLarge?.color,
           size: 25,
         )
       ],
       notSelectedTextWidgets: <Widget>[
         Text(
           getTranslated('password', context),
-          style: TextStyles.getTitleWhiteText(11),
+          style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 11),
         ),
         Text(
           getTranslated('card', context),
-          style: TextStyles.getTitleWhiteText(11),
+          style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 11),
         ),
         Text(
           getTranslated('create', context),
-          style: TextStyles.getTitleWhiteText(11),
+          style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 11),
         ),
         Text(
           getTranslated('secret_note', context),
@@ -117,29 +116,29 @@ class NavigationBarViewModel {
         ),
         Text(
           getTranslated('settings', context),
-          style: TextStyles.getTitleWhiteText(11),
+          style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 11),
         ),
       ],
       selectedTextWidgets: <Widget>[
         Text(
           getTranslated('password', context),
-          style: TextStyles.getTitleDarkRedText(12),
+          style: Theme.of(context).textTheme.displayLarge?.copyWith(fontSize: 12),
         ),
         Text(
           getTranslated('card', context),
-          style: TextStyles.getTitleDarkRedText(12),
+          style: Theme.of(context).textTheme.displayLarge?.copyWith(fontSize: 12),
         ),
         Text(
           getTranslated('create', context),
-          style: TextStyles.getTitleDarkRedText(12),
+          style: Theme.of(context).textTheme.displayLarge?.copyWith(fontSize: 12),
         ),
         Text(
           getTranslated('secret_note', context),
-          style: TextStyles.getTitleDarkRedText(12),
+          style: Theme.of(context).textTheme.displayLarge?.copyWith(fontSize: 12),
         ),
         Text(
           getTranslated('settings', context),
-          style: TextStyles.getTitleDarkRedText(12),
+          style: Theme.of(context).textTheme.displayLarge?.copyWith(fontSize: 12),
         ),
       ],
       onItemTap: (index) {

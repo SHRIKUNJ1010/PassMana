@@ -48,7 +48,7 @@ class SettingsItemListScreen extends StatelessWidget {
                 const SizedBox(width: 10),
                 Text(
                   getTranslated("settings", context),
-                  style: TextStyles.getTitleWhiteText(28),
+                  style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 28),
                 ),
                 const Spacer(),
               ],
@@ -82,13 +82,14 @@ class SettingsItemListScreen extends StatelessWidget {
                   ),
                 ),*/
                 getCommonContainer(
+                  context: context,
                   padding: const EdgeInsets.fromLTRB(15, 10, 10, 10),
                   child: Row(
                     children: [
                       Expanded(
                         child: Text(
                           getTranslated("enable_biometric", context),
-                          style: TextStyles.getTitleBlueText(20),
+                          style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 20),
                         ),
                       ),
                       Switch(
@@ -101,12 +102,13 @@ class SettingsItemListScreen extends StatelessWidget {
                   ),
                 ),
                 getCommonContainer(
+                  context: context,
                   child: Row(
                     children: [
                       Expanded(
                         child: Text(
                           getTranslated("language", context),
-                          style: TextStyles.getTitleBlueText(20),
+                          style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 20),
                         ),
                       ),
                       DropdownSearch<Locale>(
@@ -157,7 +159,7 @@ class SettingsItemListScreen extends StatelessWidget {
                           return SizedBox(
                             width: 110,
                             child: Material(
-                              color: AppColors.mWhite,
+                              color: Theme.of(context).cardColor,
                               child: InkWell(
                                 onTap: () {
                                   onTap.call();
@@ -175,7 +177,7 @@ class SettingsItemListScreen extends StatelessWidget {
                                       Expanded(
                                         child: Text(
                                           Utility.getLanguageNameFromLanguageCode(item?.languageCode ?? AppConstants.english),
-                                          style: TextStyles.getTitleBlueText(16),
+                                          style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 16),
                                         ),
                                       ),
                                       const Icon(
@@ -260,11 +262,12 @@ class SettingsItemListScreen extends StatelessWidget {
   Container getCommonContainer({
     required Widget child,
     EdgeInsetsGeometry? padding,
+    required BuildContext context,
   }) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(3),
-        color: AppColors.mWhite,
+        color: Theme.of(context).cardColor,
       ),
       margin: const EdgeInsets.fromLTRB(20, 10, 20, 0),
       padding: padding ?? const EdgeInsets.fromLTRB(15, 15, 15, 15),

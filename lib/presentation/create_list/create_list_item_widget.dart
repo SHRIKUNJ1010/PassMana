@@ -4,7 +4,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:passmana/utility/color.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 
 class CreateListItemTile extends StatelessWidget {
   final String title;
@@ -28,7 +27,7 @@ class CreateListItemTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(3),
         child: Material(
           elevation: 5,
-          color: AppColors.mWhite,
+          color: Theme.of(context).cardColor,
           child: InkWell(
             onTap: () {
               onTap.call();
@@ -37,7 +36,7 @@ class CreateListItemTile extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(3),
-                color: AppColors.mWhite.withValues(alpha: 0.7),
+                color: Theme.of(context).cardColor.withValues(alpha: 0.7),
               ),
               child: Center(
                 child: Column(
@@ -49,10 +48,7 @@ class CreateListItemTile extends StatelessWidget {
                       tag: heroTag,
                       child: Text(
                         title,
-                        style: TextStyles.getTitleTransparentBlackText(
-                          fontSize: 25,
-                          opacity: 0.6,
-                        ),
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 25),
                       ),
                     ),
                   ],

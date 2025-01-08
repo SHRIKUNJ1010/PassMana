@@ -465,7 +465,7 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
                 },
                 icon: Icon(
                   Icons.arrow_back,
-                  color: AppColors.primaryColor,
+                  color: Theme.of(context).appBarTheme.iconTheme?.color,
                   size: 25,
                 ),
               ),

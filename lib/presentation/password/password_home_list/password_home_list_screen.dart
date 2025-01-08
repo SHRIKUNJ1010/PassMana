@@ -47,7 +47,7 @@ class PasswordHomeListScreen extends StatelessWidget {
                       child: Text(
                         getTranslated("hello_user,", context),
                         softWrap: true,
-                        style: TextStyles.getBoldRedText(26),
+                        style: Theme.of(context).textTheme.displayLarge?.copyWith(fontSize: 32),
                       ),
                     ),
                     Padding(
@@ -55,7 +55,7 @@ class PasswordHomeListScreen extends StatelessWidget {
                       child: Text(
                         getTranslated("find_your_password", context),
                         softWrap: true,
-                        style: TextStyles.getTitleWhiteText(22),
+                        style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 22),
                       ),
                     ),
                     Padding(
@@ -97,7 +97,7 @@ class PasswordHomeListScreen extends StatelessWidget {
         const SizedBox(width: 10),
         Text(
           getTranslated("password", context),
-          style: TextStyles.getTitleWhiteText(28),
+          style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 28),
         ),
         const Spacer(),
         CommonAppBarActionIconButton(
@@ -106,7 +106,7 @@ class PasswordHomeListScreen extends StatelessWidget {
           },
           icon: Icon(
             Icons.alt_route,
-            color: AppColors.primaryColor,
+            color: Theme.of(context).appBarTheme.iconTheme?.color,
             size: 25,
           ),
         ),
@@ -124,7 +124,7 @@ class PasswordHomeListScreen extends StatelessWidget {
           Text(
             getTranslated("popular_groups", context),
             softWrap: true,
-            style: TextStyles.getBoldWhiteText(26),
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 26),
           ),
           vm.seeAllGroups
               ? ClipRRect(
@@ -162,7 +162,7 @@ class PasswordHomeListScreen extends StatelessWidget {
           Text(
             getTranslated("recently_added", context),
             softWrap: true,
-            style: TextStyles.getBoldWhiteText(26),
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 26),
           ),
           vm.seeAllPasswords
               ? ClipRRect(

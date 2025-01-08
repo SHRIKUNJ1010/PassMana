@@ -9,7 +9,6 @@ import 'package:passmana/localization/app_localization.dart';
 import 'package:passmana/presentation/common/common_confirmation_dialog.dart';
 import 'package:passmana/presentation/common/generate_password_dialog.dart';
 import 'package:passmana/router/router.dart';
-import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/constants.dart';
 import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -44,8 +43,8 @@ class Utility {
         end: Alignment.bottomRight,
         stops: const [0.10, 0.90],
         colors: [
-          AppColors.accentPrimaryColor.withValues(alpha: 0.9),
-          AppColors.accentSecondaryColor.withValues(alpha: 0.9),
+          Theme.of(rootNavigatorKey.currentContext ?? shellNavigatorKey.currentContext!).primaryColorLight.withValues(alpha: 0.9),
+          Theme.of(rootNavigatorKey.currentContext ?? shellNavigatorKey.currentContext!).splashColor.withValues(alpha: 0.9),
         ],
       ),
     );
