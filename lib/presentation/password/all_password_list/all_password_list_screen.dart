@@ -10,7 +10,6 @@ import 'package:passmana/presentation/common/common_app_bar_action_icon_button.d
 import 'package:passmana/presentation/common/custom_app_bar.dart';
 import 'package:passmana/presentation/password/all_password_list/all_password_list_view_model.dart';
 import 'package:passmana/presentation/password/password_common_list_tile.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:passmana/utility/utility.dart';
 
 class AllPasswordListScreen extends StatelessWidget {
@@ -61,7 +60,7 @@ class AllPasswordListScreen extends StatelessWidget {
         ),
         Text(
           getTranslated("passwords", context),
-          style: TextStyles.getTitleWhiteText(25),
+          style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 25),
         ),
         const Spacer(),
       ],
@@ -77,7 +76,7 @@ class AllPasswordListScreen extends StatelessWidget {
               child: Center(
                 child: Text(
                   getTranslated('no_passwords_found', context),
-                  style: TextStyles.getTitleWhiteText(20),
+                  style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 20),
                 ),
               ),
             ),

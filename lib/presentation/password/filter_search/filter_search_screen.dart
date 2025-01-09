@@ -12,7 +12,6 @@ import 'package:passmana/presentation/common/custom_app_bar.dart';
 import 'package:passmana/presentation/password/filter_search/filter_search_view_model.dart';
 import 'package:passmana/presentation/password/filter_search/search_password_field.dart';
 import 'package:passmana/presentation/password/password_common_list_tile.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:passmana/utility/utility.dart';
 import 'package:redux/redux.dart';
 
@@ -80,7 +79,7 @@ class FilterSearchScreen extends StatelessWidget {
         ),
         Text(
           getTranslated("filter_search", context),
-          style: TextStyles.getTitleWhiteText(25),
+          style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 25),
         ),
         const Spacer(),
       ],
@@ -96,7 +95,7 @@ class FilterSearchScreen extends StatelessWidget {
               child: Center(
                 child: Text(
                   getTranslated('no_passwords_found', context),
-                  style: TextStyles.getTitleWhiteText(20),
+                  style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 20),
                 ),
               ),
             ),

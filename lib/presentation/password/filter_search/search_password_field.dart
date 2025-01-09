@@ -4,8 +4,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:passmana/localization/app_localization.dart';
-import 'package:passmana/utility/color.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 
 class SearchPasswordField extends StatelessWidget {
   final Function(String) onTextChanged;
@@ -20,7 +18,7 @@ class SearchPasswordField extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(6),
       child: Material(
-        color: AppColors.mWhite,
+        color: Theme.of(context).cardColor,
         elevation: 2,
         borderRadius: BorderRadius.circular(6),
         child: Padding(
@@ -29,10 +27,10 @@ class SearchPasswordField extends StatelessWidget {
             onChanged: (val) {
               onTextChanged.call(val);
             },
-            style: TextStyles.getTitleTransparentBlackText(fontSize: 20, opacity: 0.8),
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 20),
             decoration: InputDecoration(
               hintText: getTranslated("search_password", context),
-              hintStyle: TextStyles.getTitleTransparentBlackText(fontSize: 20, opacity: 0.8),
+              hintStyle: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 20),
               border: InputBorder.none,
             ),
           ),

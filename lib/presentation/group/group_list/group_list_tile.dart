@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:passmana/model/group_model.dart';
 import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/constants.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 
 class GroupListTile extends StatelessWidget {
   final Group group;
@@ -51,7 +50,7 @@ class GroupListTile extends StatelessWidget {
                     tag: "${AppConstants.groupHero}${group.id}",
                     child: Text(
                       group.groupName.trim()[0].toUpperCase(),
-                      style: TextStyles.getBoldWhiteText(27),
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 27),
                     ),
                   ),
                 ),
@@ -61,7 +60,7 @@ class GroupListTile extends StatelessWidget {
                     maxLines: 1,
                     softWrap: true,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyles.getTitleBlueText(20),
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 20),
                   ),
                 ),
               ],

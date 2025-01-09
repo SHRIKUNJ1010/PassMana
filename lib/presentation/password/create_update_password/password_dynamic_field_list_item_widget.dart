@@ -69,11 +69,11 @@ class _PasswordDynamicFieldListItemWidgetState extends State<PasswordDynamicFiel
                   widget.onCancelTap.call();
                 },
                 splashColor: AppColors.primaryColor.withValues(alpha: 0.3),
-                child: const Padding(
+                child: Padding(
                   padding: EdgeInsets.all(5),
                   child: Icon(
                     Icons.cancel,
-                    color: AppColors.mWhite,
+                    color: Theme.of(context).textTheme.displaySmall?.color,
                     size: 27,
                   ),
                 ),

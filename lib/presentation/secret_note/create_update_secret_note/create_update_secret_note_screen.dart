@@ -14,7 +14,6 @@ import 'package:passmana/presentation/common/custom_app_bar.dart';
 import 'package:passmana/presentation/secret_note/create_update_secret_note/create_update_secret_note_view_model.dart';
 import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/constants.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:passmana/utility/utility.dart';
 import 'package:redux/redux.dart';
 
@@ -92,12 +91,12 @@ class _CreateUpdateSecretNoteScreenState extends State<CreateUpdateSecretNoteScr
                       tag: "${AppConstants.secretNoteHero}$secretNoteId",
                       child: Text(
                         "${getTranslated('secret_note', context)}:",
-                        style: TextStyles.getTitleWhiteText(20),
+                        style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 20),
                       ),
                     )
                   : Text(
                       "${getTranslated('secret_note', context)}:",
-                      style: TextStyles.getTitleWhiteText(20),
+                      style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 20),
                     ),
             ),
           ],
@@ -167,12 +166,12 @@ class _CreateUpdateSecretNoteScreenState extends State<CreateUpdateSecretNoteScr
                 tag: AppConstants.secretNoteHero,
                 child: Text(
                   getTranslated("create_secret_note", context),
-                  style: TextStyles.getTitleWhiteText(24),
+                  style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 24),
                 ),
               )
             : Text(
                 getTranslated("update_secret_note", context),
-                style: TextStyles.getTitleWhiteText(24),
+                style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 24),
               ),
         vm.secretNote != null
             ? Expanded(
@@ -184,7 +183,7 @@ class _CreateUpdateSecretNoteScreenState extends State<CreateUpdateSecretNoteScr
                       onItemTap: () {
                         vm.deleteSecretNote.call();
                       },
-                      buttonColor: AppColors.secondaryMaterialColor[700],
+                      buttonColor: Theme.of(context).textTheme.displayLarge?.color,
                       buttonSplashColor: AppColors.mWhite.withValues(alpha: 0.2),
                       icon: Icon(
                         Icons.delete,

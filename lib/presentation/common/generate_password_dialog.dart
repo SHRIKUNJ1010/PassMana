@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:passmana/localization/app_localization.dart';
 import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/cryptography_utility/password_generator.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:passmana/utility/utility.dart';
 
 class GeneratePasswordDialog extends StatefulWidget {
@@ -68,11 +67,11 @@ class _GeneratePasswordDialogState extends State<GeneratePasswordDialog> {
         children: [
           Text(
             getTranslated('generate_password', context),
-            style: TextStyles.getTitleBlueText(20),
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 20),
           ),
         ],
       ),
-      backgroundColor: AppColors.mWhite,
+      backgroundColor: Theme.of(context).cardColor,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       content: Column(
         mainAxisSize: MainAxisSize.min,
@@ -81,7 +80,7 @@ class _GeneratePasswordDialogState extends State<GeneratePasswordDialog> {
           Container(
             padding: const EdgeInsets.fromLTRB(10, 12, 10, 12),
             decoration: BoxDecoration(
-              color: AppColors.secondaryColor,
+              color: Theme.of(context).textTheme.displayLarge?.color,
               borderRadius: BorderRadius.circular(5),
             ),
             child: Row(
@@ -94,7 +93,7 @@ class _GeneratePasswordDialogState extends State<GeneratePasswordDialog> {
                     generatedPassword,
                     maxLines: 5,
                     softWrap: true,
-                    style: TextStyles.getTitleWhiteText(17),
+                    style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 17, color: AppColors.mWhite),
                   ),
                 ),
                 Padding(
@@ -108,7 +107,7 @@ class _GeneratePasswordDialogState extends State<GeneratePasswordDialog> {
                         onTap: () {
                           Utility.copyToClipboard(generatedPassword);
                         },
-                        child: const Padding(
+                        child: Padding(
                           padding: EdgeInsets.all(8.0),
                           child: Icon(
                             Icons.copy,
@@ -166,7 +165,7 @@ class _GeneratePasswordDialogState extends State<GeneratePasswordDialog> {
           },
           child: Text(
             getTranslated('cancel', context),
-            style: TextStyles.getTitleBlueText(16),
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 16),
           ),
         ),
         TextButton(
@@ -175,7 +174,7 @@ class _GeneratePasswordDialogState extends State<GeneratePasswordDialog> {
           },
           child: Text(
             getTranslated('confirm', context),
-            style: TextStyles.getTitleBlueText(16),
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 16),
           ),
         ),
       ],
@@ -186,22 +185,22 @@ class _GeneratePasswordDialogState extends State<GeneratePasswordDialog> {
     return Container(
       padding: const EdgeInsets.fromLTRB(10, 7, 10, 7),
       decoration: BoxDecoration(
-        color: AppColors.primaryColor,
+        color: Theme.of(context).primaryColor,
         borderRadius: BorderRadius.circular(5),
       ),
       child: Row(
         children: [
           Text(
             getTranslated('length', context),
-            style: TextStyles.getTitleWhiteText(17),
+            style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 17),
           ),
           Expanded(
             child: Slider(
               min: 8,
               max: 50,
-              activeColor: AppColors.mWhite,
-              thumbColor: AppColors.mWhite,
-              inactiveColor: AppColors.mWhite.withValues(alpha: 0.7),
+              activeColor: Theme.of(context).textTheme.displaySmall?.color,
+              thumbColor: Theme.of(context).textTheme.displaySmall?.color,
+              inactiveColor: Theme.of(context).textTheme.displaySmall?.color?.withValues(alpha: 0.7),
               value: passwordLength.toDouble(),
               onChanged: (value) {
                 if (passwordLength != value.toInt()) {
@@ -214,7 +213,7 @@ class _GeneratePasswordDialogState extends State<GeneratePasswordDialog> {
           ),
           Text(
             passwordLength.toString(),
-            style: TextStyles.getTitleWhiteText(17),
+            style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 17),
           ),
           const SizedBox(width: 8),
         ],
@@ -226,7 +225,7 @@ class _GeneratePasswordDialogState extends State<GeneratePasswordDialog> {
     return Container(
       padding: const EdgeInsets.fromLTRB(10, 7, 10, 7),
       decoration: BoxDecoration(
-        color: AppColors.primaryColor,
+        color: Theme.of(context).primaryColor,
         borderRadius: BorderRadius.circular(5),
       ),
       child: Row(
@@ -251,7 +250,7 @@ class _GeneratePasswordDialogState extends State<GeneratePasswordDialog> {
                   padding: const EdgeInsets.all(8.0),
                   child: Icon(
                     hasLowercase ? Icons.check_box : Icons.check_box_outline_blank,
-                    color: AppColors.mWhite,
+                    color: Theme.of(context).textTheme.displaySmall?.color,
                     size: 30,
                   ),
                 ),
@@ -265,11 +264,11 @@ class _GeneratePasswordDialogState extends State<GeneratePasswordDialog> {
             children: [
               Text(
                 getTranslated('lowercase', context),
-                style: TextStyles.getTitleWhiteText(17),
+                style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 17),
               ),
               Text(
                 '(a-z)',
-                style: TextStyles.getTitleWhiteText(17),
+                style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 17),
               ),
             ],
           ),
@@ -282,7 +281,7 @@ class _GeneratePasswordDialogState extends State<GeneratePasswordDialog> {
     return Container(
       padding: const EdgeInsets.fromLTRB(10, 7, 10, 7),
       decoration: BoxDecoration(
-        color: AppColors.primaryColor,
+        color: Theme.of(context).primaryColor,
         borderRadius: BorderRadius.circular(5),
       ),
       child: Row(
@@ -307,7 +306,7 @@ class _GeneratePasswordDialogState extends State<GeneratePasswordDialog> {
                   padding: const EdgeInsets.all(8.0),
                   child: Icon(
                     hasUppercase ? Icons.check_box : Icons.check_box_outline_blank,
-                    color: AppColors.mWhite,
+                    color: Theme.of(context).textTheme.displaySmall?.color,
                     size: 30,
                   ),
                 ),
@@ -321,11 +320,11 @@ class _GeneratePasswordDialogState extends State<GeneratePasswordDialog> {
             children: [
               Text(
                 getTranslated('uppercase', context),
-                style: TextStyles.getTitleWhiteText(17),
+                style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 17),
               ),
               Text(
                 '(A-Z)',
-                style: TextStyles.getTitleWhiteText(17),
+                style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 17),
               ),
             ],
           ),
@@ -338,7 +337,7 @@ class _GeneratePasswordDialogState extends State<GeneratePasswordDialog> {
     return Container(
       padding: const EdgeInsets.fromLTRB(10, 7, 10, 7),
       decoration: BoxDecoration(
-        color: AppColors.primaryColor,
+        color: Theme.of(context).primaryColor,
         borderRadius: BorderRadius.circular(5),
       ),
       child: Row(
@@ -360,7 +359,7 @@ class _GeneratePasswordDialogState extends State<GeneratePasswordDialog> {
                   padding: const EdgeInsets.all(8.0),
                   child: Icon(
                     hasNumeric ? Icons.check_box : Icons.check_box_outline_blank,
-                    color: AppColors.mWhite,
+                    color: Theme.of(context).textTheme.displaySmall?.color,
                     size: 30,
                   ),
                 ),
@@ -374,11 +373,11 @@ class _GeneratePasswordDialogState extends State<GeneratePasswordDialog> {
             children: [
               Text(
                 getTranslated('numeric', context),
-                style: TextStyles.getTitleWhiteText(17),
+                style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 17),
               ),
               Text(
                 '(0-9)',
-                style: TextStyles.getTitleWhiteText(17),
+                style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 17),
               ),
             ],
           ),
@@ -391,7 +390,7 @@ class _GeneratePasswordDialogState extends State<GeneratePasswordDialog> {
     return Container(
       padding: const EdgeInsets.fromLTRB(10, 7, 10, 7),
       decoration: BoxDecoration(
-        color: AppColors.primaryColor,
+        color: Theme.of(context).primaryColor,
         borderRadius: BorderRadius.circular(5),
       ),
       child: Row(
@@ -413,7 +412,7 @@ class _GeneratePasswordDialogState extends State<GeneratePasswordDialog> {
                   padding: const EdgeInsets.all(8.0),
                   child: Icon(
                     hasSpecialCharacter ? Icons.check_box : Icons.check_box_outline_blank,
-                    color: AppColors.mWhite,
+                    color: Theme.of(context).textTheme.displaySmall?.color,
                     size: 30,
                   ),
                 ),
@@ -427,11 +426,11 @@ class _GeneratePasswordDialogState extends State<GeneratePasswordDialog> {
             children: [
               Text(
                 getTranslated('special', context),
-                style: TextStyles.getTitleWhiteText(17),
+                style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 17),
               ),
               Text(
                 '(@%+)',
-                style: TextStyles.getTitleWhiteText(17),
+                style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 17),
               ),
             ],
           ),
@@ -444,7 +443,7 @@ class _GeneratePasswordDialogState extends State<GeneratePasswordDialog> {
     return Container(
       padding: const EdgeInsets.fromLTRB(10, 12, 10, 12),
       decoration: BoxDecoration(
-        color: AppColors.primaryColor,
+        color: Theme.of(context).primaryColor,
         borderRadius: BorderRadius.circular(5),
       ),
       child: Row(
@@ -466,7 +465,7 @@ class _GeneratePasswordDialogState extends State<GeneratePasswordDialog> {
                   padding: const EdgeInsets.all(8.0),
                   child: Icon(
                     isReadable ? Icons.check_box : Icons.check_box_outline_blank,
-                    color: AppColors.mWhite,
+                    color: Theme.of(context).textTheme.displaySmall?.color,
                     size: 30,
                   ),
                 ),
@@ -476,7 +475,7 @@ class _GeneratePasswordDialogState extends State<GeneratePasswordDialog> {
           const SizedBox(width: 5),
           Text(
             getTranslated('pronounceable', context),
-            style: TextStyles.getTitleWhiteText(17),
+            style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 17),
           ),
         ],
       ),

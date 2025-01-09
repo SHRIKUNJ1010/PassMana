@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:passmana/model/password_model.dart';
 import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/constants.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 
 class GroupPasswordListTile extends StatelessWidget {
   final double width;
@@ -29,7 +28,7 @@ class GroupPasswordListTile extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(3),
         child: Material(
-          color: AppColors.primaryMaterialColor[300],
+          color: Theme.of(context).appBarTheme.backgroundColor,
           borderRadius: BorderRadius.circular(3),
           child: InkWell(
             onTap: () {
@@ -51,7 +50,7 @@ class GroupPasswordListTile extends StatelessWidget {
                     height: 50,
                     margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                     decoration: BoxDecoration(
-                      color: AppColors.mWhite,
+                      color: Theme.of(context).cardColor,
                       borderRadius: BorderRadius.circular(3),
                     ),
                     alignment: Alignment.center,
@@ -59,7 +58,7 @@ class GroupPasswordListTile extends StatelessWidget {
                       tag: "${AppConstants.passwordHero}${item.id}",
                       child: Text(
                         item.title.trim()[0].toUpperCase(),
-                        style: TextStyles.getBoldRedText(26),
+                        style: Theme.of(context).textTheme.displayLarge?.copyWith(fontSize: 26),
                       ),
                     ),
                   ),
@@ -69,7 +68,7 @@ class GroupPasswordListTile extends StatelessWidget {
                       maxLines: 1,
                       softWrap: true,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyles.getTitleWhiteText(20),
+                      style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 20),
                     ),
                   ),
                   Padding(
@@ -83,11 +82,11 @@ class GroupPasswordListTile extends StatelessWidget {
                           onTap: () {
                             onClipboardTap.call();
                           },
-                          child: const Padding(
+                          child: Padding(
                             padding: EdgeInsets.all(8.0),
                             child: Icon(
                               Icons.copy,
-                              color: AppColors.mWhite,
+                              color: Theme.of(context).textTheme.displaySmall?.color,
                               size: 25,
                             ),
                           ),

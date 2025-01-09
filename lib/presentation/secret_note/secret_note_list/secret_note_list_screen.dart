@@ -11,7 +11,6 @@ import 'package:passmana/presentation/secret_note/secret_note_common_list_tile.d
 import 'package:passmana/presentation/secret_note/secret_note_list/secret_note_list_view_model.dart';
 import 'package:passmana/utility/assets_utility/assets_paths.dart';
 import 'package:passmana/utility/constants.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:passmana/utility/utility.dart';
 
 class SecretNoteListScreen extends StatelessWidget {
@@ -58,7 +57,7 @@ class SecretNoteListScreen extends StatelessWidget {
                         child: Center(
                           child: Text(
                             getTranslated('no_secret_note_found', context),
-                            style: TextStyles.getTitleWhiteText(20),
+                            style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 20),
                           ),
                         ),
                       ),

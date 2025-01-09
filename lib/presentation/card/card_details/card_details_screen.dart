@@ -12,9 +12,7 @@ import 'package:passmana/presentation/common/common_app_bar_action_icon_button.d
 import 'package:passmana/presentation/common/custom_app_bar.dart';
 import 'package:passmana/presentation/password/password_details/widgets/details_action_tappable_item_widget.dart';
 import 'package:passmana/presentation/password/password_details/widgets/details_item_tile.dart';
-import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/constants.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:passmana/utility/utility.dart';
 import 'package:redux/redux.dart';
 
@@ -61,7 +59,7 @@ class _CardDetailsScreenState extends State<CardDetailsScreen> {
                             tag: "${AppConstants.cardHero}${vm.card.id}",
                             child: Text(
                               vm.card.bankAndCardName,
-                              style: TextStyles.getBoldWhiteText(30),
+                              style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 30),
                             ),
                           ),
                         ],
@@ -89,14 +87,14 @@ class _CardDetailsScreenState extends State<CardDetailsScreen> {
                             setState(() {});
                           },
                           item: showCardPin
-                              ? const Icon(
+                              ? Icon(
                                   FontAwesome5.eye,
-                                  color: AppColors.primaryColor,
+                                  color: Theme.of(context).textTheme.headlineSmall?.color,
                                   size: 17,
                                 )
-                              : const Icon(
+                              : Icon(
                                   FontAwesome5.eye_slash,
-                                  color: AppColors.primaryColor,
+                                  color: Theme.of(context).textTheme.headlineSmall?.color,
                                   size: 17,
                                 ),
                         ),
@@ -111,7 +109,7 @@ class _CardDetailsScreenState extends State<CardDetailsScreen> {
                             children: [
                               Text(
                                 "${getTranslated("grid_numbers", context)}:",
-                                style: TextStyles.getTitleDarkRedText(17),
+                                style: Theme.of(context).textTheme.displayLarge?.copyWith(fontSize: 17),
                               ),
                               const SizedBox(height: 7),
                               for (int i = 0; i < vm.getSecurityGridNumbers.call().length + 4; i += 4) ...[
@@ -194,7 +192,7 @@ class _CardDetailsScreenState extends State<CardDetailsScreen> {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(3),
-        color: externalContainer ? AppColors.mWhite.withValues(alpha: 0.7) : AppColors.mWhite,
+        color: externalContainer ? Theme.of(context).cardColor.withValues(alpha: 0.7) : Theme.of(context).cardColor,
       ),
       padding: const EdgeInsets.fromLTRB(10, 7, 10, 7),
       child: child,
@@ -225,7 +223,7 @@ class _CardDetailsScreenState extends State<CardDetailsScreen> {
         ),
         Text(
           getTranslated("card_details", context),
-          style: TextStyles.getTitleWhiteText(25),
+          style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 25),
         ),
         Expanded(
           child: Row(

@@ -25,7 +25,6 @@ import 'package:passmana/presentation/password/create_update_password/create_upd
 import 'package:passmana/presentation/password/create_update_password/password_dynamic_field_list_item_widget.dart';
 import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/constants.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:passmana/utility/utility.dart';
 import 'package:redux/redux.dart';
 
@@ -133,7 +132,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                                   padding: const EdgeInsets.fromLTRB(20, 5, 0, 10),
                                   child: Text(
                                     "${getTranslated('custom_fields', context)}: (${getTranslated('optional', context)})",
-                                    style: TextStyles.getTitleWhiteText(20),
+                                    style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 20),
                                   ),
                                 ),
                               ],
@@ -165,7 +164,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(3),
                                 child: Material(
-                                  color: AppColors.mWhite,
+                                  color: Theme.of(context).cardColor,
                                   borderRadius: BorderRadius.circular(3),
                                   child: Container(
                                     height: 45,
@@ -181,15 +180,15 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         crossAxisAlignment: CrossAxisAlignment.center,
                                         children: [
-                                          const Icon(
+                                          Icon(
                                             Icons.add,
-                                            color: AppColors.primaryColor,
+                                            color: Theme.of(context).textTheme.headlineSmall?.color,
                                             size: 24,
                                           ),
                                           const SizedBox(width: 5),
                                           Text(
                                             getTranslated('add_field', context),
-                                            style: TextStyles.getTitleBlueText(18),
+                                            style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 18),
                                           ),
                                         ],
                                       ),
@@ -229,7 +228,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
               padding: const EdgeInsets.fromLTRB(20, 5, 0, 10),
               child: Text(
                 "${getTranslated('category_group', context)}: (${getTranslated('optional', context)})",
-                style: TextStyles.getTitleWhiteText(20),
+                style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 20),
               ),
             ),
           ],
@@ -283,13 +282,13 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
               return ClipRRect(
                 borderRadius: BorderRadius.circular(3),
                 child: Material(
-                  color: AppColors.mWhite,
+                  color: Theme.of(context).cardColor,
                   borderRadius: BorderRadius.circular(3),
                   child: InkWell(
                     onTap: () {
                       onTap.call();
                     },
-                    splashColor: AppColors.primaryColor.withValues(alpha: 0.2),
+                    splashColor: Theme.of(context).primaryColor.withValues(alpha: 0.2),
                     child: Container(
                       padding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
                       decoration: BoxDecoration(
@@ -302,12 +301,12 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                           Expanded(
                             child: Text(
                               item?.groupName ?? "None",
-                              style: TextStyles.getTitleBlueText(18),
+                              style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 18),
                             ),
                           ),
-                          const Icon(
+                          Icon(
                             Icons.keyboard_arrow_down,
-                            color: AppColors.primaryColor,
+                            color: Theme.of(context).textTheme.headlineSmall?.color,
                             size: 30,
                           ),
                         ],
@@ -326,13 +325,13 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
   Container getNonSelectedPopupMenuItem(Group? item) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.mWhite,
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(3),
       ),
       padding: const EdgeInsets.fromLTRB(15, 15, 15, 15),
       child: Text(
         item?.groupName ?? "None",
-        style: TextStyles.getTitleBlueText(17),
+        style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 17),
       ),
     );
   }
@@ -340,13 +339,13 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
   Container getSelectedPopupMenuItem(Group? item) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.primaryColor,
+        color: Theme.of(context).primaryColor,
         borderRadius: BorderRadius.circular(3),
       ),
       padding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
       child: Text(
         item?.groupName ?? "None",
-        style: TextStyles.getTitleWhiteText(17),
+        style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 17),
       ),
     );
   }
@@ -394,7 +393,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
               padding: const EdgeInsets.fromLTRB(20, 5, 0, 10),
               child: Text(
                 "${getTranslated('note', context)}: (${getTranslated('optional', context)})",
-                style: TextStyles.getTitleWhiteText(20),
+                style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 20),
               ),
             ),
           ],
@@ -423,7 +422,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
               padding: const EdgeInsets.fromLTRB(20, 5, 0, 10),
               child: Text(
                 "${getTranslated('password', context)}:",
-                style: TextStyles.getTitleWhiteText(20),
+                style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 20),
               ),
             ),
           ],
@@ -444,7 +443,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(6),
                       child: Material(
-                        color: AppColors.mWhite,
+                        color: Theme.of(context).cardColor,
                         child: InkWell(
                           onTap: () {
                             showPassword = !showPassword;
@@ -454,14 +453,14 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                           child: Padding(
                             padding: const EdgeInsets.all(10),
                             child: showPassword
-                                ? const Icon(
+                                ? Icon(
                                     FontAwesome5.eye,
-                                    color: AppColors.primaryColor,
+                                    color: Theme.of(context).textTheme.headlineSmall?.color,
                                     size: 17,
                                   )
-                                : const Icon(
+                                : Icon(
                                     FontAwesome5.eye_slash,
-                                    color: AppColors.primaryColor,
+                                    color: Theme.of(context).textTheme.headlineSmall?.color,
                                     size: 17,
                                   ),
                           ),
@@ -507,7 +506,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
               padding: const EdgeInsets.fromLTRB(20, 5, 0, 10),
               child: Text(
                 "${getTranslated('email_or_username', context)}:",
-                style: TextStyles.getTitleWhiteText(20),
+                style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 20),
               ),
             ),
           ],
@@ -534,7 +533,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
               padding: const EdgeInsets.fromLTRB(20, 5, 0, 10),
               child: Text(
                 "${getTranslated('subtitle', context)}: (${getTranslated('optional', context)})",
-                style: TextStyles.getTitleWhiteText(20),
+                style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 20),
               ),
             ),
           ],
@@ -562,7 +561,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
               padding: const EdgeInsets.fromLTRB(20, 5, 0, 10),
               child: Text(
                 "${getTranslated('website_url', context)}: (${getTranslated('optional', context)})",
-                style: TextStyles.getTitleWhiteText(20),
+                style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 20),
               ),
             ),
           ],
@@ -593,12 +592,12 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                       tag: "${AppConstants.passwordHero}$passwordId",
                       child: Text(
                         "${getTranslated('title', context)}:",
-                        style: TextStyles.getTitleWhiteText(20),
+                        style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 20),
                       ),
                     )
                   : Text(
                       "${getTranslated('title', context)}:",
-                      style: TextStyles.getTitleWhiteText(20),
+                      style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 20),
                     ),
             ),
           ],
@@ -642,12 +641,12 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                 tag: AppConstants.passwordHero,
                 child: Text(
                   getTranslated("create_password", context),
-                  style: TextStyles.getTitleWhiteText(25),
+                  style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 25),
                 ),
               )
             : Text(
                 getTranslated("update_password", context),
-                style: TextStyles.getTitleWhiteText(25),
+                style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 25),
               ),
         vm.password != null
             ? Expanded(
@@ -659,7 +658,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                       onItemTap: () {
                         vm.deletePassword.call();
                       },
-                      buttonColor: AppColors.secondaryMaterialColor[700],
+                      buttonColor: Theme.of(context).textTheme.displayLarge?.color,
                       buttonSplashColor: AppColors.mWhite.withValues(alpha: 0.2),
                       icon: Icon(
                         Icons.delete,

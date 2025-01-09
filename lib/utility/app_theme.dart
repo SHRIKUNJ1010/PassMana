@@ -10,6 +10,7 @@ class AppTheme {
         primaryColor: AppColors.primaryColor,
         primaryColorLight: AppColors.accentPrimaryColor,
         splashColor: AppColors.accentSecondaryColor,
+        cardColor: AppColors.mWhite,
         cardTheme: CardTheme(
           color: AppColors.primaryColor,
         ),
@@ -17,8 +18,8 @@ class AppTheme {
           iconTheme: IconThemeData(
             color: AppColors.primaryColor,
           ),
+          backgroundColor: AppColors.primaryMaterialColor[300],
         ),
-        cardColor: AppColors.mWhite,
         textTheme: TextTheme(
           displayLarge: TextStyle(
             color: AppColors.secondaryColor,
@@ -90,6 +91,7 @@ class AppTheme {
           iconTheme: IconThemeData(
             color: AppColors.mE0E0E0,
           ),
+          backgroundColor: AppColors.primaryDarkColor,
         ),
         textTheme: TextTheme(
           displayLarge: TextStyle(

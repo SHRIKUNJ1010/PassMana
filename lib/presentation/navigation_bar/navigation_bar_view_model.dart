@@ -9,7 +9,6 @@ import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/localization/app_localization.dart';
 import 'package:passmana/router/router.dart';
 import 'package:passmana/utility/page_routes_utility/page_routes.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:redux/redux.dart';
 
 class NavigationBarViewModel {
@@ -112,7 +111,7 @@ class NavigationBarViewModel {
         ),
         Text(
           getTranslated('secret_note', context),
-          style: TextStyles.getTitleWhiteText(11),
+          style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 11),
         ),
         Text(
           getTranslated('settings', context),

@@ -15,7 +15,6 @@ import 'package:passmana/presentation/password/password_home_list/search_passwor
 import 'package:passmana/utility/assets_utility/assets_paths.dart';
 import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/constants.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:passmana/utility/utility.dart';
 
 class PasswordHomeListScreen extends StatelessWidget {
@@ -141,7 +140,7 @@ class PasswordHomeListScreen extends StatelessWidget {
                         child: Text(
                           getTranslated("see_all", context),
                           softWrap: true,
-                          style: TextStyles.getTitleDarkRedText400(24),
+                          style: Theme.of(context).textTheme.displayLarge?.copyWith(fontSize: 24),
                         ),
                       ),
                     ),
@@ -179,7 +178,7 @@ class PasswordHomeListScreen extends StatelessWidget {
                         child: Text(
                           getTranslated("see_all", context),
                           softWrap: true,
-                          style: TextStyles.getTitleBlueText(24),
+                          style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 24),
                         ),
                       ),
                     ),
@@ -200,7 +199,7 @@ class PasswordHomeListScreen extends StatelessWidget {
               child: Center(
                 child: Text(
                   getTranslated('no_passwords_found', context),
-                  style: TextStyles.getTitleWhiteText(20),
+                  style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 20),
                 ),
               ),
             ),
@@ -237,7 +236,7 @@ class PasswordHomeListScreen extends StatelessWidget {
               child: Center(
                 child: Text(
                   getTranslated('no_groups_found', context),
-                  style: TextStyles.getTitleWhiteText(20),
+                  style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 20),
                 ),
               ),
             )

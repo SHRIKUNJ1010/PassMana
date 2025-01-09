@@ -16,7 +16,6 @@ import 'package:passmana/presentation/settings/settings_item_list/settings_item_
 import 'package:passmana/utility/assets_utility/assets_paths.dart';
 import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/constants.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:passmana/utility/utility.dart';
 
 class SettingsItemListScreen extends StatelessWidget {
@@ -69,7 +68,7 @@ class SettingsItemListScreen extends StatelessWidget {
                       Expanded(
                         child: Text(
                           getTranslated("enable_autofill", context),
-                          style: TextStyles.getTitleBlueText(20),
+                          style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize:20),
                         ),
                       ),
                       Switch(
@@ -135,12 +134,12 @@ class SettingsItemListScreen extends StatelessWidget {
                             if (isSelected) {
                               return Padding(
                                 padding: const EdgeInsets.fromLTRB(4, 4, 4, 4),
-                                child: getSelectedPopupMenuItem(item),
+                                child: getSelectedPopupMenuItem(item, context),
                               );
                             } else {
                               return Padding(
                                 padding: const EdgeInsets.fromLTRB(4, 4, 4, 4),
-                                child: getNonSelectedPopupMenuItem(item),
+                                child: getNonSelectedPopupMenuItem(item, context),
                               );
                             }
                           },
@@ -231,30 +230,30 @@ class SettingsItemListScreen extends StatelessWidget {
     );
   }
 
-  Container getNonSelectedPopupMenuItem(Locale item) {
+  Container getNonSelectedPopupMenuItem(Locale item, BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.mWhite,
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(3),
       ),
       padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
       child: Text(
         Utility.getLanguageNameFromLanguageCode(item.languageCode),
-        style: TextStyles.getTitleBlueText(16),
+        style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 16),
       ),
     );
   }
 
-  Container getSelectedPopupMenuItem(Locale item) {
+  Container getSelectedPopupMenuItem(Locale item, BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.primaryColor,
+        color: Theme.of(context).cardTheme.color,
         borderRadius: BorderRadius.circular(3),
       ),
-      padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
+      padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
       child: Text(
         Utility.getLanguageNameFromLanguageCode(item.languageCode),
-        style: TextStyles.getTitleWhiteText(16),
+        style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 16),
       ),
     );
   }

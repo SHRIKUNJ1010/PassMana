@@ -11,9 +11,7 @@ import 'package:passmana/presentation/common/common_app_bar_action_icon_button.d
 import 'package:passmana/presentation/common/custom_app_bar.dart';
 import 'package:passmana/presentation/password/password_details/password_details_view_model.dart';
 import 'package:passmana/presentation/password/password_details/widgets/details_item_tile.dart';
-import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/constants.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:passmana/utility/utility.dart';
 import 'package:redux/redux.dart';
 
@@ -58,7 +56,7 @@ class PasswordDetailsScreen extends StatelessWidget {
                                 width: 80,
                                 height: 80,
                                 decoration: BoxDecoration(
-                                  color: AppColors.mWhite,
+                                  color: Theme.of(context).cardColor,
                                   borderRadius: BorderRadius.circular(40),
                                 ),
                                 margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
@@ -67,7 +65,7 @@ class PasswordDetailsScreen extends StatelessWidget {
                                   tag: "${AppConstants.passwordHero}${vm.password.id}",
                                   child: Text(
                                     vm.password.title.trim()[0].toUpperCase(),
-                                    style: TextStyles.getBoldRedText(34),
+                                    style: Theme.of(context).textTheme.displayLarge?.copyWith(fontSize: 34),
                                   ),
                                 ),
                               ),
@@ -96,9 +94,9 @@ class PasswordDetailsScreen extends StatelessWidget {
                               },
                               item: Transform.rotate(
                                 angle: -math.pi / 4,
-                                child: const Icon(
+                                child: Icon(
                                   Icons.arrow_right_alt,
-                                  color: AppColors.mBlack,
+                                  color: Theme.of(context).textTheme.bodySmall?.color,
                                   size: 30,
                                 ),
                               ),
@@ -114,7 +112,7 @@ class PasswordDetailsScreen extends StatelessWidget {
                             },
                             item: Icon(
                               Icons.copy,
-                              color: AppColors.mBlack,
+                              color: Theme.of(context).textTheme.bodySmall?.color,
                               size: 25,
                             ),
                           ),
@@ -129,7 +127,7 @@ class PasswordDetailsScreen extends StatelessWidget {
                             },
                             item: Icon(
                               Icons.copy,
-                              color: AppColors.mBlack,
+                              color: Theme.of(context).textTheme.bodySmall?.color,
                               size: 25,
                             ),
                           ),
@@ -189,7 +187,7 @@ class PasswordDetailsScreen extends StatelessWidget {
         ),
         Text(
           getTranslated("password_details", context),
-          style: TextStyles.getTitleWhiteText(25),
+          style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 25),
         ),
         Expanded(
           child: Row(

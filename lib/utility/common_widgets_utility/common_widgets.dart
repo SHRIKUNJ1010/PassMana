@@ -4,7 +4,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:passmana/utility/color.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 
 class CommonWidgets {
   static Widget getCommonButtonWithSplash({
@@ -17,8 +16,8 @@ class CommonWidgets {
       margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
       height: height,
       decoration: BoxDecoration(
-        color: AppColors.secondaryColor,
-        borderRadius: BorderRadius.circular(10),
+        color: Theme.of(context).textTheme.displayLarge?.color,
+        borderRadius: BorderRadius.circular(6),
       ),
       clipBehavior: Clip.hardEdge,
       child: Material(
@@ -32,7 +31,11 @@ class CommonWidgets {
             alignment: Alignment.center,
             child: Text(
               title,
-              style: TextStyles.getButtonWhiteText(16),
+              style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                    fontSize: 16,
+                    fontWeight: FontWeight.normal,
+                    color: AppColors.mWhite,
+                  ),
             ),
           ),
         ),

@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:passmana/localization/app_localization.dart';
 import 'package:passmana/utility/color.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 
 class CommonTextField extends StatelessWidget {
   final String hintText;
@@ -57,15 +56,18 @@ class CommonTextField extends StatelessWidget {
         return null;
       },
       onChanged: onChanged,
-      style: TextStyles.getTitleBlueText(18),
+      style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 18),
       initialValue: initialValue,
       decoration: InputDecoration(
-        fillColor: AppColors.mWhite,
+        fillColor: Theme.of(context).cardColor,
         filled: true,
         hintText: hintText,
-        hintStyle: TextStyles.getTitleBlueText(18),
+        hintStyle: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 18),
         contentPadding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
-        errorStyle: TextStyles.getTitleOrangeText(20),
+        errorStyle: Theme.of(context).textTheme.displaySmall?.copyWith(
+              fontSize: 20,
+              color: AppColors.mFF9C00,
+            ),
         border: OutlineInputBorder(
           borderSide: BorderSide.none,
           borderRadius: BorderRadius.circular(3),

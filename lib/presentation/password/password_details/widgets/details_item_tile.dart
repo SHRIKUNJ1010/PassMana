@@ -4,7 +4,6 @@ Created By Shrikunj on 07/01/25
 
 import 'package:flutter/material.dart';
 import 'package:passmana/presentation/common/common_container_widget.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 
 class DetailsItemTile extends StatelessWidget {
   final String title;
@@ -36,16 +35,13 @@ class DetailsItemTile extends StatelessWidget {
                     children: [
                       Text(
                         title,
-                        style: TextStyles.getTitleDarkRedText(17),
+                        style: Theme.of(context).textTheme.displayLarge?.copyWith(fontSize: 17),
                       ),
                       Text(
                         description,
                         maxLines: 5,
                         softWrap: true,
-                        style: TextStyles.getTitleTransparentBlackText(
-                          fontSize: 17,
-                          opacity: 1,
-                        ),
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 17),
                       ),
                     ],
                   ),
@@ -58,16 +54,13 @@ class DetailsItemTile extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: TextStyles.getTitleDarkRedText(17),
+                  style: Theme.of(context).textTheme.displayLarge?.copyWith(fontSize: 17),
                 ),
                 Text(
                   description,
                   maxLines: 5,
                   softWrap: true,
-                  style: TextStyles.getTitleTransparentBlackText(
-                    fontSize: 17,
-                    opacity: 1,
-                  ),
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 17),
                 ),
               ],
             ),

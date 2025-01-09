@@ -9,9 +9,7 @@ import 'package:passmana/localization/app_localization.dart';
 import 'package:passmana/presentation/common/common_app_bar_action_icon_button.dart';
 import 'package:passmana/presentation/common/custom_app_bar.dart';
 import 'package:passmana/presentation/secret_note/secret_note_details/secret_note_details_view_model.dart';
-import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/constants.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:passmana/utility/utility.dart';
 import 'package:redux/redux.dart';
 
@@ -41,7 +39,7 @@ class SecretNoteDetailsScreen extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(3),
-                  color: AppColors.mWhite,
+                  color: Theme.of(context).cardColor,
                 ),
                 margin: const EdgeInsets.fromLTRB(20, 20, 20, 30),
                 padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
@@ -54,7 +52,7 @@ class SecretNoteDetailsScreen extends StatelessWidget {
                       tag: "${AppConstants.secretNoteHero}${vm.secretNote.id}",
                       child: Text(
                         vm.secretNote.note,
-                        style: TextStyles.getTitleBlueText(18),
+                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 18),
                       ),
                     ),
                   ],
@@ -91,7 +89,7 @@ class SecretNoteDetailsScreen extends StatelessWidget {
         ),
         Text(
           getTranslated("secret_note_details", context),
-          style: TextStyles.getTitleWhiteText(25),
+          style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 25),
         ),
         Expanded(
           child: Row(

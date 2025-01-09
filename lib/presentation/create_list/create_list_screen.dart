@@ -11,7 +11,6 @@ import 'package:passmana/presentation/create_list/create_list_item_widget.dart';
 import 'package:passmana/presentation/create_list/create_list_view_model.dart';
 import 'package:passmana/utility/assets_utility/assets_paths.dart';
 import 'package:passmana/utility/constants.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:passmana/utility/utility.dart';
 
 class CreateListScreen extends StatelessWidget {
@@ -43,7 +42,7 @@ class CreateListScreen extends StatelessWidget {
                 const SizedBox(width: 10),
                 Text(
                   getTranslated("passmana", context),
-                  style: TextStyles.getTitleWhiteText(28),
+                  style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 28),
                 ),
                 const Spacer(),
               ],

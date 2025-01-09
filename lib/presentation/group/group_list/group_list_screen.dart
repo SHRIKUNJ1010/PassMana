@@ -10,7 +10,6 @@ import 'package:passmana/presentation/common/custom_app_bar.dart';
 import 'package:passmana/presentation/group/group_list/group_list_tile.dart';
 import 'package:passmana/presentation/group/group_list/group_list_view_model.dart';
 import 'package:passmana/utility/color.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:passmana/utility/utility.dart';
 
 class GroupListScreen extends StatelessWidget {
@@ -71,7 +70,7 @@ class GroupListScreen extends StatelessWidget {
         ),
         Text(
           getTranslated("groups", context),
-          style: TextStyles.getTitleWhiteText(25),
+          style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 25),
         ),
         const Spacer(),
       ],
@@ -87,7 +86,7 @@ class GroupListScreen extends StatelessWidget {
               child: Center(
                 child: Text(
                   getTranslated('no_groups_found', context),
-                  style: TextStyles.getTitleWhiteText(20),
+                  style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 20),
                 ),
               ),
             ),

@@ -11,7 +11,6 @@ import 'package:passmana/utility/assets_utility/assets_paths.dart';
 import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/common_widgets_utility/common_widgets.dart';
 import 'package:passmana/utility/constants.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 
 class GetStartedScreen extends StatelessWidget {
   const GetStartedScreen({super.key});
@@ -23,7 +22,7 @@ class GetStartedScreen extends StatelessWidget {
       builder: (BuildContext context, GetStartedViewModel vm) {
         return Scaffold(
           body: Container(
-            color: AppColors.primaryColor,
+            color: Theme.of(context).primaryColor,
             child: SafeArea(
               child: Column(
                 children: [
@@ -49,7 +48,11 @@ class GetStartedScreen extends StatelessWidget {
                                 child: Text(
                                   getTranslated('empowering_privacy_offline', context).toUpperCase(),
                                   softWrap: true,
-                                  style: TextStyles.getTitleRedText(36),
+                                  style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                                        fontSize: 36,
+                                        fontWeight: FontWeight.w400,
+                                        color: AppColors.accentSecondaryColor,
+                                      ),
                                 ),
                               ),
                             ),
@@ -66,7 +69,7 @@ class GetStartedScreen extends StatelessWidget {
                                 child: Text(
                                   getTranslated('where_your_passwords_find_sanctuary', context),
                                   softWrap: true,
-                                  style: TextStyles.getTitleWhiteText(30),
+                                  style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 30),
                                 ),
                               ),
                             ),

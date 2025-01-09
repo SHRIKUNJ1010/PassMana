@@ -6,7 +6,6 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/presentation/splash/splash_view_model.dart';
 import 'package:passmana/utility/assets_utility/assets_paths.dart';
-import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/constants.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -17,7 +16,7 @@ class SplashScreen extends StatelessWidget {
     return StoreConnector<AppState, SplashViewModel>(
       converter: SplashViewModel.fromStore,
       builder: (BuildContext context, SplashViewModel vm) {
-        return _buildSplashImageContainer();
+        return _buildSplashImageContainer(context);
       },
       onInitialBuild: (SplashViewModel vm) {
         vm.manageNavigation.call();
@@ -25,9 +24,9 @@ class SplashScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSplashImageContainer() {
+  Widget _buildSplashImageContainer(BuildContext context) {
     return Container(
-      color: AppColors.primaryColor,
+      color: Theme.of(context).primaryColor,
       alignment: Alignment.center,
       child: Hero(
         tag: AppConstants.appLogo,

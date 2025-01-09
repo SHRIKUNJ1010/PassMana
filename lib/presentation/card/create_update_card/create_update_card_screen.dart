@@ -21,7 +21,6 @@ import 'package:passmana/presentation/common/custom_app_bar.dart';
 import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/constants.dart';
 import 'package:passmana/utility/text_utility/card_text_field_formatter.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:passmana/utility/utility.dart';
 import 'package:redux/redux.dart';
 
@@ -115,7 +114,7 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
                                   padding: const EdgeInsets.fromLTRB(20, 5, 0, 10),
                                   child: Text(
                                     "${getTranslated('grid_numbers', context)}: (${getTranslated('optional', context)})",
-                                    style: TextStyles.getTitleWhiteText(20),
+                                    style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 20),
                                   ),
                                 ),
                               ],
@@ -147,7 +146,7 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(3),
                                 child: Material(
-                                  color: AppColors.mWhite,
+                                  color: Theme.of(context).cardColor,
                                   borderRadius: BorderRadius.circular(3),
                                   child: Container(
                                     height: 45,
@@ -163,15 +162,15 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         crossAxisAlignment: CrossAxisAlignment.center,
                                         children: [
-                                          const Icon(
+                                          Icon(
                                             Icons.add,
-                                            color: AppColors.primaryColor,
+                                            color: Theme.of(context).textTheme.headlineSmall?.color,
                                             size: 24,
                                           ),
                                           const SizedBox(width: 5),
                                           Text(
                                             getTranslated('add_field', context),
-                                            style: TextStyles.getTitleBlueText(18),
+                                            style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 18),
                                           ),
                                         ],
                                       ),
@@ -214,12 +213,12 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
                       tag: "${AppConstants.cardHero}$cardId",
                       child: Text(
                         "${getTranslated('bank_and_card_name', context)}:",
-                        style: TextStyles.getTitleWhiteText(20),
+                        style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 20),
                       ),
                     )
                   : Text(
                       "${getTranslated('bank_and_card_name', context)}:",
-                      style: TextStyles.getTitleWhiteText(20),
+                      style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 20),
                     ),
             ),
           ],
@@ -246,7 +245,7 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
               padding: const EdgeInsets.fromLTRB(20, 20, 0, 10),
               child: Text(
                 "${getTranslated('card_number', context)}:",
-                style: TextStyles.getTitleWhiteText(20),
+                style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 20),
               ),
             ),
           ],
@@ -278,7 +277,7 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
               padding: const EdgeInsets.fromLTRB(20, 20, 0, 10),
               child: Text(
                 "${getTranslated('card_holder_name', context)}:",
-                style: TextStyles.getTitleWhiteText(20),
+                style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 20),
               ),
             ),
           ],
@@ -305,7 +304,7 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
               padding: const EdgeInsets.fromLTRB(20, 20, 0, 10),
               child: Text(
                 "${getTranslated('cvv', context)}:",
-                style: TextStyles.getTitleWhiteText(20),
+                style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 20),
               ),
             ),
           ],
@@ -336,7 +335,7 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
               padding: const EdgeInsets.fromLTRB(20, 20, 0, 10),
               child: Text(
                 "${getTranslated('expiry_date', context)}:",
-                style: TextStyles.getTitleWhiteText(20),
+                style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 20),
               ),
             ),
           ],
@@ -363,7 +362,7 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
               padding: const EdgeInsets.fromLTRB(20, 20, 0, 10),
               child: Text(
                 "${getTranslated('card_pin', context)}:",
-                style: TextStyles.getTitleWhiteText(20),
+                style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 20),
               ),
             ),
           ],
@@ -381,7 +380,7 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(6),
                 child: Material(
-                  color: AppColors.mWhite,
+                  color: Theme.of(context).cardColor,
                   child: InkWell(
                     onTap: () {
                       showCardPin = !showCardPin;
@@ -391,14 +390,14 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
                     child: Padding(
                       padding: const EdgeInsets.all(10),
                       child: showCardPin
-                          ? const Icon(
+                          ? Icon(
                               FontAwesome5.eye,
-                              color: AppColors.primaryColor,
+                              color: Theme.of(context).textTheme.headlineSmall?.color,
                               size: 17,
                             )
-                          : const Icon(
+                          : Icon(
                               FontAwesome5.eye_slash,
-                              color: AppColors.primaryColor,
+                              color: Theme.of(context).textTheme.headlineSmall?.color,
                               size: 17,
                             ),
                     ),
@@ -477,12 +476,12 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
                 tag: AppConstants.cardHero,
                 child: Text(
                   getTranslated("create_card", context),
-                  style: TextStyles.getTitleWhiteText(25),
+                  style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 25),
                 ),
               )
             : Text(
                 getTranslated("update_card", context),
-                style: TextStyles.getTitleWhiteText(25),
+                style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 25),
               ),
         vm.card != null
             ? Expanded(
@@ -494,7 +493,7 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
                       onItemTap: () {
                         vm.deleteCard.call();
                       },
-                      buttonColor: AppColors.secondaryMaterialColor[700],
+                      buttonColor: Theme.of(context).textTheme.displayLarge?.color,
                       buttonSplashColor: AppColors.mWhite.withValues(alpha: 0.2),
                       icon: Icon(
                         Icons.delete,

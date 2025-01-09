@@ -14,7 +14,6 @@ import 'package:passmana/presentation/common/custom_app_bar.dart';
 import 'package:passmana/presentation/group/create_update_group/create_update_group_view_model.dart';
 import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/constants.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:passmana/utility/utility.dart';
 import 'package:redux/redux.dart';
 
@@ -109,12 +108,12 @@ class _CreateUpdateGroupScreenState extends State<CreateUpdateGroupScreen> {
                       tag: "${AppConstants.groupHero}$groupId",
                       child: Text(
                         "${getTranslated('group_name', context)}:",
-                        style: TextStyles.getTitleWhiteText(20),
+                        style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 20),
                       ),
                     )
                   : Text(
                       "${getTranslated('group_name', context)}:",
-                      style: TextStyles.getTitleWhiteText(20),
+                      style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 20),
                     ),
             ),
           ],
@@ -141,7 +140,7 @@ class _CreateUpdateGroupScreenState extends State<CreateUpdateGroupScreen> {
               padding: const EdgeInsets.fromLTRB(20, 5, 0, 10),
               child: Text(
                 "${getTranslated('description', context)}: (${getTranslated('optional', context)})",
-                style: TextStyles.getTitleWhiteText(20),
+                style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 20),
               ),
             ),
           ],
@@ -208,12 +207,12 @@ class _CreateUpdateGroupScreenState extends State<CreateUpdateGroupScreen> {
                 tag: AppConstants.groupHero,
                 child: Text(
                   getTranslated("create_group", context),
-                  style: TextStyles.getTitleWhiteText(25),
+                  style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 25),
                 ),
               )
             : Text(
                 getTranslated("update_group", context),
-                style: TextStyles.getTitleWhiteText(25),
+                style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 25),
               ),
         vm.group != null
             ? Expanded(
@@ -225,7 +224,7 @@ class _CreateUpdateGroupScreenState extends State<CreateUpdateGroupScreen> {
                       onItemTap: () {
                         vm.deleteGroup.call();
                       },
-                      buttonColor: AppColors.secondaryMaterialColor[700],
+                      buttonColor: Theme.of(context).textTheme.displayLarge?.color,
                       buttonSplashColor: AppColors.mWhite.withValues(alpha: 0.2),
                       icon: Icon(
                         Icons.delete,

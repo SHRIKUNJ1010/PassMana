@@ -4,7 +4,6 @@ Created By Shrikunj on 07/01/25
 
 import 'package:flutter/material.dart';
 import 'package:passmana/localization/app_localization.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 
 import 'common_numeric_keyboard_tile.dart';
 
@@ -48,7 +47,7 @@ class CommonNumericKeyboardWidget extends StatelessWidget {
                   },
                   child: Text(
                     getTranslated('1', context),
-                    style: TextStyles.getButtonWhiteText(32),
+                    style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 32, fontWeight: FontWeight.normal),
                   ),
                 ),
                 CommonNumericKeyboardTile(
@@ -57,7 +56,7 @@ class CommonNumericKeyboardWidget extends StatelessWidget {
                   },
                   child: Text(
                     getTranslated('2', context),
-                    style: TextStyles.getButtonWhiteText(32),
+                    style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 32, fontWeight: FontWeight.normal),
                   ),
                 ),
                 CommonNumericKeyboardTile(
@@ -66,7 +65,7 @@ class CommonNumericKeyboardWidget extends StatelessWidget {
                   },
                   child: Text(
                     getTranslated('3', context),
-                    style: TextStyles.getButtonWhiteText(32),
+                    style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 32, fontWeight: FontWeight.normal),
                   ),
                 ),
               ],
@@ -81,7 +80,7 @@ class CommonNumericKeyboardWidget extends StatelessWidget {
                   },
                   child: Text(
                     getTranslated('4', context),
-                    style: TextStyles.getButtonWhiteText(32),
+                    style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 32, fontWeight: FontWeight.normal),
                   ),
                 ),
                 CommonNumericKeyboardTile(
@@ -90,7 +89,7 @@ class CommonNumericKeyboardWidget extends StatelessWidget {
                   },
                   child: Text(
                     getTranslated('5', context),
-                    style: TextStyles.getButtonWhiteText(32),
+                    style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 32, fontWeight: FontWeight.normal),
                   ),
                 ),
                 CommonNumericKeyboardTile(
@@ -99,7 +98,7 @@ class CommonNumericKeyboardWidget extends StatelessWidget {
                   },
                   child: Text(
                     getTranslated('6', context),
-                    style: TextStyles.getButtonWhiteText(32),
+                    style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 32, fontWeight: FontWeight.normal),
                   ),
                 ),
               ],
@@ -114,7 +113,7 @@ class CommonNumericKeyboardWidget extends StatelessWidget {
                   },
                   child: Text(
                     getTranslated('7', context),
-                    style: TextStyles.getButtonWhiteText(32),
+                    style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 32, fontWeight: FontWeight.normal),
                   ),
                 ),
                 CommonNumericKeyboardTile(
@@ -123,7 +122,7 @@ class CommonNumericKeyboardWidget extends StatelessWidget {
                   },
                   child: Text(
                     getTranslated('8', context),
-                    style: TextStyles.getButtonWhiteText(32),
+                    style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 32, fontWeight: FontWeight.normal),
                   ),
                 ),
                 CommonNumericKeyboardTile(
@@ -132,7 +131,7 @@ class CommonNumericKeyboardWidget extends StatelessWidget {
                   },
                   child: Text(
                     getTranslated('9', context),
-                    style: TextStyles.getButtonWhiteText(32),
+                    style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 32, fontWeight: FontWeight.normal),
                   ),
                 ),
               ],
@@ -153,7 +152,7 @@ class CommonNumericKeyboardWidget extends StatelessWidget {
                   },
                   child: Text(
                     getTranslated('0', context),
-                    style: TextStyles.getButtonWhiteText(32),
+                    style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 32, fontWeight: FontWeight.normal),
                   ),
                 ),
                 disableBottomRight

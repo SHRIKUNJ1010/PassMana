@@ -10,9 +10,7 @@ import 'package:passmana/presentation/common/common_app_bar_action_icon_button.d
 import 'package:passmana/presentation/common/custom_app_bar.dart';
 import 'package:passmana/presentation/group/group_details/group_details_password_list_tile.dart';
 import 'package:passmana/presentation/group/group_details/group_details_view_model.dart';
-import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/constants.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:passmana/utility/utility.dart';
 import 'package:redux/redux.dart';
 
@@ -55,7 +53,7 @@ class GroupDetailsScreen extends StatelessWidget {
                               width: 80,
                               height: 80,
                               decoration: BoxDecoration(
-                                color: AppColors.mWhite,
+                                color: Theme.of(context).cardColor,
                                 borderRadius: BorderRadius.circular(40),
                               ),
                               margin: const EdgeInsets.fromLTRB(0, 20, 0, 5),
@@ -64,7 +62,7 @@ class GroupDetailsScreen extends StatelessWidget {
                                 tag: "${AppConstants.groupHero}${vm.group.id}",
                                 child: Text(
                                   vm.group.groupName.trim()[0].toUpperCase(),
-                                  style: TextStyles.getBoldRedText(34),
+                                  style: Theme.of(context).textTheme.displayLarge?.copyWith(fontSize: 34),
                                 ),
                               ),
                             ),
@@ -84,7 +82,7 @@ class GroupDetailsScreen extends StatelessWidget {
                                   maxLines: 3,
                                   softWrap: true,
                                   overflow: TextOverflow.ellipsis,
-                                  style: TextStyles.getTitleWhiteText(32),
+                                  style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 32),
                                 ),
                               ),
                             ),
@@ -107,7 +105,7 @@ class GroupDetailsScreen extends StatelessWidget {
                                         maxLines: 10000,
                                         softWrap: true,
                                         overflow: TextOverflow.ellipsis,
-                                        style: TextStyles.getTitleWhiteText(16),
+                                        style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 16),
                                       ),
                                     ),
                                   ),
@@ -117,8 +115,8 @@ class GroupDetailsScreen extends StatelessWidget {
                       const SizedBox(height: 25),
                       Container(
                         width: width,
-                        decoration: const BoxDecoration(
-                          color: AppColors.mWhite,
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).cardColor,
                           borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
                         ),
                         child: Column(
@@ -127,7 +125,7 @@ class GroupDetailsScreen extends StatelessWidget {
                             const SizedBox(height: 15),
                             Text(
                               getTranslated("passwords", context),
-                              style: TextStyles.getTitleDarkRedText(26),
+                              style: Theme.of(context).textTheme.displayLarge?.copyWith(fontSize: 26, fontWeight: FontWeight.w600),
                             ),
                             const SizedBox(height: 15),
                             if (vm.group.passwords.isEmpty) ...[
@@ -137,7 +135,7 @@ class GroupDetailsScreen extends StatelessWidget {
                                 child: Center(
                                   child: Text(
                                     getTranslated('no_password_assigned', context),
-                                    style: TextStyles.getTitleBlueText(26),
+                                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 26),
                                   ),
                                 ),
                               ),
@@ -191,7 +189,7 @@ class GroupDetailsScreen extends StatelessWidget {
         ),
         Text(
           getTranslated("group_details", context),
-          style: TextStyles.getTitleWhiteText(25),
+          style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 25),
         ),
         Expanded(
           child: Row(

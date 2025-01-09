@@ -11,8 +11,6 @@ import 'package:passmana/presentation/generate_password/generate_password_view_m
 import 'package:passmana/presentation/generate_password/widgets/check_box_item_tile.dart';
 import 'package:passmana/presentation/password/password_details/widgets/details_action_tappable_item_widget.dart';
 import 'package:passmana/presentation/password/password_details/widgets/details_item_tile.dart';
-import 'package:passmana/utility/color.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:passmana/utility/utility.dart';
 
 class GeneratePasswordStatefulContainer extends StatefulWidget {
@@ -83,7 +81,7 @@ class _GeneratePasswordStatefulContainerState extends State<GeneratePasswordStat
                     },
                     item: Icon(
                       Icons.copy,
-                      color: AppColors.mBlack,
+                      color: Theme.of(context).textTheme.bodySmall?.color,
                       size: 25,
                     ),
                   ),
@@ -204,22 +202,22 @@ class _GeneratePasswordStatefulContainerState extends State<GeneratePasswordStat
     return Container(
       padding: const EdgeInsets.fromLTRB(10, 7, 10, 7),
       decoration: BoxDecoration(
-        color: AppColors.mWhite,
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(3),
       ),
       child: Row(
         children: [
           Text(
             getTranslated('length', context),
-            style: TextStyles.getTitleBlueText(17),
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 17),
           ),
           Expanded(
             child: Slider(
               min: 8,
               max: 50,
-              activeColor: AppColors.primaryColor,
-              thumbColor: AppColors.primaryColor,
-              inactiveColor: AppColors.primaryMaterialColor[400]?.withValues(alpha: 0.7),
+              activeColor: Theme.of(context).textTheme.headlineSmall?.color,
+              thumbColor: Theme.of(context).textTheme.headlineSmall?.color,
+              inactiveColor: Theme.of(context).textTheme.headlineSmall?.color?.withValues(alpha: 0.7),
               value: passwordLength.toDouble(),
               onChanged: (value) {
                 if (passwordLength != value.toInt()) {
@@ -232,7 +230,7 @@ class _GeneratePasswordStatefulContainerState extends State<GeneratePasswordStat
           ),
           Text(
             passwordLength.toString(),
-            style: TextStyles.getTitleBlueText(17),
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 17),
           ),
           const SizedBox(width: 8),
         ],
@@ -264,7 +262,7 @@ class _GeneratePasswordStatefulContainerState extends State<GeneratePasswordStat
         ),
         Text(
           getTranslated("generate_password", context),
-          style: TextStyles.getTitleWhiteText(25),
+          style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 25),
         ),
         Expanded(
           child: Row(

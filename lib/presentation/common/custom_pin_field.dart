@@ -3,8 +3,8 @@
 */
 import 'package:flutter/material.dart';
 import 'package:passmana/presentation/common/common_numeric_keyboard/common_numeric_keyboard_widget.dart';
+import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/common_widgets_utility/common_widgets.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 
 class CustomPinField extends StatefulWidget {
   final Widget bottomLeftButtonChild;
@@ -65,7 +65,10 @@ class _CustomPinFieldState extends State<CustomPinField> {
               padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
               child: Text(
                 widget.errorText!,
-                style: TextStyles.getTitleOrangeText(20),
+                style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                      fontSize: 20,
+                      color: AppColors.mFF9C00,
+                    ),
               ),
             ),
           const Spacer(),

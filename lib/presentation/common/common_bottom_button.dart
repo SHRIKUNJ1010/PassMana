@@ -4,7 +4,6 @@ Created By Shrikunj on 07/01/25
 
 import 'package:flutter/material.dart';
 import 'package:passmana/utility/color.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 
 class CommonBottomButton extends StatelessWidget {
   final String title;
@@ -23,7 +22,7 @@ class CommonBottomButton extends StatelessWidget {
         top: Radius.circular(12),
       ),
       child: Material(
-        color: AppColors.primaryColor,
+        color: Theme.of(context).primaryColor,
         borderRadius: const BorderRadius.vertical(
           top: Radius.circular(12),
         ),
@@ -37,7 +36,7 @@ class CommonBottomButton extends StatelessWidget {
             alignment: Alignment.center,
             child: Text(
               title,
-              style: TextStyles.getTitleWhiteText(24),
+              style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 24),
             ),
           ),
         ),

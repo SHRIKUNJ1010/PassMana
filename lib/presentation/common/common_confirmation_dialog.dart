@@ -3,10 +3,9 @@
 */
 
 import 'package:flutter/material.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 
 class CommonConfirmationDialog extends StatelessWidget {
-  final Color bgColor;
+  final Color? bgColor;
   final String title;
   final String message;
   final String positiveBtnText;
@@ -18,7 +17,7 @@ class CommonConfirmationDialog extends StatelessWidget {
     this.title = '',
     this.message = '',
     this.circularBorderRadius = 3,
-    this.bgColor = Colors.white,
+    this.bgColor,
     this.positiveBtnText = 'Yes',
     this.negativeBtnText = 'No',
   });
@@ -28,21 +27,19 @@ class CommonConfirmationDialog extends StatelessWidget {
     return AlertDialog(
       title: Text(
         title,
-        style: TextStyles.getTitleTransparentBlackCustomWeightText(
-          fontSize: 16,
-          opacity: 1,
-          fontWeight: FontWeight.w600,
-        ),
+        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+            ),
       ),
       content: Text(
         message,
-        style: TextStyles.getTitleTransparentBlackCustomWeightText(
-          fontSize: 16,
-          opacity: 1,
-          fontWeight: FontWeight.normal,
-        ),
+        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              fontSize: 16,
+              fontWeight: FontWeight.normal,
+            ),
       ),
-      backgroundColor: bgColor,
+      backgroundColor: bgColor ?? Theme.of(context).cardColor,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(circularBorderRadius)),
       actions: <Widget>[
         TextButton(
@@ -51,7 +48,7 @@ class CommonConfirmationDialog extends StatelessWidget {
           },
           child: Text(
             negativeBtnText,
-            style: TextStyles.getTitleBlueText(16),
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 16),
           ),
         ),
         TextButton(
@@ -60,7 +57,7 @@ class CommonConfirmationDialog extends StatelessWidget {
           },
           child: Text(
             positiveBtnText,
-            style: TextStyles.getTitleBlueText(16),
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 16),
           ),
         ),
       ],

@@ -11,7 +11,6 @@ import 'package:passmana/presentation/card/card_list/card_list_view_model.dart';
 import 'package:passmana/presentation/common/custom_app_bar.dart';
 import 'package:passmana/utility/assets_utility/assets_paths.dart';
 import 'package:passmana/utility/constants.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:passmana/utility/utility.dart';
 
 class CardListScreen extends StatelessWidget {
@@ -44,7 +43,7 @@ class CardListScreen extends StatelessWidget {
                 const SizedBox(width: 10),
                 Text(
                   getTranslated("card", context),
-                  style: TextStyles.getTitleWhiteText(28),
+                  style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 28),
                 ),
                 const Spacer(),
               ],
@@ -58,7 +57,7 @@ class CardListScreen extends StatelessWidget {
                         child: Center(
                           child: Text(
                             getTranslated('no_card_found', context),
-                            style: TextStyles.getTitleWhiteText(20),
+                            style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 20),
                           ),
                         ),
                       ),

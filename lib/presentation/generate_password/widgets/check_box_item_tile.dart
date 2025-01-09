@@ -4,7 +4,6 @@ Created By Shrikunj on 07/01/25
 
 import 'package:flutter/material.dart';
 import 'package:passmana/utility/color.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 
 class CheckBoxItemTile extends StatelessWidget {
   final bool isChecked;
@@ -25,7 +24,7 @@ class CheckBoxItemTile extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.fromLTRB(10, 7, 10, 7),
       decoration: BoxDecoration(
-        color: AppColors.mWhite,
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(3),
       ),
       child: Row(
@@ -43,7 +42,7 @@ class CheckBoxItemTile extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Icon(
                     isChecked ? Icons.check_box : Icons.check_box_outline_blank,
-                    color: AppColors.primaryColor,
+                    color: Theme.of(context).textTheme.headlineSmall?.color,
                     size: 30,
                   ),
                 ),
@@ -58,17 +57,17 @@ class CheckBoxItemTile extends StatelessWidget {
                   children: [
                     Text(
                       primaryTextTitle,
-                      style: TextStyles.getTitleBlueText(17),
+                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 17),
                     ),
                     Text(
                       secondaryTextTitle!,
-                      style: TextStyles.getTitleBlueText(17),
+                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 17),
                     ),
                   ],
                 )
               : Text(
                   primaryTextTitle,
-                  style: TextStyles.getTitleBlueText(17),
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 17),
                 ),
         ],
       ),

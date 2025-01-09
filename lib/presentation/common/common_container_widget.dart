@@ -3,7 +3,6 @@ Created By Shrikunj on 07/01/25
 */
 
 import 'package:flutter/material.dart';
-import 'package:passmana/utility/color.dart';
 
 class CommonContainerWidget extends StatelessWidget {
   final Widget child;
@@ -22,7 +21,7 @@ class CommonContainerWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(3),
-        color: AppColors.mWhite,
+        color: Theme.of(context).cardColor,
       ),
       margin: margin,
       padding: padding ?? EdgeInsets.fromLTRB(10, 7, 10, 7),

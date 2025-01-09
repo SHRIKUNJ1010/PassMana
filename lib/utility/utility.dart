@@ -10,7 +10,6 @@ import 'package:passmana/presentation/common/common_confirmation_dialog.dart';
 import 'package:passmana/presentation/common/generate_password_dialog.dart';
 import 'package:passmana/router/router.dart';
 import 'package:passmana/utility/constants.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Utility {
@@ -80,19 +79,17 @@ class Utility {
         return AlertDialog(
           title: Text(
             getTranslated('db_file_location', context),
-            style: TextStyles.getTitleTransparentBlackCustomWeightText(
-              fontSize: 16,
-              opacity: 1,
-              fontWeight: FontWeight.w600,
-            ),
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
           ),
           content: Text(
             "${getTranslated('your_db_file_location_is', context)}: $filePath",
-            style: TextStyles.getTitleTransparentBlackCustomWeightText(
-              fontSize: 16,
-              opacity: 1,
-              fontWeight: FontWeight.normal,
-            ),
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  fontSize: 16,
+                  fontWeight: FontWeight.normal,
+                ),
           ),
           backgroundColor: Colors.white,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -103,7 +100,7 @@ class Utility {
               },
               child: Text(
                 getTranslated('confirm', context),
-                style: TextStyles.getTitleBlueText(16),
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 16),
               ),
             ),
           ],

@@ -11,7 +11,6 @@ import 'package:passmana/presentation/settings/change_mobile_pin/change_mobile_p
 import 'package:passmana/utility/assets_utility/assets_paths.dart';
 import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/constants.dart';
-import 'package:passmana/utility/text_utility/text_styles.dart';
 
 class ChangeMobilePinScreen extends StatefulWidget {
   const ChangeMobilePinScreen({super.key});
@@ -32,7 +31,7 @@ class _ChangeMobilePinScreenState extends State<ChangeMobilePinScreen> {
       builder: (BuildContext context, ChangeMobilePinViewModel vm) {
         return Scaffold(
           body: Container(
-            color: AppColors.primaryColor,
+            color: Theme.of(context).primaryColor,
             child: SafeArea(
               child: Column(
                 children: [
@@ -41,12 +40,15 @@ class _ChangeMobilePinScreenState extends State<ChangeMobilePinScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(
-                          width: 60,
-                          height: 60,
-                          child: Hero(
-                            tag: AppConstants.appLogo,
-                            child: Image.asset(AppAssets.appLogoWithoutText),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(30),
+                          child: SizedBox(
+                            width: 60,
+                            height: 60,
+                            child: Hero(
+                              tag: AppConstants.appLogo,
+                              child: Image.asset(AppAssets.appLogoWithoutText),
+                            ),
                           ),
                         ),
                       ],
@@ -58,7 +60,7 @@ class _ChangeMobilePinScreenState extends State<ChangeMobilePinScreen> {
                             ? getTranslated('confirm_your_pin', context)
                             : getTranslated('create_your_pin', context)
                         : getTranslated('enter_your_pin', context),
-                    style: TextStyles.getTitleWhiteText(24),
+                    style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 24),
                   ),
                   Expanded(
                     child: CustomPinField(
