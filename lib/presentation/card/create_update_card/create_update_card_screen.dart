@@ -130,12 +130,8 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
                                     key: ValueKey(securityGridNumberList[index].hashCode),
                                     item: securityGridNumberList[index],
                                     onCancelTap: () {
-                                      if (securityGridNumberList.length != 1) {
-                                        securityGridNumberList.removeAt(index);
-                                        setState(() {});
-                                      } else {
-                                        //do nothing
-                                      }
+                                      securityGridNumberList.removeAt(index);
+                                      setState(() {});
                                     },
                                   ),
                                 );
