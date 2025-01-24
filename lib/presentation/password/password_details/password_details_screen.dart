@@ -8,6 +8,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/localization/app_localization.dart';
 import 'package:passmana/presentation/common/common_app_bar_action_icon_button.dart';
+import 'package:passmana/presentation/common/common_app_bar_back_button_icon.dart';
 import 'package:passmana/presentation/common/custom_app_bar.dart';
 import 'package:passmana/presentation/password/password_details/password_details_view_model.dart';
 import 'package:passmana/presentation/password/password_details/widgets/details_item_tile.dart';
@@ -176,11 +177,7 @@ class PasswordDetailsScreen extends StatelessWidget {
                 onItemTap: () {
                   vm.onBackPress.call();
                 },
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: Theme.of(context).appBarTheme.iconTheme?.color,
-                  size: 25,
-                ),
+                icon: CommonAppBarBackButtonIcon(),
               ),
             ],
           ),

@@ -14,6 +14,7 @@ import 'package:passmana/model/group_model.dart';
 import 'package:passmana/model/password_dynamic_field_model.dart';
 import 'package:passmana/model/screen_argument_models/create_update_password_screen_arguments.dart';
 import 'package:passmana/presentation/common/common_app_bar_action_icon_button.dart';
+import 'package:passmana/presentation/common/common_app_bar_back_button_icon.dart';
 import 'package:passmana/presentation/common/common_bottom_button.dart';
 import 'package:passmana/presentation/common/common_text_field.dart';
 import 'package:passmana/presentation/common/custom_app_bar.dart';
@@ -22,7 +23,7 @@ import 'package:passmana/presentation/common/drop_down_search_custom/src/propert
 import 'package:passmana/presentation/common/drop_down_search_custom/src/properties/menu_props.dart';
 import 'package:passmana/presentation/common/drop_down_search_custom/src/properties/popup_props.dart';
 import 'package:passmana/presentation/password/create_update_password/create_update_password_view_model.dart';
-import 'package:passmana/presentation/password/create_update_password/password_dynamic_field_list_item_widget.dart';
+import 'package:passmana/presentation/password/create_update_password/widgets/password_dynamic_field_list_item_widget.dart';
 import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/constants.dart';
 import 'package:passmana/utility/utility.dart';
@@ -627,11 +628,7 @@ class _CreateUpdatePasswordScreenState extends State<CreateUpdatePasswordScreen>
                 onItemTap: () {
                   vm.onBackPress.call();
                 },
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: Theme.of(context).appBarTheme.iconTheme?.color,
-                  size: 25,
-                ),
+                icon: CommonAppBarBackButtonIcon(),
               ),
             ],
           ),

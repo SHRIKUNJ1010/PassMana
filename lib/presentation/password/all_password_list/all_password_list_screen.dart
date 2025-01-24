@@ -7,9 +7,10 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/localization/app_localization.dart';
 import 'package:passmana/presentation/common/common_app_bar_action_icon_button.dart';
+import 'package:passmana/presentation/common/common_app_bar_back_button_icon.dart';
 import 'package:passmana/presentation/common/custom_app_bar.dart';
 import 'package:passmana/presentation/password/all_password_list/all_password_list_view_model.dart';
-import 'package:passmana/presentation/password/password_common_list_tile.dart';
+import 'package:passmana/presentation/password/password_home_list/widgets/password_common_list_tile.dart';
 import 'package:passmana/utility/utility.dart';
 
 class AllPasswordListScreen extends StatelessWidget {
@@ -49,11 +50,7 @@ class AllPasswordListScreen extends StatelessWidget {
                 onItemTap: () {
                   vm.onBackPress.call();
                 },
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: Theme.of(context).appBarTheme.iconTheme?.color,
-                  size: 25,
-                ),
+                icon: CommonAppBarBackButtonIcon(),
               ),
             ],
           ),

@@ -13,8 +13,9 @@ import 'package:passmana/domain_redux/card/card_selector.dart';
 import 'package:passmana/localization/app_localization.dart';
 import 'package:passmana/model/card_security_grid_number_list.dart';
 import 'package:passmana/presentation/card/create_update_card/create_update_card_view_model.dart';
-import 'package:passmana/presentation/card/create_update_card/security_grid_number_list_item_widget.dart';
+import 'package:passmana/presentation/card/create_update_card/widgets/security_grid_number_list_item_widget.dart';
 import 'package:passmana/presentation/common/common_app_bar_action_icon_button.dart';
+import 'package:passmana/presentation/common/common_app_bar_back_button_icon.dart';
 import 'package:passmana/presentation/common/common_bottom_button.dart';
 import 'package:passmana/presentation/common/common_text_field.dart';
 import 'package:passmana/presentation/common/custom_app_bar.dart';
@@ -458,11 +459,7 @@ class _CreateUpdateCardScreenState extends State<CreateUpdateCardScreen> {
                 onItemTap: () {
                   vm.onBackPress.call();
                 },
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: Theme.of(context).appBarTheme.iconTheme?.color,
-                  size: 25,
-                ),
+                icon: CommonAppBarBackButtonIcon(),
               ),
             ],
           ),

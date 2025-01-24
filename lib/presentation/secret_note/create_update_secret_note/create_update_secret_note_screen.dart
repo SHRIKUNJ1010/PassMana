@@ -8,6 +8,7 @@ import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/domain_redux/secret_note/secret_note_selector.dart';
 import 'package:passmana/localization/app_localization.dart';
 import 'package:passmana/presentation/common/common_app_bar_action_icon_button.dart';
+import 'package:passmana/presentation/common/common_app_bar_back_button_icon.dart';
 import 'package:passmana/presentation/common/common_bottom_button.dart';
 import 'package:passmana/presentation/common/common_text_field.dart';
 import 'package:passmana/presentation/common/custom_app_bar.dart';
@@ -152,11 +153,7 @@ class _CreateUpdateSecretNoteScreenState extends State<CreateUpdateSecretNoteScr
                 onItemTap: () {
                   vm.onBackPress.call();
                 },
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: Theme.of(context).appBarTheme.iconTheme?.color,
-                  size: 25,
-                ),
+                icon: CommonAppBarBackButtonIcon(),
               ),
             ],
           ),

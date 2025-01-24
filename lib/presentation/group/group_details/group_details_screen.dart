@@ -7,9 +7,10 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/localization/app_localization.dart';
 import 'package:passmana/presentation/common/common_app_bar_action_icon_button.dart';
+import 'package:passmana/presentation/common/common_app_bar_back_button_icon.dart';
 import 'package:passmana/presentation/common/custom_app_bar.dart';
-import 'package:passmana/presentation/group/group_details/group_details_password_list_tile.dart';
 import 'package:passmana/presentation/group/group_details/group_details_view_model.dart';
+import 'package:passmana/presentation/group/group_details/widgets/group_details_password_list_tile.dart';
 import 'package:passmana/utility/constants.dart';
 import 'package:passmana/utility/utility.dart';
 import 'package:redux/redux.dart';
@@ -178,11 +179,7 @@ class GroupDetailsScreen extends StatelessWidget {
                 onItemTap: () {
                   vm.onBackPress.call();
                 },
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: Theme.of(context).appBarTheme.iconTheme?.color,
-                  size: 25,
-                ),
+                icon: CommonAppBarBackButtonIcon(),
               ),
             ],
           ),

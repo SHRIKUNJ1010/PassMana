@@ -12,7 +12,7 @@ import 'package:passmana/presentation/common/drop_down_search_custom/src/propert
 import 'package:passmana/presentation/common/drop_down_search_custom/src/properties/menu_props.dart';
 import 'package:passmana/presentation/common/drop_down_search_custom/src/properties/popup_props.dart';
 import 'package:passmana/presentation/settings/settings_item_list/settings_item_list_view_model.dart';
-import 'package:passmana/presentation/settings/settings_item_list/settings_item_text_button_tile.dart';
+import 'package:passmana/presentation/settings/settings_item_list/widgets/settings_item_text_button_tile.dart';
 import 'package:passmana/utility/assets_utility/assets_paths.dart';
 import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/constants.dart';

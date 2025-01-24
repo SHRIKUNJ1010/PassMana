@@ -6,9 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:passmana/domain_redux/app_state.dart';
 import 'package:passmana/localization/app_localization.dart';
+import 'package:passmana/presentation/common/common_app_bar_back_button_icon.dart';
 import 'package:passmana/presentation/common/custom_app_bar.dart';
-import 'package:passmana/presentation/group/group_list/group_list_tile.dart';
 import 'package:passmana/presentation/group/group_list/group_list_view_model.dart';
+import 'package:passmana/presentation/group/group_list/widgets/group_list_tile.dart';
 import 'package:passmana/utility/color.dart';
 import 'package:passmana/utility/utility.dart';
 
@@ -56,11 +57,7 @@ class GroupListScreen extends StatelessWidget {
                     },
                     child: const Padding(
                       padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
-                      child: Icon(
-                        Icons.arrow_back,
-                        color: AppColors.primaryColor,
-                        size: 25,
-                      ),
+                      child: CommonAppBarBackButtonIcon(),
                     ),
                   ),
                 ),

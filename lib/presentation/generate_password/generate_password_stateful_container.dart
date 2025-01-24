@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:passmana/localization/app_localization.dart';
 import 'package:passmana/presentation/common/common_app_bar_action_icon_button.dart';
+import 'package:passmana/presentation/common/common_app_bar_back_button_icon.dart';
 import 'package:passmana/presentation/common/common_bottom_button.dart';
 import 'package:passmana/presentation/common/custom_app_bar.dart';
 import 'package:passmana/presentation/generate_password/generate_password_view_model.dart';
@@ -251,11 +252,7 @@ class _GeneratePasswordStatefulContainerState extends State<GeneratePasswordStat
                 onItemTap: () {
                   vm.onBackPress.call();
                 },
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: Theme.of(context).appBarTheme.iconTheme?.color,
-                  size: 25,
-                ),
+                icon: CommonAppBarBackButtonIcon(),
               ),
             ],
           ),
